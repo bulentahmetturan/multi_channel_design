@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "channelId": "tip-ogrencileri-platformu",
+  "paletteVersion": "0.1.0",
+  "standard": "WCAG-2.x-relative-luminance",
+  "thresholds": {
+    "normalText": 4.5,
+    "largeText": 3
+  },
+  "summary": {
+    "criticalPairsPass": true,
+    "restrictedPairCount": 3
+  },
+  "pairs": [
+    { "foreground": "#252627", "background": "#FFFFFF", "ratio": 15.16, "normalText": "PASS", "largeText": "PASS" },
+    { "foreground": "#252627", "background": "#D3D4D9", "ratio": 10.24, "normalText": "PASS", "largeText": "PASS" },
+    { "foreground": "#FFFFFF", "background": "#BB0A21", "ratio": 6.61, "normalText": "PASS", "largeText": "PASS" },
+    { "foreground": "#BB0A21", "background": "#FFFFFF", "ratio": 6.61, "normalText": "PASS", "largeText": "PASS" },
+    { "foreground": "#FFFFFF", "background": "#4B88A2", "ratio": 3.93, "normalText": "FAIL", "largeText": "PASS" },
+    { "foreground": "#252627", "background": "#4B88A2", "ratio": 3.86, "normalText": "FAIL", "largeText": "PASS" },
+    { "foreground": "#D3D4D9", "background": "#BB0A21", "ratio": 4.46, "normalText": "FAIL", "largeText": "PASS" }
+  ]
+}

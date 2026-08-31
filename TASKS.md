@@ -2,7 +2,7 @@
 
 ## Current
 
-- [ ] Phase 2: collect and validate the color palette for `tip-ogrencileri-platformu`.
+- [ ] Phase 2: obtain approval for the proposed color roles and usage restrictions for `tip-ogrencileri-platformu`.
 
 ## Later
 

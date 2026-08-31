@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200" role="img" aria-labelledby="title description">
+  <title id="title">Tıp Öğrencileri Platformu color proof</title>
+  <description id="description">Proposed functional roles and text contrast examples for the corrected five-color palette.</description>
+  <rect width="1200" height="1200" fill="#FFFFFF"/>
+  <text x="72" y="88" font-family="Arial, sans-serif" font-size="40" font-weight="700" fill="#252627">Tıp Öğrencileri Platformu</text>
+  <text x="72" y="132" font-family="Arial, sans-serif" font-size="24" fill="#252627">Color proof · proposed roles · palette v0.1.0</text>
+
+  <g transform="translate(72 188)">
+    <rect width="202" height="210" rx="18" fill="#BB0A21"/>
+    <text x="20" y="142" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#FFFFFF">PRIMARY</text>
+    <text x="20" y="178" font-family="Arial, sans-serif" font-size="22" fill="#FFFFFF">#BB0A21</text>
+  </g>
+  <g transform="translate(286 188)">
+    <rect width="202" height="210" rx="18" fill="#4B88A2"/>
+    <text x="20" y="142" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#FFFFFF">SECONDARY</text>
+    <text x="20" y="178" font-family="Arial, sans-serif" font-size="22" fill="#FFFFFF">#4B88A2</text>
+  </g>
+  <g transform="translate(500 188)">
+    <rect width="202" height="210" rx="18" fill="#D3D4D9"/>
+    <text x="20" y="142" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#252627">SURFACE</text>
+    <text x="20" y="178" font-family="Arial, sans-serif" font-size="22" fill="#252627">#D3D4D9</text>
+  </g>
+  <g transform="translate(714 188)">
+    <rect width="202" height="210" rx="18" fill="#252627"/>
+    <text x="20" y="142" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#FFFFFF">TEXT</text>
+    <text x="20" y="178" font-family="Arial, sans-serif" font-size="22" fill="#FFFFFF">#252627</text>
+  </g>
+  <g transform="translate(928 188)">
+    <rect width="202" height="210" rx="18" fill="#FFFFFF" stroke="#D3D4D9" stroke-width="4"/>
+    <text x="20" y="142" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#252627">BACKGROUND</text>
+    <text x="20" y="178" font-family="Arial, sans-serif" font-size="22" fill="#252627">#FFFFFF</text>
+  </g>
+
+  <text x="72" y="474" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#252627">Critical text combinations</text>
+  <g transform="translate(72 510)">
+    <rect width="510" height="156" rx="18" fill="#FFFFFF" stroke="#D3D4D9" stroke-width="3"/>
+    <text x="28" y="62" font-family="Arial, sans-serif" font-size="31" font-weight="700" fill="#252627">Burs başvuruları başladı</text>
+    <text x="28" y="108" font-family="Arial, sans-serif" font-size="22" fill="#252627">Charcoal on white · 15.16:1 · PASS</text>
+  </g>
+  <g transform="translate(618 510)">
+    <rect width="510" height="156" rx="18" fill="#BB0A21"/>
+    <text x="28" y="62" font-family="Arial, sans-serif" font-size="31" font-weight="700" fill="#FFFFFF">Son başvuru: 12 Ekim</text>
+    <text x="28" y="108" font-family="Arial, sans-serif" font-size="22" fill="#FFFFFF">White on red · 6.61:1 · PASS</text>
+  </g>
+  <g transform="translate(72 690)">
+    <rect width="510" height="156" rx="18" fill="#D3D4D9"/>
+    <text x="28" y="62" font-family="Arial, sans-serif" font-size="31" font-weight="700" fill="#252627">Araştırma fırsatları</text>
+    <text x="28" y="108" font-family="Arial, sans-serif" font-size="22" fill="#252627">Charcoal on gray · 10.24:1 · PASS</text>
+  </g>
+  <g transform="translate(618 690)">
+    <rect width="510" height="156" rx="18" fill="#FFFFFF" stroke="#D3D4D9" stroke-width="3"/>
+    <text x="28" y="62" font-family="Arial, sans-serif" font-size="31" font-weight="700" fill="#BB0A21">Yeni program</text>
+    <text x="28" y="108" font-family="Arial, sans-serif" font-size="22" fill="#252627">Red on white · 6.61:1 · PASS</text>
+  </g>
+
+  <g transform="translate(72 902)">
+    <rect width="1056" height="214" rx="18" fill="#4B88A2"/>
+    <text x="32" y="62" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#FFFFFF">Blue usage restriction</text>
+    <text x="32" y="112" font-family="Arial, sans-serif" font-size="23" fill="#FFFFFF">White on blue: 3.93:1 · large text passes · normal text fails</text>
+    <text x="32" y="154" font-family="Arial, sans-serif" font-size="23" fill="#252627">Charcoal on blue: 3.86:1 · large text passes · normal text fails</text>
+    <text x="32" y="194" font-family="Arial, sans-serif" font-size="20" fill="#FFFFFF">Use blue for decoration, imagery, or large display text—not normal body copy.</text>
+  </g>
+</svg>

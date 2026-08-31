@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "0.1.0",
+  "approvalStatus": "PROPOSED",
+  "palette": {
+    "gray100": "#D3D4D9",
+    "blue500": "#4B88A2",
+    "red600": "#BB0A21",
+    "charcoal900": "#252627",
+    "white": "#FFFFFF"
+  },
+  "roles": {
+    "primary": "#BB0A21",
+    "secondary": "#4B88A2",
+    "accent": "#D3D4D9",
+    "background": "#FFFFFF",
+    "surface": "#D3D4D9",
+    "text": "#252627",
+    "textInverse": "#FFFFFF",
+    "border": "#D3D4D9",
+    "overlay": "#252627"
+  },
+  "contrastPolicy": {
+    "normalTextMinimum": 4.5,
+    "largeTextMinimum": 3,
+    "criticalPairs": [
+      { "foreground": "#252627", "background": "#FFFFFF", "ratio": 15.16, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#252627", "background": "#D3D4D9", "ratio": 10.24, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#FFFFFF", "background": "#BB0A21", "ratio": 6.61, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#BB0A21", "background": "#FFFFFF", "ratio": 6.61, "use": "normal-text", "result": "PASS" }
+    ],
+    "restrictedPairs": [
+      { "foreground": "#FFFFFF", "background": "#4B88A2", "ratio": 3.93, "restriction": "large-text-or-decoration-only" },
+      { "foreground": "#252627", "background": "#4B88A2", "ratio": 3.86, "restriction": "large-text-or-decoration-only" },
+      { "foreground": "#D3D4D9", "background": "#BB0A21", "ratio": 4.46, "restriction": "do-not-use-for-normal-text" }
+    ]
+  },
+  "sourceNotes": "User-supplied palette retained exactly except #FFF9FB was replaced with exact white #FFFFFF by explicit request. Functional roles are inferred and awaiting approval."
+}

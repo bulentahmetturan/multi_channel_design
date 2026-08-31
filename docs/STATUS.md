@@ -18,13 +18,15 @@ Phase 1 — complete
 
 ## Next
 
-Phase 2 — collect and validate the color palette for `tip-ogrencileri-platformu`.
+Phase 2 — obtain approval for the proposed color roles and usage restrictions for `tip-ogrencileri-platformu`.
 
 ## Phase 2 progress
 
 - Channel identity: PASS
+- Palette values: PASS (`#FFF9FB` corrected to `#FFFFFF` by user request)
+- Color proof and contrast report: generated, awaiting approval
 - Channel status: `DRAFT`
-- Current onboarding step: color palette
+- Current onboarding step: color-role approval
 
 ## Blockers
 
