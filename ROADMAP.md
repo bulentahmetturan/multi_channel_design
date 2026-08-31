@@ -5,8 +5,8 @@ This roadmap keeps implementation incremental. Only the current phase is active.
 | Phase | Outcome | Status |
 | --- | --- | --- |
 | 0 | Repository, environment, plan, and technical decisions | Complete |
-| 1 | Agent-compatible repository foundation and schemas | Next |
-| 2 | Sequential Channel Pack onboarding and first brand proof | Planned |
+| 1 | Agent-compatible repository foundation and schemas | Complete |
+| 2 | Sequential Channel Pack onboarding and first brand proof | Next |
 | 3 | One-time layout ingestion and representative validation | Planned |
 | 4 | Renderer, typography fitting, and verified safe zones | Planned |
 | 5 | Content morphology, local ranking, and preview selection | Planned |

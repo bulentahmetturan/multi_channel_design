@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://multi-channel-design.local/schemas/layout.schema.json",
+  "title": "Layout Profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "id", "version", "status", "referenceHash", "formats", "morphologies", "capacity", "logoBehavior"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "status": { "enum": ["DRAFT", "ANALYZED", "TEMPLATE_CREATED", "QA_FAILED", "NEEDS_CORRECTION", "PASS", "ACTIVE", "DEPRECATED"] },
+    "referenceHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "formats": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["POST_PORTRAIT", "POST_SQUARE", "CAROUSEL", "STORY", "REELS_COVER"] } },
+    "morphologies": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["TEXT_ONLY", "IMAGE_TEXT", "FULL_BLEED", "QUOTE", "STATISTICS", "COMPARISON", "LIST", "PROFILE", "TIMELINE", "ANNOUNCEMENT", "SEQUENTIAL", "MULTI_IMAGE", "DATA_LED", "EDITORIAL"] } },
+    "capacity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["headlineCharacters", "bodyCharacters", "statistics", "images"],
+      "properties": {
+        "headlineCharacters": { "$ref": "#/$defs/range" },
+        "bodyCharacters": { "$ref": "#/$defs/range" },
+        "statistics": { "$ref": "#/$defs/range" },
+        "images": { "$ref": "#/$defs/range" }
+      }
+    },
+    "logoBehavior": { "enum": ["REQUIRED", "OPTIONAL", "FORBIDDEN"] },
+    "requiresSource": { "type": "boolean" },
+    "supportsCta": { "type": "boolean" },
+    "textDensity": { "enum": ["LOW", "MEDIUM", "HIGH"] },
+    "imageOrientations": { "type": "array", "uniqueItems": true, "items": { "enum": ["PORTRAIT", "LANDSCAPE", "SQUARE", "ANY"] } }
+  },
+  "$defs": {
+    "range": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["min", "preferredMax", "hardMax"],
+      "properties": {
+        "min": { "type": "integer", "minimum": 0 },
+        "preferredMax": { "type": "integer", "minimum": 0 },
+        "hardMax": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}

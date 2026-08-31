@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://multi-channel-design.local/schemas/content-item.schema.json",
+  "title": "Content Item",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "id", "channelId", "state", "headline", "summary", "canonicalUrl", "fingerprint", "source", "firstSeenAt", "lastUpdatedAt"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "id": { "type": "string", "format": "uuid" },
+    "channelId": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "state": { "enum": ["INCOMING", "PROCESSING", "WILL_PUBLISH", "PUBLISHED"] },
+    "updateState": { "enum": ["CURRENT", "UPDATED", "STALE"] },
+    "headline": { "type": "string", "minLength": 1, "maxLength": 500 },
+    "summary": { "type": "string", "minLength": 1, "maxLength": 2000 },
+    "canonicalUrl": { "type": "string", "format": "uri" },
+    "fingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "url"],
+      "properties": { "name": { "type": "string", "minLength": 1 }, "url": { "type": "string", "format": "uri" } }
+    },
+    "facts": { "type": "array", "items": { "type": "object", "required": ["key", "value"], "properties": { "key": { "type": "string" }, "value": {}, "sourceUrl": { "type": "string", "format": "uri" } }, "additionalProperties": false } },
+    "firstSeenAt": { "type": "string", "format": "date-time" },
+    "lastUpdatedAt": { "type": "string", "format": "date-time" },
+    "scheduledAt": { "type": "string", "format": "date-time" },
+    "publishedAt": { "type": "string", "format": "date-time" },
+    "layoutVersionId": { "type": "string" },
+    "renderVersionId": { "type": "string" }
+  }
+}

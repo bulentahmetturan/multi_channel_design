@@ -2,7 +2,7 @@
 
 ## Current
 
-- [ ] Phase 1: create the concise agent instructions, context router, repository skeleton, and initial schemas.
+- [ ] Phase 2: collect and validate the identity for the first Channel Pack.
 
 ## Later
 

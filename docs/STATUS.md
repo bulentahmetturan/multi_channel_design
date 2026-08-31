@@ -2,7 +2,7 @@
 
 ## Current phase
 
-Phase 0 — complete
+Phase 1 — complete
 
 ## Completed
 
@@ -11,10 +11,14 @@ Phase 0 — complete
 - Environment inspected: Git, Node.js 24, npm, pnpm, and Python 3.11 are available.
 - Docker and Yarn are not required.
 - Technical foundation approved and recorded in ADR-0001.
+- Concise cross-agent instructions and selective context routing established.
+- Workspace boundaries and the initial repository skeleton established.
+- Initial channel, layout, format, content-item, and typography-pair schemas validated.
+- Canonical lint, type-check, test, and build commands pass.
 
 ## Next
 
-Phase 1 — establish the agent-compatible repository foundation and initial schemas.
+Phase 2 — onboard the first Channel Pack, beginning with channel identity.
 
 ## Blockers
 
