@@ -18,7 +18,13 @@ Phase 1 — complete
 
 ## Next
 
-Phase 2 — onboard the first Channel Pack, beginning with channel identity.
+Phase 2 — collect and validate the color palette for `tip-ogrencileri-platformu`.
+
+## Phase 2 progress
+
+- Channel identity: PASS
+- Channel status: `DRAFT`
+- Current onboarding step: color palette
 
 ## Blockers
 

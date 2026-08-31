@@ -2,7 +2,7 @@
 
 ## Current
 
-- [ ] Phase 2: collect and validate the identity for the first Channel Pack.
+- [ ] Phase 2: collect and validate the color palette for `tip-ogrencileri-platformu`.
 
 ## Later
 
