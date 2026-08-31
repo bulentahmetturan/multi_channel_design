@@ -2,7 +2,7 @@
 
 ## Current
 
-- [ ] Phase 2: obtain approval for the proposed color roles and usage restrictions for `tip-ogrencileri-platformu`.
+- [ ] Phase 2: obtain approval for the proposed color roles and Color Combination Registry for `tip-ogrencileri-platformu`.
 
 ## Later
 

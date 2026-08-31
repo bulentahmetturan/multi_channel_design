@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1320" viewBox="0 0 1200 1320" role="img" aria-labelledby="title description">
+  <title id="title">Tıp Öğrencileri Platformu color combination registry</title>
+  <description id="description">Eleven proposed two, three, and four color treatments with reversed variants.</description>
+  <rect width="1200" height="1320" fill="#FFFFFF"/>
+  <text x="60" y="72" font-family="Arial, sans-serif" font-size="38" font-weight="700" fill="#252627">Color Combination Registry</text>
+  <text x="60" y="112" font-family="Arial, sans-serif" font-size="22" fill="#252627">11 proposed treatments · recent-post window: 6 · palette v0.1.0</text>
+
+  <g transform="translate(60 160)">
+    <rect width="340" height="230" rx="18" fill="#FFFFFF" stroke="#252627" stroke-width="3"/>
+    <text x="24" y="46" font-family="Arial" font-size="18" fill="#252627">2C · neutral light</text>
+    <text x="24" y="108" font-family="Arial" font-size="29" font-weight="700" fill="#252627">Burs fırsatı</text>
+    <text x="24" y="148" font-family="Arial" font-size="18" fill="#252627">Başvuru ayrıntıları</text>
+    <rect x="24" y="184" width="292" height="10" fill="#252627"/>
+  </g>
+  <g transform="translate(430 160)">
+    <rect width="340" height="230" rx="18" fill="#252627"/>
+    <text x="24" y="46" font-family="Arial" font-size="18" fill="#FFFFFF">2C · neutral reversed</text>
+    <text x="24" y="108" font-family="Arial" font-size="29" font-weight="700" fill="#FFFFFF">Araştırma çağrısı</text>
+    <text x="24" y="148" font-family="Arial" font-size="18" fill="#FFFFFF">Yeni program duyurusu</text>
+    <rect x="24" y="184" width="292" height="10" fill="#FFFFFF"/>
+  </g>
+  <g transform="translate(800 160)">
+    <rect width="340" height="230" rx="18" fill="#BB0A21"/>
+    <text x="24" y="46" font-family="Arial" font-size="18" fill="#FFFFFF">2C · primary reversed</text>
+    <text x="24" y="108" font-family="Arial" font-size="29" font-weight="700" fill="#FFFFFF">Son başvuru</text>
+    <text x="24" y="148" font-family="Arial" font-size="18" fill="#FFFFFF">12 Ekim 2026</text>
+    <rect x="24" y="184" width="292" height="10" fill="#FFFFFF"/>
+  </g>
+
+  <g transform="translate(60 420)">
+    <rect width="340" height="230" rx="18" fill="#FFFFFF" stroke="#D3D4D9" stroke-width="3"/>
+    <text x="24" y="46" font-family="Arial" font-size="18" fill="#BB0A21">2C · primary headline</text>
+    <text x="24" y="108" font-family="Arial" font-size="29" font-weight="700" fill="#BB0A21">Değişim programı</text>
+    <text x="24" y="148" font-family="Arial" font-size="18" fill="#BB0A21">Başvurular açıldı</text>
+    <rect x="24" y="184" width="292" height="10" fill="#BB0A21"/>
+  </g>
+  <g transform="translate(430 420)">
+    <rect width="340" height="230" rx="18" fill="#FFFFFF" stroke="#D3D4D9" stroke-width="3"/>
+    <text x="24" y="46" font-family="Arial" font-size="18" fill="#252627">3C · editorial primary</text>
+    <text x="24" y="108" font-family="Arial" font-size="29" font-weight="700" fill="#252627">Kongre rehberi</text>
+    <text x="24" y="148" font-family="Arial" font-size="18" fill="#252627">Program ve tarihler</text>
+    <rect x="24" y="184" width="292" height="10" fill="#BB0A21"/>
+  </g>
+  <g transform="translate(800 420)">
+    <rect width="340" height="230" rx="18" fill="#252627"/>
+    <text x="24" y="46" font-family="Arial" font-size="18" fill="#FFFFFF">3C · editorial reversed</text>
+    <text x="24" y="108" font-family="Arial" font-size="29" font-weight="700" fill="#FFFFFF">Kariyer buluşması</text>
+    <text x="24" y="148" font-family="Arial" font-size="18" fill="#FFFFFF">Konuşmacıları keşfet</text>
+    <rect x="24" y="184" width="292" height="10" fill="#BB0A21"/>
+  </g>
+
+  <g transform="translate(60 680)">
+    <rect width="340" height="230" rx="18" fill="#FFFFFF" stroke="#D3D4D9" stroke-width="3"/>
+    <text x="24" y="46" font-family="Arial" font-size="18" fill="#252627">3C · editorial blue</text>
+    <text x="24" y="108" font-family="Arial" font-size="29" font-weight="700" fill="#252627">Staj olanakları</text>
+    <text x="24" y="148" font-family="Arial" font-size="18" fill="#252627">Yeni dönem seçkisi</text>
+    <rect x="24" y="184" width="292" height="10" fill="#4B88A2"/>
+  </g>
+  <g transform="translate(430 680)">
+    <rect width="340" height="230" rx="18" fill="#252627"/>
+    <text x="24" y="46" font-family="Arial" font-size="18" fill="#FFFFFF">3C · blue reversed</text>
+    <text x="24" y="108" font-family="Arial" font-size="29" font-weight="700" fill="#FFFFFF">Yurt dışı eğitim</text>
+    <text x="24" y="148" font-family="Arial" font-size="18" fill="#FFFFFF">Fırsatları karşılaştır</text>
+    <rect x="24" y="184" width="292" height="10" fill="#4B88A2"/>
+  </g>
+  <g transform="translate(800 680)">
+    <rect width="340" height="230" rx="18" fill="#FFFFFF" stroke="#D3D4D9" stroke-width="3"/>
+    <rect x="18" y="18" width="304" height="194" rx="12" fill="#D3D4D9"/>
+    <text x="36" y="58" font-family="Arial" font-size="18" fill="#252627">4C · layered primary</text>
+    <text x="36" y="120" font-family="Arial" font-size="29" font-weight="700" fill="#252627">Program özeti</text>
+    <text x="36" y="158" font-family="Arial" font-size="18" fill="#252627">Önemli bilgiler</text>
+    <rect x="36" y="184" width="268" height="10" fill="#BB0A21"/>
+  </g>
+
+  <g transform="translate(60 940)">
+    <rect width="340" height="230" rx="18" fill="#FFFFFF" stroke="#D3D4D9" stroke-width="3"/>
+    <rect x="18" y="18" width="304" height="194" rx="12" fill="#D3D4D9"/>
+    <text x="36" y="58" font-family="Arial" font-size="18" fill="#252627">4C · layered blue</text>
+    <text x="36" y="120" font-family="Arial" font-size="29" font-weight="700" fill="#252627">Fırsat listesi</text>
+    <text x="36" y="158" font-family="Arial" font-size="18" fill="#252627">Seçili kaynaklar</text>
+    <rect x="36" y="184" width="268" height="10" fill="#4B88A2"/>
+  </g>
+  <g transform="translate(430 940)">
+    <rect width="340" height="230" rx="18" fill="#BB0A21"/>
+    <rect x="18" y="18" width="304" height="194" rx="12" fill="#252627"/>
+    <text x="36" y="58" font-family="Arial" font-size="18" fill="#FFFFFF">4C · primary reversed</text>
+    <text x="36" y="120" font-family="Arial" font-size="29" font-weight="700" fill="#FFFFFF">Önemli duyuru</text>
+    <text x="36" y="158" font-family="Arial" font-size="18" fill="#FFFFFF">Ayrıntıları incele</text>
+    <rect x="36" y="184" width="268" height="10" fill="#D3D4D9"/>
+  </g>
+  <g transform="translate(800 940)">
+    <rect width="340" height="230" rx="18" fill="#FFFFFF" stroke="#D3D4D9" stroke-width="3" stroke-dasharray="8 8"/>
+    <text x="24" y="58" font-family="Arial" font-size="18" fill="#252627">Selection rule</text>
+    <text x="24" y="108" font-family="Arial" font-size="23" font-weight="700" fill="#252627">No random colors.</text>
+    <text x="24" y="148" font-family="Arial" font-size="18" fill="#252627">Choose by content, layout,</text>
+    <text x="24" y="178" font-family="Arial" font-size="18" fill="#252627">image, density, and history.</text>
+  </g>
+
+  <text x="60" y="1242" font-family="Arial" font-size="20" fill="#252627">Approval remains pending until palette roles, typography, and logo treatments pass.</text>
+  <text x="60" y="1278" font-family="Arial" font-size="20" fill="#252627">Final posts revalidate contrast, readability, logo visibility, layout fit, diversity, and safe zones.</text>
+</svg>

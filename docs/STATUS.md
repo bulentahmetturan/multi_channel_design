@@ -25,8 +25,10 @@ Phase 2 — obtain approval for the proposed color roles and usage restrictions 
 - Channel identity: PASS
 - Palette values: PASS (`#FFF9FB` corrected to `#FFFFFF` by user request)
 - Color proof and contrast report: generated, awaiting approval
+- Global Color Combination and Reversal Policy: adopted
+- Color Combination Registry: generated as `PROPOSED` with an anti-repetition window of six posts
 - Channel status: `DRAFT`
-- Current onboarding step: color-role approval
+- Current onboarding step: color-role and combination-registry approval
 
 ## Blockers
 

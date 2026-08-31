@@ -6,4 +6,4 @@ Required onboarding progression:
 
 `DRAFT → COLORS_PASS → LOGOS_PASS → TYPOGRAPHY_PASS → BRAND_PROOF_PASS → READY`
 
-A Channel Pack contains channel identity, functional color roles, logo manifest, typography pool and pairs, copy style, image direction, decision colors, assets, and proofs. New channels must not require core ranking changes.
+A Channel Pack contains channel identity, functional color roles, a Color Combination Registry, logo manifest, typography pool and pairs, copy style, image direction, decision colors, assets, and proofs. New channels must not require core ranking changes.

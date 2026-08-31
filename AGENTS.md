@@ -15,6 +15,7 @@ Build a portable, local-first operating system for multi-channel Instagram desig
 ## Hard rules
 
 - Select layouts from content morphology before applying channel identity.
+- Select colors from the channel's approved combination registry; enforce role-based variation and the recent-post repetition window.
 - Treat safe zones, contrast, minimum type size, overflow, and logo cropping as hard gates.
 - Never invent factual claims, dates, deadlines, prices, eligibility, statistics, quotes, or sources.
 - Preserve historical versions needed to reproduce published work.

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://multi-channel-design.local/schemas/post-record.schema.json",
+  "title": "Post Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "id", "channelId", "status", "format", "contentProfileId", "layoutVersionId", "formatProfileVersionId", "colorSelection"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "id": { "type": "string", "format": "uuid" },
+    "channelId": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "status": { "enum": ["DRAFT", "QA_FAILED", "READY", "WILL_PUBLISH", "PUBLISHED"] },
+    "format": { "enum": ["POST_PORTRAIT", "POST_SQUARE", "CAROUSEL", "STORY", "REELS_COVER"] },
+    "contentProfileId": { "type": "string" },
+    "layoutVersionId": { "type": "string" },
+    "formatProfileVersionId": { "type": "string" },
+    "colorSelection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["registryVersion", "combinationId", "combinationVersion", "repeatSignature"],
+      "properties": {
+        "registryVersion": { "type": "string" },
+        "combinationId": { "type": "string" },
+        "combinationVersion": { "type": "string" },
+        "repeatSignature": { "type": "string" },
+        "campaignOverrideId": { "type": "string" }
+      }
+    },
+    "renderVersionId": { "type": "string" },
+    "publishedAt": { "type": "string", "format": "date-time" }
+  }
+}

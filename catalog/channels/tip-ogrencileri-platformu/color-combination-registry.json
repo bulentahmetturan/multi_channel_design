@@ -1,0 +1,220 @@
+{
+  "schemaVersion": "1.0.0",
+  "channelId": "tip-ogrencileri-platformu",
+  "version": "0.1.0",
+  "paletteVersion": "0.1.0",
+  "status": "PROPOSED",
+  "recentPostWindow": 6,
+  "campaignOverrideAllowed": true,
+  "combinations": [
+    {
+      "id": "minimal-neutral-light",
+      "version": "0.1.0",
+      "arity": 2,
+      "variant": "LIGHT",
+      "colors": ["#FFFFFF", "#252627"],
+      "roles": {
+        "background": "#FFFFFF",
+        "surfaceOrOverlay": "#FFFFFF",
+        "primaryText": "#252627",
+        "secondaryText": "#252627",
+        "accent": "#252627",
+        "borderOrDataHighlight": "#252627",
+        "logoTreatment": { "mode": "DARK", "color": "#252627" }
+      },
+      "suitableFor": { "textDensity": ["LOW", "MEDIUM", "HIGH"], "imageBrightness": ["NONE", "LIGHT", "MIXED"], "notes": "Minimal, highly legible neutral treatment." },
+      "repeatSignature": "#FFFFFF|#252627|#252627",
+      "validation": { "contrast": "PASS", "typographyReadability": "PENDING", "logoVisibility": "PENDING", "layoutCompatibility": "CONDITIONAL", "feedDiversity": "CONDITIONAL", "safeZone": "CONDITIONAL" }
+    },
+    {
+      "id": "minimal-neutral-dark",
+      "version": "0.1.0",
+      "arity": 2,
+      "variant": "DARK_REVERSED",
+      "colors": ["#252627", "#FFFFFF"],
+      "roles": {
+        "background": "#252627",
+        "surfaceOrOverlay": "#252627",
+        "primaryText": "#FFFFFF",
+        "secondaryText": "#FFFFFF",
+        "accent": "#FFFFFF",
+        "borderOrDataHighlight": "#FFFFFF",
+        "logoTreatment": { "mode": "LIGHT", "color": "#FFFFFF" }
+      },
+      "suitableFor": { "textDensity": ["LOW", "MEDIUM", "HIGH"], "imageBrightness": ["NONE", "DARK", "MIXED"], "notes": "High-contrast reversed neutral treatment." },
+      "repeatSignature": "#252627|#FFFFFF|#FFFFFF",
+      "validation": { "contrast": "PASS", "typographyReadability": "PENDING", "logoVisibility": "PENDING", "layoutCompatibility": "CONDITIONAL", "feedDiversity": "CONDITIONAL", "safeZone": "CONDITIONAL" }
+    },
+    {
+      "id": "minimal-primary-reversed",
+      "version": "0.1.0",
+      "arity": 2,
+      "variant": "PRIMARY_REVERSED",
+      "colors": ["#BB0A21", "#FFFFFF"],
+      "roles": {
+        "background": "#BB0A21",
+        "surfaceOrOverlay": "#BB0A21",
+        "primaryText": "#FFFFFF",
+        "secondaryText": "#FFFFFF",
+        "accent": "#FFFFFF",
+        "borderOrDataHighlight": "#FFFFFF",
+        "logoTreatment": { "mode": "LIGHT", "color": "#FFFFFF" }
+      },
+      "suitableFor": { "textDensity": ["LOW", "MEDIUM"], "imageBrightness": ["NONE"], "notes": "Urgent or high-impact minimal treatment with white text on red." },
+      "repeatSignature": "#BB0A21|#FFFFFF|#FFFFFF",
+      "validation": { "contrast": "PASS", "typographyReadability": "PENDING", "logoVisibility": "PENDING", "layoutCompatibility": "CONDITIONAL", "feedDiversity": "CONDITIONAL", "safeZone": "CONDITIONAL" }
+    },
+    {
+      "id": "minimal-primary-headline",
+      "version": "0.1.0",
+      "arity": 2,
+      "variant": "NEUTRAL_PRIMARY_HEADLINE",
+      "colors": ["#FFFFFF", "#BB0A21"],
+      "roles": {
+        "background": "#FFFFFF",
+        "surfaceOrOverlay": "#FFFFFF",
+        "primaryText": "#BB0A21",
+        "secondaryText": "#BB0A21",
+        "accent": "#BB0A21",
+        "borderOrDataHighlight": "#BB0A21",
+        "logoTreatment": { "mode": "MONOCHROME", "color": "#BB0A21" }
+      },
+      "suitableFor": { "textDensity": ["LOW", "MEDIUM"], "imageBrightness": ["NONE", "LIGHT"], "notes": "Light minimal treatment led by a primary-color headline." },
+      "repeatSignature": "#FFFFFF|#BB0A21|#BB0A21",
+      "validation": { "contrast": "PASS", "typographyReadability": "PENDING", "logoVisibility": "PENDING", "layoutCompatibility": "CONDITIONAL", "feedDiversity": "CONDITIONAL", "safeZone": "CONDITIONAL" }
+    },
+    {
+      "id": "editorial-primary-light",
+      "version": "0.1.0",
+      "arity": 3,
+      "variant": "LIGHT",
+      "colors": ["#FFFFFF", "#252627", "#BB0A21"],
+      "roles": {
+        "background": "#FFFFFF",
+        "surfaceOrOverlay": "#FFFFFF",
+        "primaryText": "#252627",
+        "secondaryText": "#252627",
+        "accent": "#BB0A21",
+        "borderOrDataHighlight": "#BB0A21",
+        "logoTreatment": { "mode": "DARK", "color": "#252627" }
+      },
+      "suitableFor": { "textDensity": ["LOW", "MEDIUM", "HIGH"], "imageBrightness": ["NONE", "LIGHT", "MIXED"], "notes": "Default editorial treatment with red emphasis." },
+      "repeatSignature": "#FFFFFF|#252627|#BB0A21",
+      "validation": { "contrast": "PASS", "typographyReadability": "PENDING", "logoVisibility": "PENDING", "layoutCompatibility": "CONDITIONAL", "feedDiversity": "CONDITIONAL", "safeZone": "CONDITIONAL" }
+    },
+    {
+      "id": "editorial-primary-dark",
+      "version": "0.1.0",
+      "arity": 3,
+      "variant": "DARK_REVERSED",
+      "colors": ["#252627", "#FFFFFF", "#BB0A21"],
+      "roles": {
+        "background": "#252627",
+        "surfaceOrOverlay": "#252627",
+        "primaryText": "#FFFFFF",
+        "secondaryText": "#FFFFFF",
+        "accent": "#BB0A21",
+        "borderOrDataHighlight": "#FFFFFF",
+        "logoTreatment": { "mode": "LIGHT", "color": "#FFFFFF" }
+      },
+      "suitableFor": { "textDensity": ["LOW", "MEDIUM"], "imageBrightness": ["NONE", "DARK", "MIXED"], "notes": "Dark editorial reversal; red is a small non-text accent." },
+      "repeatSignature": "#252627|#FFFFFF|#BB0A21",
+      "validation": { "contrast": "PASS", "typographyReadability": "PENDING", "logoVisibility": "PENDING", "layoutCompatibility": "CONDITIONAL", "feedDiversity": "CONDITIONAL", "safeZone": "CONDITIONAL" }
+    },
+    {
+      "id": "editorial-blue-light",
+      "version": "0.1.0",
+      "arity": 3,
+      "variant": "LIGHT",
+      "colors": ["#FFFFFF", "#252627", "#4B88A2"],
+      "roles": {
+        "background": "#FFFFFF",
+        "surfaceOrOverlay": "#FFFFFF",
+        "primaryText": "#252627",
+        "secondaryText": "#252627",
+        "accent": "#4B88A2",
+        "borderOrDataHighlight": "#4B88A2",
+        "logoTreatment": { "mode": "DARK", "color": "#252627" }
+      },
+      "suitableFor": { "textDensity": ["LOW", "MEDIUM", "HIGH"], "imageBrightness": ["NONE", "LIGHT", "MIXED"], "notes": "Calmer editorial treatment; blue is decorative or large-display only." },
+      "repeatSignature": "#FFFFFF|#252627|#4B88A2",
+      "validation": { "contrast": "PASS", "typographyReadability": "PENDING", "logoVisibility": "PENDING", "layoutCompatibility": "CONDITIONAL", "feedDiversity": "CONDITIONAL", "safeZone": "CONDITIONAL" }
+    },
+    {
+      "id": "editorial-blue-dark",
+      "version": "0.1.0",
+      "arity": 3,
+      "variant": "DARK_REVERSED",
+      "colors": ["#252627", "#FFFFFF", "#4B88A2"],
+      "roles": {
+        "background": "#252627",
+        "surfaceOrOverlay": "#252627",
+        "primaryText": "#FFFFFF",
+        "secondaryText": "#FFFFFF",
+        "accent": "#4B88A2",
+        "borderOrDataHighlight": "#4B88A2",
+        "logoTreatment": { "mode": "LIGHT", "color": "#FFFFFF" }
+      },
+      "suitableFor": { "textDensity": ["LOW", "MEDIUM"], "imageBrightness": ["NONE", "DARK", "MIXED"], "notes": "Dark editorial reversal with accessible blue graphical accents." },
+      "repeatSignature": "#252627|#FFFFFF|#4B88A2",
+      "validation": { "contrast": "PASS", "typographyReadability": "PENDING", "logoVisibility": "PENDING", "layoutCompatibility": "CONDITIONAL", "feedDiversity": "CONDITIONAL", "safeZone": "CONDITIONAL" }
+    },
+    {
+      "id": "layered-primary-light",
+      "version": "0.1.0",
+      "arity": 4,
+      "variant": "LIGHT",
+      "colors": ["#FFFFFF", "#D3D4D9", "#252627", "#BB0A21"],
+      "roles": {
+        "background": "#FFFFFF",
+        "surfaceOrOverlay": "#D3D4D9",
+        "primaryText": "#252627",
+        "secondaryText": "#252627",
+        "accent": "#BB0A21",
+        "borderOrDataHighlight": "#BB0A21",
+        "logoTreatment": { "mode": "DARK", "color": "#252627" }
+      },
+      "suitableFor": { "textDensity": ["MEDIUM", "HIGH"], "imageBrightness": ["NONE", "LIGHT", "MIXED"], "notes": "Layered editorial hierarchy for layouts with distinct surface regions." },
+      "repeatSignature": "#FFFFFF|#252627|#BB0A21",
+      "validation": { "contrast": "PASS", "typographyReadability": "PENDING", "logoVisibility": "PENDING", "layoutCompatibility": "CONDITIONAL", "feedDiversity": "CONDITIONAL", "safeZone": "CONDITIONAL" }
+    },
+    {
+      "id": "layered-blue-light",
+      "version": "0.1.0",
+      "arity": 4,
+      "variant": "LIGHT",
+      "colors": ["#FFFFFF", "#D3D4D9", "#252627", "#4B88A2"],
+      "roles": {
+        "background": "#FFFFFF",
+        "surfaceOrOverlay": "#D3D4D9",
+        "primaryText": "#252627",
+        "secondaryText": "#252627",
+        "accent": "#4B88A2",
+        "borderOrDataHighlight": "#4B88A2",
+        "logoTreatment": { "mode": "DARK", "color": "#252627" }
+      },
+      "suitableFor": { "textDensity": ["MEDIUM", "HIGH"], "imageBrightness": ["NONE", "LIGHT", "MIXED"], "notes": "Layered hierarchy with blue restricted to graphical or large-display accents." },
+      "repeatSignature": "#FFFFFF|#252627|#4B88A2",
+      "validation": { "contrast": "PASS", "typographyReadability": "PENDING", "logoVisibility": "PENDING", "layoutCompatibility": "CONDITIONAL", "feedDiversity": "CONDITIONAL", "safeZone": "CONDITIONAL" }
+    },
+    {
+      "id": "layered-primary-reversed",
+      "version": "0.1.0",
+      "arity": 4,
+      "variant": "PRIMARY_REVERSED",
+      "colors": ["#BB0A21", "#252627", "#FFFFFF", "#D3D4D9"],
+      "roles": {
+        "background": "#BB0A21",
+        "surfaceOrOverlay": "#252627",
+        "primaryText": "#FFFFFF",
+        "secondaryText": "#FFFFFF",
+        "accent": "#D3D4D9",
+        "borderOrDataHighlight": "#D3D4D9",
+        "logoTreatment": { "mode": "LIGHT", "color": "#FFFFFF" }
+      },
+      "suitableFor": { "textDensity": ["LOW", "MEDIUM"], "imageBrightness": ["NONE", "DARK"], "notes": "Primary-color reversal with a dark overlay and neutral highlights." },
+      "repeatSignature": "#BB0A21|#FFFFFF|#D3D4D9",
+      "validation": { "contrast": "PASS", "typographyReadability": "PENDING", "logoVisibility": "PENDING", "layoutCompatibility": "CONDITIONAL", "feedDiversity": "CONDITIONAL", "safeZone": "CONDITIONAL" }
+    }
+  ]
+}

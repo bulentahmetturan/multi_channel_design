@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://multi-channel-design.local/schemas/color-combination-registry.schema.json",
+  "title": "Color Combination Registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "channelId", "version", "paletteVersion", "status", "recentPostWindow", "combinations"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "channelId": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "version": { "$ref": "#/$defs/version" },
+    "paletteVersion": { "$ref": "#/$defs/version" },
+    "status": { "enum": ["PROPOSED", "APPROVED", "DEPRECATED"] },
+    "recentPostWindow": { "type": "integer", "minimum": 1, "maximum": 50 },
+    "campaignOverrideAllowed": { "type": "boolean" },
+    "combinations": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/combination" }
+    }
+  },
+  "$defs": {
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "color": { "type": "string", "pattern": "^#[A-F0-9]{6}$" },
+    "gate": { "enum": ["PASS", "CONDITIONAL", "PENDING", "FAIL"] },
+    "combination": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "arity", "variant", "colors", "roles", "suitableFor", "repeatSignature", "validation"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "version": { "$ref": "#/$defs/version" },
+        "arity": { "enum": [2, 3, 4] },
+        "variant": { "enum": ["LIGHT", "DARK_REVERSED", "PRIMARY_REVERSED", "NEUTRAL_PRIMARY_HEADLINE"] },
+        "colors": { "type": "array", "minItems": 2, "maxItems": 4, "uniqueItems": true, "items": { "$ref": "#/$defs/color" } },
+        "roles": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["background", "surfaceOrOverlay", "primaryText", "secondaryText", "accent", "borderOrDataHighlight", "logoTreatment"],
+          "properties": {
+            "background": { "$ref": "#/$defs/color" },
+            "surfaceOrOverlay": { "$ref": "#/$defs/color" },
+            "primaryText": { "$ref": "#/$defs/color" },
+            "secondaryText": { "$ref": "#/$defs/color" },
+            "accent": { "$ref": "#/$defs/color" },
+            "borderOrDataHighlight": { "$ref": "#/$defs/color" },
+            "logoTreatment": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["mode", "color"],
+              "properties": {
+                "mode": { "enum": ["DARK", "LIGHT", "FULL_COLOR", "MONOCHROME"] },
+                "color": { "$ref": "#/$defs/color" }
+              }
+            }
+          }
+        },
+        "suitableFor": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["textDensity", "imageBrightness", "notes"],
+          "properties": {
+            "textDensity": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["LOW", "MEDIUM", "HIGH"] } },
+            "imageBrightness": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["NONE", "LIGHT", "DARK", "MIXED"] } },
+            "notes": { "type": "string", "minLength": 1 }
+          }
+        },
+        "repeatSignature": { "type": "string", "pattern": "^#[A-F0-9]{6}\\|#[A-F0-9]{6}\\|#[A-F0-9]{6}$" },
+        "validation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["contrast", "typographyReadability", "logoVisibility", "layoutCompatibility", "feedDiversity", "safeZone"],
+          "properties": {
+            "contrast": { "$ref": "#/$defs/gate" },
+            "typographyReadability": { "$ref": "#/$defs/gate" },
+            "logoVisibility": { "$ref": "#/$defs/gate" },
+            "layoutCompatibility": { "$ref": "#/$defs/gate" },
+            "feedDiversity": { "$ref": "#/$defs/gate" },
+            "safeZone": { "$ref": "#/$defs/gate" }
+          }
+        }
+      }
+    }
+  }
+}
