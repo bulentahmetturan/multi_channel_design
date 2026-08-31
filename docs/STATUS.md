@@ -2,7 +2,7 @@
 
 ## Current phase
 
-Phase 1 — complete
+Phase 2 — in progress
 
 ## Completed
 
@@ -18,17 +18,17 @@ Phase 1 — complete
 
 ## Next
 
-Phase 2 — obtain approval for the proposed color roles and usage restrictions for `tip-ogrencileri-platformu`.
+Phase 2 — collect and validate the primary logo for `tip-ogrencileri-platformu`.
 
 ## Phase 2 progress
 
 - Channel identity: PASS
 - Palette values: PASS (`#FFF9FB` corrected to `#FFFFFF` by user request)
-- Color proof and contrast report: generated, awaiting approval
+- Color proof and contrast report: PASS
 - Global Color Combination and Reversal Policy: adopted
 - Color Combination Registry: generated as `PROPOSED` with an anti-repetition window of six posts
-- Channel status: `DRAFT`
-- Current onboarding step: color-role and combination-registry approval
+- Channel status: `COLORS_PASS`
+- Current onboarding step: primary logo
 
 ## Blockers
 

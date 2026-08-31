@@ -2,7 +2,7 @@
 
 ## Current
 
-- [ ] Phase 2: obtain approval for the proposed color roles and Color Combination Registry for `tip-ogrencileri-platformu`.
+- [ ] Phase 2: collect and validate the primary logo for `tip-ogrencileri-platformu`.
 
 ## Later
 

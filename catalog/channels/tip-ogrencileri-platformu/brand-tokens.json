@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "version": "0.1.0",
-  "approvalStatus": "PROPOSED",
+  "approvalStatus": "APPROVED",
   "palette": {
     "gray100": "#D3D4D9",
     "blue500": "#4B88A2",
@@ -35,5 +35,5 @@
       { "foreground": "#D3D4D9", "background": "#BB0A21", "ratio": 4.46, "restriction": "do-not-use-for-normal-text" }
     ]
   },
-  "sourceNotes": "User-supplied palette retained exactly except #FFF9FB was replaced with exact white #FFFFFF by explicit request. Functional roles are inferred and awaiting approval."
+  "sourceNotes": "User-supplied palette retained exactly except #FFF9FB was replaced with exact white #FFFFFF by explicit request. Functional roles and the global variation policy were approved by the user on 2026-09-01."
 }
