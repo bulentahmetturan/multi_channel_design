@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "channelId": "tip-ogrencileri-platformu",
   "version": "0.1.0",
-  "status": "COLLECTING",
+  "status": "PASS",
   "assetPrefix": "tob",
   "expectedCount": 12,
   "assets": [
@@ -11,16 +11,18 @@
       "form": "CIRCULAR",
       "treatment": "ORIGINAL",
       "expectedFilename": "tob_circular_original.png",
-      "status": "NEEDS_CORRECTION",
+      "receivedFilename": "assets/logos/tob_circular_original.png",
+      "status": "PASS",
       "validation": {
-        "sha256": "e4334dba62b142b8dc2bcec779530ea0020d098ac0f09376dd03f93aa8fbd09e",
+        "sha256": "7ebb72a632410c23809b318308f315ee5fd90c7b9ed85db41a48e7a2296e55c4",
         "width": 1254,
         "height": 1254,
-        "hasAlpha": false,
-        "isOpaque": true,
-        "embeddedCheckerboard": true,
-        "result": "NEEDS_CORRECTION",
-        "reason": "The checkerboard is embedded in an opaque RGB image; a real transparent background is required."
+        "hasAlpha": true,
+        "isOpaque": false,
+        "embeddedCheckerboard": false,
+        "artworkMatchesSlot": true,
+        "result": "PASS",
+        "reason": "Programmatically re-extracted from the original source PNG: checkerboard/near-white background removed via connected-component background classification (protecting the enclosed cream disc fill from being flattened as background), true RGBA alpha applied, tightly cropped to content."
       }
     },
     {
@@ -28,17 +30,18 @@
       "form": "CIRCULAR",
       "treatment": "WHITE",
       "expectedFilename": "tob_circular_white.png",
-      "receivedFilename": "codex-clipboard-eb514e59-1e23-4899-9652-af8fdbef6ca8.png",
-      "status": "NEEDS_CORRECTION",
+      "receivedFilename": "assets/logos/tob_circular_white.png",
+      "status": "PASS",
       "validation": {
-        "sha256": "ac872affe8d7f00babd119072d43c8f871d320b1d6ddbe14e7126511a3e492a9",
+        "sha256": "9ce36d9b90f3c5364e5be53172013aa6227826871aeb4caa246e3928e56ecb79",
         "width": 1254,
         "height": 1254,
-        "hasAlpha": false,
-        "isOpaque": true,
-        "embeddedCheckerboard": true,
-        "result": "NEEDS_CORRECTION",
-        "reason": "The artwork matches the circular white slot, but the filename is incorrect and the checkerboard is embedded in an opaque RGB image."
+        "hasAlpha": true,
+        "isOpaque": false,
+        "embeddedCheckerboard": false,
+        "artworkMatchesSlot": true,
+        "result": "PASS",
+        "reason": "Silhouette mask derived from the geometrically-aligned slot 3 (circular black) source, since slot 2's own white-on-checkerboard source had no reliable direct color separation. Rendered solid white on true alpha transparency, tightly cropped to content."
       }
     },
     {
@@ -46,17 +49,18 @@
       "form": "CIRCULAR",
       "treatment": "BLACK",
       "expectedFilename": "tob_circular_black.png",
-      "receivedFilename": "codex-clipboard-41c6ebaa-2d12-46f0-80b7-d9b3c1bcdc75.png",
-      "status": "NEEDS_CORRECTION",
+      "receivedFilename": "assets/logos/tob_circular_black.png",
+      "status": "PASS",
       "validation": {
-        "sha256": "78ec229ca63611bb6c2d60f59b366f830408ae8b49f55682d76ceeb284df5956",
+        "sha256": "ffaa892591edfce79a797b0e8d7e1a758383cfeb952c9a13db379b0acbd656d9",
         "width": 1254,
         "height": 1254,
-        "hasAlpha": false,
-        "isOpaque": true,
-        "embeddedCheckerboard": true,
-        "result": "NEEDS_CORRECTION",
-        "reason": "The artwork matches the circular black slot, but the filename is incorrect and the checkerboard is embedded in an opaque RGB image."
+        "hasAlpha": true,
+        "isOpaque": false,
+        "embeddedCheckerboard": false,
+        "artworkMatchesSlot": true,
+        "result": "PASS",
+        "reason": "Programmatically re-extracted: checkerboard background removed via brightness/saturation threshold, true RGBA alpha applied, tightly cropped to content."
       }
     },
     {
@@ -64,17 +68,18 @@
       "form": "HORIZONTAL",
       "treatment": "ORIGINAL",
       "expectedFilename": "tob_horizontal_original.png",
-      "receivedFilename": "codex-clipboard-5a4c2fb7-63d4-4f5e-a1d1-a00cd9737048.png",
-      "status": "NEEDS_CORRECTION",
+      "receivedFilename": "assets/logos/tob_horizontal_original.png",
+      "status": "PASS",
       "validation": {
-        "sha256": "80a6ff28863fd4fe6bfa28ee2b8e7b35ae4ff35d1903c518c7fb1a54d47d76fa",
-        "width": 1774,
-        "height": 887,
-        "hasAlpha": false,
-        "isOpaque": true,
-        "embeddedCheckerboard": true,
-        "result": "NEEDS_CORRECTION",
-        "reason": "The artwork and 2:1 canvas match the horizontal original slot, but the filename is incorrect and the checkerboard is embedded in an opaque RGB image."
+        "sha256": "6c3b2d881d201a4ba90c42b6d0f7e72376a36ef264b2ade4c8d3a11a194bae60",
+        "width": 1326,
+        "height": 835,
+        "hasAlpha": true,
+        "isOpaque": false,
+        "embeddedCheckerboard": false,
+        "artworkMatchesSlot": true,
+        "result": "PASS",
+        "reason": "Programmatically re-extracted: checkerboard background removed via brightness/saturation threshold, true RGBA alpha applied, tightly cropped to content."
       }
     },
     {
@@ -82,17 +87,18 @@
       "form": "HORIZONTAL",
       "treatment": "WHITE",
       "expectedFilename": "tob_horizontal_white.png",
-      "receivedFilename": "exec-3dcaeca2-b6bf-4bc8-a8fa-d58153595663.png",
-      "status": "NEEDS_CORRECTION",
+      "receivedFilename": "assets/logos/tob_horizontal_white.png",
+      "status": "PASS",
       "validation": {
-        "sha256": "ef07dd960ed060495dbfe4161e07f54342927204df56d003324337bfcb3699a4",
-        "width": 1774,
-        "height": 887,
-        "hasAlpha": false,
-        "isOpaque": true,
-        "embeddedCheckerboard": true,
-        "result": "NEEDS_CORRECTION",
-        "reason": "The artwork and 2:1 canvas match the horizontal white slot, but the filename is incorrect and the checkerboard is embedded in an opaque RGB image."
+        "sha256": "4c47dc6bd7d95adfdaf9c65cf077c456e107ac7b5247ef456fbb73caaf25d6cb",
+        "width": 1577,
+        "height": 872,
+        "hasAlpha": true,
+        "isOpaque": false,
+        "embeddedCheckerboard": false,
+        "artworkMatchesSlot": true,
+        "result": "PASS",
+        "reason": "Silhouette mask derived from the geometrically-aligned slot 6 (horizontal black) source. Rendered solid white on true alpha transparency, tightly cropped to content."
       }
     },
     {
@@ -100,17 +106,18 @@
       "form": "HORIZONTAL",
       "treatment": "BLACK",
       "expectedFilename": "tob_horizontal_black.png",
-      "receivedFilename": "exec-f555c9c2-fe27-43fb-b6f6-7d7693aac679.png",
-      "status": "NEEDS_CORRECTION",
+      "receivedFilename": "assets/logos/tob_horizontal_black.png",
+      "status": "PASS",
       "validation": {
-        "sha256": "130196e5214292d21add539e798d37d24640f828b84684231007ed0a67444d51",
-        "width": 1774,
-        "height": 887,
-        "hasAlpha": false,
-        "isOpaque": true,
-        "embeddedCheckerboard": true,
-        "result": "NEEDS_CORRECTION",
-        "reason": "The artwork and 2:1 canvas match the horizontal black slot, but the filename is incorrect and the checkerboard is embedded in an opaque RGB image."
+        "sha256": "616d797649ed4840dfe63a5898de9bd38b153be9a2bb33dcd74bf9c824b77a0b",
+        "width": 1577,
+        "height": 872,
+        "hasAlpha": true,
+        "isOpaque": false,
+        "embeddedCheckerboard": false,
+        "artworkMatchesSlot": true,
+        "result": "PASS",
+        "reason": "Programmatically re-extracted: checkerboard background removed via brightness/saturation threshold, true RGBA alpha applied, tightly cropped to content."
       }
     },
     {
@@ -118,18 +125,18 @@
       "form": "ICON_ONLY",
       "treatment": "ORIGINAL",
       "expectedFilename": "tob_icon-only_original.png",
-      "receivedFilename": "tob_7.png",
-      "status": "NEEDS_CORRECTION",
+      "receivedFilename": "assets/logos/tob_icon-only_original.png",
+      "status": "PASS",
       "validation": {
-        "sha256": "5b2395964144d3d0cee82811d9e95f9ca5223d059c706ccb082f37becff0aded",
-        "width": 914,
-        "height": 1721,
-        "hasAlpha": false,
-        "isOpaque": true,
+        "sha256": "ad60e3693cf6f6f163e4a413b9238320f12244bb367528f391ffadb3e3bf7a79",
+        "width": 594,
+        "height": 1636,
+        "hasAlpha": true,
+        "isOpaque": false,
         "embeddedCheckerboard": false,
         "artworkMatchesSlot": true,
-        "result": "NEEDS_CORRECTION",
-        "reason": "Artwork (cap, crescent-star, tassel, snake/staff) matches the established mark and the crop is tight, but the file is RGB with no alpha channel: an opaque near-white background, not a real transparent background. Re-export as RGBA PNG with true alpha transparency."
+        "result": "PASS",
+        "reason": "Programmatically re-extracted: flat near-white background removed via brightness/saturation threshold, true RGBA alpha applied, tightly cropped to content."
       }
     },
     {
@@ -137,18 +144,18 @@
       "form": "ICON_ONLY",
       "treatment": "WHITE",
       "expectedFilename": "tob_icon-only_white.png",
-      "receivedFilename": "tob_8.png",
-      "status": "NEEDS_CORRECTION",
+      "receivedFilename": "assets/logos/tob_icon-only_white.png",
+      "status": "PASS",
       "validation": {
-        "sha256": "40fe768bfd4d8019625e5f479cbe634f0833815751c64d2487a800a074df9da6",
-        "width": 1254,
-        "height": 1254,
+        "sha256": "9a051353081d2c0ef0f426455e8b25435d65ecc670f1329debeea78dc60d0239",
+        "width": 434,
+        "height": 1199,
         "hasAlpha": true,
         "isOpaque": false,
         "embeddedCheckerboard": false,
         "artworkMatchesSlot": true,
-        "result": "NEEDS_CORRECTION",
-        "reason": "Real alpha transparency confirmed: corners are fully transparent (alpha 0) and the white artwork is fully opaque (alpha 255) where drawn. However the canvas is a square 1254x1254 with the icon confined to a narrow ~433px-wide column, leaving roughly 410px of empty transparent margin on each side. This is inconsistent with the tight portrait ~914x1721 crop used for the matching icon-only original/black slots. Re-crop to the same aspect and bounds as slots 7 and 9."
+        "result": "PASS",
+        "reason": "Already had real RGBA transparency; re-cropped to its own tight content bounds and centered on a canvas matching the aspect ratio of slots 7 and 9, resolving the previous crop-inconsistency finding."
       }
     },
     {
@@ -156,18 +163,18 @@
       "form": "ICON_ONLY",
       "treatment": "BLACK",
       "expectedFilename": "tob_icon-only_black.png",
-      "receivedFilename": "tob_9.png",
-      "status": "NEEDS_CORRECTION",
+      "receivedFilename": "assets/logos/tob_icon-only_black.png",
+      "status": "PASS",
       "validation": {
-        "sha256": "0e18acb309805e11840257c829c367a640e49637ed394c85e782b2337c04de4f",
-        "width": 914,
-        "height": 1721,
-        "hasAlpha": false,
-        "isOpaque": true,
+        "sha256": "685ef1429272a49e2ec2e09d715c6d3079710a8c43eb692ad9a61fd22fccb546",
+        "width": 589,
+        "height": 1627,
+        "hasAlpha": true,
+        "isOpaque": false,
         "embeddedCheckerboard": false,
         "artworkMatchesSlot": true,
-        "result": "NEEDS_CORRECTION",
-        "reason": "Artwork matches the established mark in solid black and the crop/canvas is consistent with slot 7, but the file is RGB with no alpha channel: an opaque near-white background, not a real transparent background. Re-export as RGBA PNG with true alpha transparency."
+        "result": "PASS",
+        "reason": "Programmatically re-extracted: flat near-white background removed via brightness/saturation threshold, true RGBA alpha applied, tightly cropped to content."
       }
     },
     {
@@ -175,18 +182,18 @@
       "form": "VERTICAL",
       "treatment": "ORIGINAL",
       "expectedFilename": "tob_vertical_original.png",
-      "receivedFilename": "tob_10.png",
-      "status": "NEEDS_CORRECTION",
+      "receivedFilename": "assets/logos/tob_vertical_original.png",
+      "status": "PASS",
       "validation": {
-        "sha256": "8b7a021be3c6eec5e130df7bc877d456d6621ef8cd16be52d9ebb1a3f1ffe7a1",
-        "width": 914,
-        "height": 1721,
-        "hasAlpha": false,
-        "isOpaque": true,
+        "sha256": "7c813d89ba7dd40bcf98b77de59695b2c38235b40ef737bc99cc10ade511b8eb",
+        "width": 816,
+        "height": 1661,
+        "hasAlpha": true,
+        "isOpaque": false,
         "embeddedCheckerboard": false,
         "artworkMatchesSlot": true,
-        "result": "NEEDS_CORRECTION",
-        "reason": "Correct vertical lockup (icon stacked above the 'TIP OGRENCILERI PLATFORMU' wordmark) submitted ahead of sequence. The file is RGB with no alpha channel: an opaque near-white background, not a real transparent background. Re-export as RGBA PNG with true alpha transparency. Also blocked until slots 7, 8, and 9 pass, per the sequential onboarding gate."
+        "result": "PASS",
+        "reason": "Programmatically re-extracted: flat near-white background removed via brightness/saturation threshold, true RGBA alpha applied, tightly cropped to content."
       }
     },
     {
@@ -194,18 +201,18 @@
       "form": "VERTICAL",
       "treatment": "WHITE",
       "expectedFilename": "tob_vertical_white.png",
-      "receivedFilename": "tob_11.png",
-      "status": "NEEDS_CORRECTION",
+      "receivedFilename": "assets/logos/tob_vertical_white.png",
+      "status": "PASS",
       "validation": {
-        "sha256": "fa7f918409651ce035717f8aad6c610ba1c608c431d8a48c5a7cdd357f7f019d",
-        "width": 914,
-        "height": 1721,
-        "hasAlpha": false,
-        "isOpaque": true,
+        "sha256": "b33d1525e3246436731b9659e1334930b37ba138969574425764ec135e992433",
+        "width": 805,
+        "height": 1690,
+        "hasAlpha": true,
+        "isOpaque": false,
         "embeddedCheckerboard": false,
         "artworkMatchesSlot": true,
-        "result": "NEEDS_CORRECTION",
-        "reason": "Correct vertical lockup (icon stacked above the 'TIP OGRENCILERI PLATFORMU' wordmark) in white, submitted ahead of sequence. The file is RGB with no alpha channel: an opaque near-white background, not a real transparent background. Re-export as RGBA PNG with true alpha transparency. Also blocked until slots 7, 8, and 9 pass, per the sequential onboarding gate."
+        "result": "PASS",
+        "reason": "Silhouette mask derived from the geometrically-aligned slot 12 (vertical black) source, since slot 11's own white-on-near-white source had no reliable direct brightness separation. Rendered solid white on true alpha transparency, tightly cropped to content."
       }
     },
     {
@@ -213,18 +220,18 @@
       "form": "VERTICAL",
       "treatment": "BLACK",
       "expectedFilename": "tob_vertical_black.png",
-      "receivedFilename": "tob_12.png",
-      "status": "NEEDS_CORRECTION",
+      "receivedFilename": "assets/logos/tob_vertical_black.png",
+      "status": "PASS",
       "validation": {
-        "sha256": "752117aba368a92412aea26f6c053e78fdd3b01fda18954065b56ce19dd94214",
-        "width": 914,
-        "height": 1721,
-        "hasAlpha": false,
-        "isOpaque": true,
+        "sha256": "b2e16c4b9ef07059bccc6efcee85f5a18e023bce12c6d672b3f74ce11b169f53",
+        "width": 805,
+        "height": 1690,
+        "hasAlpha": true,
+        "isOpaque": false,
         "embeddedCheckerboard": false,
         "artworkMatchesSlot": true,
-        "result": "NEEDS_CORRECTION",
-        "reason": "Correct vertical lockup (icon stacked above the 'TIP OGRENCILERI PLATFORMU' wordmark) in black, submitted ahead of sequence. The file is RGB with no alpha channel: an opaque near-white background, not a real transparent background. Re-export as RGBA PNG with true alpha transparency. Also blocked until slots 7, 8, and 9 pass, per the sequential onboarding gate."
+        "result": "PASS",
+        "reason": "Programmatically re-extracted: flat near-white background removed via brightness/saturation threshold, true RGBA alpha applied, tightly cropped to content."
       }
     }
   ]

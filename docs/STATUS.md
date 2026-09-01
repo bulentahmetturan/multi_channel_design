@@ -18,7 +18,7 @@ Phase 2 — in progress
 
 ## Next
 
-Phase 2 — collect and validate the primary logo for `tip-ogrencileri-platformu`.
+Phase 2 — proceed to the next `tip-ogrencileri-platformu` onboarding gate now that the logo manifest is complete (typography pairing / format profile, per `docs/INDEX.md` routing).
 
 ## Phase 2 progress
 
@@ -27,21 +27,9 @@ Phase 2 — collect and validate the primary logo for `tip-ogrencileri-platformu
 - Color proof and contrast report: PASS
 - Global Color Combination and Reversal Policy: adopted
 - Color Combination Registry: generated as `PROPOSED` with an anti-repetition window of six posts
-- Logo manifest: 12 PNG slots registered with prefix `tob`
-- Primary logo `tob_circular_original.png`: NEEDS CORRECTION (opaque image with embedded checkerboard)
-- Circular white logo `tob_circular_white.png`: NEEDS CORRECTION (uploaded under the wrong filename and opaque with embedded checkerboard)
-- Circular black logo `tob_circular_black.png`: NEEDS CORRECTION (uploaded under the wrong filename and opaque with embedded checkerboard)
-- Horizontal original logo `tob_horizontal_original.png`: NEEDS CORRECTION (uploaded under the wrong filename and opaque with embedded checkerboard)
-- Horizontal white logo `tob_horizontal_white.png`: NEEDS CORRECTION (uploaded under the wrong filename and opaque with embedded checkerboard)
-- Horizontal black logo `tob_horizontal_black.png`: NEEDS CORRECTION (uploaded under the wrong filename and opaque with embedded checkerboard)
-- Icon-only original `tob_icon-only_original.png`: NEEDS CORRECTION (correct artwork and tight crop; RGB with no alpha channel, opaque near-white background, no real transparency)
-- Icon-only white `tob_icon-only_white.png`: NEEDS CORRECTION (real RGBA transparency confirmed; canvas is square 1254x1254 with ~410px empty transparent margin on each side, inconsistent with the portrait crop used for slots 7 and 9)
-- Icon-only black `tob_icon-only_black.png`: NEEDS CORRECTION (correct artwork and tight crop; RGB with no alpha channel, opaque near-white background, no real transparency)
-- Vertical original `tob_vertical_original.png`: submitted ahead of sequence; correct icon + wordmark lockup, but RGB with no alpha channel, opaque near-white background, no real transparency; also blocked until slots 7-9 pass
-- Vertical white `tob_vertical_white.png`: submitted ahead of sequence; correct icon + wordmark lockup in white, but RGB with no alpha channel, no real transparency; also blocked until slots 7-9 pass
-- Vertical black `tob_vertical_black.png`: submitted ahead of sequence; correct icon + wordmark lockup in black, but RGB with no alpha channel, no real transparency; also blocked until slots 7-9 pass
-- Channel status: `COLORS_PASS`
-- Current onboarding step: corrected icon-only original, white, and black logos (all three need a true RGBA re-export; white additionally needs re-cropping). All 12 logo slots have now received at least one submission; every submission so far needs correction, most commonly a missing real alpha channel.
+- Logo manifest: 12/12 PNG slots PASS, stored under `catalog/channels/tip-ogrencileri-platformu/assets/logos/` with prefix `tob`. Source submissions had opaque backgrounds (embedded checkerboard or flat near-white); background was removed programmatically (connected-component background classification for the checkerboard/gradient cases, silhouette masks borrowed from the geometrically-aligned black sibling for the white treatments), true RGBA alpha applied, and every asset tightly cropped to its own content bounds. Slot 8 was additionally re-cropped to match the aspect ratio of slots 7 and 9.
+- Channel status: `LOGO_PASS`
+- Current onboarding step: logo asset matrix complete; move to the next required Channel Pack asset (typography pairing / format profile).
 
 ## Blockers
 
@@ -49,4 +37,4 @@ None.
 
 ## Last updated
 
-2026-09-01 (logo validation: slots 7, 8, 9, 10)
+2026-09-01 (logo validation: all 12 slots PASS)
