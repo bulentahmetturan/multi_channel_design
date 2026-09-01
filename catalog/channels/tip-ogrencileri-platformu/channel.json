@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "id": "tip-ogrencileri-platformu",
-  "version": "0.2.0",
-  "status": "COLORS_PASS",
+  "version": "0.3.0",
+  "status": "LOGOS_PASS",
   "name": "Tıp Öğrencileri Platformu",
   "purpose": "A premium editorial platform that helps medical students in Türkiye discover verified scholarships, internships, research programs, congresses, conferences, exchange opportunities, and career-development resources in Türkiye and abroad.",
   "audience": "Medical students in Türkiye, especially those seeking academic, research, international mobility, scholarship, and early-career opportunities.",

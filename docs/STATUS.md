@@ -18,7 +18,7 @@ Phase 2 — in progress
 
 ## Next
 
-Phase 2 — proceed to the next `tip-ogrencileri-platformu` onboarding gate now that the logo manifest is complete (typography pairing / format profile, per `docs/INDEX.md` routing).
+Phase 2 — `tip-ogrencileri-platformu` TYPOGRAPHY_PASS gate: establish the channel's approved font pool (2-font pair minimum), per `docs/ONBOARDING-ORCHESTRATION.md`.
 
 ## Phase 2 progress
 
@@ -28,8 +28,8 @@ Phase 2 — proceed to the next `tip-ogrencileri-platformu` onboarding gate now 
 - Global Color Combination and Reversal Policy: adopted
 - Color Combination Registry: generated as `PROPOSED` with an anti-repetition window of six posts
 - Logo manifest: 12/12 PNG slots PASS, stored under `catalog/channels/tip-ogrencileri-platformu/assets/logos/` with prefix `tob`. Source submissions had opaque backgrounds (embedded checkerboard or flat near-white); background was removed programmatically (connected-component background classification for the checkerboard/gradient cases, silhouette masks borrowed from the geometrically-aligned black sibling for the white treatments), true RGBA alpha applied, and every asset tightly cropped to its own content bounds. Slot 8 was additionally re-cropped to match the aspect ratio of slots 7 and 9.
-- Channel status: `LOGO_PASS`
-- Current onboarding step: logo asset matrix complete; move to the next required Channel Pack asset (typography pairing / format profile).
+- Channel status: `LOGOS_PASS` (channel.json bumped to `0.3.0`)
+- Current onboarding step: TYPOGRAPHY_PASS gate opened. Awaiting the channel's font choice/decision (see `docs/ONBOARDING-ORCHESTRATION.md` for the one-step onboarding procedure now in effect for every channel).
 
 ## Blockers
 
