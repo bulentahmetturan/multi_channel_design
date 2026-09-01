@@ -31,6 +31,7 @@ Phase 2 — collect and validate the primary logo for `tip-ogrencileri-platformu
 - Primary logo `tob_circular_original.png`: NEEDS CORRECTION (opaque image with embedded checkerboard)
 - Circular white logo `tob_circular_white.png`: NEEDS CORRECTION (uploaded under the wrong filename and opaque with embedded checkerboard)
 - Circular black logo `tob_circular_black.png`: NEEDS CORRECTION (uploaded under the wrong filename and opaque with embedded checkerboard)
+- Horizontal original logo `tob_horizontal_original.png`: NEEDS CORRECTION (uploaded under the wrong filename and opaque with embedded checkerboard)
 - Channel status: `COLORS_PASS`
 - Current onboarding step: corrected primary logo
 
