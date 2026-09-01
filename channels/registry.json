@@ -54,14 +54,14 @@
     {
       "slug": "futboscope",
       "name": "Futboscope",
-      "shortDescription": "Football, analysis, statistics, and editorial sports content.",
-      "registryStatus": "PLANNED",
-      "language": "UNSET",
-      "logo": "UNSET",
-      "colorPalette": "UNSET",
+      "shortDescription": "Quote-driven Turkish football commentary Reels, filtered for genuine analysis over transfer noise.",
+      "registryStatus": "ACTIVE",
+      "language": "tr",
+      "logo": "IN_PROGRESS",
+      "colorPalette": "PASS",
       "typography": "UNSET",
       "monitoringSources": "UNSET",
-      "channelPackPath": null
+      "channelPackPath": "channels/futboscope/"
     },
     {
       "slug": "macaristan-rehberi",

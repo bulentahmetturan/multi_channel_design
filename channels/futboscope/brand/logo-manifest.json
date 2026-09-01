@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "1.0.0",
+  "channelId": "futboscope",
+  "version": "0.1.0",
+  "status": "COLLECTING",
+  "assetPrefix": "futboscope",
+  "expectedCount": 12,
+  "assets": [
+    {
+      "slot": 1, "form": "CIRCULAR", "treatment": "ORIGINAL",
+      "expectedFilename": "futboscope-circular-original.png",
+      "receivedFilename": "logos/futboscope-circular-original.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "f0408192b90e44113037725ffa9198a6bf1f3f645bf29a3bc0d2d68fc25d6faa",
+        "width": 330, "height": 634, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Source ('12_profile_avatar.png') already had real RGBA transparency; re-cropped to its own tight content bounds. This brand kit has no pre-rendered circular disc/ring badge -- this asset is the icon mark sized for Instagram's own circular profile-photo crop, not a composed badge. Same limitation applies to slots 2-3 below."
+      }
+    },
+    {
+      "slot": 2, "form": "CIRCULAR", "treatment": "WHITE",
+      "expectedFilename": "futboscope-circular-white.png",
+      "status": "PENDING"
+    },
+    {
+      "slot": 3, "form": "CIRCULAR", "treatment": "BLACK",
+      "expectedFilename": "futboscope-circular-black.png",
+      "status": "PENDING"
+    },
+    {
+      "slot": 4, "form": "HORIZONTAL", "treatment": "ORIGINAL",
+      "expectedFilename": "futboscope-horizontal-original.png",
+      "status": "PENDING"
+    },
+    {
+      "slot": 5, "form": "HORIZONTAL", "treatment": "WHITE",
+      "expectedFilename": "futboscope-horizontal-white.png",
+      "status": "PENDING"
+    },
+    {
+      "slot": 6, "form": "HORIZONTAL", "treatment": "BLACK",
+      "expectedFilename": "futboscope-horizontal-black.png",
+      "status": "PENDING"
+    },
+    {
+      "slot": 7, "form": "ICON_ONLY", "treatment": "ORIGINAL",
+      "expectedFilename": "futboscope-icon-only-original.png",
+      "receivedFilename": "logos/futboscope-icon-only-original.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "a432beaca48fa6485b35e63406f9b4c91a553dba3f385fbca1d1af347145254f",
+        "width": 220, "height": 423, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Source ('07_minimal_blue_black.png', the isolated pill/O mark used as the brand's standalone icon) already had real RGBA transparency; re-cropped to its own tight content bounds."
+      }
+    },
+    {
+      "slot": 8, "form": "ICON_ONLY", "treatment": "WHITE",
+      "expectedFilename": "futboscope-icon-only-white.png",
+      "receivedFilename": "logos/futboscope-icon-only-white.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "af3b0676a41291fb56277f47b905f1c26287424946583cc5869ee7d693443b5d",
+        "width": 220, "height": 423, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Source ('09_minimal_white_black.png') already had real RGBA transparency; re-cropped to its own tight content bounds."
+      }
+    },
+    {
+      "slot": 9, "form": "ICON_ONLY", "treatment": "BLACK",
+      "expectedFilename": "futboscope-icon-only-black.png",
+      "receivedFilename": "logos/futboscope-icon-only-black.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "eaa9a51b4c42d5e25d28213c8f98beb32882f5c31a2b6b7e96b68fe3759645b6",
+        "width": 226, "height": 430, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Source ('10_minimal_black_light.png') already had real RGBA transparency; re-cropped to its own tight content bounds."
+      }
+    },
+    {
+      "slot": 10, "form": "VERTICAL", "treatment": "ORIGINAL",
+      "expectedFilename": "futboscope-vertical-original.png",
+      "receivedFilename": "logos/futboscope-vertical-original.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "6189267c65d2ba15d081806332f9bb383935922cd50c41a51fca95b85c3123d3",
+        "width": 680, "height": 701, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Source ('01_primary_color_black.png', the two-line stacked FUTBO/SCOPE wordmark with the brand-blue O) already had real RGBA transparency; re-cropped to its own tight content bounds. Mapped to VERTICAL since it is a stacked two-line lockup rather than a single-line wide lockup; this brand's design system has no separate icon-beside-wordmark HORIZONTAL treatment (see slots 4-6)."
+      }
+    },
+    {
+      "slot": 11, "form": "VERTICAL", "treatment": "WHITE",
+      "expectedFilename": "futboscope-vertical-white.png",
+      "receivedFilename": "logos/futboscope-vertical-white.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "317de3ebe30dce7437714f55c10becec67928554d45a18f3bdb7d84aaef7341d",
+        "width": 723, "height": 694, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Source ('03_primary_white_black.png') already had real RGBA transparency; re-cropped to its own tight content bounds."
+      }
+    },
+    {
+      "slot": 12, "form": "VERTICAL", "treatment": "BLACK",
+      "expectedFilename": "futboscope-vertical-black.png",
+      "receivedFilename": "logos/futboscope-vertical-black.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "6098bac2366b93e662ae20202403fddcb57e05dc134bcea9da89a2ba616554a2",
+        "width": 637, "height": 704, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Source ('04_primary_black_light.png') already had real RGBA transparency; re-cropped to its own tight content bounds."
+      }
+    }
+  ]
+}

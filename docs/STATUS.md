@@ -29,7 +29,8 @@ Phase 2 — Channel Registry & Brand Foundations: onboard the next `PLANNED` cha
 - `kaduse-medikal`: `ACTIVE`, logo `PASS`, color `PASS`, language `tr`.
 - `iyilesme-kanali`: `ACTIVE`, logo `PASS`, color `PASS`, language `tr`.
 - `turkiye-scholarships`: `ACTIVE`, logo `PASS`, color `PASS`, language `en` (+7 secondary).
-- Remaining 8 channels: `PLANNED`, all foundation fields `UNSET`.
+- `futboscope`: `ACTIVE`, logo `IN_PROGRESS` (7/12 slots PASS), color `PASS`, language `tr`.
+- Remaining 7 channels: `PLANNED`, all foundation fields `UNSET`.
 
 ## tip-ogrencileri-platformu progress
 
@@ -66,6 +67,14 @@ Phase 2 — Channel Registry & Brand Foundations: onboard the next `PLANNED` cha
 - Channel status: `LOGOS_PASS`.
 - Typography: deliberately deferred (portfolio-level rule). Note: the website already runs a locked, documented typography system (IBM Plex Sans) for its own UI -- unrelated to this channel's future Instagram font pool, kept separate.
 
+## futboscope progress
+
+- Channel identity: PASS. Purpose, audience, and language (`tr`) drawn from the project's own existing handover doc (a separate, already-running YouTube-transcript/filtering/captioning pipeline).
+- Palette: PASS. Brand blue `#0044FF` taken verbatim from the project's own locked design decision (`brand/FORMAT1-DIRECTION.md` -- a documented, tested brand-color decision, not a guess). Two-tone identity (blue + black/white); no second brand color is documented anywhere in the source project.
+- Logo manifest: 7/12 PNG slots PASS (icon-only x3, a stacked two-line wordmark mapped to VERTICAL x3, one circular avatar mark). 5 slots `PENDING`: horizontal (this brand has no icon-beside-wordmark lockup) and circular white/black (no pre-composed circular badge exists, only one avatar-style mark). Not invented to fill the gap.
+- Channel status: `COLORS_PASS` (not yet `LOGOS_PASS` -- manifest is incomplete, honestly).
+- **Scope note:** Futboscope also has an existing, separate, working video-production pipeline (YouTube sync, transcript archive, speaker ID, captioning) that lives outside this repo and is explicitly out of scope here. A proposed (not built) non-video "news column" using this repo's shared design/approval layer is documented, clearly marked not-implemented, at `channels/futboscope/SCOPE.md`.
+
 ## Blockers
 
 None.
@@ -76,4 +85,4 @@ A working, tested source-monitoring implementation for `tip-ogrencileri-platform
 
 ## Last updated
 
-2026-09-01 (portfolio restructuring: channels/ + design-system/ + radar/ + data/; tip-ogrencileri-platformu radar implementation integrated; kaduse-medikal, iyilesme-kanali, and turkiye-scholarships onboarded to LOGOS_PASS)
+2026-09-01 (portfolio restructuring: channels/ + design-system/ + radar/ + data/; tip-ogrencileri-platformu radar implementation integrated; kaduse-medikal, iyilesme-kanali, and turkiye-scholarships onboarded to LOGOS_PASS; futboscope onboarded to COLORS_PASS with 7/12 logo slots and a documented pipeline/scope boundary)
