@@ -3,7 +3,10 @@
 ## Current
 
 - [x] Phase 2: collect and validate the primary logo for `tip-ogrencileri-platformu`. All 12 logo slots PASS. Channel status advanced to `LOGOS_PASS`.
-- [ ] Phase 2: `tip-ogrencileri-platformu` TYPOGRAPHY_PASS gate — establish the channel's approved font pool and headline/body pair.
+- [x] Phase 2: create the central Channel Registry (`channels/registry.json`) with all 11 current/planned brands.
+- [x] Phase 2: migrate the repository to the portfolio layout (`channels/`, `design-system/`, `apps/dashboard`, `apps/worker`, `radar/`, `data/`), recorded in ADR-0002.
+- [ ] Phase 2: process `kaduse-medikal`'s submitted logo pack; still need identity (purpose, audience, primary language) and color palette.
+- [ ] Phase 2: onboard the remaining 9 `PLANNED` channels one at a time, in registry order. Typography stays deferred for every channel until the whole registry reaches `LOGOS_PASS`.
 
 ## Later
 

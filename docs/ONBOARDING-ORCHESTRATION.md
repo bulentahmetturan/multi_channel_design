@@ -4,18 +4,27 @@ Governs how any Channel Pack moves through the progression defined in `docs/CHAN
 
 `DRAFT → COLORS_PASS → LOGOS_PASS → TYPOGRAPHY_PASS → BRAND_PROOF_PASS → READY`
 
-This is a continuous, self-driving loop across turns. Once onboarding is underway for a channel, do not stop and wait silently for the user to name the next task — determine it and ask for it.
+This is a continuous, self-driving loop across turns. Once onboarding is underway, do not stop and wait silently for the user to name the next task — determine it and ask for it.
+
+## Portfolio-level sequencing (current rule)
+
+Typography is deferred at the portfolio level, per `ROADMAP.md` Phase 2:
+
+- Every channel in `channels/registry.json` must first reach `LOGOS_PASS` (identity, color palette, logo assets) before **any** channel proceeds to `TYPOGRAPHY_PASS`.
+- Do not request logos or palettes for more than one channel at a time. Onboard channels one at a time, in registry order, through identity → color palette → logo assets.
+- Do not request fonts, or otherwise begin typography onboarding, for any channel until every registry entry has reached `LOGOS_PASS` (or is explicitly marked out of scope) and a central typography library has been established.
+- When a new channel is named that is not yet in `channels/registry.json`, add it there first (`registryStatus: "PLANNED"`, all foundation fields `"UNSET"`) before starting its onboarding.
 
 ## Procedure (every onboarding turn)
 
-1. Read the channel's record (`catalog/channels/<id>/channel.json`), its existing asset/catalog files, `docs/STATUS.md`, and the schema for the gate immediately after the channel's current `status`.
+1. Read the channel's record (`channels/<id>/channel.json`), its existing Channel Pack files, `docs/STATUS.md`, and the schema for the gate immediately after the channel's current `status`.
 2. Determine the single next unmet prerequisite in dependency order. Do not skip ahead and do not request multiple assets or decisions at once.
 3. State plainly what is needed next and why (which gate it unlocks).
 4. Request exactly one asset or decision. Provide the accepted format and the technical requirements (dimensions, color model, schema fields, naming, etc.) needed to pass validation on the first attempt.
 5. When the user provides it:
-   - Place the asset at its canonical catalog path, or record the decision in the appropriate catalog file.
+   - Place the asset at its canonical Channel Pack path, or record the decision in the appropriate Channel Pack file.
    - Run the deterministic validation for that asset/decision type.
-   - Update the relevant catalog record's `status` field.
+   - Update the relevant record's `status` field.
    - Update `docs/STATUS.md` and `TASKS.md`.
    - Commit and push. File creation, edits, validation, commits, and pushes to the private repository are pre-authorized for this routine onboarding work; no per-step confirmation is needed.
    - Report `PASS`, or the exact blocking failure, for that step only.

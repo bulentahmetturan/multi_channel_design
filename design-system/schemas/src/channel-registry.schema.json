@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://multi-channel-design.local/schemas/channel-registry.schema.json",
+  "title": "Channel Registry",
+  "description": "Central index of every current and planned brand/channel. Individual Channel Packs under channels/<slug>/ hold the full onboarded record; this registry tracks the portfolio and each channel's coarse foundation status before and during onboarding.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "version", "channels"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "updatedAt": { "type": "string", "format": "date" },
+    "channels": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["slug", "name", "shortDescription", "registryStatus", "language", "logo", "colorPalette", "typography", "monitoringSources", "channelPackPath"],
+        "properties": {
+          "slug": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "name": { "type": "string", "minLength": 1, "maxLength": 120 },
+          "shortDescription": { "type": "string", "minLength": 1, "maxLength": 300 },
+          "registryStatus": { "enum": ["PLANNED", "ACTIVE"] },
+          "language": {
+            "oneOf": [
+              { "const": "UNSET" },
+              { "type": "string", "pattern": "^[a-z]{2}(?:-[A-Z]{2})?$" }
+            ]
+          },
+          "logo": { "enum": ["UNSET", "IN_PROGRESS", "PASS"] },
+          "colorPalette": { "enum": ["UNSET", "IN_PROGRESS", "PASS"] },
+          "typography": { "enum": ["UNSET", "IN_PROGRESS", "PASS"] },
+          "monitoringSources": {
+            "oneOf": [
+              { "const": "UNSET" },
+              { "type": "array", "items": { "type": "string", "minLength": 1 } }
+            ]
+          },
+          "channelPackPath": {
+            "oneOf": [
+              { "const": null },
+              { "type": "string", "pattern": "^channels/[a-z0-9]+(?:-[a-z0-9]+)*/$" }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

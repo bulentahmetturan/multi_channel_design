@@ -8,4 +8,4 @@ importers:
 
   .: {}
 
-  packages/schemas: {}
+  design-system/schemas: {}

@@ -6,11 +6,12 @@ Build a portable, local-first operating system for multi-channel Instagram desig
 
 ## Architecture
 
-- Keep layouts channel-independent; Channel Packs live under `catalog/channels/<channel-id>/`.
+- Keep layouts channel-independent; Channel Packs live under `channels/<channel-id>/`. Radar (source monitoring) is a shared core serving every channel, not tied to one channel; each channel keeps its own sources within its own Channel Pack.
 - Compose posts as content-based layout + Channel Pack + typography pair + assets + format profile.
-- Keep catalogs as versioned JSON; keep mutable workflow state in SQLite behind adapters.
+- Keep cross-channel design data (schemas, layouts, safe zones, typography library) as versioned JSON under `design-system/`; keep mutable workflow state in SQLite behind adapters.
 - Keep external integrations optional. Do not use MCP for local repository access.
 - Analyze binary references once, store compact metadata, and retrieve narrowly.
+- Name channel asset files with the full channel slug (e.g. `<channel-slug>-circular-original.png`), never an abbreviation.
 
 ## Hard rules
 

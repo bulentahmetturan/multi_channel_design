@@ -1,0 +1,139 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "0.1.0",
+  "updatedAt": "2026-09-01",
+  "channels": [
+    {
+      "slug": "tip-ogrencileri-platformu",
+      "name": "Tıp Öğrencileri Platformu",
+      "shortDescription": "Medical students in Türkiye: scholarships, internships, research, congresses, exchanges, and career opportunities.",
+      "registryStatus": "ACTIVE",
+      "language": "tr",
+      "logo": "PASS",
+      "colorPalette": "PASS",
+      "typography": "UNSET",
+      "monitoringSources": "UNSET",
+      "channelPackPath": "channels/tip-ogrencileri-platformu/"
+    },
+    {
+      "slug": "kaduse-medikal",
+      "name": "Kaduse Medikal",
+      "shortDescription": "Health, medicine, brand, and campaign content.",
+      "registryStatus": "ACTIVE",
+      "language": "UNSET",
+      "logo": "IN_PROGRESS",
+      "colorPalette": "UNSET",
+      "typography": "UNSET",
+      "monitoringSources": "UNSET",
+      "channelPackPath": null
+    },
+    {
+      "slug": "yeni-nesil-romanci",
+      "name": "Yeni Nesil Romancı",
+      "shortDescription": "Literature, editorial writing, quotations, and writing culture.",
+      "registryStatus": "PLANNED",
+      "language": "UNSET",
+      "logo": "UNSET",
+      "colorPalette": "UNSET",
+      "typography": "UNSET",
+      "monitoringSources": "UNSET",
+      "channelPackPath": null
+    },
+    {
+      "slug": "turkiye-scholarships",
+      "name": "Türkiye Scholarships",
+      "shortDescription": "Education in Türkiye, international students, cities, campus life, and opportunities.",
+      "registryStatus": "PLANNED",
+      "language": "UNSET",
+      "logo": "UNSET",
+      "colorPalette": "UNSET",
+      "typography": "UNSET",
+      "monitoringSources": "UNSET",
+      "channelPackPath": null
+    },
+    {
+      "slug": "futboscope",
+      "name": "Futboscope",
+      "shortDescription": "Football, analysis, statistics, and editorial sports content.",
+      "registryStatus": "PLANNED",
+      "language": "UNSET",
+      "logo": "UNSET",
+      "colorPalette": "UNSET",
+      "typography": "UNSET",
+      "monitoringSources": "UNSET",
+      "channelPackPath": null
+    },
+    {
+      "slug": "macaristan-rehberi",
+      "name": "Macaristan Rehberi",
+      "shortDescription": "Hungary: education, student life, company formation, investment, and Türkiye–Hungary news.",
+      "registryStatus": "PLANNED",
+      "language": "UNSET",
+      "logo": "UNSET",
+      "colorPalette": "UNSET",
+      "typography": "UNSET",
+      "monitoringSources": "UNSET",
+      "channelPackPath": null
+    },
+    {
+      "slug": "dua-mecmuasi",
+      "name": "Dua Mecmuası",
+      "shortDescription": "Prayers, spiritual texts, and Islamic thought.",
+      "registryStatus": "PLANNED",
+      "language": "UNSET",
+      "logo": "UNSET",
+      "colorPalette": "UNSET",
+      "typography": "UNSET",
+      "monitoringSources": "UNSET",
+      "channelPackPath": null
+    },
+    {
+      "slug": "folk-saying",
+      "name": "Folk Saying",
+      "shortDescription": "Proverbs, idioms, folk wisdom, and cross-cultural short-form text.",
+      "registryStatus": "PLANNED",
+      "language": "UNSET",
+      "logo": "UNSET",
+      "colorPalette": "UNSET",
+      "typography": "UNSET",
+      "monitoringSources": "UNSET",
+      "channelPackPath": null
+    },
+    {
+      "slug": "context-turkish",
+      "name": "Context Turkish",
+      "shortDescription": "Turkish learning, vocabulary in context, language usage, and cultural language content.",
+      "registryStatus": "PLANNED",
+      "language": "UNSET",
+      "logo": "UNSET",
+      "colorPalette": "UNSET",
+      "typography": "UNSET",
+      "monitoringSources": "UNSET",
+      "channelPackPath": null
+    },
+    {
+      "slug": "dunya-burslari",
+      "name": "Dünya Bursları",
+      "shortDescription": "Global scholarships, international education, and student opportunities.",
+      "registryStatus": "PLANNED",
+      "language": "UNSET",
+      "logo": "UNSET",
+      "colorPalette": "UNSET",
+      "typography": "UNSET",
+      "monitoringSources": "UNSET",
+      "channelPackPath": null
+    },
+    {
+      "slug": "scope-turkiye",
+      "name": "Scope Türkiye",
+      "shortDescription": "Türkiye-focused social, cultural, educational, and current-context content.",
+      "registryStatus": "PLANNED",
+      "language": "UNSET",
+      "logo": "UNSET",
+      "colorPalette": "UNSET",
+      "typography": "UNSET",
+      "monitoringSources": "UNSET",
+      "channelPackPath": null
+    }
+  ]
+}
