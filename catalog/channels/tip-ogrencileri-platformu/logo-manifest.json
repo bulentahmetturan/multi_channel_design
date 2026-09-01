@@ -41,7 +41,24 @@
         "reason": "The artwork matches the circular white slot, but the filename is incorrect and the checkerboard is embedded in an opaque RGB image."
       }
     },
-    { "slot": 3, "form": "CIRCULAR", "treatment": "BLACK", "expectedFilename": "tob_circular_black.png", "status": "PENDING" },
+    {
+      "slot": 3,
+      "form": "CIRCULAR",
+      "treatment": "BLACK",
+      "expectedFilename": "tob_circular_black.png",
+      "receivedFilename": "codex-clipboard-41c6ebaa-2d12-46f0-80b7-d9b3c1bcdc75.png",
+      "status": "NEEDS_CORRECTION",
+      "validation": {
+        "sha256": "78ec229ca63611bb6c2d60f59b366f830408ae8b49f55682d76ceeb284df5956",
+        "width": 1254,
+        "height": 1254,
+        "hasAlpha": false,
+        "isOpaque": true,
+        "embeddedCheckerboard": true,
+        "result": "NEEDS_CORRECTION",
+        "reason": "The artwork matches the circular black slot, but the filename is incorrect and the checkerboard is embedded in an opaque RGB image."
+      }
+    },
     { "slot": 4, "form": "HORIZONTAL", "treatment": "ORIGINAL", "expectedFilename": "tob_horizontal_original.png", "status": "PENDING" },
     { "slot": 5, "form": "HORIZONTAL", "treatment": "WHITE", "expectedFilename": "tob_horizontal_white.png", "status": "PENDING" },
     { "slot": 6, "form": "HORIZONTAL", "treatment": "BLACK", "expectedFilename": "tob_horizontal_black.png", "status": "PENDING" },
