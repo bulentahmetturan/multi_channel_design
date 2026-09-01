@@ -113,7 +113,25 @@
         "reason": "The artwork and 2:1 canvas match the horizontal black slot, but the filename is incorrect and the checkerboard is embedded in an opaque RGB image."
       }
     },
-    { "slot": 7, "form": "ICON_ONLY", "treatment": "ORIGINAL", "expectedFilename": "tob_icon-only_original.png", "status": "PENDING" },
+    {
+      "slot": 7,
+      "form": "ICON_ONLY",
+      "treatment": "ORIGINAL",
+      "expectedFilename": "tob_icon-only_original.png",
+      "receivedFilename": "codex-clipboard-5ce6c3bb-8920-4da4-8ac6-649b91564cdd.png",
+      "status": "NEEDS_CORRECTION",
+      "validation": {
+        "sha256": "1e12f22ef492d208e2b21b84b4bffd89f111d7776ecf669732e5e8f192d9b333",
+        "width": 1024,
+        "height": 1536,
+        "hasAlpha": true,
+        "isOpaque": false,
+        "embeddedCheckerboard": false,
+        "artworkMatchesSlot": false,
+        "result": "NEEDS_CORRECTION",
+        "reason": "Transparency passes, but the filename is incorrect and the portrait artwork adds black/red glow effects instead of providing a tightly cropped, faithful icon-only extraction of the established mark."
+      }
+    },
     { "slot": 8, "form": "ICON_ONLY", "treatment": "WHITE", "expectedFilename": "tob_icon-only_white.png", "status": "PENDING" },
     { "slot": 9, "form": "ICON_ONLY", "treatment": "BLACK", "expectedFilename": "tob_icon-only_black.png", "status": "PENDING" },
     { "slot": 10, "form": "VERTICAL", "treatment": "ORIGINAL", "expectedFilename": "tob_vertical_original.png", "status": "PENDING" },

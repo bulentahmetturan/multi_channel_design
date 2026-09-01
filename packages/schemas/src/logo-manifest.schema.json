@@ -37,6 +37,7 @@
               "hasAlpha": { "type": "boolean" },
               "isOpaque": { "type": "boolean" },
               "embeddedCheckerboard": { "type": "boolean" },
+              "artworkMatchesSlot": { "type": "boolean" },
               "result": { "enum": ["PASS", "NEEDS_CORRECTION"] },
               "reason": { "type": "string" }
             }
