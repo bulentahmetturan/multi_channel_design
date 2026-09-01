@@ -21,3 +21,12 @@ The portfolio grew from a single channel to 11 current and planned brands, plus 
 ## Consequences
 
 Every path reference across `AGENTS.md`, `docs/`, `ROADMAP.md`, `TASKS.md`, schemas, and the registry was updated to match. The already-passed `tip-ogrencileri-platformu` logo set was moved and renamed in place (asset bytes unchanged, only path and filename); its manifest and registry entry were updated to match. `radar/`, `apps/dashboard`'s onboarding UI, and `design-system/typography/`'s central library remain unimplemented scaffolding until their respective phases (6 and 4) begin — this ADR fixes their location, not their implementation.
+
+## Follow-up: existing channel-embedded radar implementation
+
+A separate session pushed a working, tested source-monitoring implementation (Python: `radar/` engine, `scripts/` faculty-source discovery, `sources/` official source inventory, `tests/`, 77 passing tests) directly under `tip-ogrencileri-platformu`'s Channel Pack, ahead of this ADR. It was moved intact to `channels/tip-ogrencileri-platformu/{radar,scripts,sources,tests,database}/` (all 77 tests still pass at the new path; committed `__pycache__`/`.pyc` files were removed and gitignored) rather than being merged into the shared top-level `radar/` right away, because:
+
+- Its `config.py` computes paths relative to its own parent directory and its tests import it as a local `radar` package; generalizing it into a channel-agnostic shared core requires parameterizing that root and re-verifying every test, which is real engineering work, not a rename.
+- `sources/` (official faculty/source inventory) and `scripts/` (faculty-discovery/verification) are genuinely `tip-ogrencileri-platformu`-specific data and tooling and belong in its Channel Pack regardless of where the engine ends up, per this ADR's own principle that each channel keeps its own sources.
+
+Generalizing the engine into the shared `radar/` core so other channels can reuse it remains open work for Phase 6, tracked in `TASKS.md`.

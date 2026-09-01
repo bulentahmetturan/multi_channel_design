@@ -49,6 +49,10 @@ Phase 2 — Channel Registry & Brand Foundations: process `kaduse-medikal`'s sub
 
 None.
 
+## Radar (source monitoring)
+
+A working, tested source-monitoring implementation for `tip-ogrencileri-platformu` (scan pipeline, faculty-source discovery scripts, official source inventory, 77 passing tests) arrived from a separate session and was integrated at `channels/tip-ogrencileri-platformu/{radar,scripts,sources,tests,database}/`. It is still channel-embedded, not yet generalized into the shared top-level `radar/` core defined in ADR-0002 — see that ADR's follow-up section and `TASKS.md` for the deferred generalization work.
+
 ## Last updated
 
-2026-09-01 (portfolio restructuring: channels/ + design-system/ + radar/ + data/; kaduse-medikal logo pack received)
+2026-09-01 (portfolio restructuring: channels/ + design-system/ + radar/ + data/; tip-ogrencileri-platformu radar implementation integrated; kaduse-medikal logo pack received)
