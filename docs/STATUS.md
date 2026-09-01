@@ -29,6 +29,7 @@ Phase 2 — collect and validate the primary logo for `tip-ogrencileri-platformu
 - Color Combination Registry: generated as `PROPOSED` with an anti-repetition window of six posts
 - Logo manifest: 12 PNG slots registered with prefix `tob`
 - Primary logo `tob_circular_original.png`: NEEDS CORRECTION (opaque image with embedded checkerboard)
+- Circular white logo `tob_circular_white.png`: NEEDS CORRECTION (uploaded under the wrong filename and opaque with embedded checkerboard)
 - Channel status: `COLORS_PASS`
 - Current onboarding step: corrected primary logo
 

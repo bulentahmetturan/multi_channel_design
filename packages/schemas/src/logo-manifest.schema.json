@@ -25,6 +25,7 @@
           "form": { "enum": ["CIRCULAR", "HORIZONTAL", "ICON_ONLY", "VERTICAL"] },
           "treatment": { "enum": ["ORIGINAL", "WHITE", "BLACK"] },
           "expectedFilename": { "type": "string", "pattern": "^[a-z0-9_-]+\\.png$" },
+          "receivedFilename": { "type": "string", "minLength": 1 },
           "status": { "enum": ["PENDING", "NEEDS_CORRECTION", "PASS"] },
           "validation": {
             "type": "object",
