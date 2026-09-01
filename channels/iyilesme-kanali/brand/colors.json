@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "0.1.0",
+  "approvalStatus": "APPROVED",
+  "palette": {
+    "healingRed": "#A61E2B",
+    "warmIvory": "#F4F0E8",
+    "deepPlum": "#472742",
+    "sageAccent": "#A5B39B",
+    "graphite": "#1E1E1E",
+    "white": "#FFFFFF"
+  },
+  "roles": {
+    "primary": "#A61E2B",
+    "secondary": "#472742",
+    "accent": "#A5B39B",
+    "background": "#F4F0E8",
+    "surface": "#FFFFFF",
+    "text": "#1E1E1E",
+    "textInverse": "#F4F0E8",
+    "border": "#A5B39B",
+    "overlay": "#472742"
+  },
+  "contrastPolicy": {
+    "normalTextMinimum": 4.5,
+    "largeTextMinimum": 3,
+    "criticalPairs": [
+      { "foreground": "#1E1E1E", "background": "#F4F0E8", "ratio": 14.67, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#1E1E1E", "background": "#FFFFFF", "ratio": 16.67, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#FFFFFF", "background": "#A61E2B", "ratio": 7.39, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#A61E2B", "background": "#FFFFFF", "ratio": 7.39, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#FFFFFF", "background": "#472742", "ratio": 12.83, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#F4F0E8", "background": "#472742", "ratio": 11.29, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#1E1E1E", "background": "#A5B39B", "ratio": 7.56, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#A61E2B", "background": "#F4F0E8", "ratio": 6.50, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#472742", "background": "#F4F0E8", "ratio": 11.29, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#472742", "background": "#A5B39B", "ratio": 5.82, "use": "normal-text", "result": "PASS" }
+    ],
+    "restrictedPairs": [
+      { "foreground": "#FFFFFF", "background": "#A5B39B", "ratio": 2.21, "restriction": "do-not-use-for-text" },
+      { "foreground": "#A5B39B", "background": "#F4F0E8", "ratio": 1.94, "restriction": "do-not-use-for-text" },
+      { "foreground": "#A5B39B", "background": "#FFFFFF", "ratio": 2.21, "restriction": "do-not-use-for-text" }
+    ]
+  },
+  "sourceNotes": "Palette and role meanings taken verbatim from the brand's own source deck (iyilesme_kanali_brandkit.png, 'RENK PALETI'): Healing Red #A61E2B (enerji, yasam, donusum), Warm Ivory #F4F0E8 (sadelik, sakinlik, nefes), Deep Plum #472742 (bilinc, derinlik, sinir sistemi), Sage Accent #A5B39B (doga, biyolojik denge, iyilesme), Graphite #1E1E1E (denge, yazi rengi, modernlik -- explicitly designated as the text color in the source deck, mapped directly to the text role here). Sage Accent is decorative/border-only per its own accessibility numbers (fails 4.5:1 and 3:1 against every other palette color except as a role reserved for non-text use)."
+}

@@ -134,6 +134,18 @@
       "typography": "UNSET",
       "monitoringSources": "UNSET",
       "channelPackPath": null
+    },
+    {
+      "slug": "iyilesme-kanali",
+      "name": "İyileşme Kanalı",
+      "shortDescription": "Research-based wellbeing and functional health platform: balance, consciousness, biology, transformation.",
+      "registryStatus": "ACTIVE",
+      "language": "tr",
+      "logo": "PASS",
+      "colorPalette": "PASS",
+      "typography": "UNSET",
+      "monitoringSources": "UNSET",
+      "channelPackPath": "channels/iyilesme-kanali/"
     }
   ]
 }

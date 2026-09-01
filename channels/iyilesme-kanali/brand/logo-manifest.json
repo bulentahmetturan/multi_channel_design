@@ -1,0 +1,154 @@
+{
+  "schemaVersion": "1.0.0",
+  "channelId": "iyilesme-kanali",
+  "version": "0.1.0",
+  "status": "PASS",
+  "assetPrefix": "iyilesme-kanali",
+  "expectedCount": 12,
+  "assets": [
+    {
+      "slot": 1, "form": "CIRCULAR", "treatment": "ORIGINAL",
+      "expectedFilename": "iyilesme-kanali-circular-original.png",
+      "receivedFilename": "logos/iyilesme-kanali-circular-original.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "b00884c2e59a168fbac9fb94bd8597c1bf61a4c2ec8c3dd58a4d05fa4d379f7f",
+        "width": 1088, "height": 1088, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Submitted already as a genuine RGBA PNG with real alpha transparency and a tight crop; no extraction needed."
+      }
+    },
+    {
+      "slot": 2, "form": "CIRCULAR", "treatment": "WHITE",
+      "expectedFilename": "iyilesme-kanali-circular-white.png",
+      "receivedFilename": "logos/iyilesme-kanali-circular-white.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "540379af9a074137159530e0e56cab597a39900423b839a51812c6efb6a73f9b",
+        "width": 1088, "height": 1088, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Submitted already as a genuine RGBA PNG with real alpha transparency and a tight crop; no extraction needed."
+      }
+    },
+    {
+      "slot": 3, "form": "CIRCULAR", "treatment": "BLACK",
+      "expectedFilename": "iyilesme-kanali-circular-black.png",
+      "receivedFilename": "logos/iyilesme-kanali-circular-black.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "5942b2e7146bef47eccd9047d05dfdd6aeecbcebc556aeec1d0b97aa808a4b55",
+        "width": 1088, "height": 1088, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Submitted already as a genuine RGBA PNG with real alpha transparency and a tight crop; no extraction needed."
+      }
+    },
+    {
+      "slot": 4, "form": "HORIZONTAL", "treatment": "ORIGINAL",
+      "expectedFilename": "iyilesme-kanali-horizontal-original.png",
+      "receivedFilename": "logos/iyilesme-kanali-horizontal-original.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "11f3877e2b8e9ff2e9bac5d58129e44de3d138047b9039e31927899e68445e52",
+        "width": 2116, "height": 800, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Submitted already as a genuine RGBA PNG with real alpha transparency and a tight crop; no extraction needed."
+      }
+    },
+    {
+      "slot": 5, "form": "HORIZONTAL", "treatment": "WHITE",
+      "expectedFilename": "iyilesme-kanali-horizontal-white.png",
+      "receivedFilename": "logos/iyilesme-kanali-horizontal-white.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "1eaf6cf64afd9dbe83db7395b8d96f04f06150bd5b81a172928725e1dc7318f0",
+        "width": 2116, "height": 800, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Submitted already as a genuine RGBA PNG with real alpha transparency and a tight crop; no extraction needed."
+      }
+    },
+    {
+      "slot": 6, "form": "HORIZONTAL", "treatment": "BLACK",
+      "expectedFilename": "iyilesme-kanali-horizontal-black.png",
+      "receivedFilename": "logos/iyilesme-kanali-horizontal-black.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "63757bebd22ef49b7bee8862a18f33b5c3f102e1a638f590f188ca96d97f7c92",
+        "width": 2116, "height": 800, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Submitted already as a genuine RGBA PNG with real alpha transparency and a tight crop; no extraction needed."
+      }
+    },
+    {
+      "slot": 7, "form": "ICON_ONLY", "treatment": "ORIGINAL",
+      "expectedFilename": "iyilesme-kanali-icon-only-original.png",
+      "receivedFilename": "logos/iyilesme-kanali-icon-only-original.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "c678fefe34a9b21337b5b4509d40a314c87124fa016d1108e7bf94fcdebb898f",
+        "width": 1200, "height": 1200, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Submitted already as a genuine RGBA PNG with real alpha transparency and a tight crop; no extraction needed."
+      }
+    },
+    {
+      "slot": 8, "form": "ICON_ONLY", "treatment": "WHITE",
+      "expectedFilename": "iyilesme-kanali-icon-only-white.png",
+      "receivedFilename": "logos/iyilesme-kanali-icon-only-white.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "862bc31a5cc80aa56572bab7a324667c54caadbe918537fd9cf699f7a6c6985c",
+        "width": 1200, "height": 1200, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Submitted already as a genuine RGBA PNG with real alpha transparency and a tight crop; no extraction needed."
+      }
+    },
+    {
+      "slot": 9, "form": "ICON_ONLY", "treatment": "BLACK",
+      "expectedFilename": "iyilesme-kanali-icon-only-black.png",
+      "receivedFilename": "logos/iyilesme-kanali-icon-only-black.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "19ae29482544d51f977468864224d910e9d9ffca7add8819ee96ab43331b8f29",
+        "width": 1200, "height": 1200, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Submitted already as a genuine RGBA PNG with real alpha transparency and a tight crop; no extraction needed."
+      }
+    },
+    {
+      "slot": 10, "form": "VERTICAL", "treatment": "ORIGINAL",
+      "expectedFilename": "iyilesme-kanali-vertical-original.png",
+      "receivedFilename": "logos/iyilesme-kanali-vertical-original.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "ce587743744e6a24eb4d27f4a22a8d76d4aa651cc412f668419e9db1ae0c8591",
+        "width": 1088, "height": 1382, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Submitted already as a genuine RGBA PNG with real alpha transparency and a tight crop; no extraction needed."
+      }
+    },
+    {
+      "slot": 11, "form": "VERTICAL", "treatment": "WHITE",
+      "expectedFilename": "iyilesme-kanali-vertical-white.png",
+      "receivedFilename": "logos/iyilesme-kanali-vertical-white.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "abe6c375b41b7a7b2dc2ab227dc8b314ff8b33a83569a5fda931df59699afd70",
+        "width": 1088, "height": 1382, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Submitted already as a genuine RGBA PNG with real alpha transparency and a tight crop; no extraction needed."
+      }
+    },
+    {
+      "slot": 12, "form": "VERTICAL", "treatment": "BLACK",
+      "expectedFilename": "iyilesme-kanali-vertical-black.png",
+      "receivedFilename": "logos/iyilesme-kanali-vertical-black.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "566ba226fc4ad919b7bed870292db23e636921c7a3ea230c513acc4355126cd2",
+        "width": 1088, "height": 1382, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Submitted already as a genuine RGBA PNG with real alpha transparency and a tight crop; no extraction needed."
+      }
+    }
+  ]
+}

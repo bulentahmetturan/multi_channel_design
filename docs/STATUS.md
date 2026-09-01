@@ -23,10 +23,11 @@ Phase 2 — Channel Registry & Brand Foundations: onboard the next `PLANNED` cha
 
 ## Channel Registry
 
-`channels/registry.json` holds all 11 current and planned brands (schema: `design-system/schemas/src/channel-registry.schema.json`).
+`channels/registry.json` holds all 12 current and planned brands (schema: `design-system/schemas/src/channel-registry.schema.json`).
 
 - `tip-ogrencileri-platformu`: `ACTIVE`, logo `PASS`, color `PASS`.
 - `kaduse-medikal`: `ACTIVE`, logo `PASS`, color `PASS`, language `tr`.
+- `iyilesme-kanali`: `ACTIVE`, logo `PASS`, color `PASS`, language `tr`.
 - Remaining 9 channels: `PLANNED`, all foundation fields `UNSET`.
 
 ## tip-ogrencileri-platformu progress
@@ -48,6 +49,14 @@ Phase 2 — Channel Registry & Brand Foundations: onboard the next `PLANNED` cha
 - Channel status: `LOGOS_PASS`.
 - Typography: deliberately deferred (portfolio-level rule, not a blocker for this channel).
 
+## iyilesme-kanali progress
+
+- Channel identity: PASS. Purpose, audience, and primary language (`tr`) drawn from the brand's own source deck (`iyilesme_kanali_brandkit.png`): four pillars (balance, consciousness, biology, transformation), brand keywords and personality.
+- Palette: PASS. Taken verbatim from the brandkit's stated palette (Healing Red `#A61E2B`, Warm Ivory `#F4F0E8`, Deep Plum `#472742`, Sage Accent `#A5B39B`, Graphite `#1E1E1E` -- explicitly labeled as the text color in the source deck). WCAG contrast ratios recorded in `channels/iyilesme-kanali/brand/colors.json`; Sage Accent is decorative/border-only (fails contrast as text against every other palette color).
+- Logo manifest: 12/12 PNG slots PASS, stored under `channels/iyilesme-kanali/brand/logos/`. Unlike the first two channels, all 12 source files arrived as genuine RGBA PNGs with real transparency and tight crops already -- no background-removal processing was needed, only validation and renaming (numeric prefixes stripped) to the canonical filename convention.
+- Channel status: `LOGOS_PASS`.
+- Typography: deliberately deferred (portfolio-level rule). Note for later: the source brandkit already specifies a 3-font system (Ofelia Text Semibold / Placard Next Condensed / Cormorant Garamond) for reference when the central typography phase begins.
+
 ## Blockers
 
 None.
@@ -58,4 +67,4 @@ A working, tested source-monitoring implementation for `tip-ogrencileri-platform
 
 ## Last updated
 
-2026-09-01 (portfolio restructuring: channels/ + design-system/ + radar/ + data/; tip-ogrencileri-platformu radar implementation integrated; kaduse-medikal onboarded to LOGOS_PASS)
+2026-09-01 (portfolio restructuring: channels/ + design-system/ + radar/ + data/; tip-ogrencileri-platformu radar implementation integrated; kaduse-medikal and iyilesme-kanali onboarded to LOGOS_PASS; iyilesme-kanali added to the registry as its 12th entry)

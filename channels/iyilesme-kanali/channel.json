@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "iyilesme-kanali",
+  "version": "0.1.0",
+  "status": "LOGOS_PASS",
+  "name": "İyileşme Kanalı",
+  "purpose": "A research-based awareness platform focused on the holistic healing of body, mind, and consciousness, built around four pillars: balance, consciousness, biology, and transformation (tagline: Denge - Bilinc - Donusum). Covers nervous-system science, longevity, and lasting personal transformation with an academic, calm, and sophisticated voice.",
+  "audience": "People interested in holistic wellbeing and functional health -- nervous-system science, longevity, and personal transformation -- who are drawn to research-grounded, non-clinical content about healing and biology rather than clinical or medical-treatment advice.",
+  "languages": {
+    "primary": "tr",
+    "secondary": []
+  }
+}
