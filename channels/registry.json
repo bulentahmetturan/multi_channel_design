@@ -18,14 +18,14 @@
     {
       "slug": "kaduse-medikal",
       "name": "Kaduse Medikal",
-      "shortDescription": "Health, medicine, brand, and campaign content.",
+      "shortDescription": "Medical-equipment brand (starting with stethoscopes) for healthcare professionals and students in Turkiye.",
       "registryStatus": "ACTIVE",
-      "language": "UNSET",
-      "logo": "IN_PROGRESS",
-      "colorPalette": "UNSET",
+      "language": "tr",
+      "logo": "PASS",
+      "colorPalette": "PASS",
       "typography": "UNSET",
       "monitoringSources": "UNSET",
-      "channelPackPath": null
+      "channelPackPath": "channels/kaduse-medikal/"
     },
     {
       "slug": "yeni-nesil-romanci",

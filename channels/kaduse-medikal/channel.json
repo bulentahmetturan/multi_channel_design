@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "kaduse-medikal",
+  "version": "0.1.0",
+  "status": "LOGOS_PASS",
+  "name": "Kaduse Medikal",
+  "purpose": "A medical-equipment brand, starting with stethoscopes, that builds its identity through the relationship with the medical profession rather than product-first selling -- accompanying healthcare workers and students through the choice of important tools in their professional life. Long-term: a medical lifestyle and professional brand for healthcare workers in Turkiye, not limited to a single product category.",
+  "audience": "Medical students, physicians, interns, nurses, health-department students, and other healthcare professionals in Turkiye, especially those beginning their profession or seeking personalized medical equipment.",
+  "languages": {
+    "primary": "tr",
+    "secondary": []
+  }
+}

@@ -1,0 +1,238 @@
+{
+  "schemaVersion": "1.0.0",
+  "channelId": "kaduse-medikal",
+  "version": "0.1.0",
+  "status": "PASS",
+  "assetPrefix": "kaduse-medikal",
+  "expectedCount": 12,
+  "assets": [
+    {
+      "slot": 1,
+      "form": "CIRCULAR",
+      "treatment": "ORIGINAL",
+      "expectedFilename": "kaduse-medikal-circular-original.png",
+      "receivedFilename": "logos/kaduse-medikal-circular-original.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "84f54fc672b2e041b6b2898ead533fbdd4b732149746ef648bbc042363c05705",
+        "width": 1137,
+        "height": 1172,
+        "hasAlpha": true,
+        "isOpaque": false,
+        "embeddedCheckerboard": false,
+        "artworkMatchesSlot": true,
+        "result": "PASS",
+        "reason": "Source was a glossy 3D-rendered badge (blue ring + icon + wordmark on a white disc, studio-gradient background with a soft drop shadow) submitted as opaque RGB. Programmatically re-extracted: background/shadow removed via connected-component background classification (protecting the enclosed white disc fill from being flattened as background, matching the same technique used for tip-ogrencileri-platformu's circular original), true RGBA alpha applied, tightly cropped to content."
+      }
+    },
+    {
+      "slot": 2,
+      "form": "CIRCULAR",
+      "treatment": "WHITE",
+      "expectedFilename": "kaduse-medikal-circular-white.png",
+      "receivedFilename": "logos/kaduse-medikal-circular-white.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "f2067b8b581050bc76d786421f54cfefec9850f796a74c0f1bf8fa7735678c5a",
+        "width": 1136,
+        "height": 1171,
+        "hasAlpha": true,
+        "isOpaque": false,
+        "embeddedCheckerboard": false,
+        "artworkMatchesSlot": true,
+        "result": "PASS",
+        "reason": "Silhouette mask derived from the geometrically-aligned slot 3 (circular black) source. Rendered solid white on true alpha transparency, tightly cropped to content."
+      }
+    },
+    {
+      "slot": 3,
+      "form": "CIRCULAR",
+      "treatment": "BLACK",
+      "expectedFilename": "kaduse-medikal-circular-black.png",
+      "receivedFilename": "logos/kaduse-medikal-circular-black.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "36870780a1db2df1c47d0075f9e82d70e8e8eedd3b29194be7f884ee838f3984",
+        "width": 1136,
+        "height": 1171,
+        "hasAlpha": true,
+        "isOpaque": false,
+        "embeddedCheckerboard": false,
+        "artworkMatchesSlot": true,
+        "result": "PASS",
+        "reason": "Programmatically re-extracted: studio-gradient background and drop shadow removed via connected-component background classification, true RGBA alpha applied, tightly cropped to content."
+      }
+    },
+    {
+      "slot": 4,
+      "form": "HORIZONTAL",
+      "treatment": "ORIGINAL",
+      "expectedFilename": "kaduse-medikal-horizontal-original.png",
+      "receivedFilename": "logos/kaduse-medikal-horizontal-original.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "b935a2e656c66b65ec8080510db2498cdf29c8e355026c5bfe87cb235ca66d13",
+        "width": 1529,
+        "height": 492,
+        "hasAlpha": true,
+        "isOpaque": false,
+        "embeddedCheckerboard": false,
+        "artworkMatchesSlot": true,
+        "result": "PASS",
+        "reason": "Programmatically re-extracted: studio-gradient background removed, true RGBA alpha applied, tightly cropped to content. A very faint trace of the source render's drop shadow remains at low alpha along the bottom edge; visually negligible but noted for a future refinement pass."
+      }
+    },
+    {
+      "slot": 5,
+      "form": "HORIZONTAL",
+      "treatment": "WHITE",
+      "expectedFilename": "kaduse-medikal-horizontal-white.png",
+      "receivedFilename": "logos/kaduse-medikal-horizontal-white.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "8d2bcd4ae26771d8b745f12d428ca2eaf0bd925ea91d93d930af02ef9de650a2",
+        "width": 1358,
+        "height": 426,
+        "hasAlpha": true,
+        "isOpaque": false,
+        "embeddedCheckerboard": false,
+        "artworkMatchesSlot": true,
+        "result": "PASS",
+        "reason": "Silhouette mask derived from the geometrically-aligned slot 6 (horizontal black) source. Rendered solid white on true alpha transparency, tightly cropped to content."
+      }
+    },
+    {
+      "slot": 6,
+      "form": "HORIZONTAL",
+      "treatment": "BLACK",
+      "expectedFilename": "kaduse-medikal-horizontal-black.png",
+      "receivedFilename": "logos/kaduse-medikal-horizontal-black.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "9e1d7a340252b95cd08b7118931abb4e9106d3059156113d2669d1a8330ef675",
+        "width": 1358,
+        "height": 426,
+        "hasAlpha": true,
+        "isOpaque": false,
+        "embeddedCheckerboard": false,
+        "artworkMatchesSlot": true,
+        "result": "PASS",
+        "reason": "Programmatically re-extracted: studio-gradient background removed, true RGBA alpha applied, tightly cropped to content."
+      }
+    },
+    {
+      "slot": 7,
+      "form": "ICON_ONLY",
+      "treatment": "ORIGINAL",
+      "expectedFilename": "kaduse-medikal-icon-only-original.png",
+      "receivedFilename": "logos/kaduse-medikal-icon-only-original.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "fc1f33065806d5c638484bc1526f14081383d23695cea4644667409f0be49985",
+        "width": 525,
+        "height": 863,
+        "hasAlpha": true,
+        "isOpaque": false,
+        "embeddedCheckerboard": false,
+        "artworkMatchesSlot": true,
+        "result": "PASS",
+        "reason": "Programmatically re-extracted: studio-gradient background and drop shadow removed, true RGBA alpha applied, tightly cropped to content. A very faint low-alpha shadow trace remains at the icon's base; visually negligible."
+      }
+    },
+    {
+      "slot": 8,
+      "form": "ICON_ONLY",
+      "treatment": "WHITE",
+      "expectedFilename": "kaduse-medikal-icon-only-white.png",
+      "receivedFilename": "logos/kaduse-medikal-icon-only-white.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "a2fbd11f7b94e559f3e55469c3087d13e61deeed687a6f68293d76a42a200c20",
+        "width": 524,
+        "height": 841,
+        "hasAlpha": true,
+        "isOpaque": false,
+        "embeddedCheckerboard": false,
+        "artworkMatchesSlot": true,
+        "result": "PASS",
+        "reason": "Silhouette mask derived from the geometrically-aligned slot 9 (icon-only black) source. Rendered solid white on true alpha transparency, tightly cropped to content."
+      }
+    },
+    {
+      "slot": 9,
+      "form": "ICON_ONLY",
+      "treatment": "BLACK",
+      "expectedFilename": "kaduse-medikal-icon-only-black.png",
+      "receivedFilename": "logos/kaduse-medikal-icon-only-black.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "01467438c18b3b361273a6a9465c421abfe1afb0d3ae61a5d57b03f5517dfc93",
+        "width": 524,
+        "height": 841,
+        "hasAlpha": true,
+        "isOpaque": false,
+        "embeddedCheckerboard": false,
+        "artworkMatchesSlot": true,
+        "result": "PASS",
+        "reason": "Programmatically re-extracted: studio-gradient background and drop shadow removed, true RGBA alpha applied, tightly cropped to content."
+      }
+    },
+    {
+      "slot": 10,
+      "form": "VERTICAL",
+      "treatment": "ORIGINAL",
+      "expectedFilename": "kaduse-medikal-vertical-original.png",
+      "receivedFilename": "logos/kaduse-medikal-vertical-original.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "1dc3b20420bb7b56479e783adda0dad3a7f16e44c2512a2d48f81f45c3f6ac7c",
+        "width": 914,
+        "height": 992,
+        "hasAlpha": true,
+        "isOpaque": false,
+        "embeddedCheckerboard": false,
+        "artworkMatchesSlot": true,
+        "result": "PASS",
+        "reason": "Programmatically re-extracted: studio-gradient background and drop shadow removed, true RGBA alpha applied, tightly cropped to content."
+      }
+    },
+    {
+      "slot": 11,
+      "form": "VERTICAL",
+      "treatment": "WHITE",
+      "expectedFilename": "kaduse-medikal-vertical-white.png",
+      "receivedFilename": "logos/kaduse-medikal-vertical-white.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "89cadd93d0d3593d9b0e130c7d51a3b23737037278e97819c97fc10d2536b046",
+        "width": 912,
+        "height": 989,
+        "hasAlpha": true,
+        "isOpaque": false,
+        "embeddedCheckerboard": false,
+        "artworkMatchesSlot": true,
+        "result": "PASS",
+        "reason": "Silhouette mask derived from the geometrically-aligned slot 12 (vertical black) source. Rendered solid white on true alpha transparency, tightly cropped to content."
+      }
+    },
+    {
+      "slot": 12,
+      "form": "VERTICAL",
+      "treatment": "BLACK",
+      "expectedFilename": "kaduse-medikal-vertical-black.png",
+      "receivedFilename": "logos/kaduse-medikal-vertical-black.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "adeb4301da7ff62e420c10c93aa608d74e2e3721230303a5bb0ef0aad5e18341",
+        "width": 912,
+        "height": 989,
+        "hasAlpha": true,
+        "isOpaque": false,
+        "embeddedCheckerboard": false,
+        "artworkMatchesSlot": true,
+        "result": "PASS",
+        "reason": "Programmatically re-extracted: studio-gradient background and drop shadow removed, true RGBA alpha applied, tightly cropped to content."
+      }
+    }
+  ]
+}

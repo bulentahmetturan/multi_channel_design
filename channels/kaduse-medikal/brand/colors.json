@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "0.1.0",
+  "approvalStatus": "APPROVED",
+  "palette": {
+    "blue600": "#1178BB",
+    "turquoise400": "#35BCD1",
+    "navy900": "#0B3654",
+    "coral500": "#F2765C",
+    "neutral100": "#F7F5F2",
+    "white": "#FFFFFF"
+  },
+  "roles": {
+    "primary": "#1178BB",
+    "secondary": "#35BCD1",
+    "accent": "#F2765C",
+    "background": "#F7F5F2",
+    "surface": "#FFFFFF",
+    "text": "#0B3654",
+    "textInverse": "#FFFFFF",
+    "border": "#0B3654",
+    "overlay": "#0B3654"
+  },
+  "contrastPolicy": {
+    "normalTextMinimum": 4.5,
+    "largeTextMinimum": 3,
+    "criticalPairs": [
+      { "foreground": "#0B3654", "background": "#F7F5F2", "ratio": 11.56, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#0B3654", "background": "#FFFFFF", "ratio": 12.58, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#FFFFFF", "background": "#1178BB", "ratio": 4.74, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#1178BB", "background": "#FFFFFF", "ratio": 4.74, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#0B3654", "background": "#F2765C", "ratio": 4.50, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#0B3654", "background": "#35BCD1", "ratio": 5.55, "use": "normal-text", "result": "PASS" }
+    ],
+    "restrictedPairs": [
+      { "foreground": "#1178BB", "background": "#F7F5F2", "ratio": 4.36, "restriction": "large-text-or-decoration-only" },
+      { "foreground": "#FFFFFF", "background": "#F2765C", "ratio": 2.79, "restriction": "do-not-use-for-text" },
+      { "foreground": "#FFFFFF", "background": "#35BCD1", "ratio": 2.27, "restriction": "do-not-use-for-text" },
+      { "foreground": "#F2765C", "background": "#F7F5F2", "ratio": 2.57, "restriction": "do-not-use-for-text" },
+      { "foreground": "#35BCD1", "background": "#F7F5F2", "ratio": 2.08, "restriction": "do-not-use-for-text" }
+    ]
+  },
+  "sourceNotes": "Palette taken verbatim from the brand's own source-of-truth (00_KADUSE_BIBLE.md / 00_KADUSE_MASTER.md, section 'Palet'): Ana Mavi #1178BB, Turkuaz #35BCD1, Lacivert #0B3654, Mercan #F2765C, Notr #F7F5F2. Not derived from logo pixel sampling -- the submitted logo files are glossy 3D renders with per-pixel lighting/highlight variation, so pixel sampling was used only as a sanity cross-check (rendered icon color measured close to blue600 under studio lighting), not as the source of these values. Forbidden product-background colors per the brand bible: random pink/yellow, floral, black studio, off-palette blocks."
+}

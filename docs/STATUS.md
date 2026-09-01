@@ -19,14 +19,14 @@ Phase 2 — in progress
 
 ## Next
 
-Phase 2 — Channel Registry & Brand Foundations: process `kaduse-medikal`'s submitted logo pack (identity fields still needed: purpose, audience, primary language). Typography is deferred for every channel until all 11 registry entries reach `LOGOS_PASS`; see `ROADMAP.md` Phase 2 sub-sequence and `docs/ONBOARDING-ORCHESTRATION.md`.
+Phase 2 — Channel Registry & Brand Foundations: onboard the next `PLANNED` channel in registry order (identity first). Typography is deferred for every channel until all 11 registry entries reach `LOGOS_PASS`; see `ROADMAP.md` Phase 2 sub-sequence and `docs/ONBOARDING-ORCHESTRATION.md`.
 
 ## Channel Registry
 
 `channels/registry.json` holds all 11 current and planned brands (schema: `design-system/schemas/src/channel-registry.schema.json`).
 
 - `tip-ogrencileri-platformu`: `ACTIVE`, logo `PASS`, color `PASS`.
-- `kaduse-medikal`: `ACTIVE`, logo `IN_PROGRESS` (source logo pack received and being processed), color/language/typography/monitoring `UNSET`.
+- `kaduse-medikal`: `ACTIVE`, logo `PASS`, color `PASS`, language `tr`.
 - Remaining 9 channels: `PLANNED`, all foundation fields `UNSET`.
 
 ## tip-ogrencileri-platformu progress
@@ -42,8 +42,11 @@ Phase 2 — Channel Registry & Brand Foundations: process `kaduse-medikal`'s sub
 
 ## kaduse-medikal progress
 
-- Logo pack received as a zip from the user; extraction and per-asset validation in progress.
-- Identity (purpose, audience, primary language) and color palette not yet collected.
+- Channel identity: PASS. Purpose, audience, and primary language (`tr`) drawn faithfully from the brand's own source docs (`00_KADUSE_BIBLE.md` / `00_KADUSE_MASTER.md`) supplied alongside the logo pack.
+- Palette: PASS. Taken verbatim from the brand bible's stated palette (Ana Mavi `#1178BB`, Turkuaz `#35BCD1`, Lacivert `#0B3654`, Mercan `#F2765C`, Notr `#F7F5F2`), not derived from logo-pixel sampling (the source logos are glossy 3D renders with per-pixel lighting variation, unsuitable for exact color extraction). Role mapping and WCAG contrast ratios recorded in `channels/kaduse-medikal/brand/colors.json`.
+- Logo manifest: 12/12 PNG slots PASS, stored under `channels/kaduse-medikal/brand/logos/`. Source files (a complete 12-slot pack from the user, zip already extracted to a local folder) were opaque RGB, glossy 3D-rendered marks on a studio-gradient background with a soft drop shadow -- a different, harder asset type than tip-ogrencileri-platformu's flat vector marks. Background and shadow removed programmatically (same connected-component technique, generalized successfully), true RGBA alpha applied, tightly cropped. Two slots (4 horizontal-original, 7 icon-only-original) retain a visually negligible low-alpha shadow trace, noted in the manifest as a future refinement, not a blocking defect.
+- Channel status: `LOGOS_PASS`.
+- Typography: deliberately deferred (portfolio-level rule, not a blocker for this channel).
 
 ## Blockers
 
@@ -55,4 +58,4 @@ A working, tested source-monitoring implementation for `tip-ogrencileri-platform
 
 ## Last updated
 
-2026-09-01 (portfolio restructuring: channels/ + design-system/ + radar/ + data/; tip-ogrencileri-platformu radar implementation integrated; kaduse-medikal logo pack received)
+2026-09-01 (portfolio restructuring: channels/ + design-system/ + radar/ + data/; tip-ogrencileri-platformu radar implementation integrated; kaduse-medikal onboarded to LOGOS_PASS)
