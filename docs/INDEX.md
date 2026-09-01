@@ -7,7 +7,7 @@ Read `AGENTS.md` first, then use only the route matching the task.
 | Understand current work | `docs/STATUS.md`, `TASKS.md` |
 | Change product scope | `docs/PRODUCT-SPEC.md`, relevant ADRs |
 | Change boundaries or dependencies | `docs/SYSTEM-ARCHITECTURE.md`, relevant ADRs |
-| Add or onboard a channel | `docs/CHANNEL-SYSTEM.md`, `packages/schemas/src/channel.schema.json` |
+| Add or onboard a channel | `docs/CHANNEL-SYSTEM.md`, `packages/schemas/src/channel.schema.json`, and the relevant asset schema |
 | Change palettes or color variation | `docs/COLOR-SYSTEM.md`, `packages/schemas/src/color-combination-registry.schema.json` |
 | Analyze or add a layout | `docs/CONTENT-MORPHOLOGY.md`, `docs/LAYOUT-GRAMMAR.md`, `packages/schemas/src/layout.schema.json` |
 | Change selection or ranking | `docs/CONTENT-MORPHOLOGY.md`, `docs/SELECTION-ENGINE.md` |

@@ -27,8 +27,10 @@ Phase 2 — collect and validate the primary logo for `tip-ogrencileri-platformu
 - Color proof and contrast report: PASS
 - Global Color Combination and Reversal Policy: adopted
 - Color Combination Registry: generated as `PROPOSED` with an anti-repetition window of six posts
+- Logo manifest: 12 PNG slots registered with prefix `tob`
+- Primary logo `tob_circular_original.png`: NEEDS CORRECTION (opaque image with embedded checkerboard)
 - Channel status: `COLORS_PASS`
-- Current onboarding step: primary logo
+- Current onboarding step: corrected primary logo
 
 ## Blockers
 

@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "1.0.0",
+  "channelId": "tip-ogrencileri-platformu",
+  "version": "0.1.0",
+  "status": "COLLECTING",
+  "assetPrefix": "tob",
+  "expectedCount": 12,
+  "assets": [
+    {
+      "slot": 1,
+      "form": "CIRCULAR",
+      "treatment": "ORIGINAL",
+      "expectedFilename": "tob_circular_original.png",
+      "status": "NEEDS_CORRECTION",
+      "validation": {
+        "sha256": "e4334dba62b142b8dc2bcec779530ea0020d098ac0f09376dd03f93aa8fbd09e",
+        "width": 1254,
+        "height": 1254,
+        "hasAlpha": false,
+        "isOpaque": true,
+        "embeddedCheckerboard": true,
+        "result": "NEEDS_CORRECTION",
+        "reason": "The checkerboard is embedded in an opaque RGB image; a real transparent background is required."
+      }
+    },
+    { "slot": 2, "form": "CIRCULAR", "treatment": "WHITE", "expectedFilename": "tob_circular_white.png", "status": "PENDING" },
+    { "slot": 3, "form": "CIRCULAR", "treatment": "BLACK", "expectedFilename": "tob_circular_black.png", "status": "PENDING" },
+    { "slot": 4, "form": "HORIZONTAL", "treatment": "ORIGINAL", "expectedFilename": "tob_horizontal_original.png", "status": "PENDING" },
+    { "slot": 5, "form": "HORIZONTAL", "treatment": "WHITE", "expectedFilename": "tob_horizontal_white.png", "status": "PENDING" },
+    { "slot": 6, "form": "HORIZONTAL", "treatment": "BLACK", "expectedFilename": "tob_horizontal_black.png", "status": "PENDING" },
+    { "slot": 7, "form": "ICON_ONLY", "treatment": "ORIGINAL", "expectedFilename": "tob_icon-only_original.png", "status": "PENDING" },
+    { "slot": 8, "form": "ICON_ONLY", "treatment": "WHITE", "expectedFilename": "tob_icon-only_white.png", "status": "PENDING" },
+    { "slot": 9, "form": "ICON_ONLY", "treatment": "BLACK", "expectedFilename": "tob_icon-only_black.png", "status": "PENDING" },
+    { "slot": 10, "form": "VERTICAL", "treatment": "ORIGINAL", "expectedFilename": "tob_vertical_original.png", "status": "PENDING" },
+    { "slot": 11, "form": "VERTICAL", "treatment": "WHITE", "expectedFilename": "tob_vertical_white.png", "status": "PENDING" },
+    { "slot": 12, "form": "VERTICAL", "treatment": "BLACK", "expectedFilename": "tob_vertical_black.png", "status": "PENDING" }
+  ]
+}
