@@ -118,24 +118,114 @@
       "form": "ICON_ONLY",
       "treatment": "ORIGINAL",
       "expectedFilename": "tob_icon-only_original.png",
-      "receivedFilename": "codex-clipboard-5ce6c3bb-8920-4da4-8ac6-649b91564cdd.png",
+      "receivedFilename": "tob_7.png",
       "status": "NEEDS_CORRECTION",
       "validation": {
-        "sha256": "1e12f22ef492d208e2b21b84b4bffd89f111d7776ecf669732e5e8f192d9b333",
-        "width": 1024,
-        "height": 1536,
+        "sha256": "5b2395964144d3d0cee82811d9e95f9ca5223d059c706ccb082f37becff0aded",
+        "width": 914,
+        "height": 1721,
+        "hasAlpha": false,
+        "isOpaque": true,
+        "embeddedCheckerboard": false,
+        "artworkMatchesSlot": true,
+        "result": "NEEDS_CORRECTION",
+        "reason": "Artwork (cap, crescent-star, tassel, snake/staff) matches the established mark and the crop is tight, but the file is RGB with no alpha channel: an opaque near-white background, not a real transparent background. Re-export as RGBA PNG with true alpha transparency."
+      }
+    },
+    {
+      "slot": 8,
+      "form": "ICON_ONLY",
+      "treatment": "WHITE",
+      "expectedFilename": "tob_icon-only_white.png",
+      "receivedFilename": "tob_8.png",
+      "status": "NEEDS_CORRECTION",
+      "validation": {
+        "sha256": "40fe768bfd4d8019625e5f479cbe634f0833815751c64d2487a800a074df9da6",
+        "width": 1254,
+        "height": 1254,
         "hasAlpha": true,
         "isOpaque": false,
         "embeddedCheckerboard": false,
-        "artworkMatchesSlot": false,
+        "artworkMatchesSlot": true,
         "result": "NEEDS_CORRECTION",
-        "reason": "Transparency passes, but the filename is incorrect and the portrait artwork adds black/red glow effects instead of providing a tightly cropped, faithful icon-only extraction of the established mark."
+        "reason": "Real alpha transparency confirmed: corners are fully transparent (alpha 0) and the white artwork is fully opaque (alpha 255) where drawn. However the canvas is a square 1254x1254 with the icon confined to a narrow ~433px-wide column, leaving roughly 410px of empty transparent margin on each side. This is inconsistent with the tight portrait ~914x1721 crop used for the matching icon-only original/black slots. Re-crop to the same aspect and bounds as slots 7 and 9."
       }
     },
-    { "slot": 8, "form": "ICON_ONLY", "treatment": "WHITE", "expectedFilename": "tob_icon-only_white.png", "status": "PENDING" },
-    { "slot": 9, "form": "ICON_ONLY", "treatment": "BLACK", "expectedFilename": "tob_icon-only_black.png", "status": "PENDING" },
-    { "slot": 10, "form": "VERTICAL", "treatment": "ORIGINAL", "expectedFilename": "tob_vertical_original.png", "status": "PENDING" },
-    { "slot": 11, "form": "VERTICAL", "treatment": "WHITE", "expectedFilename": "tob_vertical_white.png", "status": "PENDING" },
-    { "slot": 12, "form": "VERTICAL", "treatment": "BLACK", "expectedFilename": "tob_vertical_black.png", "status": "PENDING" }
+    {
+      "slot": 9,
+      "form": "ICON_ONLY",
+      "treatment": "BLACK",
+      "expectedFilename": "tob_icon-only_black.png",
+      "receivedFilename": "tob_9.png",
+      "status": "NEEDS_CORRECTION",
+      "validation": {
+        "sha256": "0e18acb309805e11840257c829c367a640e49637ed394c85e782b2337c04de4f",
+        "width": 914,
+        "height": 1721,
+        "hasAlpha": false,
+        "isOpaque": true,
+        "embeddedCheckerboard": false,
+        "artworkMatchesSlot": true,
+        "result": "NEEDS_CORRECTION",
+        "reason": "Artwork matches the established mark in solid black and the crop/canvas is consistent with slot 7, but the file is RGB with no alpha channel: an opaque near-white background, not a real transparent background. Re-export as RGBA PNG with true alpha transparency."
+      }
+    },
+    {
+      "slot": 10,
+      "form": "VERTICAL",
+      "treatment": "ORIGINAL",
+      "expectedFilename": "tob_vertical_original.png",
+      "receivedFilename": "tob_10.png",
+      "status": "NEEDS_CORRECTION",
+      "validation": {
+        "sha256": "8b7a021be3c6eec5e130df7bc877d456d6621ef8cd16be52d9ebb1a3f1ffe7a1",
+        "width": 914,
+        "height": 1721,
+        "hasAlpha": false,
+        "isOpaque": true,
+        "embeddedCheckerboard": false,
+        "artworkMatchesSlot": true,
+        "result": "NEEDS_CORRECTION",
+        "reason": "Correct vertical lockup (icon stacked above the 'TIP OGRENCILERI PLATFORMU' wordmark) submitted ahead of sequence. The file is RGB with no alpha channel: an opaque near-white background, not a real transparent background. Re-export as RGBA PNG with true alpha transparency. Also blocked until slots 7, 8, and 9 pass, per the sequential onboarding gate."
+      }
+    },
+    {
+      "slot": 11,
+      "form": "VERTICAL",
+      "treatment": "WHITE",
+      "expectedFilename": "tob_vertical_white.png",
+      "receivedFilename": "tob_11.png",
+      "status": "NEEDS_CORRECTION",
+      "validation": {
+        "sha256": "fa7f918409651ce035717f8aad6c610ba1c608c431d8a48c5a7cdd357f7f019d",
+        "width": 914,
+        "height": 1721,
+        "hasAlpha": false,
+        "isOpaque": true,
+        "embeddedCheckerboard": false,
+        "artworkMatchesSlot": true,
+        "result": "NEEDS_CORRECTION",
+        "reason": "Correct vertical lockup (icon stacked above the 'TIP OGRENCILERI PLATFORMU' wordmark) in white, submitted ahead of sequence. The file is RGB with no alpha channel: an opaque near-white background, not a real transparent background. Re-export as RGBA PNG with true alpha transparency. Also blocked until slots 7, 8, and 9 pass, per the sequential onboarding gate."
+      }
+    },
+    {
+      "slot": 12,
+      "form": "VERTICAL",
+      "treatment": "BLACK",
+      "expectedFilename": "tob_vertical_black.png",
+      "receivedFilename": "tob_12.png",
+      "status": "NEEDS_CORRECTION",
+      "validation": {
+        "sha256": "752117aba368a92412aea26f6c053e78fdd3b01fda18954065b56ce19dd94214",
+        "width": 914,
+        "height": 1721,
+        "hasAlpha": false,
+        "isOpaque": true,
+        "embeddedCheckerboard": false,
+        "artworkMatchesSlot": true,
+        "result": "NEEDS_CORRECTION",
+        "reason": "Correct vertical lockup (icon stacked above the 'TIP OGRENCILERI PLATFORMU' wordmark) in black, submitted ahead of sequence. The file is RGB with no alpha channel: an opaque near-white background, not a real transparent background. Re-export as RGBA PNG with true alpha transparency. Also blocked until slots 7, 8, and 9 pass, per the sequential onboarding gate."
+      }
+    }
   ]
 }
