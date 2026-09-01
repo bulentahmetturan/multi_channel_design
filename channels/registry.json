@@ -42,14 +42,14 @@
     {
       "slug": "turkiye-scholarships",
       "name": "Türkiye Scholarships",
-      "shortDescription": "Education in Türkiye, international students, cities, campus life, and opportunities.",
-      "registryStatus": "PLANNED",
-      "language": "UNSET",
-      "logo": "UNSET",
-      "colorPalette": "UNSET",
+      "shortDescription": "Premium platform helping international students find scholarships and universities in Turkiye.",
+      "registryStatus": "ACTIVE",
+      "language": "en",
+      "logo": "PASS",
+      "colorPalette": "PASS",
       "typography": "UNSET",
       "monitoringSources": "UNSET",
-      "channelPackPath": null
+      "channelPackPath": "channels/turkiye-scholarships/"
     },
     {
       "slug": "futboscope",

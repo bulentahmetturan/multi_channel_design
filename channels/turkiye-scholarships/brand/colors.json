@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "0.1.0",
+  "approvalStatus": "APPROVED",
+  "palette": {
+    "crimsonPrimary": "#9D1B35",
+    "crimsonCta": "#B6283F",
+    "charcoalPrimary": "#1F1B18",
+    "charcoalSupport": "#3A3532",
+    "ivory": "#FCFAF7",
+    "blush": "#FBEDEE",
+    "white": "#FFFFFF"
+  },
+  "roles": {
+    "primary": "#9D1B35",
+    "secondary": "#1F1B18",
+    "accent": "#B6283F",
+    "background": "#FCFAF7",
+    "surface": "#FBEDEE",
+    "text": "#1F1B18",
+    "textInverse": "#FFFFFF",
+    "border": "#3A3532",
+    "overlay": "#1F1B18"
+  },
+  "contrastPolicy": {
+    "normalTextMinimum": 4.5,
+    "largeTextMinimum": 3,
+    "criticalPairs": [
+      { "foreground": "#1F1B18", "background": "#FCFAF7", "ratio": 16.41, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#1F1B18", "background": "#FFFFFF", "ratio": 17.10, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#FFFFFF", "background": "#9D1B35", "ratio": 7.95, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#9D1B35", "background": "#FFFFFF", "ratio": 7.95, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#FFFFFF", "background": "#B6283F", "ratio": 6.24, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#1F1B18", "background": "#FBEDEE", "ratio": 15.02, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#9D1B35", "background": "#FCFAF7", "ratio": 7.63, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#9D1B35", "background": "#FBEDEE", "ratio": 6.98, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#3A3532", "background": "#FCFAF7", "ratio": 11.62, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#FFFFFF", "background": "#3A3532", "ratio": 12.10, "use": "normal-text", "result": "PASS" }
+    ],
+    "restrictedPairs": []
+  },
+  "sourceNotes": "Taken verbatim from this project's own existing, already-in-production Instagram renderer token file (instagram-post-automation/renderer/colors.json, 'Merkezi renk token dosyasi -- Asama 5.1. Renderer yalnizca bu dosyadan okur'), not re-derived. That file is treated as authoritative for Instagram-channel color, since it is the canonical source the project's own renderer already reads from for this exact purpose. A separate marketing-website brand doc (website/docs/05_BRAND_AND_DESIGN.md) states a visibly different palette (Turkiye Red #B30015, Warm White #F8F6F2, Soft Cream #EFE7DA, Charcoal #1A1A1A, Navy #0A1F44) for the website's own UI -- noted here as an observed discrepancy between the two sub-projects, not reconciled, since this Channel Pack is scoped to Instagram design and the renderer token file is the purpose-matched source."
+}

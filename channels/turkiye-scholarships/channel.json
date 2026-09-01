@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "turkiye-scholarships",
+  "version": "0.1.0",
+  "status": "LOGOS_PASS",
+  "name": "Türkiye Scholarships",
+  "purpose": "A premium, modern, minimal, and institutional platform (turkiyescholarships.com) helping prospective international students discover scholarships, universities, and academic pathways in Turkiye, with free personalized guidance toward the right program and application route.",
+  "audience": "Prospective international students worldwide considering higher education in Turkiye -- across academic pathways, partner universities, and scholarship opportunities -- who need trustworthy, guided information rather than a directory to search alone.",
+  "languages": {
+    "primary": "en",
+    "secondary": ["tr", "ar", "fa", "ur", "ru", "fr", "es"]
+  }
+}

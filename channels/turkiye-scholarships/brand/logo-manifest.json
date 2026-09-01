@@ -1,0 +1,154 @@
+{
+  "schemaVersion": "1.0.0",
+  "channelId": "turkiye-scholarships",
+  "version": "0.1.0",
+  "status": "PASS",
+  "assetPrefix": "turkiye-scholarships",
+  "expectedCount": 12,
+  "assets": [
+    {
+      "slot": 1, "form": "CIRCULAR", "treatment": "ORIGINAL",
+      "expectedFilename": "turkiye-scholarships-circular-original.png",
+      "receivedFilename": "logos/turkiye-scholarships-circular-original.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "5937c0046f26f5a0d2feddcfd712bbbe9d81e19cea6faa720e84a3e27c5c2ad8",
+        "width": 1235, "height": 1238, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Selected from the project's existing 'ts-circular-red-white.png' (solid red disc, white mark) out of 4 circular variants in instagram-post-automation/assets/1. logos/1.2.circular/. Source was opaque RGB; background removed via connected-component classification (protecting the enclosed disc fill), true RGBA alpha applied, tightly cropped."
+      }
+    },
+    {
+      "slot": 2, "form": "CIRCULAR", "treatment": "WHITE",
+      "expectedFilename": "turkiye-scholarships-circular-white.png",
+      "receivedFilename": "logos/turkiye-scholarships-circular-white.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "1421003a682a4e9fea7af3053b844155c73f399e33e58da53b4282518b581db7",
+        "width": 1178, "height": 1191, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Selected from the existing 'ts-circular-white-white.png' (white ring outline + mark). Silhouette mask derived from the geometrically-aligned circular black source. Programmatically re-extracted, true RGBA alpha applied, tightly cropped."
+      }
+    },
+    {
+      "slot": 3, "form": "CIRCULAR", "treatment": "BLACK",
+      "expectedFilename": "turkiye-scholarships-circular-black.png",
+      "receivedFilename": "logos/turkiye-scholarships-circular-black.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "e395719e8bc9e7fa0cedee93a1f33fe336bec1a26e6a862957c11be9766456f1",
+        "width": 1178, "height": 1191, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Selected from the existing 'ts-circular-white-dark.png' (charcoal disc, white mark). Source was opaque RGB; background removed via connected-component classification, true RGBA alpha applied, tightly cropped. A fourth circular variant ('ts-circular-white-red.png', white disc + red outline ring) exists in the source folder but was left unused -- it does not map cleanly to the original/white/black three-treatment model."
+      }
+    },
+    {
+      "slot": 4, "form": "HORIZONTAL", "treatment": "ORIGINAL",
+      "expectedFilename": "turkiye-scholarships-horizontal-original.png",
+      "receivedFilename": "logos/turkiye-scholarships-horizontal-original.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "fdc6fa199b90687bc541bbb118f7ceab4211d195b501fd705899c3c4a84c623d",
+        "width": 1952, "height": 532, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Selected from the existing 'ts-logo-whitered-horizontal.png' (red mark and wordmark). Source was opaque RGB; background removed, true RGBA alpha applied, tightly cropped. A fourth horizontal variant ('ts-logo-redwhite-horizontal.png', white mark pre-composited onto a solid red background rectangle) exists in the source folder but was left unused -- it is a fixed-background social-tile asset, not a transparent-background logo."
+      }
+    },
+    {
+      "slot": 5, "form": "HORIZONTAL", "treatment": "WHITE",
+      "expectedFilename": "turkiye-scholarships-horizontal-white.png",
+      "receivedFilename": "logos/turkiye-scholarships-horizontal-white.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "1a4f55fbd74c5d539420a93941bc9806cfbcf4ea0306c8751fc04a2ec06183f1",
+        "width": 1397, "height": 432, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Selected from the existing 'ts-logo-white-horizontal.png'. Silhouette mask derived from the geometrically-aligned horizontal black source. Programmatically re-extracted, true RGBA alpha applied, tightly cropped."
+      }
+    },
+    {
+      "slot": 6, "form": "HORIZONTAL", "treatment": "BLACK",
+      "expectedFilename": "turkiye-scholarships-horizontal-black.png",
+      "receivedFilename": "logos/turkiye-scholarships-horizontal-black.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "347565f73276899ac17e25083657c4cf4c5e632613fef3b401846c75fd891f4b",
+        "width": 1397, "height": 432, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Selected from the existing 'ts-logo-dark-horizontal.png'. Source was opaque RGB; background removed, true RGBA alpha applied, tightly cropped."
+      }
+    },
+    {
+      "slot": 7, "form": "ICON_ONLY", "treatment": "ORIGINAL",
+      "expectedFilename": "turkiye-scholarships-icon-only-original.png",
+      "receivedFilename": "logos/turkiye-scholarships-icon-only-original.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "2b19420549acf10663ca7589aa1e4a69ddcb4d0fc480f020785248849ba83314",
+        "width": 672, "height": 806, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Source ('ts-icon-only.png') already had real RGBA transparency; re-cropped to its own tight content bounds."
+      }
+    },
+    {
+      "slot": 8, "form": "ICON_ONLY", "treatment": "WHITE",
+      "expectedFilename": "turkiye-scholarships-icon-only-white.png",
+      "receivedFilename": "logos/turkiye-scholarships-icon-only-white.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "7dd21ecb51b5dff488ef29104f4af8539acf67ed80184469d38da473b5b8f367",
+        "width": 840, "height": 1006, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Selected from the existing 'ts-icon-only-white.png'. Silhouette mask derived from the geometrically-aligned icon-only black source. Programmatically re-extracted, true RGBA alpha applied, tightly cropped. Canvas differs slightly from slot 7 (different source export); not re-matched to slot 7's aspect since both are already independently tight."
+      }
+    },
+    {
+      "slot": 9, "form": "ICON_ONLY", "treatment": "BLACK",
+      "expectedFilename": "turkiye-scholarships-icon-only-black.png",
+      "receivedFilename": "logos/turkiye-scholarships-icon-only-black.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "d84427364dac717d1a7c0a2cbbcf0348eb39323623591da74ca4adfa11d8080a",
+        "width": 840, "height": 1006, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Selected from the existing 'ts-icon-only-black.png'. Source was opaque RGB; background removed, true RGBA alpha applied, tightly cropped."
+      }
+    },
+    {
+      "slot": 10, "form": "VERTICAL", "treatment": "ORIGINAL",
+      "expectedFilename": "turkiye-scholarships-vertical-original.png",
+      "receivedFilename": "logos/turkiye-scholarships-vertical-original.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "448f96956a342820ba420a48d2cbcb3e28eb296869b35f432c69e781532f2653",
+        "width": 717, "height": 874, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "The source folder's 'ts-logo-red-vertical.png' is actually a solid-red-fill background with a white mark (a fixed-background tile, like the unused horizontal 'redwhite' variant), not a transparent-background original -- background removal found nothing to remove. Rebuilt instead from the working vertical-black silhouette mask, recolored to the brand's crimson-primary (#9D1B35, instagram-post-automation/renderer/colors.json), true RGBA alpha applied, tightly cropped."
+      }
+    },
+    {
+      "slot": 11, "form": "VERTICAL", "treatment": "WHITE",
+      "expectedFilename": "turkiye-scholarships-vertical-white.png",
+      "receivedFilename": "logos/turkiye-scholarships-vertical-white.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "797bb20171d8cac07abbce29d9d0db2d338db55d3b7c32a709812a3c2aba0d3c",
+        "width": 1176, "height": 1231, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Source ('ts-logo-white-vertical.png') already had real RGBA transparency; re-cropped to its own tight content bounds. A 'white-vertical-onred' variant also exists in the source folder (white mark intended specifically for a red background) but was left unused, same reasoning as the unused horizontal/circular fixed-background variants."
+      }
+    },
+    {
+      "slot": 12, "form": "VERTICAL", "treatment": "BLACK",
+      "expectedFilename": "turkiye-scholarships-vertical-black.png",
+      "receivedFilename": "logos/turkiye-scholarships-vertical-black.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "29ffda7bdc115a331892c972709d27f2af13d19de76b3581fa5da5b5d33019e7",
+        "width": 717, "height": 874, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Selected from the existing 'ts-logo-dark-vertical.png'. Source was opaque RGB; background removed, true RGBA alpha applied, tightly cropped."
+      }
+    }
+  ]
+}

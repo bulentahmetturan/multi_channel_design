@@ -28,7 +28,8 @@ Phase 2 — Channel Registry & Brand Foundations: onboard the next `PLANNED` cha
 - `tip-ogrencileri-platformu`: `ACTIVE`, logo `PASS`, color `PASS`.
 - `kaduse-medikal`: `ACTIVE`, logo `PASS`, color `PASS`, language `tr`.
 - `iyilesme-kanali`: `ACTIVE`, logo `PASS`, color `PASS`, language `tr`.
-- Remaining 9 channels: `PLANNED`, all foundation fields `UNSET`.
+- `turkiye-scholarships`: `ACTIVE`, logo `PASS`, color `PASS`, language `en` (+7 secondary).
+- Remaining 8 channels: `PLANNED`, all foundation fields `UNSET`.
 
 ## tip-ogrencileri-platformu progress
 
@@ -57,6 +58,14 @@ Phase 2 — Channel Registry & Brand Foundations: onboard the next `PLANNED` cha
 - Channel status: `LOGOS_PASS`.
 - Typography: deliberately deferred (portfolio-level rule). Note for later: the source brandkit already specifies a 3-font system (Ofelia Text Semibold / Placard Next Condensed / Cormorant Garamond) for reference when the central typography phase begins.
 
+## turkiye-scholarships progress
+
+- Channel identity: PASS. Purpose, audience, and languages (primary `en`, secondary `tr/ar/fa/ur/ru/fr/es`) drawn from the project's own existing website (`website/docs/05_BRAND_AND_DESIGN.md`, `website/i18n/routing.ts` defaultLocale, `website/data/languages.ts`) and `instagram-post-automation/renderer/brand-constants.json`. Unlike the first three channels, this project already has a mature, in-production codebase (marketing website + Next.js Instagram-post renderer).
+- Palette: PASS. Taken verbatim from `instagram-post-automation/renderer/colors.json`, the project's own canonical Instagram-render color token file. **Discrepancy noted, not resolved:** the separate marketing-website brand doc states a visibly different palette (Turkiye Red `#B30015` vs. crimson-primary `#9D1B35`, etc.) for its own UI; the Instagram renderer's tokens were used as authoritative here since they are the purpose-matched source for Instagram design and this repo does not own the website.
+- Logo manifest: 12/12 PNG slots PASS, stored under `channels/turkiye-scholarships/brand/logos/`. The source `instagram-post-automation/assets/1. logos/` folder had 4 variants per form (not always fitting the original/white/black model) -- unused fixed-background variants (e.g. white-on-solid-red tiles) are documented per-slot in the manifest's `reason` fields rather than silently dropped. Slot 10 (vertical original) had no usable transparent-background red source; it was rebuilt from the working vertical-black silhouette, recolored to the brand's crimson-primary.
+- Channel status: `LOGOS_PASS`.
+- Typography: deliberately deferred (portfolio-level rule). Note: the website already runs a locked, documented typography system (IBM Plex Sans) for its own UI -- unrelated to this channel's future Instagram font pool, kept separate.
+
 ## Blockers
 
 None.
@@ -67,4 +76,4 @@ A working, tested source-monitoring implementation for `tip-ogrencileri-platform
 
 ## Last updated
 
-2026-09-01 (portfolio restructuring: channels/ + design-system/ + radar/ + data/; tip-ogrencileri-platformu radar implementation integrated; kaduse-medikal and iyilesme-kanali onboarded to LOGOS_PASS; iyilesme-kanali added to the registry as its 12th entry)
+2026-09-01 (portfolio restructuring: channels/ + design-system/ + radar/ + data/; tip-ogrencileri-platformu radar implementation integrated; kaduse-medikal, iyilesme-kanali, and turkiye-scholarships onboarded to LOGOS_PASS)
