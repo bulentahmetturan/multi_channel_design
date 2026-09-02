@@ -1,0 +1,143 @@
+{
+  "slug": "notion",
+  "source_url": "https://github.com/VoltAgent/awesome-design-md/blob/main/design-md/notion/DESIGN.md",
+  "version_commit_sha": "e06a96660396d741d0c106c8972172254dafbdc2",
+  "fetched_at": "2026-09-02T05:20:25.430522+00:00",
+  "source_description": "Notion presents itself as the all-in-one workspace through a confident, illustration-rich brand voice — anchored by a deep navy hero band ({colors.brand-navy}) decorated with brand-colored sticky-note dots and mesh wire illustrations, a signature purple pill primary CTA ({colors.primary}), and a rich palette of pastel-tinted feature cards that echo the colorful database properties of the live product. The system uses a Notion-Sans (Inter-based) typeface across every UI surface, anchors a 4-tier pricing comparison (Free / Plus / Business / Enterprise), and presents the live workspace UI mockup directly inside the hero band. Coverage spans homepage, Enterprise, Product AI, Product Agents, Startups, and Pricing surfaces.",
+  "structural_pattern": {
+    "typography_scale": {
+      "hero-display": {
+        "fontFamily": "Notion Sans",
+        "fontSize": "80px",
+        "fontWeight": "600",
+        "lineHeight": "1.05",
+        "letterSpacing": "-2px"
+      },
+      "display-lg": {
+        "fontFamily": "Notion Sans",
+        "fontSize": "56px",
+        "fontWeight": "600",
+        "lineHeight": "1.10",
+        "letterSpacing": "-1px"
+      },
+      "heading-1": {
+        "fontFamily": "Notion Sans",
+        "fontSize": "48px",
+        "fontWeight": "600",
+        "lineHeight": "1.15",
+        "letterSpacing": "-0.5px"
+      },
+      "heading-2": {
+        "fontFamily": "Notion Sans",
+        "fontSize": "36px",
+        "fontWeight": "600",
+        "lineHeight": "1.20",
+        "letterSpacing": "-0.5px"
+      },
+      "heading-3": {
+        "fontFamily": "Notion Sans",
+        "fontSize": "28px",
+        "fontWeight": "600",
+        "lineHeight": "1.25"
+      },
+      "heading-4": {
+        "fontFamily": "Notion Sans",
+        "fontSize": "22px",
+        "fontWeight": "600",
+        "lineHeight": "1.30"
+      },
+      "heading-5": {
+        "fontFamily": "Notion Sans",
+        "fontSize": "18px",
+        "fontWeight": "600",
+        "lineHeight": "1.40"
+      },
+      "subtitle": {
+        "fontFamily": "Notion Sans",
+        "fontSize": "18px",
+        "fontWeight": "400",
+        "lineHeight": "1.50"
+      },
+      "body-md": {
+        "fontFamily": "Notion Sans",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "lineHeight": "1.55"
+      },
+      "body-md-medium": {
+        "fontFamily": "Notion Sans",
+        "fontSize": "16px",
+        "fontWeight": "500",
+        "lineHeight": "1.55"
+      },
+      "body-sm": {
+        "fontFamily": "Notion Sans",
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "lineHeight": "1.50"
+      },
+      "body-sm-medium": {
+        "fontFamily": "Notion Sans",
+        "fontSize": "14px",
+        "fontWeight": "500",
+        "lineHeight": "1.50"
+      },
+      "caption": {
+        "fontFamily": "Notion Sans",
+        "fontSize": "13px",
+        "fontWeight": "400",
+        "lineHeight": "1.40"
+      },
+      "caption-bold": {
+        "fontFamily": "Notion Sans",
+        "fontSize": "13px",
+        "fontWeight": "600",
+        "lineHeight": "1.40"
+      },
+      "micro": {
+        "fontFamily": "Notion Sans",
+        "fontSize": "12px",
+        "fontWeight": "500",
+        "lineHeight": "1.40"
+      },
+      "micro-uppercase": {
+        "fontFamily": "Notion Sans",
+        "fontSize": "11px",
+        "fontWeight": "600",
+        "lineHeight": "1.40",
+        "letterSpacing": "1px"
+      },
+      "button-md": {
+        "fontFamily": "Notion Sans",
+        "fontSize": "14px",
+        "fontWeight": "500",
+        "lineHeight": "1.30"
+      }
+    },
+    "spacing_scale": {
+      "xxs": "4px",
+      "xs": "8px",
+      "sm": "12px",
+      "md": "16px",
+      "lg": "20px",
+      "xl": "24px",
+      "xxl": "32px",
+      "xxxl": "40px",
+      "section-sm": "48px",
+      "section": "64px",
+      "section-lg": "96px",
+      "hero": "120px"
+    },
+    "corner_radius_scale": {
+      "xs": "4px",
+      "sm": "6px",
+      "md": "8px",
+      "lg": "12px",
+      "xl": "16px",
+      "xxl": "20px",
+      "xxxl": "24px",
+      "full": "9999px"
+    }
+  },
+  "usage_note": "Apply typography_scale's size/weight/line-height RATIOS and spacing_scale's rhythm to the target channel's own brand colors/fonts/logo. Do not carry over this guide's own color values or font family."
+}
