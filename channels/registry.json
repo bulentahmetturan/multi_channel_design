@@ -146,6 +146,30 @@
       "typography": "UNSET",
       "monitoringSources": "UNSET",
       "channelPackPath": "channels/iyilesme-kanali/"
+    },
+    {
+      "slug": "fenerbahce-cephesi",
+      "name": "Fenerbahçe Cephesi",
+      "shortDescription": "Fenerbahçe-focused football fan content.",
+      "registryStatus": "PLANNED",
+      "language": "UNSET",
+      "logo": "UNSET",
+      "colorPalette": "UNSET",
+      "typography": "UNSET",
+      "monitoringSources": "UNSET",
+      "channelPackPath": null
+    },
+    {
+      "slug": "footballevo",
+      "name": "Footballevo",
+      "shortDescription": "Football content (not yet reviewed).",
+      "registryStatus": "PLANNED",
+      "language": "UNSET",
+      "logo": "UNSET",
+      "colorPalette": "UNSET",
+      "typography": "UNSET",
+      "monitoringSources": "UNSET",
+      "channelPackPath": null
     }
   ]
 }
