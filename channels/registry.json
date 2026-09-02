@@ -108,7 +108,7 @@
       "logo": "PASS",
       "colorPalette": "PASS",
       "typography": "UNSET",
-      "monitoringSources": "UNSET",
+      "monitoringSources": ["kulturportali_gov_tr"],
       "channelPackPath": "channels/turkish-context/"
     },
     {

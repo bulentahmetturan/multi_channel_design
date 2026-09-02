@@ -1,0 +1,17 @@
+sources:
+- id: kulturportali_gov_tr
+  name: Kültür Portalı (T.C. Kültür ve Turizm Bakanlığı)
+  institution: T.C. Kültür ve Turizm Bakanlığı
+  category: cultural_reference
+  url: https://www.kulturportali.gov.tr/
+  source_type: html
+  official: true
+  enabled: true
+  check_every_minutes: 10080
+  notes: >
+    Official government reference for Turkish cultural facts, traditions,
+    places, and terminology -- used to ground channel content in verifiable
+    sources rather than invented claims. A full one-time site mirror was
+    previously kept locally under channels/turkish-context/ (kulturportali-full/,
+    609M); removed to reclaim disk space since this URL is the durable
+    reference and can be re-scanned/re-fetched on demand.
