@@ -100,7 +100,7 @@
       "channelPackPath": "channels/folk-saying/"
     },
     {
-      "slug": "context-turkish",
+      "slug": "turkish-context",
       "name": "Turkish Context",
       "shortDescription": "Turkish vocabulary and language usage taught through real cultural context.",
       "registryStatus": "ACTIVE",
@@ -109,7 +109,7 @@
       "colorPalette": "PASS",
       "typography": "UNSET",
       "monitoringSources": "UNSET",
-      "channelPackPath": "channels/context-turkish/"
+      "channelPackPath": "channels/turkish-context/"
     },
     {
       "slug": "dunya-burslari",

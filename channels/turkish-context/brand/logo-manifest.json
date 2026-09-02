@@ -1,15 +1,15 @@
 {
   "schemaVersion": "1.0.0",
-  "channelId": "context-turkish",
+  "channelId": "turkish-context",
   "version": "0.1.0",
   "status": "COLLECTING",
-  "assetPrefix": "context-turkish",
+  "assetPrefix": "turkish-context",
   "expectedCount": 12,
   "assets": [
     {
       "slot": 1, "form": "CIRCULAR", "treatment": "ORIGINAL",
-      "expectedFilename": "context-turkish-circular-original.png",
-      "receivedFilename": "logos/context-turkish-circular-original.png",
+      "expectedFilename": "turkish-context-circular-original.png",
+      "receivedFilename": "logos/turkish-context-circular-original.png",
       "status": "PASS",
       "validation": {
         "sha256": "c47c103d44e0a88038f32f76aa5fca9744dffed03c7ecf775fefbabbfae3a945",
@@ -20,8 +20,8 @@
     },
     {
       "slot": 2, "form": "CIRCULAR", "treatment": "WHITE",
-      "expectedFilename": "context-turkish-circular-white.png",
-      "receivedFilename": "logos/context-turkish-circular-white.png",
+      "expectedFilename": "turkish-context-circular-white.png",
+      "receivedFilename": "logos/turkish-context-circular-white.png",
       "status": "PASS",
       "validation": {
         "sha256": "32f46e4e478edb461dbabf0609e08a71c3084ca15cde450e835cc79cee91810b",
@@ -32,8 +32,8 @@
     },
     {
       "slot": 3, "form": "CIRCULAR", "treatment": "BLACK",
-      "expectedFilename": "context-turkish-circular-black.png",
-      "receivedFilename": "logos/context-turkish-circular-black.png",
+      "expectedFilename": "turkish-context-circular-black.png",
+      "receivedFilename": "logos/turkish-context-circular-black.png",
       "status": "PASS",
       "validation": {
         "sha256": "f39c16a59d0e77738add13bb49beb30a316244ea95d4d1cdf4194863d7940b20",
@@ -44,23 +44,23 @@
     },
     {
       "slot": 4, "form": "HORIZONTAL", "treatment": "ORIGINAL",
-      "expectedFilename": "context-turkish-horizontal-original.png",
+      "expectedFilename": "turkish-context-horizontal-original.png",
       "status": "PENDING"
     },
     {
       "slot": 5, "form": "HORIZONTAL", "treatment": "WHITE",
-      "expectedFilename": "context-turkish-horizontal-white.png",
+      "expectedFilename": "turkish-context-horizontal-white.png",
       "status": "PENDING"
     },
     {
       "slot": 6, "form": "HORIZONTAL", "treatment": "BLACK",
-      "expectedFilename": "context-turkish-horizontal-black.png",
+      "expectedFilename": "turkish-context-horizontal-black.png",
       "status": "PENDING"
     },
     {
       "slot": 7, "form": "ICON_ONLY", "treatment": "ORIGINAL",
-      "expectedFilename": "context-turkish-icon-only-original.png",
-      "receivedFilename": "logos/context-turkish-icon-only-original.png",
+      "expectedFilename": "turkish-context-icon-only-original.png",
+      "receivedFilename": "logos/turkish-context-icon-only-original.png",
       "status": "PASS",
       "validation": {
         "sha256": "3b6f64aafc5599ddd453e51def20283a2fd288e187ce0d6f010c89df566a7ba2",
@@ -71,8 +71,8 @@
     },
     {
       "slot": 8, "form": "ICON_ONLY", "treatment": "WHITE",
-      "expectedFilename": "context-turkish-icon-only-white.png",
-      "receivedFilename": "logos/context-turkish-icon-only-white.png",
+      "expectedFilename": "turkish-context-icon-only-white.png",
+      "receivedFilename": "logos/turkish-context-icon-only-white.png",
       "status": "PASS",
       "validation": {
         "sha256": "a220b0f47321085e347a539c34116dc2c659908770aa09a2320015584b9863d6",
@@ -83,8 +83,8 @@
     },
     {
       "slot": 9, "form": "ICON_ONLY", "treatment": "BLACK",
-      "expectedFilename": "context-turkish-icon-only-black.png",
-      "receivedFilename": "logos/context-turkish-icon-only-black.png",
+      "expectedFilename": "turkish-context-icon-only-black.png",
+      "receivedFilename": "logos/turkish-context-icon-only-black.png",
       "status": "PASS",
       "validation": {
         "sha256": "55d06bdeb695f89372ec9883f940dd19a2e6b19bd2d7a8033a4777d31243a0cc",
@@ -95,8 +95,8 @@
     },
     {
       "slot": 10, "form": "VERTICAL", "treatment": "ORIGINAL",
-      "expectedFilename": "context-turkish-vertical-original.png",
-      "receivedFilename": "logos/context-turkish-vertical-original.png",
+      "expectedFilename": "turkish-context-vertical-original.png",
+      "receivedFilename": "logos/turkish-context-vertical-original.png",
       "status": "PASS",
       "validation": {
         "sha256": "a19e2062969ba0f0a904b54053404d212aed7d6746bb248be34bee330b61c510",
@@ -107,8 +107,8 @@
     },
     {
       "slot": 11, "form": "VERTICAL", "treatment": "WHITE",
-      "expectedFilename": "context-turkish-vertical-white.png",
-      "receivedFilename": "logos/context-turkish-vertical-white.png",
+      "expectedFilename": "turkish-context-vertical-white.png",
+      "receivedFilename": "logos/turkish-context-vertical-white.png",
       "status": "PASS",
       "validation": {
         "sha256": "22a3d48ab0a849a374b47da6636b5789bbe87b5ed7cbd742c8bce7a965e7da13",
@@ -119,8 +119,8 @@
     },
     {
       "slot": 12, "form": "VERTICAL", "treatment": "BLACK",
-      "expectedFilename": "context-turkish-vertical-black.png",
-      "receivedFilename": "logos/context-turkish-vertical-black.png",
+      "expectedFilename": "turkish-context-vertical-black.png",
+      "receivedFilename": "logos/turkish-context-vertical-black.png",
       "status": "PASS",
       "validation": {
         "sha256": "cabfc957f7dd8deaa21181e8fe8c8003ab3147b3fe27f0c10c9fe3745eae7937",

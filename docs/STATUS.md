@@ -33,7 +33,7 @@ Phase 2 — onboard the remaining `PLANNED` channels (`dunya-burslari`; `yeni-ne
 | iyilesme-kanali | ACTIVE | PASS (12/12) | PASS | tr |
 | turkiye-scholarships | ACTIVE | PASS (12/12) | PASS | en (+7) |
 | futboscope | ACTIVE | PASS (7/12) | PASS | tr |
-| context-turkish | ACTIVE | PASS (9/12) | PASS | en (+tr) |
+| turkish-context | ACTIVE | PASS (9/12) | PASS | en (+tr) |
 | dua-mecmuasi | ACTIVE | PASS (9/12) | PASS | tr |
 | macaristan-rehberi | ACTIVE | PASS (3/12) | PASS | tr |
 | folk-saying | ACTIVE | PASS (4/12) | PASS | en (+tr) |
@@ -52,7 +52,7 @@ Full validation detail lives in each channel's own `brand/logo-manifest.json` an
 - **iyilesme-kanali**: 12/12 logos, all submitted already as clean transparent PNGs -- validation only, no extraction needed. Palette + identity from the brand's own brandkit deck.
 - **turkiye-scholarships**: 12/12 logos selected from the project's own existing (larger) asset set, not user-submitted. Palette taken from the project's own Instagram-renderer color tokens; a discrepancy against the separate website's different brand doc is documented, not resolved.
 - **futboscope**: 7/12 logos (no horizontal lockup or composed circular badge exist in the source kit). Palette from the project's own locked, tested color-decision doc. Existing separate video-production pipeline documented as out of scope at `channels/futboscope/SCOPE.md`.
-- **context-turkish**: 9/12 logos (no horizontal lockup). Palette fetched from logo pixel data (no color doc existed). Source assets are low resolution (72-318px) -- flagged, not blocking.
+- **turkish-context**: 9/12 logos (no horizontal lockup). Palette fetched from logo pixel data (no color doc existed). Source assets are low resolution (72-318px) -- flagged, not blocking.
 - **dua-mecmuasi**: 9/12 logos (no standalone icon in source kit). Palette fetched from logo pixel data.
 - **macaristan-rehberi**: 3/12 logos (circular only; source kit's actual brand is "Barlovics Türkiye"). Palette fetched from logo pixel data.
 - **folk-saying**: 4/12 logos (icon-only + horizontal, black/white only -- no transparent color original exists yet). Palette fetched from an opaque reference render in the source kit (not a proper logo asset itself).
