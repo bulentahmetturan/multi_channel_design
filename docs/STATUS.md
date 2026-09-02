@@ -31,7 +31,9 @@ Phase 2 — Channel Registry & Brand Foundations: onboard the next `PLANNED` cha
 - `turkiye-scholarships`: `ACTIVE`, logo `PASS`, color `PASS`, language `en` (+7 secondary).
 - `futboscope`: `ACTIVE`, logo `IN_PROGRESS` (7/12 slots PASS), color `PASS`, language `tr`.
 - `context-turkish`: `ACTIVE`, logo `IN_PROGRESS` (9/12 slots PASS), color `PASS`, language `en` (+tr).
-- Remaining 6 channels: `PLANNED`, all foundation fields `UNSET`.
+- `dua-mecmuasi`: `ACTIVE`, logo `IN_PROGRESS` (9/12 slots PASS), color `PASS`, language `tr`.
+- `yeni-nesil-romanci`: still `PLANNED` by explicit user instruction (holds its registry place, no material provided yet).
+- Remaining 5 channels: `PLANNED`, all foundation fields `UNSET`.
 
 ## tip-ogrencileri-platformu progress
 
@@ -83,6 +85,13 @@ Phase 2 — Channel Registry & Brand Foundations: onboard the next `PLANNED` cha
 - Logo manifest: 9/12 PNG slots PASS (circular, icon-only, and a stacked-wordmark VERTICAL, all already real RGBA with tight crops). 3 slots `PENDING` (horizontal -- no such lockup in the source pack). **Quality caveat, not blocking:** every source asset is very low resolution (72-318px canvases, vs. 900-2100px for every other onboarded channel) -- usable now, but flagged for a higher-resolution re-export before heavy production use. Two overlapping/inconsistently-numbered source folders existed for this channel; the complete three-treatment sets were used and redundant/incomplete alternates (a separate circular pair with no original, and a monogram lettermark) were left unused.
 - Channel status: `COLORS_PASS` (not yet `LOGOS_PASS` -- manifest incomplete).
 
+## dua-mecmuasi progress
+
+- Channel identity: PASS. Purpose, audience, language (`tr`) drawn from the logo pack's own wordmark and tagline ("Dua bize yeter").
+- Palette: PASS. No brand color-code document found; fetched from the logo pack's pixel data via dominant-color clustering -- a deliberately restrained two-tone identity (Olive `#505828`, Cream `#F8F8F0`), matching what the artwork itself actually uses.
+- Logo manifest: 9/12 PNG slots PASS (circular, horizontal, and vertical/stacked -- all already real RGBA, high resolution, tight after re-cropping). 3 icon-only slots `PENDING` -- no standalone icon exists in the source pack (only the full badge/wordmark lockups).
+- Channel status: `COLORS_PASS`.
+
 ## Blockers
 
 None.
@@ -93,4 +102,4 @@ A working, tested source-monitoring implementation for `tip-ogrencileri-platform
 
 ## Last updated
 
-2026-09-01 (portfolio restructuring: channels/ + design-system/ + radar/ + data/; tip-ogrencileri-platformu radar implementation integrated; kaduse-medikal, iyilesme-kanali, and turkiye-scholarships onboarded to LOGOS_PASS; futboscope onboarded to COLORS_PASS with 7/12 logo slots and a documented pipeline/scope boundary; context-turkish onboarded to COLORS_PASS with 9/12 logo slots, palette fetched from pixel data)
+2026-09-01 (portfolio restructuring: channels/ + design-system/ + radar/ + data/; tip-ogrencileri-platformu radar implementation integrated; kaduse-medikal, iyilesme-kanali, and turkiye-scholarships onboarded to LOGOS_PASS; futboscope onboarded to COLORS_PASS with 7/12 logo slots and a documented pipeline/scope boundary; context-turkish onboarded to COLORS_PASS with 9/12 logo slots, palette fetched from pixel data; dua-mecmuasi onboarded to COLORS_PASS with 9/12 logo slots, palette fetched from pixel data)

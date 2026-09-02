@@ -78,14 +78,14 @@
     {
       "slug": "dua-mecmuasi",
       "name": "Dua Mecmuası",
-      "shortDescription": "Prayers, spiritual texts, and Islamic thought.",
-      "registryStatus": "PLANNED",
-      "language": "UNSET",
-      "logo": "UNSET",
-      "colorPalette": "UNSET",
+      "shortDescription": "Prayers, spiritual texts, and Islamic thought. Tagline: 'Dua bize yeter'.",
+      "registryStatus": "ACTIVE",
+      "language": "tr",
+      "logo": "IN_PROGRESS",
+      "colorPalette": "PASS",
       "typography": "UNSET",
       "monitoringSources": "UNSET",
-      "channelPackPath": null
+      "channelPackPath": "channels/dua-mecmuasi/"
     },
     {
       "slug": "folk-saying",
