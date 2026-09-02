@@ -46,8 +46,30 @@
     { "slot": 5, "form": "HORIZONTAL", "treatment": "WHITE", "expectedFilename": "scope-turkiye-horizontal-white.png", "status": "PENDING" },
     { "slot": 6, "form": "HORIZONTAL", "treatment": "BLACK", "expectedFilename": "scope-turkiye-horizontal-black.png", "status": "PENDING" },
     { "slot": 7, "form": "ICON_ONLY", "treatment": "ORIGINAL", "expectedFilename": "scope-turkiye-icon-only-original.png", "status": "PENDING" },
-    { "slot": 8, "form": "ICON_ONLY", "treatment": "WHITE", "expectedFilename": "scope-turkiye-icon-only-white.png", "status": "PENDING" },
-    { "slot": 9, "form": "ICON_ONLY", "treatment": "BLACK", "expectedFilename": "scope-turkiye-icon-only-black.png", "status": "PENDING" },
+    {
+      "slot": 8, "form": "ICON_ONLY", "treatment": "WHITE",
+      "expectedFilename": "scope-turkiye-icon-only-white.png",
+      "receivedFilename": "logos/scope-turkiye-icon-only-white.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "b4257b4707b90e0ff02d9fb78f97929a2282bfc214bb5668a07ea74cb3fe6358",
+        "width": 1254, "height": 1254, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "'scope-icon-premium-white.png' from the logo pack: target/compass mark alone (no outer ring text, no wordmark), white fill, real RGBA transparency, tight crop -- matches the icon-only mark used inside the circular badge (slot 2)."
+      }
+    },
+    {
+      "slot": 9, "form": "ICON_ONLY", "treatment": "BLACK",
+      "expectedFilename": "scope-turkiye-icon-only-black.png",
+      "receivedFilename": "logos/scope-turkiye-icon-only-black.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "e0df11c3841a230b9e89c2a5b42fb5f1baa86a357e9c6018c7f241a8f2b6c8d5",
+        "width": 1254, "height": 1254, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "'scope-icon-premium-black.png' from the logo pack: same target/compass mark, black fill, real RGBA transparency, tight crop -- matches the icon-only mark used inside the circular badge (slot 3)."
+      }
+    },
     { "slot": 10, "form": "VERTICAL", "treatment": "ORIGINAL", "expectedFilename": "scope-turkiye-vertical-original.png", "status": "PENDING" },
     { "slot": 11, "form": "VERTICAL", "treatment": "WHITE", "expectedFilename": "scope-turkiye-vertical-white.png", "status": "PENDING" },
     { "slot": 12, "form": "VERTICAL", "treatment": "BLACK", "expectedFilename": "scope-turkiye-vertical-black.png", "status": "PENDING" }
