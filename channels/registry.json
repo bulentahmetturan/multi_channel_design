@@ -101,15 +101,15 @@
     },
     {
       "slug": "context-turkish",
-      "name": "Context Turkish",
-      "shortDescription": "Turkish learning, vocabulary in context, language usage, and cultural language content.",
-      "registryStatus": "PLANNED",
-      "language": "UNSET",
-      "logo": "UNSET",
-      "colorPalette": "UNSET",
+      "name": "Turkish Context",
+      "shortDescription": "Turkish vocabulary and language usage taught through real cultural context.",
+      "registryStatus": "ACTIVE",
+      "language": "en",
+      "logo": "IN_PROGRESS",
+      "colorPalette": "PASS",
       "typography": "UNSET",
       "monitoringSources": "UNSET",
-      "channelPackPath": null
+      "channelPackPath": "channels/context-turkish/"
     },
     {
       "slug": "dunya-burslari",

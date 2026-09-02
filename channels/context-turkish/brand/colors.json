@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "0.1.0",
+  "approvalStatus": "APPROVED",
+  "palette": {
+    "burgundy": "#501818",
+    "navy": "#0A0F1A",
+    "ivory": "#F0EFE4",
+    "white": "#FFFFFF"
+  },
+  "roles": {
+    "primary": "#501818",
+    "secondary": "#0A0F1A",
+    "accent": "#501818",
+    "background": "#F0EFE4",
+    "surface": "#FFFFFF",
+    "text": "#0A0F1A",
+    "textInverse": "#F0EFE4",
+    "border": "#501818",
+    "overlay": "#0A0F1A"
+  },
+  "contrastPolicy": {
+    "normalTextMinimum": 4.5,
+    "largeTextMinimum": 3,
+    "criticalPairs": [
+      { "foreground": "#0A0F1A", "background": "#F0EFE4", "ratio": 16.58, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#0A0F1A", "background": "#FFFFFF", "ratio": 19.16, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#FFFFFF", "background": "#501818", "ratio": 14.14, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#501818", "background": "#F0EFE4", "ratio": 12.24, "use": "normal-text", "result": "PASS" }
+    ],
+    "restrictedPairs": []
+  },
+  "sourceNotes": "This brand has no discovered color-code document (unlike kaduse-medikal, iyilesme-kanali, or turkiye-scholarships). Fetched directly from the logo pack's own pixel data via dominant-color clustering on the avatar and tea-glass marks, per explicit instruction to fetch from the visuals when no color page exists. Burgundy #501818 (tea-glass fill) and Navy #0A0F1A (circular badge background) are the two clearly dominant hues; Ivory #F0EFE4 is the glass's light band / icon-only white base. A red/gold nazar (evil-eye) ring is visible in the artwork but too small at this source resolution (72-318px canvases) to sample a reliable hex value -- not included as a named role to avoid guessing. accent duplicates primary since no second brand hue was measurable. Two logo-pack folders existed for this channel with overlapping/colliding file numbering; the cleaner, complete three-treatment sets (avatar, tea-glass, primary) were used and the redundant/incomplete sets (a separate 'circular' pair with no original, and a 'monogram' lettermark) were left unused."
+}

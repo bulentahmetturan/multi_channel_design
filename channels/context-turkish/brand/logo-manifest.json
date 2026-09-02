@@ -1,0 +1,133 @@
+{
+  "schemaVersion": "1.0.0",
+  "channelId": "context-turkish",
+  "version": "0.1.0",
+  "status": "COLLECTING",
+  "assetPrefix": "context-turkish",
+  "expectedCount": 12,
+  "assets": [
+    {
+      "slot": 1, "form": "CIRCULAR", "treatment": "ORIGINAL",
+      "expectedFilename": "context-turkish-circular-original.png",
+      "receivedFilename": "logos/context-turkish-circular-original.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "c47c103d44e0a88038f32f76aa5fca9744dffed03c7ecf775fefbabbfae3a945",
+        "width": 158, "height": 160, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Selected from the pack's 'avatar' set (dark circular badge, ivory tea-glass + nazar mark). Already had real RGBA transparency and a tight crop. QUALITY CAVEAT: source canvas is only 158x160px -- far below the resolution used by every other onboarded channel's logo set (900-2100px). Usable for small placements (avatar, watermark) but will look soft at full Instagram post scale (1080px+). Flagged for a higher-resolution re-export before heavy production use, not blocked on it."
+      }
+    },
+    {
+      "slot": 2, "form": "CIRCULAR", "treatment": "WHITE",
+      "expectedFilename": "context-turkish-circular-white.png",
+      "receivedFilename": "logos/context-turkish-circular-white.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "32f46e4e478edb461dbabf0609e08a71c3084ca15cde450e835cc79cee91810b",
+        "width": 158, "height": 160, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Already had real RGBA transparency and a tight crop. Same low-resolution caveat as slot 1."
+      }
+    },
+    {
+      "slot": 3, "form": "CIRCULAR", "treatment": "BLACK",
+      "expectedFilename": "context-turkish-circular-black.png",
+      "receivedFilename": "logos/context-turkish-circular-black.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "f39c16a59d0e77738add13bb49beb30a316244ea95d4d1cdf4194863d7940b20",
+        "width": 158, "height": 160, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Already had real RGBA transparency and a tight crop. Same low-resolution caveat as slot 1."
+      }
+    },
+    {
+      "slot": 4, "form": "HORIZONTAL", "treatment": "ORIGINAL",
+      "expectedFilename": "context-turkish-horizontal-original.png",
+      "status": "PENDING"
+    },
+    {
+      "slot": 5, "form": "HORIZONTAL", "treatment": "WHITE",
+      "expectedFilename": "context-turkish-horizontal-white.png",
+      "status": "PENDING"
+    },
+    {
+      "slot": 6, "form": "HORIZONTAL", "treatment": "BLACK",
+      "expectedFilename": "context-turkish-horizontal-black.png",
+      "status": "PENDING"
+    },
+    {
+      "slot": 7, "form": "ICON_ONLY", "treatment": "ORIGINAL",
+      "expectedFilename": "context-turkish-icon-only-original.png",
+      "receivedFilename": "logos/context-turkish-icon-only-original.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "3b6f64aafc5599ddd453e51def20283a2fd288e187ce0d6f010c89df566a7ba2",
+        "width": 72, "height": 123, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Selected from the pack's isolated 'tea-glass' icon (Turkish tea glass with a nazar/evil-eye motif at its base, no circle, no wordmark) -- the pack's most distinctive standalone icon, preferred over the abstract 'tc' monogram lettermark also present in the source folder. Already had real RGBA transparency and a tight crop. QUALITY CAVEAT: source canvas is only 72x123px, the smallest of the three forms in this pack -- same low-resolution flag as slots 1-3, more pronounced here."
+      }
+    },
+    {
+      "slot": 8, "form": "ICON_ONLY", "treatment": "WHITE",
+      "expectedFilename": "context-turkish-icon-only-white.png",
+      "receivedFilename": "logos/context-turkish-icon-only-white.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "a220b0f47321085e347a539c34116dc2c659908770aa09a2320015584b9863d6",
+        "width": 72, "height": 123, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Already had real RGBA transparency and a tight crop. Same low-resolution caveat as slot 7."
+      }
+    },
+    {
+      "slot": 9, "form": "ICON_ONLY", "treatment": "BLACK",
+      "expectedFilename": "context-turkish-icon-only-black.png",
+      "receivedFilename": "logos/context-turkish-icon-only-black.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "55d06bdeb695f89372ec9883f940dd19a2e6b19bd2d7a8033a4777d31243a0cc",
+        "width": 72, "height": 123, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Already had real RGBA transparency and a tight crop. Same low-resolution caveat as slot 7."
+      }
+    },
+    {
+      "slot": 10, "form": "VERTICAL", "treatment": "ORIGINAL",
+      "expectedFilename": "context-turkish-vertical-original.png",
+      "receivedFilename": "logos/context-turkish-vertical-original.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "a19e2062969ba0f0a904b54053404d212aed7d6746bb248be34bee330b61c510",
+        "width": 318, "height": 151, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Selected from the pack's 'primary' lockup: the two-line stacked wordmark ('turkish' / 'context') with the tea-glass icon replacing the dot of the i. Mapped to VERTICAL as a stacked two-line lockup, same reasoning as futboscope's primary wordmark -- this brand also has no icon-beside-wordmark HORIZONTAL treatment (slots 4-6 PENDING). Already had real RGBA transparency and a tight crop. Same low-resolution caveat as slots 1-9."
+      }
+    },
+    {
+      "slot": 11, "form": "VERTICAL", "treatment": "WHITE",
+      "expectedFilename": "context-turkish-vertical-white.png",
+      "receivedFilename": "logos/context-turkish-vertical-white.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "22a3d48ab0a849a374b47da6636b5789bbe87b5ed7cbd742c8bce7a965e7da13",
+        "width": 318, "height": 151, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Already had real RGBA transparency and a tight crop. Same low-resolution caveat as slot 10."
+      }
+    },
+    {
+      "slot": 12, "form": "VERTICAL", "treatment": "BLACK",
+      "expectedFilename": "context-turkish-vertical-black.png",
+      "receivedFilename": "logos/context-turkish-vertical-black.png",
+      "status": "PASS",
+      "validation": {
+        "sha256": "cabfc957f7dd8deaa21181e8fe8c8003ab3147b3fe27f0c10c9fe3745eae7937",
+        "width": 318, "height": 151, "hasAlpha": true, "isOpaque": false,
+        "embeddedCheckerboard": false, "artworkMatchesSlot": true, "result": "PASS",
+        "reason": "Already had real RGBA transparency and a tight crop. Same low-resolution caveat as slot 10."
+      }
+    }
+  ]
+}

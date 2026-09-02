@@ -11,7 +11,8 @@
 - [x] Phase 2: onboard `futboscope` to `COLORS_PASS` (identity, palette) with 7/12 logo slots PASS (5 genuinely unavailable in the source brand kit, not invented). Documented the existing-pipeline/proposed-news-column/shared-layer scope boundary at `channels/futboscope/SCOPE.md`.
 - [ ] Futboscope: horizontal lockup + circular white/black logo treatments, if/when designed -- not yet requested.
 - [ ] Futboscope: news-column prototype (read-only candidate inbox, no transcript-archive write path) -- proposed only, not yet requested.
-- [ ] Phase 2: onboard the remaining 7 `PLANNED` channels one at a time, in registry order. Typography stays deferred for every channel until the whole registry reaches `LOGOS_PASS`.
+- [x] Phase 2: onboard `context-turkish` to `COLORS_PASS` with 9/12 logo slots PASS (3 horizontal slots genuinely unavailable); palette fetched from logo pixel data (no color doc existed). Low-resolution source assets flagged, not blocking.
+- [ ] Phase 2: onboard the remaining 6 `PLANNED` channels one at a time, in registry order. Typography stays deferred for every channel until the whole registry reaches `LOGOS_PASS`.
 - [x] Integrate the `tip-ogrencileri-platformu` radar implementation (scan pipeline, faculty-source discovery, 77 tests) into its Channel Pack at `channels/tip-ogrencileri-platformu/{radar,scripts,sources,tests,database}/`.
 - [ ] Phase 6 (future): generalize the channel-embedded `radar` engine into the shared top-level `radar/` core (parameterize its config/root, re-verify all tests) so other channels can reuse it, per ADR-0002.
 

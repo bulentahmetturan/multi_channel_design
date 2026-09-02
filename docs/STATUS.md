@@ -30,7 +30,8 @@ Phase 2 — Channel Registry & Brand Foundations: onboard the next `PLANNED` cha
 - `iyilesme-kanali`: `ACTIVE`, logo `PASS`, color `PASS`, language `tr`.
 - `turkiye-scholarships`: `ACTIVE`, logo `PASS`, color `PASS`, language `en` (+7 secondary).
 - `futboscope`: `ACTIVE`, logo `IN_PROGRESS` (7/12 slots PASS), color `PASS`, language `tr`.
-- Remaining 7 channels: `PLANNED`, all foundation fields `UNSET`.
+- `context-turkish`: `ACTIVE`, logo `IN_PROGRESS` (9/12 slots PASS), color `PASS`, language `en` (+tr).
+- Remaining 6 channels: `PLANNED`, all foundation fields `UNSET`.
 
 ## tip-ogrencileri-platformu progress
 
@@ -75,6 +76,13 @@ Phase 2 — Channel Registry & Brand Foundations: onboard the next `PLANNED` cha
 - Channel status: `COLORS_PASS` (not yet `LOGOS_PASS` -- manifest is incomplete, honestly).
 - **Scope note:** Futboscope also has an existing, separate, working video-production pipeline (YouTube sync, transcript archive, speaker ID, captioning) that lives outside this repo and is explicitly out of scope here. A proposed (not built) non-video "news column" using this repo's shared design/approval layer is documented, clearly marked not-implemented, at `channels/futboscope/SCOPE.md`.
 
+## context-turkish progress
+
+- Channel identity: PASS. Purpose, audience, and language (primary `en`, secondary `tr`) drawn from the original portfolio brief and the logo pack's own wordmark/iconography.
+- Palette: PASS. No brand color-code document was found for this channel (unlike the four prior ones); fetched directly from the logo pack's pixel data via dominant-color clustering (Burgundy `#501818`, Navy `#0A0F1A`, Ivory `#F0EFE4`), per fallback instruction to fetch from the visuals when no color page exists.
+- Logo manifest: 9/12 PNG slots PASS (circular, icon-only, and a stacked-wordmark VERTICAL, all already real RGBA with tight crops). 3 slots `PENDING` (horizontal -- no such lockup in the source pack). **Quality caveat, not blocking:** every source asset is very low resolution (72-318px canvases, vs. 900-2100px for every other onboarded channel) -- usable now, but flagged for a higher-resolution re-export before heavy production use. Two overlapping/inconsistently-numbered source folders existed for this channel; the complete three-treatment sets were used and redundant/incomplete alternates (a separate circular pair with no original, and a monogram lettermark) were left unused.
+- Channel status: `COLORS_PASS` (not yet `LOGOS_PASS` -- manifest incomplete).
+
 ## Blockers
 
 None.
@@ -85,4 +93,4 @@ A working, tested source-monitoring implementation for `tip-ogrencileri-platform
 
 ## Last updated
 
-2026-09-01 (portfolio restructuring: channels/ + design-system/ + radar/ + data/; tip-ogrencileri-platformu radar implementation integrated; kaduse-medikal, iyilesme-kanali, and turkiye-scholarships onboarded to LOGOS_PASS; futboscope onboarded to COLORS_PASS with 7/12 logo slots and a documented pipeline/scope boundary)
+2026-09-01 (portfolio restructuring: channels/ + design-system/ + radar/ + data/; tip-ogrencileri-platformu radar implementation integrated; kaduse-medikal, iyilesme-kanali, and turkiye-scholarships onboarded to LOGOS_PASS; futboscope onboarded to COLORS_PASS with 7/12 logo slots and a documented pipeline/scope boundary; context-turkish onboarded to COLORS_PASS with 9/12 logo slots, palette fetched from pixel data)
