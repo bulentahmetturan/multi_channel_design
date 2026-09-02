@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "0.1.0",
+  "approvalStatus": "APPROVED",
+  "palette": {
+    "black": "#101010",
+    "green": "#0F4A28",
+    "red": "#B81020",
+    "white": "#FFFFFF"
+  },
+  "roles": {
+    "primary": "#B81020",
+    "secondary": "#0F4A28",
+    "accent": "#B81020",
+    "background": "#FFFFFF",
+    "surface": "#FFFFFF",
+    "text": "#101010",
+    "textInverse": "#FFFFFF",
+    "border": "#101010",
+    "overlay": "#101010"
+  },
+  "contrastPolicy": {
+    "normalTextMinimum": 4.5,
+    "largeTextMinimum": 3,
+    "criticalPairs": [
+      { "foreground": "#101010", "background": "#FFFFFF", "ratio": 19.03, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#0F4A28", "background": "#FFFFFF", "ratio": 10.34, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#B81020", "background": "#FFFFFF", "ratio": 6.70, "use": "normal-text", "result": "PASS" }
+    ],
+    "restrictedPairs": []
+  },
+  "sourceNotes": "No brand color-code document found for this channel. Fetched from the logo pack's own pixel data via dominant-color clustering: Black #101010 (ring, monogram), Green #0F4A28 ('BARLOVICS' arc text), Red #B81020 ('TURKIYE' arc text), White (disc fill). primary set to red and secondary to green (Hungary's and Turkiye's flag colors both draw on red/green, fitting a Turkiye-Hungary guide channel) rather than black, which is reserved for text/border. Source logo reads 'BARLOVICS TURKIYE' with a monogram 'BB' mark -- the channel's own brand appears to be built on a personal/business name (Barlovics) rather than a literal 'Macaristan Rehberi' wordmark; used as supplied without alteration."
+}

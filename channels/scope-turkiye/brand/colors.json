@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "0.1.0",
+  "approvalStatus": "APPROVED",
+  "palette": {
+    "navy": "#001838",
+    "cream": "#F8F0E8",
+    "gold": "#C09858",
+    "white": "#FFFFFF"
+  },
+  "roles": {
+    "primary": "#001838",
+    "secondary": "#C09858",
+    "accent": "#C09858",
+    "background": "#F8F0E8",
+    "surface": "#FFFFFF",
+    "text": "#001838",
+    "textInverse": "#F8F0E8",
+    "border": "#C09858",
+    "overlay": "#001838"
+  },
+  "contrastPolicy": {
+    "normalTextMinimum": 4.5,
+    "largeTextMinimum": 3,
+    "criticalPairs": [
+      { "foreground": "#001838", "background": "#F8F0E8", "ratio": 15.68, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#001838", "background": "#FFFFFF", "ratio": 17.68, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#C09858", "background": "#001838", "ratio": 6.63, "use": "normal-text", "result": "PASS" }
+    ],
+    "restrictedPairs": [
+      { "foreground": "#C09858", "background": "#F8F0E8", "ratio": 2.36, "restriction": "do-not-use-for-text" }
+    ]
+  },
+  "sourceNotes": "No brand color-code document found. Fetched from the logo pack's own pixel data via dominant-color clustering: Navy #001838 (outer ring, wordmark), Cream #F8F0E8 (badge center fill), Gold #C09858 (pinstripe rings, 'TURKIYE' text, compass needle). A fourth source file ('scope-turkiye-dark-original-transparent.png', a solid navy-filled disc with white/gold wordmark and an extra tagline) exists but was left unused -- it doesn't map to the white/black monochrome treatment model used elsewhere; noted here in case a dedicated 'on-dark' variant is wanted later."
+}

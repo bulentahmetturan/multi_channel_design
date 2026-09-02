@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "folk-saying",
+  "version": "0.1.0",
+  "status": "LOGOS_PASS",
+  "name": "Folks Saying",
+  "purpose": "Shares proverbs, idioms, and folk wisdom from Turkish and other cultures, presented for their meaning in a short, quotable form rather than as a linguistics or translation reference.",
+  "audience": "People who enjoy folk wisdom, proverbs, and cross-cultural sayings as short, shareable content.",
+  "languages": {
+    "primary": "en",
+    "secondary": [
+      "tr"
+    ]
+  }
+}

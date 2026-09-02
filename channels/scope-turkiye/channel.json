@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "scope-turkiye",
+  "version": "0.1.0",
+  "status": "LOGOS_PASS",
+  "name": "Scope Türkiye",
+  "purpose": "A trusted gateway to Türkiye (per its own tagline) covering Türkiye-focused social, cultural, educational, and current-context content for people engaging with the country from abroad.",
+  "audience": "People outside Türkiye seeking a trustworthy, current-context view of Turkish society, culture, and education.",
+  "languages": {
+    "primary": "en",
+    "secondary": ["tr"]
+  }
+}

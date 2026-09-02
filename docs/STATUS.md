@@ -16,81 +16,53 @@ Phase 2 — in progress
 - Workspace boundaries and the initial repository skeleton established.
 - Initial channel, layout, format, content-item, and typography-pair schemas validated.
 - Canonical lint, type-check, test, and build commands pass.
+- **Relaxed rule (explicit user instruction):** a channel's logo manifest does not need all 12 slots filled to reach `LOGOS_PASS`. Every *provided* slot must still pass its own validation; genuinely unavailable slots stay `PENDING` rather than being invented. Recorded in `docs/CHANNEL-SYSTEM.md`.
 
 ## Next
 
-Phase 2 — Channel Registry & Brand Foundations: onboard the next `PLANNED` channel in registry order (identity first). Typography is deferred for every channel until all 11 registry entries reach `LOGOS_PASS`; see `ROADMAP.md` Phase 2 sub-sequence and `docs/ONBOARDING-ORCHESTRATION.md`.
+Phase 2 — onboard the remaining `PLANNED` channels (`dunya-burslari`; `yeni-nesil-romanci` intentionally held). Typography stays deferred for every channel until the whole registry reaches `LOGOS_PASS`; see `ROADMAP.md` Phase 2 sub-sequence and `docs/ONBOARDING-ORCHESTRATION.md`.
 
 ## Channel Registry
 
 `channels/registry.json` holds all 12 current and planned brands (schema: `design-system/schemas/src/channel-registry.schema.json`).
 
-- `tip-ogrencileri-platformu`: `ACTIVE`, logo `PASS`, color `PASS`.
-- `kaduse-medikal`: `ACTIVE`, logo `PASS`, color `PASS`, language `tr`.
-- `iyilesme-kanali`: `ACTIVE`, logo `PASS`, color `PASS`, language `tr`.
-- `turkiye-scholarships`: `ACTIVE`, logo `PASS`, color `PASS`, language `en` (+7 secondary).
-- `futboscope`: `ACTIVE`, logo `IN_PROGRESS` (7/12 slots PASS), color `PASS`, language `tr`.
-- `context-turkish`: `ACTIVE`, logo `IN_PROGRESS` (9/12 slots PASS), color `PASS`, language `en` (+tr).
-- `dua-mecmuasi`: `ACTIVE`, logo `IN_PROGRESS` (9/12 slots PASS), color `PASS`, language `tr`.
-- `yeni-nesil-romanci`: still `PLANNED` by explicit user instruction (holds its registry place, no material provided yet).
-- Remaining 5 channels: `PLANNED`, all foundation fields `UNSET`.
+| Slug | Status | Logo | Color | Language |
+| --- | --- | --- | --- | --- |
+| tip-ogrencileri-platformu | ACTIVE | PASS (12/12) | PASS | tr |
+| kaduse-medikal | ACTIVE | PASS (12/12) | PASS | tr |
+| iyilesme-kanali | ACTIVE | PASS (12/12) | PASS | tr |
+| turkiye-scholarships | ACTIVE | PASS (12/12) | PASS | en (+7) |
+| futboscope | ACTIVE | PASS (7/12) | PASS | tr |
+| context-turkish | ACTIVE | PASS (9/12) | PASS | en (+tr) |
+| dua-mecmuasi | ACTIVE | PASS (9/12) | PASS | tr |
+| macaristan-rehberi | ACTIVE | PASS (3/12) | PASS | tr |
+| folk-saying | ACTIVE | PASS (4/12) | PASS | en (+tr) |
+| scope-turkiye | ACTIVE | PASS (3/12) | PASS | en (+tr) |
+| yeni-nesil-romanci | PLANNED | UNSET | UNSET | — |
+| dunya-burslari | PLANNED | UNSET | UNSET | — |
 
-## tip-ogrencileri-platformu progress
+`yeni-nesil-romanci` stays `PLANNED` by explicit user instruction (holds its registry place, no material provided yet). All other `ACTIVE` channels are at `LOGOS_PASS`.
 
-- Channel identity: PASS
-- Palette values: PASS (`#FFF9FB` corrected to `#FFFFFF` by user request)
-- Color proof and contrast report: PASS
-- Global Color Combination and Reversal Policy: adopted
-- Color Combination Registry: generated as `PROPOSED` with an anti-repetition window of six posts
-- Logo manifest: 12/12 PNG slots PASS, stored under `channels/tip-ogrencileri-platformu/brand/logos/` with the full channel-slug filename prefix. Source submissions had opaque backgrounds (embedded checkerboard or flat near-white); background was removed programmatically (connected-component background classification for the checkerboard/gradient cases, silhouette masks borrowed from the geometrically-aligned black sibling for the white treatments), true RGBA alpha applied, and every asset tightly cropped to its own content bounds. Slot 8 was additionally re-cropped to match the aspect ratio of slots 7 and 9.
-- Channel status: `LOGOS_PASS` (channel.json bumped to `0.3.0`)
-- Typography: deliberately deferred (portfolio-level rule, not a blocker for this channel).
+## Per-channel progress notes
 
-## kaduse-medikal progress
+Full validation detail lives in each channel's own `brand/logo-manifest.json` and `brand/colors.json`. Summary of what's notable per channel:
 
-- Channel identity: PASS. Purpose, audience, and primary language (`tr`) drawn faithfully from the brand's own source docs (`00_KADUSE_BIBLE.md` / `00_KADUSE_MASTER.md`) supplied alongside the logo pack.
-- Palette: PASS. Taken verbatim from the brand bible's stated palette (Ana Mavi `#1178BB`, Turkuaz `#35BCD1`, Lacivert `#0B3654`, Mercan `#F2765C`, Notr `#F7F5F2`), not derived from logo-pixel sampling (the source logos are glossy 3D renders with per-pixel lighting variation, unsuitable for exact color extraction). Role mapping and WCAG contrast ratios recorded in `channels/kaduse-medikal/brand/colors.json`.
-- Logo manifest: 12/12 PNG slots PASS, stored under `channels/kaduse-medikal/brand/logos/`. Source files (a complete 12-slot pack from the user, zip already extracted to a local folder) were opaque RGB, glossy 3D-rendered marks on a studio-gradient background with a soft drop shadow -- a different, harder asset type than tip-ogrencileri-platformu's flat vector marks. Background and shadow removed programmatically (same connected-component technique, generalized successfully), true RGBA alpha applied, tightly cropped. Two slots (4 horizontal-original, 7 icon-only-original) retain a visually negligible low-alpha shadow trace, noted in the manifest as a future refinement, not a blocking defect.
-- Channel status: `LOGOS_PASS`.
-- Typography: deliberately deferred (portfolio-level rule, not a blocker for this channel).
+- **tip-ogrencileri-platformu**: 12/12 logos. Original submissions had opaque/checkerboard backgrounds; extracted programmatically (connected-component background classification, white treatments derived from black-sibling silhouette masks).
+- **kaduse-medikal**: 12/12 logos, glossy 3D-rendered source art (harder case than flat vector) -- same extraction technique generalized successfully. Palette taken verbatim from the brand's own Bible doc, not pixel-sampled (renders have per-pixel lighting variation).
+- **iyilesme-kanali**: 12/12 logos, all submitted already as clean transparent PNGs -- validation only, no extraction needed. Palette + identity from the brand's own brandkit deck.
+- **turkiye-scholarships**: 12/12 logos selected from the project's own existing (larger) asset set, not user-submitted. Palette taken from the project's own Instagram-renderer color tokens; a discrepancy against the separate website's different brand doc is documented, not resolved.
+- **futboscope**: 7/12 logos (no horizontal lockup or composed circular badge exist in the source kit). Palette from the project's own locked, tested color-decision doc. Existing separate video-production pipeline documented as out of scope at `channels/futboscope/SCOPE.md`.
+- **context-turkish**: 9/12 logos (no horizontal lockup). Palette fetched from logo pixel data (no color doc existed). Source assets are low resolution (72-318px) -- flagged, not blocking.
+- **dua-mecmuasi**: 9/12 logos (no standalone icon in source kit). Palette fetched from logo pixel data.
+- **macaristan-rehberi**: 3/12 logos (circular only; source kit's actual brand is "Barlovics Türkiye"). Palette fetched from logo pixel data.
+- **folk-saying**: 4/12 logos (icon-only + horizontal, black/white only -- no transparent color original exists yet). Palette fetched from an opaque reference render in the source kit (not a proper logo asset itself).
+- **scope-turkiye**: 3/12 logos (circular only). Palette fetched from logo pixel data.
 
-## iyilesme-kanali progress
+Every channel: typography deliberately deferred (portfolio-level rule, not a per-channel blocker).
 
-- Channel identity: PASS. Purpose, audience, and primary language (`tr`) drawn from the brand's own source deck (`iyilesme_kanali_brandkit.png`): four pillars (balance, consciousness, biology, transformation), brand keywords and personality.
-- Palette: PASS. Taken verbatim from the brandkit's stated palette (Healing Red `#A61E2B`, Warm Ivory `#F4F0E8`, Deep Plum `#472742`, Sage Accent `#A5B39B`, Graphite `#1E1E1E` -- explicitly labeled as the text color in the source deck). WCAG contrast ratios recorded in `channels/iyilesme-kanali/brand/colors.json`; Sage Accent is decorative/border-only (fails contrast as text against every other palette color).
-- Logo manifest: 12/12 PNG slots PASS, stored under `channels/iyilesme-kanali/brand/logos/`. Unlike the first two channels, all 12 source files arrived as genuine RGBA PNGs with real transparency and tight crops already -- no background-removal processing was needed, only validation and renaming (numeric prefixes stripped) to the canonical filename convention.
-- Channel status: `LOGOS_PASS`.
-- Typography: deliberately deferred (portfolio-level rule). Note for later: the source brandkit already specifies a 3-font system (Ofelia Text Semibold / Placard Next Condensed / Cormorant Garamond) for reference when the central typography phase begins.
+## Central typography pool (data collection only)
 
-## turkiye-scholarships progress
-
-- Channel identity: PASS. Purpose, audience, and languages (primary `en`, secondary `tr/ar/fa/ur/ru/fr/es`) drawn from the project's own existing website (`website/docs/05_BRAND_AND_DESIGN.md`, `website/i18n/routing.ts` defaultLocale, `website/data/languages.ts`) and `instagram-post-automation/renderer/brand-constants.json`. Unlike the first three channels, this project already has a mature, in-production codebase (marketing website + Next.js Instagram-post renderer).
-- Palette: PASS. Taken verbatim from `instagram-post-automation/renderer/colors.json`, the project's own canonical Instagram-render color token file. **Discrepancy noted, not resolved:** the separate marketing-website brand doc states a visibly different palette (Turkiye Red `#B30015` vs. crimson-primary `#9D1B35`, etc.) for its own UI; the Instagram renderer's tokens were used as authoritative here since they are the purpose-matched source for Instagram design and this repo does not own the website.
-- Logo manifest: 12/12 PNG slots PASS, stored under `channels/turkiye-scholarships/brand/logos/`. The source `instagram-post-automation/assets/1. logos/` folder had 4 variants per form (not always fitting the original/white/black model) -- unused fixed-background variants (e.g. white-on-solid-red tiles) are documented per-slot in the manifest's `reason` fields rather than silently dropped. Slot 10 (vertical original) had no usable transparent-background red source; it was rebuilt from the working vertical-black silhouette, recolored to the brand's crimson-primary.
-- Channel status: `LOGOS_PASS`.
-- Typography: deliberately deferred (portfolio-level rule). Note: the website already runs a locked, documented typography system (IBM Plex Sans) for its own UI -- unrelated to this channel's future Instagram font pool, kept separate.
-
-## futboscope progress
-
-- Channel identity: PASS. Purpose, audience, and language (`tr`) drawn from the project's own existing handover doc (a separate, already-running YouTube-transcript/filtering/captioning pipeline).
-- Palette: PASS. Brand blue `#0044FF` taken verbatim from the project's own locked design decision (`brand/FORMAT1-DIRECTION.md` -- a documented, tested brand-color decision, not a guess). Two-tone identity (blue + black/white); no second brand color is documented anywhere in the source project.
-- Logo manifest: 7/12 PNG slots PASS (icon-only x3, a stacked two-line wordmark mapped to VERTICAL x3, one circular avatar mark). 5 slots `PENDING`: horizontal (this brand has no icon-beside-wordmark lockup) and circular white/black (no pre-composed circular badge exists, only one avatar-style mark). Not invented to fill the gap.
-- Channel status: `COLORS_PASS` (not yet `LOGOS_PASS` -- manifest is incomplete, honestly).
-- **Scope note:** Futboscope also has an existing, separate, working video-production pipeline (YouTube sync, transcript archive, speaker ID, captioning) that lives outside this repo and is explicitly out of scope here. A proposed (not built) non-video "news column" using this repo's shared design/approval layer is documented, clearly marked not-implemented, at `channels/futboscope/SCOPE.md`.
-
-## context-turkish progress
-
-- Channel identity: PASS. Purpose, audience, and language (primary `en`, secondary `tr`) drawn from the original portfolio brief and the logo pack's own wordmark/iconography.
-- Palette: PASS. No brand color-code document was found for this channel (unlike the four prior ones); fetched directly from the logo pack's pixel data via dominant-color clustering (Burgundy `#501818`, Navy `#0A0F1A`, Ivory `#F0EFE4`), per fallback instruction to fetch from the visuals when no color page exists.
-- Logo manifest: 9/12 PNG slots PASS (circular, icon-only, and a stacked-wordmark VERTICAL, all already real RGBA with tight crops). 3 slots `PENDING` (horizontal -- no such lockup in the source pack). **Quality caveat, not blocking:** every source asset is very low resolution (72-318px canvases, vs. 900-2100px for every other onboarded channel) -- usable now, but flagged for a higher-resolution re-export before heavy production use. Two overlapping/inconsistently-numbered source folders existed for this channel; the complete three-treatment sets were used and redundant/incomplete alternates (a separate circular pair with no original, and a monogram lettermark) were left unused.
-- Channel status: `COLORS_PASS` (not yet `LOGOS_PASS` -- manifest incomplete).
-
-## dua-mecmuasi progress
-
-- Channel identity: PASS. Purpose, audience, language (`tr`) drawn from the logo pack's own wordmark and tagline ("Dua bize yeter").
-- Palette: PASS. No brand color-code document found; fetched from the logo pack's pixel data via dominant-color clustering -- a deliberately restrained two-tone identity (Olive `#505828`, Cream `#F8F8F0`), matching what the artwork itself actually uses.
-- Logo manifest: 9/12 PNG slots PASS (circular, horizontal, and vertical/stacked -- all already real RGBA, high resolution, tight after re-cropping). 3 icon-only slots `PENDING` -- no standalone icon exists in the source pack (only the full badge/wordmark lockups).
-- Channel status: `COLORS_PASS`.
+Per explicit user instruction, fonts already documented or licensed by individual channel projects have been cataloged at `design-system/typography/font-pool.json`: Söhne and Tungsten (licensed commercial faces, actual font files found in futboscope's own project folder -- **not copied into this repo**, licensing unverified), Ofelia Text Semibold / Placard Next Condensed / Cormorant Garamond (iyilesme-kanali's brandkit), IBM Plex Sans / IBM Plex Sans Arabic (turkiye-scholarships' existing website runtime). This is cataloging only -- no channel has moved to `TYPOGRAPHY_PASS`, and the portfolio-level deferral rule is unchanged.
 
 ## Blockers
 
@@ -102,4 +74,4 @@ A working, tested source-monitoring implementation for `tip-ogrencileri-platform
 
 ## Last updated
 
-2026-09-01 (portfolio restructuring: channels/ + design-system/ + radar/ + data/; tip-ogrencileri-platformu radar implementation integrated; kaduse-medikal, iyilesme-kanali, and turkiye-scholarships onboarded to LOGOS_PASS; futboscope onboarded to COLORS_PASS with 7/12 logo slots and a documented pipeline/scope boundary; context-turkish onboarded to COLORS_PASS with 9/12 logo slots, palette fetched from pixel data; dua-mecmuasi onboarded to COLORS_PASS with 9/12 logo slots, palette fetched from pixel data)
+2026-09-02 (10 of 12 registry channels onboarded to LOGOS_PASS + COLORS_PASS; 12-slot logo requirement relaxed per explicit user instruction; central font-pool data collection started; `.claude/instructions.txt` decision guide added -- commit/pull pre-authorized, push requires confirmation)

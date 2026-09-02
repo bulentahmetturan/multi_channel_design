@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "0.1.0",
+  "approvalStatus": "APPROVED",
+  "palette": {
+    "pixelGreen": "#96E040",
+    "black": "#000000",
+    "white": "#FFFFFF"
+  },
+  "roles": {
+    "primary": "#96E040",
+    "secondary": "#000000",
+    "accent": "#96E040",
+    "background": "#FFFFFF",
+    "surface": "#FFFFFF",
+    "text": "#000000",
+    "textInverse": "#FFFFFF",
+    "border": "#000000",
+    "overlay": "#000000"
+  },
+  "contrastPolicy": {
+    "normalTextMinimum": 4.5,
+    "largeTextMinimum": 3,
+    "criticalPairs": [
+      { "foreground": "#000000", "background": "#FFFFFF", "ratio": 21.0, "use": "normal-text", "result": "PASS" },
+      { "foreground": "#96E040", "background": "#000000", "ratio": 13.03, "use": "normal-text", "result": "PASS" }
+    ],
+    "restrictedPairs": []
+  },
+  "sourceNotes": "No brand color-code document found. Fetched from a reference render in the logo pack (a pixel-art speech-bubble wordmark on black) via dominant-color clustering: pixel-art green #96E040, plus black/white. That reference render is an opaque preview, not a proper transparent-background export, so it was used only as a color source, not as a logo asset -- the two proper transparent logo files provided (icon, horizontal/main lockup) are black/white monochrome only; no transparent color ORIGINAL treatment exists yet for either form."
+}

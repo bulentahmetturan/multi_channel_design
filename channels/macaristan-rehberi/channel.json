@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "macaristan-rehberi",
+  "version": "0.1.0",
+  "status": "LOGOS_PASS",
+  "name": "Macaristan Rehberi",
+  "purpose": "Covers Turkiye-Hungary news, study and university options, residency and legal information, company formation, investment, and business regulation for people moving between the two countries.",
+  "audience": "Turkish citizens and businesses considering study, residency, investment, or company formation in Hungary, and anyone following Turkiye-Hungary relations.",
+  "languages": {
+    "primary": "tr",
+    "secondary": []
+  }
+}

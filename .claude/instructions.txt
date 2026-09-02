@@ -1,0 +1,25 @@
+# Claude Code Karar Rehberi
+
+## Sorsun (Onay iste)
+Sadece şu durumlarda soruş:
+- Mimari kararlar (klasör yapısı değişikliği, framework değişimi vb)
+- Tasarım kararları (UI layout, component yapısı vb)
+- Veri kaybı riski (dosya silme, veritabanı işlemleri, reset işlemleri)
+- Güvenlik (API keys, credentials, sensitive veriler)
+- Breaking changes (kütüphane versiyonu, API değişikliği)
+- Ürün logic değişimi (feature karar değişikliği)
+
+## Kendisi Yapsın (Sormadan yap)
+Şunları sormadan tamamla:
+- Dosya okuma/yazma
+- Test çalıştırma
+- Linting, formatting, build işlemleri
+- Git commit ve pull (push değil)
+- Kütüphane yükleme
+- Kod yapısını düzenleme (refactor)
+- Hata düzeltme
+- Dependency kontrolü
+- Syntax düzeltmeleri
+- Boilerplate kod yazma
+
+Özet: Eğer sonuç geri döndürülebilirse ve teknik bir işlemse, sorma. Eğer geri döndürülemeyecekse ya da tasarım/mimari etki edecekse, sor.

@@ -8,13 +8,18 @@
 - [x] Phase 2: onboard `kaduse-medikal` to `LOGOS_PASS` (identity, palette, all 12 logo slots) from the user-submitted logo pack and brand bible.
 - [x] Phase 2: onboard `iyilesme-kanali` (registry's 12th entry) to `LOGOS_PASS` (identity, palette, all 12 logo slots -- submitted already as clean transparent PNGs) from the user-submitted logo pack and brandkit deck.
 - [x] Phase 2: onboard `turkiye-scholarships` to `LOGOS_PASS`, selecting the best-fitting 12 of that project's existing logo assets and using its own existing Instagram-renderer color tokens as the palette (discrepancy vs. the website's separate brand doc noted, not resolved).
-- [x] Phase 2: onboard `futboscope` to `COLORS_PASS` (identity, palette) with 7/12 logo slots PASS (5 genuinely unavailable in the source brand kit, not invented). Documented the existing-pipeline/proposed-news-column/shared-layer scope boundary at `channels/futboscope/SCOPE.md`.
+- [x] Phase 2: onboard `futboscope` to `LOGOS_PASS` (identity, palette) with 7/12 logo slots PASS (5 genuinely unavailable in the source brand kit, not invented). Documented the existing-pipeline/proposed-news-column/shared-layer scope boundary at `channels/futboscope/SCOPE.md`.
 - [ ] Futboscope: horizontal lockup + circular white/black logo treatments, if/when designed -- not yet requested.
 - [ ] Futboscope: news-column prototype (read-only candidate inbox, no transcript-archive write path) -- proposed only, not yet requested.
-- [x] Phase 2: onboard `context-turkish` to `COLORS_PASS` with 9/12 logo slots PASS (3 horizontal slots genuinely unavailable); palette fetched from logo pixel data (no color doc existed). Low-resolution source assets flagged, not blocking.
-- [x] Phase 2: onboard `dua-mecmuasi` to `COLORS_PASS` with 9/12 logo slots PASS (icon-only genuinely unavailable); palette fetched from logo pixel data.
+- [x] Phase 2: onboard `context-turkish` to `LOGOS_PASS` with 9/12 logo slots PASS (3 horizontal slots genuinely unavailable); palette fetched from logo pixel data (no color doc existed). Low-resolution source assets flagged, not blocking.
+- [x] Phase 2: onboard `dua-mecmuasi` to `LOGOS_PASS` with 9/12 logo slots PASS (icon-only genuinely unavailable); palette fetched from logo pixel data.
+- [x] Phase 2: onboard `macaristan-rehberi` to `LOGOS_PASS` with 3/12 logo slots PASS (circular only; source kit's brand reads "Barlovics Türkiye"); palette fetched from logo pixel data.
+- [x] Phase 2: onboard `folk-saying` to `LOGOS_PASS` with 4/12 logo slots PASS (icon-only + horizontal, black/white only); palette fetched from an opaque reference render in the source kit.
+- [x] Phase 2: onboard `scope-turkiye` to `LOGOS_PASS` with 3/12 logo slots PASS (circular only); palette fetched from logo pixel data.
+- [x] Relax the 12-slot logo requirement portfolio-wide per explicit user instruction; documented in `docs/CHANNEL-SYSTEM.md`. Retroactively bumped futboscope/context-turkish/dua-mecmuasi/folk-saying from `COLORS_PASS` to `LOGOS_PASS` for consistency.
+- [x] Start central typography data collection (`design-system/typography/font-pool.json`) from channel brand kits already documenting or licensing fonts (futboscope, iyilesme-kanali, turkiye-scholarships), per explicit user instruction. Not a TYPOGRAPHY_PASS for any channel -- portfolio-level deferral unchanged.
 - yeni-nesil-romanci: stays `PLANNED` for now by explicit user instruction; already holds its registry place.
-- [ ] Phase 2: onboard the remaining 5 `PLANNED` channels one at a time, in registry order. Typography stays deferred for every channel until the whole registry reaches `LOGOS_PASS`.
+- [ ] Phase 2: onboard `dunya-burslari` (last remaining `PLANNED` channel with no material yet). Typography stays deferred for every channel until the whole registry reaches `LOGOS_PASS`.
 - [x] Integrate the `tip-ogrencileri-platformu` radar implementation (scan pipeline, faculty-source discovery, 77 tests) into its Channel Pack at `channels/tip-ogrencileri-platformu/{radar,scripts,sources,tests,database}/`.
 - [ ] Phase 6 (future): generalize the channel-embedded `radar` engine into the shared top-level `radar/` core (parameterize its config/root, re-verify all tests) so other channels can reuse it, per ADR-0002.
 

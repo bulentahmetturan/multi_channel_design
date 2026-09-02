@@ -2,12 +2,14 @@
   "schemaVersion": "1.0.0",
   "id": "context-turkish",
   "version": "0.1.0",
-  "status": "COLORS_PASS",
+  "status": "LOGOS_PASS",
   "name": "Turkish Context",
   "purpose": "Teaches Turkish vocabulary and language usage through real cultural context rather than isolated word lists -- phrases, idioms, and expressions shown the way Turkish speakers actually use them, paired with the cultural background (custom, object, or setting) that gives each one its meaning.",
   "audience": "Learners of Turkish as a foreign or heritage language who want usage-in-context over rote memorization, and anyone interested in Turkish language and culture together rather than as separate subjects.",
   "languages": {
     "primary": "en",
-    "secondary": ["tr"]
+    "secondary": [
+      "tr"
+    ]
   }
 }

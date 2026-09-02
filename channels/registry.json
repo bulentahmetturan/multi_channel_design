@@ -57,7 +57,7 @@
       "shortDescription": "Quote-driven Turkish football commentary Reels, filtered for genuine analysis over transfer noise.",
       "registryStatus": "ACTIVE",
       "language": "tr",
-      "logo": "IN_PROGRESS",
+      "logo": "PASS",
       "colorPalette": "PASS",
       "typography": "UNSET",
       "monitoringSources": "UNSET",
@@ -67,13 +67,13 @@
       "slug": "macaristan-rehberi",
       "name": "Macaristan Rehberi",
       "shortDescription": "Hungary: education, student life, company formation, investment, and Türkiye–Hungary news.",
-      "registryStatus": "PLANNED",
-      "language": "UNSET",
-      "logo": "UNSET",
-      "colorPalette": "UNSET",
+      "registryStatus": "ACTIVE",
+      "language": "tr",
+      "logo": "PASS",
+      "colorPalette": "PASS",
       "typography": "UNSET",
       "monitoringSources": "UNSET",
-      "channelPackPath": null
+      "channelPackPath": "channels/macaristan-rehberi/"
     },
     {
       "slug": "dua-mecmuasi",
@@ -81,7 +81,7 @@
       "shortDescription": "Prayers, spiritual texts, and Islamic thought. Tagline: 'Dua bize yeter'.",
       "registryStatus": "ACTIVE",
       "language": "tr",
-      "logo": "IN_PROGRESS",
+      "logo": "PASS",
       "colorPalette": "PASS",
       "typography": "UNSET",
       "monitoringSources": "UNSET",
@@ -89,15 +89,15 @@
     },
     {
       "slug": "folk-saying",
-      "name": "Folk Saying",
+      "name": "Folks Saying",
       "shortDescription": "Proverbs, idioms, folk wisdom, and cross-cultural short-form text.",
-      "registryStatus": "PLANNED",
-      "language": "UNSET",
-      "logo": "UNSET",
-      "colorPalette": "UNSET",
+      "registryStatus": "ACTIVE",
+      "language": "en",
+      "logo": "PASS",
+      "colorPalette": "PASS",
       "typography": "UNSET",
       "monitoringSources": "UNSET",
-      "channelPackPath": null
+      "channelPackPath": "channels/folk-saying/"
     },
     {
       "slug": "context-turkish",
@@ -105,7 +105,7 @@
       "shortDescription": "Turkish vocabulary and language usage taught through real cultural context.",
       "registryStatus": "ACTIVE",
       "language": "en",
-      "logo": "IN_PROGRESS",
+      "logo": "PASS",
       "colorPalette": "PASS",
       "typography": "UNSET",
       "monitoringSources": "UNSET",
@@ -126,14 +126,14 @@
     {
       "slug": "scope-turkiye",
       "name": "Scope Türkiye",
-      "shortDescription": "Türkiye-focused social, cultural, educational, and current-context content.",
-      "registryStatus": "PLANNED",
-      "language": "UNSET",
-      "logo": "UNSET",
-      "colorPalette": "UNSET",
+      "shortDescription": "Trusted gateway to Türkiye: social, cultural, educational, and current-context content.",
+      "registryStatus": "ACTIVE",
+      "language": "en",
+      "logo": "PASS",
+      "colorPalette": "PASS",
       "typography": "UNSET",
       "monitoringSources": "UNSET",
-      "channelPackPath": null
+      "channelPackPath": "channels/scope-turkiye/"
     },
     {
       "slug": "iyilesme-kanali",

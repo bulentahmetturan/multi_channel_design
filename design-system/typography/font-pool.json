@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "0.1.0",
+  "status": "COLLECTING",
+  "note": "Central catalog of fonts already documented or licensed by individual channel projects, gathered ahead of the Phase 4 central typography library per explicit user instruction. This is data collection only -- no channel has been moved to TYPOGRAPHY_PASS, and typography onboarding for any channel stays deferred until every registry entry reaches LOGOS_PASS (see ROADMAP.md Phase 2, docs/ONBOARDING-ORCHESTRATION.md). Commercial/licensed font BINARIES are intentionally not copied into this repo -- only their family names, roles, and source locations are recorded, to avoid redistributing fonts whose license terms are unverified.",
+  "fonts": [
+    {
+      "family": "Söhne",
+      "role": "candidate",
+      "source": "Klim Type Foundry (commercial)",
+      "channels": ["futboscope"],
+      "location": "futboscope project folder, brand/fonts/sohne/ (local, not in this repo)",
+      "licenseNote": "Files present are named 'TestSohne-*' -- appear to be trial/test license copies. Verify commercial license terms before any production or redistribution use.",
+      "weightsObserved": ["Extraleicht", "Leicht", "Buch", "Kraftig", "Halbfett", "Dreiviertelfett", "Fett", "Extrafett"],
+      "widthsObserved": ["normal", "Breit (wide)", "Schmal (narrow)"],
+      "alsoIncludes": "TestSohneMono (monospace variant)"
+    },
+    {
+      "family": "Tungsten",
+      "role": "candidate",
+      "source": "Hoefler&Co (commercial)",
+      "channels": ["futboscope"],
+      "location": "futboscope project folder, brand/fonts/tungsten/ (local, not in this repo)",
+      "licenseNote": "Commercial display typeface. Verify license terms before any production or redistribution use.",
+      "weightsObserved": ["XLight", "Light", "Book", "Medium", "Semibold", "Bold", "Black"],
+      "widthsObserved": ["normal", "Comp (compressed)", "Cond (condensed)", "Narrow"]
+    },
+    {
+      "family": "Ofelia Text",
+      "role": "candidate (body)",
+      "source": "documented in brand deck, files not located",
+      "channels": ["iyilesme-kanali"],
+      "location": "iyilesme_kanali_brandkit.png ('Body text, aciklamalar, carousel icerikleri, egitici metinler icin. Modern, okunabilir ve premium.')",
+      "weightsObserved": ["Semibold"]
+    },
+    {
+      "family": "Placard Next Condensed",
+      "role": "candidate (headline)",
+      "source": "documented in brand deck, files not located",
+      "channels": ["iyilesme-kanali"],
+      "location": "iyilesme_kanali_brandkit.png ('Basliklar, posterler, reel kapaklari ve guclu vurgu metinleri icin. Cesur, modern, carpici.')"
+    },
+    {
+      "family": "Cormorant Garamond",
+      "role": "candidate (accent)",
+      "source": "Google Fonts (open license)",
+      "channels": ["iyilesme-kanali"],
+      "location": "iyilesme_kanali_brandkit.png ('Alintilar, ozel vurgu metinleri, felsefi icerikler icin. Zamansiz, zarif, entellektuel.')"
+    },
+    {
+      "family": "IBM Plex Sans",
+      "role": "candidate (base UI)",
+      "source": "IBM (open license, SIL OFL)",
+      "channels": ["turkiye-scholarships"],
+      "location": "already the locked runtime base font for turkiye-scholarships' own website (website/docs/05_BRAND_AND_DESIGN.md, website/lib/fonts.ts), loaded via next/font -- not yet evaluated for Instagram-post use specifically",
+      "note": "This is the website's own UI font choice, not yet a channel typography-pair decision for Instagram content."
+    },
+    {
+      "family": "IBM Plex Sans Arabic",
+      "role": "candidate (RTL base UI)",
+      "source": "IBM (open license, SIL OFL)",
+      "channels": ["turkiye-scholarships"],
+      "location": "same as IBM Plex Sans; used for the website's Arabic/Persian RTL locales"
+    }
+  ]
+}
