@@ -229,10 +229,17 @@ test('27. Research remains separate and its own approved semantics are unchanged
   assert.ok(kaduseNews.boundaryWithResearch.rule.includes('never collapsed'));
 });
 
-test('28. Kaduse News source pack is an empty, architecture-only placeholder (no sources invented)', () => {
-  assert.equal(newsSources.status, 'EMPTY_PLACEHOLDER');
-  assert.deepEqual(newsSources.sources, []);
+test('28. Kaduse News source pack holds real, user-approved subscriptions as of Batch N2-FINAL (supersedes the Batch N1 empty placeholder)', () => {
+  assert.equal(newsSources.status, 'ACTIVE_SUBSCRIPTIONS');
+  assert.equal(newsSources.subscriptions.length, 59);
+  assert.equal(newsSources.subscriptionCount, newsSources.subscriptions.length);
   assert.ok(newsSources.sourceRecordContract.fields.length > 0);
+  // every subscription references a global source/target by ID only -- no
+  // duplicated publisher/URL metadata (full cross-repo proof lives in
+  // news-source-mapping.test.mjs).
+  for (const sub of newsSources.subscriptions) {
+    assert.ok(sub.sourceId && sub.targetId && sub.channelId === 'kaduse-medikal');
+  }
 });
 
 test('29. Kaduse News policy names the Global News Hub as engine owner, and channel config stays here', () => {

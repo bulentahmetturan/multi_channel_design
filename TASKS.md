@@ -23,7 +23,8 @@
 - [x] Integrate the `tip-ogrencileri-platformu` radar implementation (scan pipeline, faculty-source discovery, 77 tests) into its Channel Pack at `channels/tip-ogrencileri-platformu/{radar,scripts,sources,tests,database}/`.
 - [ ] Phase 6 (future): if the channel-embedded `tip-ogrencileri-platformu` `radar` engine's logic is reused as part of the shared engine, the target is the Global News Hub in `channel-content-os` (parameterize/port as needed, re-verify all tests) -- not this repo's top-level `radar/`, which is retired per ADR-0003.
 - [x] Batch N1 (2026-09-04): lock Global News Hub architecture (ownership, sync model, cross-channel article model) in `channel-content-os`'s `docs/global-news-hub-contract.md`; retire this repo's empty `radar/` scaffold per ADR-0003; persist `kaduse-news` as a USER_APPROVED channel archetype/policy with a `news-sources.json` source-pack placeholder.
-- [ ] Kaduse News source pack: select and trust-tier actual sources (deferred to its own batch, per Batch N1).
+- [x] Batch N2-FINAL (2026-09-04): Kaduse News source pack populated -- 59 subscriptions across 54 logical sources / 49 unique publishers, referencing channel-content-os's global source registry by ID only. No trust-tier/priority ontology (explicitly not approved by the user). `EUnetHTA 21` superseded by EC/HTACG; `Lexxion EHPL`, `TOPRA Regulatory Rapporteur`, `MedDeviceGuide`, `MHRA` remain excluded.
+- [ ] News ingestion runtime, delivery surfaces (localhost/email), and Global Mail integration remain unbuilt -- Batch N2-FINAL is source architecture + configuration only.
 
 ## Later
 

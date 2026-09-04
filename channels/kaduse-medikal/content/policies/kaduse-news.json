@@ -51,8 +51,8 @@
     "engineOwner": "channel-content-os (Global News Hub) -- see that repo's docs/global-news-hub-contract.md for the full ingestion/routing/delivery architecture",
     "channelConfigOwner": "multi_channel_design, this channel's Channel Pack (channels/kaduse-medikal/content/)",
     "sourcePackPath": "channels/kaduse-medikal/content/news-sources.json",
-    "sourcePackStatus": "PLACEHOLDER_EMPTY",
-    "note": "Actual source selection (which specific sites/feeds, trust tiers) is deferred to its own batch, source-by-source, per explicit user instruction. This file records editorial coverage rules, not the source list."
+    "sourcePackStatus": "ACTIVE_SUBSCRIPTIONS",
+    "note": "Batch N2-FINAL (2026-09-04) populated 59 real, user-approved subscriptions across 54 logical sources / 49 unique publisher organisations, referencing the global source registry in channel-content-os by ID only -- no priority/trust-tier ontology, per explicit user instruction. This file records editorial coverage rules, not the source list itself."
   },
   "sourceAuthorityPrinciple": "A discovery source (e.g. a media publication reporting a development) may identify a candidate. A primary/original source (e.g. the regulator or manufacturer itself), when available, should be preferred for factual verification of that candidate before publication.",
   "designIndependence": "This policy file encodes content/coverage rules only. It does NOT and must NOT encode layout IDs, typography decisions, art-direction decisions, visual-direction approvals, composition coordinates, or design-family assignments. The pipeline is: post archetype -> news candidate (from the Global News Hub, routed to this channel) -> ContentBrief -> deterministic classification -> design retrieval -> layout/typography/art-direction/composition (out of scope here)."
