@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "product-promotion-message-led-sparse-v1",
+  "channelId": "kaduse-medikal",
+  "postArchetypeId": "product-promotion",
+  "content": {
+    "headline": "İlk duyduğun kalp sesi,\nbir ömür aklında kalır.",
+    "body": "Mesleğinin önemli eşyasını seçerken,\nkendini de dinle.",
+    "isAuthoritative": true,
+    "provenance": "outputs/kaduse-medikal/2026-09-03/kaduse-medikal-heartbeat-product-hero-v1.manifest.json and -v2.manifest.json, contentProfile.source = \"user-provided-final-copy\" (real, user-authored copy, not AI-invented)."
+  },
+  "derivedProfile": {
+    "densityBand": "SPARSE",
+    "narrativeStructure": "SINGLE_STATEMENT",
+    "publishingShape": "SINGLE_POST",
+    "computedBy": "channel-content-os:deriveDesignRetrievalContext (Batch A5-D) -- headline+body only, zero claims/dataPoints/steps: informationUnits=0 -> SPARSE; no postType hint or structural trigger -> SINGLE_STATEMENT (STRUCTURAL_DEFAULT_SINGLE_STATEMENT); output.mode=static, no multi-step/multi-item signal -> SINGLE_POST."
+  },
+  "notes": "message-led / emotional / sparse / image-supported -- descriptive only, NOT an authoritative classification axis. This case is evidence for exactly this content condition, not for Product Promotion broadly (e.g. not for a feature-led or comparison-led Product Promotion variant, which would need its own Evaluation Case).",
+  "createdAt": "2026-09-04T00:00:00.000Z"
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://multi-channel-design.local/schemas/post-archetype.schema.json",
+  "title": "Post Archetype",
+  "description": "Channel-owned, extensible semantic content format (e.g. 'product-promotion', 'medical-news'). Deliberately NOT a closed global enum: each channel maintains its own post-archetypes.json under channels/<slug>/content/. Post Archetype != publishing shape (SINGLE_POST|CAROUSEL|REEL, computed by channel-content-os), != canvas format (FEED_TALL_PORTRAIT etc.), != density, != narrativeStructure -- those are all derived facts about a specific piece of real content, never this channel-curated label.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "id", "channelId", "label"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "channelId": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "label": { "type": "string", "minLength": 1 },
+    "description": { "type": "string" },
+    "status": { "enum": ["ACTIVE", "RETIRED"], "default": "ACTIVE" }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://multi-channel-design.local/schemas/visual-direction.schema.json",
+  "title": "Visual Direction",
+  "description": "One complete evaluated design direction for one Evaluation Case. Approval here is a curation-scope decision only: it does NOT imply layout readiness, font registration, or production-D1 mutation -- those remain separate milestones owned by channel-content-os's own production-readiness gates.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "id", "evaluationCaseId", "layout", "typography", "artifact", "status", "createdAt"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "evaluationCaseId": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "layout": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provenance"],
+      "properties": {
+        "layoutVersionId": { "type": "string", "description": "Set only once a real, registered layout version exists. Absent for a purely exploratory direction." },
+        "provenance": { "type": "string", "description": "Real source/reference used (a real repo file or module), what structural/compositional idea was borrowed, and what was discarded -- never 'the repo chose this'." }
+      }
+    },
+    "typography": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["candidateFamily", "productionApproved"],
+      "properties": {
+        "candidateFamily": { "type": "string", "minLength": 1 },
+        "licenseNote": { "type": "string" },
+        "productionApproved": { "const": false, "description": "Always false at this stage -- approving a Visual Direction never registers a font in channel-content-os's production fonts table." }
+      }
+    },
+    "artDirection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "compositionMode": { "type": "string" },
+        "ground": { "type": "string" },
+        "thesis": { "type": "string" }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind"],
+      "properties": {
+        "kind": {
+          "enum": ["EXTERNAL_EVALUATION_HISTORY", "REPO_FILE"],
+          "description": "REPO_FILE only when `path` is a real, existing repo-relative file. EXTERNAL_EVALUATION_HISTORY when the render was delivered for human review but never copied into canonical repo storage -- never invent a path to make this look canonically stored."
+        },
+        "path": { "type": "string", "description": "Real repo-relative path. Required when kind=REPO_FILE, must be omitted otherwise." },
+        "description": { "type": "string" }
+      }
+    },
+    "status": { "enum": ["CANDIDATE", "APPROVED", "REJECTED", "RETIRED"] },
+    "decisionNote": { "type": "string", "description": "Why approved/rejected, and under what conditions this direction should/should not be used." },
+    "createdAt": { "type": "string", "format": "date-time" }
+  }
+}

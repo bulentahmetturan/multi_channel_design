@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "product-promotion-message-led-sparse-v1-direction-03",
+  "evaluationCaseId": "product-promotion-message-led-sparse-v1",
+  "layout": {
+    "provenance": "channel-content-os art-direction/engine.ts's real CompositionMode vocabulary -- PREMIUM_SHOWCASE, the SAME mode the real 2026-09-03 Kaduse production manifest already chose for this exact product asset, making this the most brand-precedented of the four directions. Discarded: any comparison/duel mode, since there is only one product and showcase (not contrast) is the point."
+  },
+  "typography": {
+    "candidateFamily": "Manrope",
+    "licenseNote": "SIL OFL 1.1, verified live from google/fonts' bundled OFL.txt -- evaluation use only, not registered in channel-content-os's production fonts table.",
+    "productionApproved": false
+  },
+  "artDirection": {
+    "compositionMode": "PREMIUM_SHOWCASE",
+    "ground": "paper-light",
+    "thesis": "Maximum restraint: the product itself, matted in generous negative space, carries the trust the brand wants to convey."
+  },
+  "artifact": {
+    "kind": "EXTERNAL_EVALUATION_HISTORY",
+    "description": "Rendered PNG (kaduse-product-promo-v2-direction-03.png, 1080x1440) delivered to the human reviewer for visual inspection; not copied into canonical repo storage in this batch."
+  },
+  "status": "CANDIDATE",
+  "createdAt": "2026-09-04T00:00:00.000Z"
+}

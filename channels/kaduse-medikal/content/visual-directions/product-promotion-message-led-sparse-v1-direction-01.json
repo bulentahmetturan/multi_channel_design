@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "product-promotion-message-led-sparse-v1-direction-01",
+  "evaluationCaseId": "product-promotion-message-led-sparse-v1",
+  "layout": {
+    "provenance": "design-catalog/guizang-templates/template-swiss-card.html (channel-content-os, vendored AGPL-3.0) -- borrowed its tag -> statement -> lead -> meta vertical stack with generous gap spacing. Discarded: its own type/color choices and its square/xhs poster variants; Kaduse's own palette/logo used instead, and canvas chosen independently (FEED_TALL_PORTRAIT, 1080x1440)."
+  },
+  "typography": {
+    "candidateFamily": "Source Sans 3",
+    "licenseNote": "SIL OFL 1.1, verified live from google/fonts' bundled OFL.txt -- evaluation use only, not registered in channel-content-os's production fonts table.",
+    "productionApproved": false
+  },
+  "artDirection": {
+    "compositionMode": "EDITORIAL_CONTRAST-adjacent (channel-content-os art-direction/engine.ts vocabulary)",
+    "ground": "paper-light",
+    "thesis": "Restraint and generous negative space let the brand voice/message lead; the product supports quietly rather than dominating."
+  },
+  "artifact": {
+    "kind": "EXTERNAL_EVALUATION_HISTORY",
+    "description": "Rendered PNG (kaduse-product-promo-v2-direction-01.png, 1080x1440) delivered to the human reviewer for visual inspection; not copied into canonical repo storage in this batch."
+  },
+  "status": "CANDIDATE",
+  "createdAt": "2026-09-04T00:00:00.000Z"
+}

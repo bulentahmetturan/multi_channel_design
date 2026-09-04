@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://multi-channel-design.local/schemas/evaluation-case.schema.json",
+  "title": "Evaluation Case",
+  "description": "One real-content case used for pre-production visual curation. `derivedProfile` is evidence/labeling produced by channel-content-os's real deterministic classifiers (content-classification/density-engine.ts, narrative-engine.ts, format-classifier.ts) -- it is NEVER a manually authored ContentStyle/ContentVariant/ContentProfile taxonomy. `notes` may describe the case in human terms (e.g. 'message-led / sparse / image-supported') but is descriptive only and must never be read as an authoritative classification axis -- `derivedProfile` is the only authoritative classification here.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "id", "channelId", "postArchetypeId", "content", "derivedProfile", "createdAt"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "channelId": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "postArchetypeId": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "content": {
+      "type": "object",
+      "description": "The real content payload this case evaluates. Every field must be demonstrably real (existing brand copy, or explicitly marked evaluation-only) -- never invented facts/claims/statistics.",
+      "additionalProperties": false,
+      "required": ["headline", "isAuthoritative"],
+      "properties": {
+        "headline": { "type": "string", "minLength": 1 },
+        "body": { "type": "string" },
+        "source": { "type": "string" },
+        "cta": { "type": "string" },
+        "isAuthoritative": {
+          "type": "boolean",
+          "description": "true only if this content demonstrably exists in real Kaduse source material (e.g. a prior real production manifest). false means it was authored solely to make this visual evaluation possible and must never be labeled real brand copy."
+        },
+        "provenance": { "type": "string", "description": "Where this content came from, e.g. a real repo-relative manifest path, or 'evaluation-copy: not present in any real Kaduse source'." }
+      }
+    },
+    "derivedProfile": {
+      "type": "object",
+      "description": "Evidence only -- computed, not hand-maintained. Recompute via channel-content-os's deriveDesignRetrievalContext() if the content above ever changes.",
+      "additionalProperties": false,
+      "required": ["densityBand", "narrativeStructure", "publishingShape", "computedBy"],
+      "properties": {
+        "densityBand": { "enum": ["SPARSE", "MEDIUM", "DENSE"] },
+        "narrativeStructure": { "enum": ["SINGLE_STATEMENT", "COMPARISON", "SEQUENCE", "PROBLEM_SOLUTION", "DATA_REVEAL", "ENUMERATION", "QUOTE", "ANNOUNCEMENT"] },
+        "publishingShape": { "enum": ["SINGLE_POST", "CAROUSEL", "REEL"] },
+        "computedBy": { "type": "string", "description": "Which real function produced this, e.g. 'channel-content-os:deriveDesignRetrievalContext'." }
+      }
+    },
+    "notes": { "type": "string", "description": "Optional human-readable, non-authoritative description of the case." },
+    "createdAt": { "type": "string", "format": "date-time" }
+  }
+}

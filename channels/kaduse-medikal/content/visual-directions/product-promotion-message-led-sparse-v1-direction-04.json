@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "product-promotion-message-led-sparse-v1-direction-04",
+  "evaluationCaseId": "product-promotion-message-led-sparse-v1",
+  "layout": {
+    "provenance": "channel-content-os art-direction/engine.ts's real vocabulary -- ground:\"saturated\" combined with DIAGONAL_CONFRONTATION-style controlled-overlap energy. Discarded: photographic restraint (the other three directions' mode), since this direction is deliberately the expressive counterpoint."
+  },
+  "typography": {
+    "candidateFamily": "Inter",
+    "licenseNote": "SIL OFL 1.1, verified live from google/fonts' bundled OFL.txt -- evaluation use only, not registered in channel-content-os's production fonts table.",
+    "productionApproved": false
+  },
+  "artDirection": {
+    "compositionMode": "DIAGONAL_CONFRONTATION-adjacent",
+    "ground": "saturated",
+    "thesis": "A full-bleed brand-color field with the product overlapping its edge is the most scroll-stopping, expressive of the four."
+  },
+  "artifact": {
+    "kind": "EXTERNAL_EVALUATION_HISTORY",
+    "description": "Rendered PNG (kaduse-product-promo-v2-direction-04.png, 1080x1440) delivered to the human reviewer for visual inspection; not copied into canonical repo storage in this batch."
+  },
+  "status": "CANDIDATE",
+  "createdAt": "2026-09-04T00:00:00.000Z"
+}

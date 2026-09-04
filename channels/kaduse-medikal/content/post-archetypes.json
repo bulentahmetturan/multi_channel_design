@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0.0",
+  "channelId": "kaduse-medikal",
+  "$comment": "Channel-owned, extensible list -- validates against design-system/schemas/src/post-archetype.schema.json, one entry per element. NOT a closed global enum; only the archetype(s) actually exercised so far are listed here.",
+  "archetypes": [
+    {
+      "schemaVersion": "1.0.0",
+      "id": "product-promotion",
+      "channelId": "kaduse-medikal",
+      "label": "Product Promotion",
+      "description": "Promotes a specific Kaduse product (e.g. a stethoscope) directly -- distinct from a comparison, a news/announcement post, or an important-day post.",
+      "status": "ACTIVE"
+    }
+  ]
+}
