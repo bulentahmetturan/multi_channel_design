@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "1.0.0",
+  "channelId": "kaduse-medikal",
+  "$comment": "Batch O2 (2026-09-04). Layer B: KADUSE-ONLY health/profession/awareness observance calendar. Unlike the Layer A global registry (owned in channel-content-os, referenced by ID in channels/kaduse-medikal/content/observances.json), these 57 entries are Kaduse-owned truth end-to-end -- identity AND treatment live in this one file, because no other channel needs or references them in this batch (per explicit instruction: do not move these into the all-project global registry, and do not prebuild a future health-domain reuse layer). Not validated against a JSON Schema, same minimal convention as observances.json/policies/*.json. This file MUST NOT contain layout, typography, art-direction, canvas, or composition decisions -- see designIndependence below.",
+  "observanceCount": 57,
+  "authorisedClasses": [
+    "HEALTHCARE_PROFESSION_DAY",
+    "HEALTHCARE_PROFESSION_WEEK",
+    "HEALTH_AWARENESS_DAY",
+    "HEALTH_AWARENESS_WEEK",
+    "HEALTH_AWARENESS_MONTH"
+  ],
+  "leadTimePolicy": {
+    "note": "Deterministic defaultLeadDays per class (semantic range preserved in this note per explicit instruction): profession day/week = 6 (semantic range 5-7), awareness day = 4 (semantic range 3-5), awareness week = 5 (fixed), awareness month = 6 before month start (semantic range 5-7).",
+    "HEALTHCARE_PROFESSION_DAY": 6,
+    "HEALTHCARE_PROFESSION_WEEK": 6,
+    "HEALTH_AWARENESS_DAY": 4,
+    "HEALTH_AWARENESS_WEEK": 5,
+    "HEALTH_AWARENESS_MONTH": 6
+  },
+  "routingSemantics": {
+    "note": "The calendar stores only a preferred routing HINT, never a forced final archetype selection. 'special-day' and 'clinical-education' are NOT registered post archetypes yet (both remain unapproved K1 candidates) -- these are forward-looking markers only, exactly like observances.json's intendedFuturePostArchetypeId.",
+    "HEALTHCARE_PROFESSION_DAY_OR_WEEK": {
+      "preferredArchetypeHint": "special-day",
+      "preferredSubtypeHint": "PROFESSION_RECOGNITION",
+      "preferredAction": "CONSIDER"
+    },
+    "HEALTH_AWARENESS_DAY_OR_WEEK_OR_MONTH": {
+      "preferredAction": "CONSIDER",
+      "candidateArchetypeHints": ["clinical-education", "special-day"],
+      "note": "Deliberately NOT a single forced hint -- awareness dates may route to Clinical Education or a Special Day awareness editorial treatment; final selection is a future editorial decision, not calendar-forced."
+    }
+  },
+  "commercialSafetyDefault": {
+    "commercialContentAllowed": false,
+    "productPlacementAllowed": false,
+    "ctaAllowed": false,
+    "note": "Healthcare profession dates MAY later allow a subtle brand presence (see futureSubtleBrandPresenceConsideration on those 7 entries) -- this is a documented future consideration only, NOT an authorization. No promotional sales CTA is allowed for any of the 57 in this batch."
+  },
+  "dateRuleKinds": ["FIXED_DATE", "FIXED_RANGE", "MONTH", "VARIABLE_ANNUAL_DATE"],
+  "designIndependence": "This file encodes content/editorial-planning rules only. It does NOT and must NOT encode layout IDs, typography decisions, art-direction decisions, visual-direction approvals, composition coordinates, or design-family assignments.",
+  "observances": [
+    { "id": "kaduse-cervical-cancer-awareness-month", "canonicalName": "Serviks Kanseri Farkındalık Ayı", "class": "HEALTH_AWARENESS_MONTH", "dateRule": { "kind": "MONTH", "month": 1 }, "defaultLeadDays": 6, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-tb-education-awareness-week", "canonicalName": "4-10 Ocak Verem Eğitimi ve Farkındalık Haftası", "class": "HEALTH_AWARENESS_WEEK", "dateRule": { "kind": "FIXED_RANGE", "startMonth": 1, "startDay": 4, "endMonth": 1, "endDay": 10 }, "defaultLeadDays": 5, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-white-cane-visually-impaired-week", "canonicalName": "7-14 Ocak Beyaz Baston Görme Engelliler Haftası", "class": "HEALTH_AWARENESS_WEEK", "dateRule": { "kind": "FIXED_RANGE", "startMonth": 1, "startDay": 7, "endMonth": 1, "endDay": 14 }, "defaultLeadDays": 5, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-world-ntd-day", "canonicalName": "30 Ocak Dünya İhmal Edilmiş Tropikal Hastalıklar Günü", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 1, "day": 30 }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-world-leprosy-day", "canonicalName": "Dünya Cüzzam Günü (Ocak son pazarı)", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "VARIABLE_ANNUAL_DATE", "resolutionMechanism": "Last Sunday of January (Gregorian, floating weekday-based) -- no per-year resolution algorithm implemented here.", "yearSpecificDateStatus": "UNRESOLVED_NO_ALGORITHM_INVENTED" }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+
+    { "id": "kaduse-world-cancer-day", "canonicalName": "4 Şubat Dünya Kanser Günü", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 2, "day": 4 }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-international-childhood-cancer-day", "canonicalName": "15 Şubat Uluslararası Çocukluk Çağı Kanseri Günü", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 2, "day": 15 }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+
+    { "id": "kaduse-yesilay-week", "canonicalName": "1-7 Mart Yeşilay Haftası", "class": "HEALTH_AWARENESS_WEEK", "dateRule": { "kind": "FIXED_RANGE", "startMonth": 3, "startDay": 1, "endMonth": 3, "endDay": 7 }, "defaultLeadDays": 5, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-colorectal-cancer-awareness-month", "canonicalName": "Kolorektal Kanser Farkındalık Ayı (Mart)", "class": "HEALTH_AWARENESS_MONTH", "dateRule": { "kind": "MONTH", "month": 3 }, "defaultLeadDays": 6, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-world-hearing-day", "canonicalName": "3 Mart Dünya İşitme Günü", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 3, "day": 3 }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-world-obesity-day", "canonicalName": "4 Mart Dünya Obezite Günü", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 3, "day": 4 }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-world-glaucoma-week", "canonicalName": "8-14 Mart Dünya Glokom Haftası", "class": "HEALTH_AWARENESS_WEEK", "dateRule": { "kind": "FIXED_RANGE", "startMonth": 3, "startDay": 8, "endMonth": 3, "endDay": 14 }, "defaultLeadDays": 5, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-tip-bayrami", "canonicalName": "14 Mart Tıp Bayramı", "class": "HEALTHCARE_PROFESSION_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 3, "day": 14 }, "defaultLeadDays": 6, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false, "futureSubtleBrandPresenceConsideration": true },
+    { "id": "kaduse-world-kidney-day", "canonicalName": "Dünya Böbrek Günü", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "VARIABLE_ANNUAL_DATE", "resolutionMechanism": "Second Thursday of March (Gregorian, floating weekday-based) -- no per-year resolution algorithm implemented here.", "yearSpecificDateStatus": "UNRESOLVED_NO_ALGORITHM_INVENTED" }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-world-tb-day", "canonicalName": "24 Mart Dünya Tüberküloz Günü", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 3, "day": 24 }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+
+    { "id": "kaduse-national-cancer-week", "canonicalName": "1-7 Nisan Ulusal Kanser Haftası", "class": "HEALTH_AWARENESS_WEEK", "dateRule": { "kind": "FIXED_RANGE", "startMonth": 4, "startDay": 1, "endMonth": 4, "endDay": 7 }, "defaultLeadDays": 5, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-world-health-day", "canonicalName": "7 Nisan Dünya Sağlık Günü", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 4, "day": 7 }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-world-chagas-disease-day", "canonicalName": "14 Nisan Dünya Chagas Hastalığı Günü", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 4, "day": 14 }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-ebeler-week", "canonicalName": "21-28 Nisan Ebeler Haftası", "class": "HEALTHCARE_PROFESSION_WEEK", "dateRule": { "kind": "FIXED_RANGE", "startMonth": 4, "startDay": 21, "endMonth": 4, "endDay": 28 }, "defaultLeadDays": 6, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false, "futureSubtleBrandPresenceConsideration": true },
+    { "id": "kaduse-world-immunization-week", "canonicalName": "24-30 Nisan Dünya Aşı Haftası", "class": "HEALTH_AWARENESS_WEEK", "dateRule": { "kind": "FIXED_RANGE", "startMonth": 4, "startDay": 24, "endMonth": 4, "endDay": 30 }, "defaultLeadDays": 5, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-world-malaria-day", "canonicalName": "25 Nisan Dünya Sıtma Günü", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 4, "day": 25 }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+
+    { "id": "kaduse-skin-cancer-melanoma-awareness-month", "canonicalName": "Cilt Kanseri / Melanom Farkındalık Ayı (Mayıs)", "class": "HEALTH_AWARENESS_MONTH", "dateRule": { "kind": "MONTH", "month": 5 }, "defaultLeadDays": 6, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-world-hand-hygiene-day", "canonicalName": "5 Mayıs Dünya El Hijyeni Günü", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 5, "day": 5 }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-engelliler-week-may", "canonicalName": "10-16 Mayıs Engelliler Haftası", "class": "HEALTH_AWARENESS_WEEK", "dateRule": { "kind": "FIXED_RANGE", "startMonth": 5, "startDay": 10, "endMonth": 5, "endDay": 16 }, "defaultLeadDays": 5, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-world-nurses-day", "canonicalName": "12 Mayıs Dünya Hemşireler Günü", "class": "HEALTHCARE_PROFESSION_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 5, "day": 12 }, "defaultLeadDays": 6, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false, "futureSubtleBrandPresenceConsideration": true },
+    { "id": "kaduse-hemsireler-week", "canonicalName": "12-18 Mayıs Hemşireler Haftası", "class": "HEALTHCARE_PROFESSION_WEEK", "dateRule": { "kind": "FIXED_RANGE", "startMonth": 5, "startDay": 12, "endMonth": 5, "endDay": 18 }, "defaultLeadDays": 6, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false, "futureSubtleBrandPresenceConsideration": true },
+    { "id": "kaduse-eczacilik-gunu", "canonicalName": "14 Mayıs Eczacılık Günü", "class": "HEALTHCARE_PROFESSION_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 5, "day": 14 }, "defaultLeadDays": 6, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false, "futureSubtleBrandPresenceConsideration": true },
+    { "id": "kaduse-world-hypertension-day", "canonicalName": "17 Mayıs Dünya Hipertansiyon Günü", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 5, "day": 17 }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-world-no-tobacco-day", "canonicalName": "31 Mayıs Dünya Tütünsüz Günü", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 5, "day": 31 }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+
+    { "id": "kaduse-world-blood-donor-day", "canonicalName": "14 Haziran Dünya Kan Bağışçıları Günü", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 6, "day": 14 }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-drug-abuse-trafficking-day", "canonicalName": "26 Haziran Uyuşturucu Kullanımı ve Kaçakçılığı ile Mücadele Günü", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 6, "day": 26 }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+
+    { "id": "kaduse-world-drowning-prevention-day", "canonicalName": "25 Temmuz Dünya Boğulmayı Önleme Günü", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 7, "day": 25 }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-world-hepatitis-day", "canonicalName": "28 Temmuz Dünya Hepatit Günü", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 7, "day": 28 }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+
+    { "id": "kaduse-world-breastfeeding-week", "canonicalName": "1-7 Ağustos Dünya Emzirme Haftası", "class": "HEALTH_AWARENESS_WEEK", "dateRule": { "kind": "FIXED_RANGE", "startMonth": 8, "startDay": 1, "endMonth": 8, "endDay": 7 }, "defaultLeadDays": 5, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+
+    { "id": "kaduse-world-suicide-prevention-day", "canonicalName": "10 Eylül Dünya İntiharı Önleme Günü", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 9, "day": 10 }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-world-sepsis-day", "canonicalName": "13 Eylül Dünya Sepsis Günü", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 9, "day": 13 }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-world-lymphoma-awareness-day", "canonicalName": "15 Eylül Dünya Lenfoma Farkındalık Günü", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 9, "day": 15 }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-world-patient-safety-day", "canonicalName": "17 Eylül Dünya Hasta Güvenliği Günü", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 9, "day": 17 }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-world-alzheimers-day", "canonicalName": "21 Eylül Dünya Alzheimer Günü", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 9, "day": 21 }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-world-rabies-day", "canonicalName": "28 Eylül Dünya Kuduz Günü", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 9, "day": 28 }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-world-heart-day", "canonicalName": "29 Eylül Dünya Kalp Günü", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 9, "day": 29 }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+
+    { "id": "kaduse-breast-cancer-awareness-month", "canonicalName": "Meme Kanseri Farkındalık Ayı (Ekim)", "class": "HEALTH_AWARENESS_MONTH", "dateRule": { "kind": "MONTH", "month": 10 }, "defaultLeadDays": 6, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-international-day-of-older-persons", "canonicalName": "1 Ekim Dünya Yaşlılar Günü", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 10, "day": 1 }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-world-mental-health-day", "canonicalName": "10 Ekim Dünya Ruh Sağlığı Günü", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 10, "day": 10 }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    {
+      "id": "kaduse-world-hospice-palliative-care-day",
+      "canonicalName": "Dünya Palyatif Bakım Günü / Haftası",
+      "class": "HEALTH_AWARENESS_DAY",
+      "classResolutionStatus": "PENDING_OFFICIAL_FORM_CONFIRMATION",
+      "classResolutionNote": "Official annual form (single day vs. week) is not confirmed in this batch -- do not guess. Tentatively modeled as HEALTH_AWARENESS_DAY pending confirmation; treat class as provisional.",
+      "dateRule": { "kind": "VARIABLE_ANNUAL_DATE", "resolutionMechanism": "Commonly observed on a Saturday in October (exact designation varies by year/source) -- no per-year resolution algorithm implemented here, and the day-vs-week form is itself pending confirmation.", "yearSpecificDateStatus": "UNRESOLVED_NO_ALGORITHM_INVENTED" },
+      "defaultLeadDays": 4,
+      "commercialContentAllowed": false,
+      "productPlacementAllowed": false,
+      "ctaAllowed": false
+    },
+
+    { "id": "kaduse-organ-tissue-donation-week", "canonicalName": "3-9 Kasım Organ ve Doku Bağışı Haftası", "class": "HEALTH_AWARENESS_WEEK", "dateRule": { "kind": "FIXED_RANGE", "startMonth": 11, "startDay": 3, "endMonth": 11, "endDay": 9 }, "defaultLeadDays": 5, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-world-diabetes-day", "canonicalName": "14 Kasım Dünya Diyabet Günü", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 11, "day": 14 }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-world-prematurity-day", "canonicalName": "15 Kasım Dünya Prematüre Günü", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 11, "day": 15 }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-cervical-cancer-elimination-day", "canonicalName": "17 Kasım Serviks Kanseri Eliminasyon Günü", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 11, "day": 17 }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-world-amr-awareness-week", "canonicalName": "18-24 Kasım Dünya Antimikrobiyal Farkındalık Haftası", "class": "HEALTH_AWARENESS_WEEK", "dateRule": { "kind": "FIXED_RANGE", "startMonth": 11, "startDay": 18, "endMonth": 11, "endDay": 24 }, "defaultLeadDays": 5, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-dis-hekimligi-gunu", "canonicalName": "22 Kasım Diş Hekimliği Günü", "class": "HEALTHCARE_PROFESSION_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 11, "day": 22 }, "defaultLeadDays": 6, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false, "futureSubtleBrandPresenceConsideration": true },
+    { "id": "kaduse-toplum-agiz-dis-sagligi-week", "canonicalName": "22-27 Kasım Toplum Ağız ve Diş Sağlığı Haftası", "class": "HEALTH_AWARENESS_WEEK", "dateRule": { "kind": "FIXED_RANGE", "startMonth": 11, "startDay": 22, "endMonth": 11, "endDay": 27 }, "defaultLeadDays": 5, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-lung-cancer-awareness-month", "canonicalName": "Akciğer Kanseri Farkındalık Ayı (Kasım)", "class": "HEALTH_AWARENESS_MONTH", "dateRule": { "kind": "MONTH", "month": 11 }, "defaultLeadDays": 6, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+
+    { "id": "kaduse-world-aids-day", "canonicalName": "1 Aralık Dünya AIDS Günü", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 12, "day": 1 }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-acil-saglik-hizmetleri-week", "canonicalName": "1-7 Aralık Acil Sağlık Hizmetleri Haftası", "class": "HEALTHCARE_PROFESSION_WEEK", "dateRule": { "kind": "FIXED_RANGE", "startMonth": 12, "startDay": 1, "endMonth": 12, "endDay": 7 }, "defaultLeadDays": 6, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false, "futureSubtleBrandPresenceConsideration": true },
+    { "id": "kaduse-international-day-of-persons-with-disabilities", "canonicalName": "3 Aralık Dünya Engelliler Günü", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 12, "day": 3 }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false },
+    { "id": "kaduse-universal-health-coverage-day", "canonicalName": "12 Aralık Evrensel Sağlık Kapsayıcılığı Günü", "class": "HEALTH_AWARENESS_DAY", "dateRule": { "kind": "FIXED_DATE", "month": 12, "day": 12 }, "defaultLeadDays": 4, "commercialContentAllowed": false, "productPlacementAllowed": false, "ctaAllowed": false }
+  ]
+}
