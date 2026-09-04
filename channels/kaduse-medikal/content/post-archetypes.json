@@ -47,6 +47,15 @@
       "description": "STRICTLY stethoscope-related technical education only (how to use a stethoscope, bell vs diaphragm, cardiac/lung auscultation technique, sound-category identification, Korotkoff sound technique, digital stethoscope operation, cleaning/maintenance, common auscultation mistakes) -- NEVER diagnosis, treatment, medication, referral, or general disease education with no direct stethoscope connection. Evergreen/editorially-planned, not calendar-triggered (typical triggerType: EVERGREEN_TOPIC or CONTENT_PLANNER). Every technical claim must be backed by a verified source from the dedicated Clinical Education source registry (channel-content-os mcp-server/src/clinical-education/source-registry.ts) -- never the News or Observance registries, never LLM memory. User-approved 2026-09-04 (Batch CE1). Topic registry: channels/kaduse-medikal/content/clinical-education-topics.json.",
       "status": "ACTIVE",
       "order": 5
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "stethoscope-guide",
+      "channelId": "kaduse-medikal",
+      "label": "Stethoscope Guide",
+      "description": "Merges two never-separately-registered candidate archetypes ('Stethoscope Usage/Maintenance/Troubleshooting' and 'Product Selection Guide') into one archetype with three subtypes: USAGE, MAINTENANCE_TROUBLESHOOTING, PRODUCT_SELECTION. Covers how to use/maintain/troubleshoot a Littmann stethoscope and how to choose between Kaduse's real catalog series (Classic III, Cardiology IV, Master Cardiology, Pediatrik/Classic II Pediatric) using only official technical facts -- never price-based selection, never an unauthorized source (marketplaces, blogs, forums, reviewer/affiliate sites). Every technical claim must be backed by a verified source from the dedicated Stethoscope Guide source registry (channel-content-os mcp-server/src/stethoscope-guide/source-registry.ts), with an explicit precedence hierarchy (Littmann Global Official > Country Official > Certified Distributor > Authorized Reseller) resolving any conflict -- never the News, Observance, or Clinical Education registries. User-approved 2026-09-04 (Batch SG1). Topic registry: channels/kaduse-medikal/content/stethoscope-guide-topics.json.",
+      "status": "ACTIVE",
+      "order": 6
     }
   ]
 }

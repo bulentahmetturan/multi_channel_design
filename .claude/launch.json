@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dashboard",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["-C", "apps/dashboard", "dev"],
+      "port": 5173
+    },
+    {
+      "name": "channel-content-os-api",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d C:\\Users\\W11\\Desktop\\projects\\channel-content-os\\mcp-server && npx wrangler dev --local --port 8787"],
+      "port": 8787
+    }
+  ]
+}

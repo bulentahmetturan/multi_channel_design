@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "1.0.0",
+  "channelId": "kaduse-medikal",
+  "postArchetypeId": "stethoscope-guide",
+  "$comment": "Batch SG1 (2026-09-04). Kaduse-owned Topic Registry -- distinct from the Source registry (owned in channel-content-os, mcp-server/src/stethoscope-guide/). Answers 'what can we write about', never 'where does the evidence come from'. No generated post copy stored. Every topic below has at least one CANONICAL_ACTIVE or CONDITIONAL_VERIFIED source available for its allowedSourceRoles, verified against the sibling repo's registry as of this batch; product-selection topics are scoped only to series Kaduse actually carries (Classic III, Cardiology IV, Master Cardiology, Pediatrik).",
+  "topicFamilies": [
+    "USAGE_BASICS",
+    "TUNABLE_DIAPHRAGM_TECHNIQUE",
+    "DEVICE_CARE_MAINTENANCE",
+    "TROUBLESHOOTING",
+    "PRODUCT_COMPARISON_SELECTION",
+    "WARRANTY_SERVICE",
+    "LOCAL_AVAILABILITY"
+  ],
+  "topicCount": 6,
+  "topics": [
+    {
+      "topicId": "sg-tunable-diaphragm-usage",
+      "title": "Tunable Diyafram Nasıl Kullanılır?",
+      "topicFamily": "TUNABLE_DIAPHRAGM_TECHNIQUE",
+      "postArchetypeId": "stethoscope-guide",
+      "postSubtype": "USAGE",
+      "productScope": ["Classic III", "Cardiology IV", "Master Cardiology"],
+      "allowedSourceRoles": ["LITTMANN_GLOBAL_OFFICIAL"],
+      "status": "ACTIVE",
+      "notes": "Sourceable via the official Classic III/Cardiology IV product pages and the global products hub (tunable-diaphragm operating instructions)."
+    },
+    {
+      "topicId": "sg-eartip-fit-usage",
+      "title": "Doğru Eartip Seçimi ve Takılışı",
+      "topicFamily": "USAGE_BASICS",
+      "postArchetypeId": "stethoscope-guide",
+      "postSubtype": "USAGE",
+      "productScope": ["Classic III", "Cardiology IV", "Master Cardiology", "Pediatrik"],
+      "allowedSourceRoles": ["LITTMANN_GLOBAL_OFFICIAL"],
+      "status": "ACTIVE",
+      "notes": "Sourceable via the global products hub's general usage guidance (applies across the full Littmann line, not model-specific)."
+    },
+    {
+      "topicId": "sg-diaphragm-cleaning",
+      "title": "Stetoskop Diyaframı Nasıl Temizlenir?",
+      "topicFamily": "DEVICE_CARE_MAINTENANCE",
+      "postArchetypeId": "stethoscope-guide",
+      "postSubtype": "MAINTENANCE_TROUBLESHOOTING",
+      "productScope": ["Classic III", "Cardiology IV", "Master Cardiology", "Pediatrik"],
+      "allowedSourceRoles": ["LITTMANN_OFFICIAL_SERVICE"],
+      "status": "ACTIVE",
+      "notes": "Sourceable via the official warranty-and-repairs page's care guidance."
+    },
+    {
+      "topicId": "sg-tubing-cracking-troubleshooting",
+      "title": "Tubing Sertleşmesi/Çatlaması Sorun Giderme",
+      "topicFamily": "TROUBLESHOOTING",
+      "postArchetypeId": "stethoscope-guide",
+      "postSubtype": "MAINTENANCE_TROUBLESHOOTING",
+      "productScope": ["Classic III", "Cardiology IV", "Master Cardiology", "Pediatrik"],
+      "allowedSourceRoles": ["LITTMANN_OFFICIAL_SERVICE"],
+      "status": "ACTIVE",
+      "notes": "Sourceable via the official warranty-and-repairs page (repair/replacement-parts guidance)."
+    },
+    {
+      "topicId": "sg-classic-iii-vs-cardiology-iv-selection",
+      "title": "Classic III vs Cardiology IV: Resmî Teknik Farklar",
+      "topicFamily": "PRODUCT_COMPARISON_SELECTION",
+      "postArchetypeId": "stethoscope-guide",
+      "postSubtype": "PRODUCT_SELECTION",
+      "productScope": ["Classic III", "Cardiology IV"],
+      "allowedSourceRoles": ["LITTMANN_GLOBAL_OFFICIAL"],
+      "status": "ACTIVE",
+      "notes": "Sourceable via the official 2024 comparison chart -- product-selection content routes ONLY through official technical facts, never price."
+    },
+    {
+      "topicId": "sg-warranty-by-country-selection",
+      "title": "Türkiye'de Garanti ve Servis Süreci Nasıl İşler?",
+      "topicFamily": "WARRANTY_SERVICE",
+      "postArchetypeId": "stethoscope-guide",
+      "postSubtype": "PRODUCT_SELECTION",
+      "productScope": ["Classic III", "Cardiology IV", "Master Cardiology", "Pediatrik"],
+      "allowedSourceRoles": ["LITTMANN_COUNTRY_OFFICIAL"],
+      "status": "ACTIVE",
+      "notes": "Sourceable via the official Littmann Turkey country page; country-official may speak to local warranty/service process specifically for TR jurisdiction."
+    }
+  ]
+}
