@@ -44,6 +44,7 @@ function candidate(overrides: Partial<CandidateLabel> = {}): CandidateLabel {
     renderUrl: null,
     evidenceStatus: null,
     sourcesUsed: null,
+    researchMeta: null,
     createdAt: '2026-09-04T00:00:00.000Z',
     updatedAt: '2026-09-04T00:00:00.000Z',
     ...overrides,
@@ -284,6 +285,111 @@ describe('Content Operations UI (Batch P1)', () => {
       await waitFor(() => {
         const lastCall = spy.mock.calls[spy.mock.calls.length - 1][0];
         expect(lastCall?.postArchetypeId).toBe('clinical-education');
+      });
+    });
+  });
+
+  describe('Batch R1: Research candidate display', () => {
+    const generalHealthCandidate = candidate({
+      candidateId: 'research-1',
+      postArchetypeId: 'research',
+      postArchetypeOrder: 3,
+      postArchetypeLabel: 'Research / Scientific Research',
+      triggerType: 'HISTORICAL_RESEARCH_DISCOVERY',
+      triggerId: 'diş-fircalama-kardiyovaskuler',
+      triggerLabel: 'Diş Fırçalama ve Kardiyovasküler Sağlık: Araştırma Ne Buldu?',
+      prepDate: null,
+      publishDate: '2027-06-01',
+      evidenceStatus: 'VERIFIED',
+      researchMeta: {
+        paperId: 'doi:10.1001/example.oral-cv',
+        doi: '10.1001/example.oral-cv',
+        pmid: null,
+        pmcid: null,
+        studyType: 'COHORT_STUDY',
+        peerReviewStatus: 'PEER_REVIEWED',
+        integrityStatus: 'OK',
+        accessLevel: 'PAYWALLED_WITH_USABLE_ABSTRACT',
+        researchAffinity: 'GENERAL_HEALTH_MEDICAL',
+        publicationDate: '2022-04-10',
+        discoveredAt: '2026-09-05',
+      },
+    });
+
+    const stethoscopeResearchCandidate = candidate({
+      candidateId: 'research-2',
+      postArchetypeId: 'research',
+      postArchetypeOrder: 3,
+      postArchetypeLabel: 'Research / Scientific Research',
+      triggerType: 'RESEARCH_PUBLICATION_EVENT',
+      triggerId: 'digital-stethoscope-diagnostic-accuracy',
+      triggerLabel: 'Dijital Stetoskoplarla İlgili Yeni Bir Çalışma',
+      publishDate: '2027-06-08',
+      evidenceStatus: 'VERIFIED',
+      researchMeta: {
+        paperId: 'doi:10.1001/example.digital-stetho',
+        doi: '10.1001/example.digital-stetho',
+        pmid: '99999999',
+        pmcid: null,
+        studyType: 'DIAGNOSTIC_ACCURACY',
+        peerReviewStatus: 'PEER_REVIEWED',
+        integrityStatus: 'OK',
+        accessLevel: 'OPEN_FULL_TEXT',
+        researchAffinity: 'STETHOSCOPE_AUSCULTATION',
+        publicationDate: '2026-08-20',
+        discoveredAt: '2026-09-05',
+      },
+    });
+
+    it('general-health Research card shows 03 · Research tag, historical trigger, and research affinity', async () => {
+      vi.spyOn(api, 'fetchCandidates').mockResolvedValue([generalHealthCandidate]);
+      vi.spyOn(api, 'fetchChannels').mockResolvedValue([KADUSE_CHANNEL]);
+      renderAt('/queue');
+      const card = await screen.findByTestId('candidate-card');
+      expect(within(card).getByText('03 · Research / Scientific Research')).toBeInTheDocument();
+      expect(within(card).getByText('Historical Research Discovery')).toBeInTheDocument();
+      expect(within(card).getByText('GENERAL_HEALTH_MEDICAL')).toBeInTheDocument();
+      expect(within(card).getByText('PAYWALLED_WITH_USABLE_ABSTRACT')).toBeInTheDocument();
+    });
+
+    it('stethoscope-affinity Research card shows the live publication trigger and affinity, never a priority marker', async () => {
+      vi.spyOn(api, 'fetchCandidates').mockResolvedValue([stethoscopeResearchCandidate]);
+      vi.spyOn(api, 'fetchChannels').mockResolvedValue([KADUSE_CHANNEL]);
+      renderAt('/queue');
+      const card = await screen.findByTestId('candidate-card');
+      expect(within(card).getByText('Research Publication Event')).toBeInTheDocument();
+      expect(within(card).getByText('STETHOSCOPE_AUSCULTATION')).toBeInTheDocument();
+    });
+
+    it('candidate detail shows the Research Paper section with study type, access level, publication date, and DOI', async () => {
+      vi.spyOn(api, 'fetchCandidate').mockResolvedValue(generalHealthCandidate);
+      renderAt('/candidate/research-1');
+      await screen.findByRole('heading', { name: /Diş Fırçalama/ });
+      expect(screen.getByText('COHORT_STUDY')).toBeInTheDocument();
+      expect(screen.getByText('10.1001/example.oral-cv')).toBeInTheDocument();
+    });
+
+    it('a historical discovery never displays as if it were a new publication event -- distinct trigger labels', async () => {
+      vi.spyOn(api, 'fetchCandidates').mockResolvedValue([generalHealthCandidate, stethoscopeResearchCandidate]);
+      vi.spyOn(api, 'fetchChannels').mockResolvedValue([KADUSE_CHANNEL]);
+      renderAt('/queue');
+      const cards = await screen.findAllByTestId('candidate-card');
+      expect(cards.length).toBe(2);
+      expect(within(cards[0]).getByText('Historical Research Discovery')).toBeInTheDocument();
+      expect(within(cards[1]).getByText('Research Publication Event')).toBeInTheDocument();
+    });
+
+    it('Research candidates are filterable via the existing Queue filters -- no separate Research dashboard', async () => {
+      const spy = vi.spyOn(api, 'fetchCandidates').mockResolvedValue([generalHealthCandidate]);
+      vi.spyOn(api, 'fetchChannels').mockResolvedValue([{ ...KADUSE_CHANNEL, archetypes: [...KADUSE_CHANNEL.archetypes, { id: 'research', order: 3, label: 'Research / Scientific Research' }] }]);
+      renderAt('/queue');
+      await screen.findByTestId('candidate-card');
+      const user = userEvent.setup();
+      await user.selectOptions(screen.getByLabelText('Channel'), 'kaduse-medikal');
+      await user.selectOptions(screen.getByLabelText('Post Archetype'), 'research');
+      await waitFor(() => {
+        const lastCall = spy.mock.calls[spy.mock.calls.length - 1][0];
+        expect(lastCall?.postArchetypeId).toBe('research');
       });
     });
   });

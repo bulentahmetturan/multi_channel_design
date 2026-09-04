@@ -7,6 +7,8 @@ export type TriggerType =
   | 'CONTENT_PLANNER'
   | 'EVERGREEN_TOPIC'
   | 'RESEARCH_EVENT'
+  | 'RESEARCH_PUBLICATION_EVENT'
+  | 'HISTORICAL_RESEARCH_DISCOVERY'
   | 'PRODUCT_CONTENT'
   | 'MANUAL_REQUEST'
   | 'CHANNEL_EVENT';
@@ -16,13 +18,29 @@ export type DesignStatus = 'NOT_STARTED' | 'GENERATING' | 'DESIGN_READY' | 'BLOC
 export type ReviewStatus = 'NOT_READY' | 'READY_FOR_REVIEW' | 'APPROVED' | 'REJECTED' | 'REVISION_REQUESTED';
 export type PublishStatus = 'NOT_READY' | 'READY_TO_SCHEDULE' | 'SCHEDULED' | 'PUBLISHED' | 'CANCELLED';
 
-export type EvidenceStatus = 'UNVERIFIED' | 'VERIFIED' | 'BLOCKED';
+export type EvidenceStatus = 'UNVERIFIED' | 'VERIFIED' | 'BLOCKED' | 'SOURCE_CONFLICT';
 
 export interface CandidateSourceRef {
   sourceId: string;
   sourceName: string;
   sourceRole: string;
   sourceUrl: string;
+}
+
+// Batch R1 -- mirrors ResearchCandidateMetaSchema; null for every
+// non-Research candidate.
+export interface ResearchCandidateMeta {
+  paperId: string;
+  doi: string | null;
+  pmid: string | null;
+  pmcid: string | null;
+  studyType: string;
+  peerReviewStatus: string;
+  integrityStatus: string;
+  accessLevel: string;
+  researchAffinity: string;
+  publicationDate: string;
+  discoveredAt: string;
 }
 
 export interface CandidateLabel {
@@ -45,6 +63,7 @@ export interface CandidateLabel {
   renderUrl: string | null;
   evidenceStatus: EvidenceStatus | null;
   sourcesUsed: CandidateSourceRef[] | null;
+  researchMeta: ResearchCandidateMeta | null;
   createdAt: string;
   updatedAt: string;
 }

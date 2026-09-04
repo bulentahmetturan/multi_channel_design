@@ -29,6 +29,8 @@ export function CandidateCard({ candidate, channelName }: { candidate: Candidate
         <div className="candidate-meta">
           {subtype && <span>{subtype}</span>}
           {trigger && <span>{trigger}</span>}
+          {candidate.researchMeta && <span>{candidate.researchMeta.researchAffinity}</span>}
+          {candidate.researchMeta && <span>{candidate.researchMeta.accessLevel}</span>}
         </div>
         <div className="candidate-status-row">
           <StatusPill kind="content" value={candidate.contentStatus} label={contentStatusLabel(candidate.contentStatus)} />

@@ -9,6 +9,8 @@ const TRIGGER_TYPE_LABELS: Record<string, string> = {
   CONTENT_PLANNER: 'Content Planner',
   EVERGREEN_TOPIC: 'Evergreen Topic',
   RESEARCH_EVENT: 'Research Event',
+  RESEARCH_PUBLICATION_EVENT: 'Research Publication Event',
+  HISTORICAL_RESEARCH_DISCOVERY: 'Historical Research Discovery',
   PRODUCT_CONTENT: 'Product Content',
   MANUAL_REQUEST: 'Manual Request',
   CHANNEL_EVENT: 'Channel Event',

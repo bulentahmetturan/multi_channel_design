@@ -103,6 +103,21 @@ export function CandidateDetail() {
             <Field k="Publish Date" v={formatDate(candidate.publishDate) ?? 'Not applicable'} />
           </div>
 
+          {candidate.researchMeta && (
+            <div className="detail-section">
+              <h3>Research Paper</h3>
+              <Field k="Study Type" v={candidate.researchMeta.studyType} />
+              <Field k="Research Affinity" v={candidate.researchMeta.researchAffinity} />
+              <Field k="Access Level" v={candidate.researchMeta.accessLevel} />
+              <Field k="Peer Review Status" v={candidate.researchMeta.peerReviewStatus} />
+              <Field k="Integrity Status" v={candidate.researchMeta.integrityStatus} />
+              <Field k="Publication Date" v={formatDate(candidate.researchMeta.publicationDate) ?? candidate.researchMeta.publicationDate} />
+              <Field k="Discovered At" v={formatDate(candidate.researchMeta.discoveredAt) ?? candidate.researchMeta.discoveredAt} />
+              {candidate.researchMeta.doi && <Field k="DOI" v={candidate.researchMeta.doi} />}
+              {candidate.researchMeta.pmid && <Field k="PMID" v={candidate.researchMeta.pmid} />}
+            </div>
+          )}
+
           {(candidate.evidenceStatus || candidate.sourcesUsed) && (
             <div className="detail-section">
               <h3>Evidence</h3>
