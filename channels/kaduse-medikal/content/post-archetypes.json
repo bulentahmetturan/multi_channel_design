@@ -8,7 +8,15 @@
       "id": "product-promotion",
       "channelId": "kaduse-medikal",
       "label": "Product Promotion",
-      "description": "Promotes a specific Kaduse product (e.g. a stethoscope) directly -- distinct from a comparison, a news/announcement post, or an important-day post.",
+      "description": "Promotes a specific Kaduse product (e.g. a stethoscope) directly -- distinct from a comparison, a news/announcement post, or an important-day post. User-approved 2026-09-04 (Batch K2A). Detailed subtype/content rules live in channels/kaduse-medikal/content/policies/product-promotion.json, not in this registry entry -- this schema has no field for approval status or subtypes, so approval is recorded in the policy file instead.",
+      "status": "ACTIVE"
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "product-comparison",
+      "channelId": "kaduse-medikal",
+      "label": "Product Comparison",
+      "description": "Objectively compares exactly two different Ana Seri (series) product families using authoritative catalog facts -- distinct from Product Promotion's same-series variant showcase. User-approved 2026-09-04 (Batch K2A). Detailed cardinality/content rules live in channels/kaduse-medikal/content/policies/product-comparison.json.",
       "status": "ACTIVE"
     }
   ]

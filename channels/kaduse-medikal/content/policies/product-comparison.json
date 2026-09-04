@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "1.0.0",
+  "channelId": "kaduse-medikal",
+  "archetypeId": "product-comparison",
+  "approvalStatus": "USER_APPROVED",
+  "approvedAt": "2026-09-04",
+  "$comment": "Not validated against a JSON Schema -- deliberately minimal per Batch K2A instruction not to build a universal content-policy framework. This file records user-approved content rules only; it MUST NOT contain layout, typography, art-direction, canvas, or composition decisions (see designIndependence below). Design retrieval happens downstream from a ContentBrief, never from this file directly.",
+  "purpose": "Objectively compare exactly two DIFFERENT Ana Seri product families using authoritative catalog/source facts.",
+  "productTruthSource": "channels/kaduse-medikal/product-catalog/",
+  "productTruthRule": "Use real catalog facts only. Do not manually re-author product specifications per post. Do not use LLM memory as product truth.",
+  "cardinality": {
+    "requiredProductCount": 2,
+    "requiredDistinctSeriesCount": 2,
+    "minDistinctSeries": 2,
+    "maxDistinctSeries": 2,
+    "sameSeriesComparisonForbidden": true,
+    "threeOrMoreSeriesComparisonForbidden": true,
+    "note": "Same-Ana-Seri products are NEVER Product Comparison -- they are variants and belong under Product Promotion / Same Series Variant Showcase (channels/kaduse-medikal/content/policies/product-promotion.json)."
+  },
+  "examples": [
+    "Classic III vs Cardiology IV",
+    "Classic III vs Master Cardiology",
+    "Cardiology IV vs Pediatrik"
+  ],
+  "content": {
+    "primary": {
+      "label": "differences",
+      "priority": "PRIMARY",
+      "description": "The MAIN content is real differences between the two series, drawn only from authoritative catalog/source facts.",
+      "candidateDimensions": [
+        "series-common features",
+        "warranty",
+        "chestpiece construction",
+        "diaphragm structure",
+        "tubing structure",
+        "verified acoustic/technical characteristics",
+        "verified intended-use differences",
+        "length",
+        "other structured authoritative product facts"
+      ],
+      "rules": [
+        "do NOT invent missing differences",
+        "do NOT turn color/finish into the core difference between product families"
+      ]
+    },
+    "commonPoints": {
+      "label": "her ikisinde de (both have)",
+      "priority": "SECONDARY",
+      "optional": true,
+      "description": "May explicitly show shared characteristics. Only include genuinely shared facts verified per comparison pair -- this file records the RULE, not a universal fact list (e.g. the 69 cm length / tunable diaphragm / sealing eartips example seen for Master Cardiology vs Classic III applies to that pair, not automatically to every pair)."
+    },
+    "guidance": {
+      "label": "orientation line",
+      "priority": "SECONDARY",
+      "optional": true,
+      "description": "A short orientation line may appear after the objective comparison, derived only from verified product characteristics mapped to a use need (e.g. \"If you prioritize X characteristic, Series A may be more relevant\").",
+      "forbiddenClaims": [
+        "best for medical students",
+        "best for cardiologists",
+        "definitely better",
+        "professional choice",
+        "best value",
+        "best choice"
+      ],
+      "rule": "Guidance is secondary to the objective comparison and must never assert an unsupported suitability claim unless authoritative source data explicitly supports it."
+    },
+    "variantInformation": {
+      "priority": "SECONDARY",
+      "fields": ["tubeColor", "chestpieceFinish", "productCode", "selectedProductImage"],
+      "rule": "These are secondary presentation details. The semantic comparison is SERIES vs SERIES, never variant vs variant."
+    }
+  },
+  "designIndependence": "This policy file encodes content/product-truth rules only. It does NOT and must NOT encode layout IDs, typography decisions, art-direction decisions, visual-direction approvals, composition coordinates, or design-family assignments. The pipeline is: post archetype -> product/series selection -> canonical product catalog facts -> ContentBrief -> deterministic classification -> design retrieval -> layout/typography/art-direction/composition (out of scope here)."
+}

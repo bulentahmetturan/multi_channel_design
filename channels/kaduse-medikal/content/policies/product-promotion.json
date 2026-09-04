@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0.0",
+  "channelId": "kaduse-medikal",
+  "archetypeId": "product-promotion",
+  "approvalStatus": "USER_APPROVED",
+  "approvedAt": "2026-09-04",
+  "$comment": "Not validated against a JSON Schema -- deliberately minimal per Batch K2A instruction not to build a universal content-policy framework. This file records user-approved content rules only; it MUST NOT contain layout, typography, art-direction, canvas, or composition decisions (see designIndependence below). Design retrieval happens downstream from a ContentBrief, never from this file directly.",
+  "purpose": "Promote ONE Ana Seri product family using authoritative product information plus applicable Kaduse seller/service advantages.",
+  "productTruthSource": "channels/kaduse-medikal/product-catalog/",
+  "productTruthFields": [
+    "series",
+    "sku",
+    "name",
+    "tubeColor",
+    "bellFinish",
+    "warranty",
+    "features",
+    "url"
+  ],
+  "productTruthRule": "Do NOT manually re-author product specifications per post. Do NOT use LLM memory as product truth. All facts must come from channels/kaduse-medikal/product-catalog/ (see products.json and source/SATIS_ARGUMANLARI.md for Kaduse shared-service facts).",
+  "subtypes": [
+    {
+      "id": "same-series-variant-showcase",
+      "label": "Same Series / Variant Showcase",
+      "rules": {
+        "cardinality": "exactly one Ana Seri; multiple SKUs/color/finish variants from that same series may be shown",
+        "do": [
+          "show series-common features once, not repeated per SKU",
+          "show warranty once if shared",
+          "show available tube colors",
+          "show chestpiece finishes",
+          "show SKU/product codes where useful",
+          "show color swatches/images where available",
+          "may show multiple variants visually"
+        ],
+        "doNot": [
+          "compare same-series variants",
+          "use \"vs\" between same-series SKUs",
+          "imply technical superiority between colors/finishes without authoritative evidence",
+          "repeat identical series-common features for every SKU"
+        ]
+      }
+    },
+    {
+      "id": "single-product-hero-promotion",
+      "label": "Single Product / Hero Promotion",
+      "rules": {
+        "cardinality": "exactly one Ana Seri is the semantic product; one SKU/variant may be selected as the hero visual, and does NOT become a new semantic product family",
+        "contentInputs": [
+          "series (Ana Seri)",
+          "selected SKU/product code where useful",
+          "product name",
+          "tube color",
+          "chestpiece finish",
+          "warranty",
+          "2-4 relevant series-common features",
+          "applicable Kaduse shared-service advantages",
+          "CTA (generated later, not part of this policy)"
+        ]
+      }
+    }
+  ],
+  "removedSubtypes": [
+    {
+      "id": "different-products-joint-promotion",
+      "label": "Different Products / Joint Promotion",
+      "removedAt": "2026-09-04",
+      "removedReason": "Presenting two DIFFERENT Ana Seri families in one post (not compared) creates the same semantic content problem as Product Comparison -- an ambiguous, unnecessary middle category. Any post involving two different series now belongs to Product Comparison, not Product Promotion."
+    }
+  ],
+  "designIndependence": "This policy file encodes content/product-truth rules only. It does NOT and must NOT encode layout IDs, typography decisions, art-direction decisions, visual-direction approvals, composition coordinates, or design-family assignments. The pipeline is: post archetype -> product/series selection -> canonical product catalog facts -> ContentBrief -> deterministic classification -> design retrieval -> layout/typography/art-direction/composition (out of scope here)."
+}
