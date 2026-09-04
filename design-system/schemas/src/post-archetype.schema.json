@@ -12,6 +12,7 @@
     "channelId": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
     "label": { "type": "string", "minLength": 1 },
     "description": { "type": "string" },
-    "status": { "enum": ["ACTIVE", "RETIRED"], "default": "ACTIVE" }
+    "status": { "enum": ["ACTIVE", "RETIRED"], "default": "ACTIVE" },
+    "order": { "type": "integer", "minimum": 1, "description": "Display order only (e.g. '04 · Special Day' in an operations UI) -- NOT semantic identity. Channel-owned, reflects this channel's own registration order, never assumed identical across channels." }
   }
 }
