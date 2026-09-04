@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "1.0.0",
+  "channelId": "kaduse-medikal",
+  "$comment": "Batch O1 (2026-09-04). Channel-owned applicability map -- Layer 2 of GLOBAL OBSERVANCE TRUTH -> CHANNEL APPLICABILITY MAP -> CHANNEL-SPECIFIC TREATMENT. Global observance identity (canonical name, date rule, class, provenance, default lead time) is owned exclusively by the sibling channel-content-os repo (mcp-server/src/observance/global-observance-registry.ts) and is NOT duplicated here -- each mapping references an observanceId only. This file records Kaduse's own applicability/treatment decisions: whether the observance is enabled for this channel, the default editorial action, subtype, tone, and whether commercial content/product placement/CTA are allowed (all false for every entry per explicit user instruction -- these are not promotional occasions). Not validated against a JSON Schema, same minimal convention as content/policies/*.json.",
+  "mappingCount": 9,
+  "intendedFuturePostArchetypeId": "special-day",
+  "intendedFuturePostArchetypeNote": "These mappings will eventually route into the Special Day / Celebration / Condolence post archetype. That archetype is NOT registered in post-archetypes.json yet (still an unapproved K1 candidate) -- this field only persists the semantic relationship, per explicit instruction not to canonicalize design families or register unapproved archetypes in this batch.",
+  "mappings": [
+    {
+      "observanceId": "tr-national-sovereignty-childrens-day",
+      "channelId": "kaduse-medikal",
+      "enabled": true,
+      "defaultAction": "CONSIDER",
+      "channelSubtype": "NATIONAL_CELEBRATION",
+      "tone": "respectful / celebratory / national",
+      "commercialContentAllowed": false,
+      "productPlacementAllowed": false,
+      "ctaAllowed": false
+    },
+    {
+      "observanceId": "tr-ataturk-commemoration-youth-sports-day",
+      "channelId": "kaduse-medikal",
+      "enabled": true,
+      "defaultAction": "CONSIDER",
+      "channelSubtype": "NATIONAL_CELEBRATION",
+      "tone": "respectful / celebratory / national",
+      "commercialContentAllowed": false,
+      "productPlacementAllowed": false,
+      "ctaAllowed": false
+    },
+    {
+      "observanceId": "tr-victory-day",
+      "channelId": "kaduse-medikal",
+      "enabled": true,
+      "defaultAction": "CREATE_POST",
+      "channelSubtype": "NATIONAL_CELEBRATION",
+      "tone": "respectful / celebratory / national",
+      "commercialContentAllowed": false,
+      "productPlacementAllowed": false,
+      "ctaAllowed": false
+    },
+    {
+      "observanceId": "tr-republic-day",
+      "channelId": "kaduse-medikal",
+      "enabled": true,
+      "defaultAction": "CREATE_POST",
+      "channelSubtype": "NATIONAL_CELEBRATION",
+      "tone": "respectful / celebratory / national",
+      "commercialContentAllowed": false,
+      "productPlacementAllowed": false,
+      "ctaAllowed": false
+    },
+    {
+      "observanceId": "tr-ramadan-feast",
+      "channelId": "kaduse-medikal",
+      "enabled": true,
+      "defaultAction": "CREATE_POST",
+      "channelSubtype": "RELIGIOUS_CELEBRATION",
+      "tone": "warm / respectful / celebratory",
+      "commercialContentAllowed": false,
+      "productPlacementAllowed": false,
+      "ctaAllowed": false
+    },
+    {
+      "observanceId": "tr-sacrifice-feast",
+      "channelId": "kaduse-medikal",
+      "enabled": true,
+      "defaultAction": "CREATE_POST",
+      "channelSubtype": "RELIGIOUS_CELEBRATION",
+      "tone": "warm / respectful / celebratory",
+      "commercialContentAllowed": false,
+      "productPlacementAllowed": false,
+      "ctaAllowed": false
+    },
+    {
+      "observanceId": "tr-martyrs-day-canakkale-naval-victory",
+      "channelId": "kaduse-medikal",
+      "enabled": true,
+      "defaultAction": "CREATE_POST",
+      "channelSubtype": "NATIONAL_COMMEMORATION",
+      "tone": "solemn / respectful / commemorative",
+      "commercialContentAllowed": false,
+      "productPlacementAllowed": false,
+      "ctaAllowed": false
+    },
+    {
+      "observanceId": "tr-ataturk-memorial-day",
+      "channelId": "kaduse-medikal",
+      "enabled": true,
+      "defaultAction": "CREATE_POST",
+      "channelSubtype": "MEMORIAL",
+      "tone": "solemn / respectful / commemorative",
+      "commercialContentAllowed": false,
+      "productPlacementAllowed": false,
+      "ctaAllowed": false
+    },
+    {
+      "observanceId": "tr-democracy-national-unity-day",
+      "channelId": "kaduse-medikal",
+      "enabled": true,
+      "defaultAction": "CONSIDER",
+      "channelSubtype": "NATIONAL_COMMEMORATION",
+      "tone": "solemn / respectful / commemorative",
+      "commercialContentAllowed": false,
+      "productPlacementAllowed": false,
+      "ctaAllowed": false
+    }
+  ]
+}
