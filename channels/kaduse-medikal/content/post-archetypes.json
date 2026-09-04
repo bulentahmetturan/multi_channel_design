@@ -18,6 +18,14 @@
       "label": "Product Comparison",
       "description": "Objectively compares exactly two different Ana Seri (series) product families using authoritative catalog facts -- distinct from Product Promotion's same-series variant showcase. User-approved 2026-09-04 (Batch K2A). Detailed cardinality/content rules live in channels/kaduse-medikal/content/policies/product-comparison.json.",
       "status": "ACTIVE"
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "research",
+      "channelId": "kaduse-medikal",
+      "label": "Research / Scientific Research",
+      "description": "Presents and explains a specific published study (study-centric: what did the study examine and find) -- distinct from Medical News (event/development-centric: what happened). Supersedes the earlier candidate label 'Clinical Evidence / Research Summary', which is not a separate active canonical archetype. User-approved 2026-09-04 (Batch K2B). Detailed content-structure/evidence rules live in channels/kaduse-medikal/content/policies/research.json.",
+      "status": "ACTIVE"
     }
   ]
 }

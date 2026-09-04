@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "1.0.0",
+  "channelId": "kaduse-medikal",
+  "archetypeId": "research",
+  "approvalStatus": "USER_APPROVED",
+  "approvedAt": "2026-09-04",
+  "$comment": "Not validated against a JSON Schema -- deliberately minimal per the same convention as product-promotion.json/product-comparison.json (Batch K2A). This file records user-approved content rules only; it MUST NOT contain layout, typography, art-direction, canvas, or composition decisions (see designIndependence below).",
+  "supersedes": {
+    "candidateLabel": "Clinical Evidence / Research Summary",
+    "note": "That earlier candidate wording is replaced by this canonical archetype (id: research, label: Research / Scientific Research). There is no separate active canonical archetype called clinical-evidence-research-summary."
+  },
+  "purpose": "Present and explain newly published, notable, or high-impact scientific/medical research.",
+  "primaryEditorialQuestion": "What did the study examine, and what did it find?",
+  "centricity": "SOURCE_STUDY_CENTRIC",
+  "typicalAuthoritativeSources": {
+    "note": "Examples only, not an exclusive global source list.",
+    "examples": [
+      "PubMed-indexed papers",
+      "peer-reviewed medical/scientific journals",
+      "NEJM",
+      "The Lancet",
+      "JAMA",
+      "BMJ",
+      "Nature Medicine",
+      "Circulation",
+      "European Heart Journal",
+      "other relevant specialty journals"
+    ]
+  },
+  "typicalContentStructure": {
+    "note": "Not every post requires every field. Use only what is actually supported by the paper/source.",
+    "fields": [
+      "paper title",
+      "journal",
+      "publication date",
+      "authors / institution where useful",
+      "study type",
+      "sample size",
+      "population",
+      "intervention/exposure",
+      "comparator",
+      "primary outcome",
+      "2-4 main findings",
+      "statistical result(s) where materially important",
+      "authors' conclusion",
+      "important limitation(s)",
+      "source / DOI / PubMed URL"
+    ]
+  },
+  "exampleContentBehavior": [
+    "A new study found...",
+    "According to research published in JAMA...",
+    "In a study of 1,200 patients...",
+    "Researchers examined whether X was associated with Y...",
+    "The study reported..."
+  ],
+  "contentDirective": "The post should explain the STUDY, not merely announce that something happened.",
+  "boundaryWithMedicalNews": {
+    "research": {
+      "centricity": "study-centric",
+      "primaryQuestion": "What did the study investigate and find?"
+    },
+    "medicalNews": {
+      "centricity": "event/development-centric",
+      "primaryQuestion": "What happened?",
+      "status": "NOT_REGISTERED_THIS_BATCH"
+    },
+    "rule": "Research and Medical News are separate semantic content problems and must NOT be merged. The same scientific development may support both a Medical News post about the development and a separate Research post explaining the underlying paper. Medical News is not implemented or registered in Batch K2B -- it remains pending user review."
+  },
+  "evidenceSafetyRule": {
+    "rule": "Do NOT transform association into causation. Do NOT overstate preliminary findings, small studies, observational research, surrogate outcomes, or animal/in-vitro results. Preserve the strength of evidence represented by the source.",
+    "forbiddenPattern": "Writing \"X cures Y\" when the underlying source only supports \"X was associated with...\" or \"X improved outcome Z in this study.\""
+  },
+  "preprintConferenceStatus": {
+    "decided": false,
+    "note": "No final global policy on preprints/conference abstracts is made in this batch. If encountered later, publication status must remain explicit and must not be presented as equivalent to peer-reviewed evidence. Deferred as a future content-source policy decision."
+  },
+  "designIndependence": "This policy file encodes content/evidence rules only. It does NOT and must NOT encode layout IDs, typography decisions, art-direction decisions, visual-direction approvals, composition coordinates, or design-family assignments. The pipeline is: post archetype -> source/study selection -> authoritative source facts -> ContentBrief -> deterministic classification -> design retrieval -> layout/typography/art-direction/composition (out of scope here)."
+}

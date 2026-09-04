@@ -19,6 +19,7 @@ function loadJson(relPath) {
 const registry = loadJson('channels/kaduse-medikal/content/post-archetypes.json');
 const promotion = loadJson('channels/kaduse-medikal/content/policies/product-promotion.json');
 const comparison = loadJson('channels/kaduse-medikal/content/policies/product-comparison.json');
+const research = loadJson('channels/kaduse-medikal/content/policies/research.json');
 
 function findArchetype(id) {
   return registry.archetypes.find((a) => a.id === id);
@@ -95,9 +96,9 @@ test('11. no unsupported suitability claims are canonicalized', () => {
 });
 
 // 12: no design decisions stored in either policy file
-test('12. no layout/typography/art-direction/composition keys exist in either policy file', () => {
+test('12. no layout/typography/art-direction/composition keys exist in any policy file', () => {
   const banned = ['layout', 'typography', 'font', 'fontFamily', 'artDirection', 'composition', 'canvas', 'compositionMode', 'colorPalette'];
-  const serialized = JSON.stringify(promotion) + JSON.stringify(comparison);
+  const serialized = JSON.stringify(promotion) + JSON.stringify(comparison) + JSON.stringify(research);
   for (const term of banned) {
     // case-sensitive key-shaped check: term as a JSON key ("term":)
     assert.ok(!serialized.includes(`"${term}":`), `found banned design key "${term}"`);
@@ -122,10 +123,10 @@ test('14. existing Product Promotion evaluation case remains unchanged', () => {
   assert.deepEqual(directionStatuses, ['CANDIDATE', 'CANDIDATE', 'CANDIDATE', 'CANDIDATE']);
 });
 
-// 15: other 9 candidate archetypes remain unregistered
+// 15: other candidate archetypes remain unregistered (as of Batch K2A)
 test('15. the other 9 candidate post types remain unregistered', () => {
   const registeredIds = registry.archetypes.map((a) => a.id);
-  assert.deepEqual(registeredIds.sort(), ['product-comparison', 'product-promotion']);
+  assert.deepEqual(registeredIds.sort(), ['product-comparison', 'product-promotion', 'research']);
   const forbiddenCandidateIds = [
     'medical-news',
     'special-day',
@@ -140,4 +141,48 @@ test('15. the other 9 candidate post types remain unregistered', () => {
   for (const id of forbiddenCandidateIds) {
     assert.ok(!registeredIds.includes(id));
   }
+});
+
+// --- Batch K2B: Research archetype -----------------------------------------
+
+test('16. canonical Research archetype ID is exactly "research"', () => {
+  const entry = findArchetype('research');
+  assert.ok(entry, 'research missing from registry');
+  assert.equal(entry.id, 'research');
+  assert.equal(research.archetypeId, 'research');
+});
+
+test('17. Research is USER_APPROVED', () => {
+  const entry = findArchetype('research');
+  assert.equal(entry.status, 'ACTIVE');
+  assert.equal(research.approvalStatus, 'USER_APPROVED');
+});
+
+test('18. old candidate "clinical-evidence-research-summary" is not an active canonical archetype', () => {
+  const registeredIds = registry.archetypes.map((a) => a.id);
+  assert.ok(!registeredIds.includes('clinical-evidence-research-summary'));
+  assert.equal(research.supersedes.candidateLabel, 'Clinical Evidence / Research Summary');
+});
+
+test('19. Research is study-centric, not event-centric', () => {
+  assert.equal(research.centricity, 'SOURCE_STUDY_CENTRIC');
+  assert.equal(research.primaryEditorialQuestion, 'What did the study examine, and what did it find?');
+});
+
+test('20. Medical News is explicitly not merged into Research and remains unregistered', () => {
+  assert.equal(research.boundaryWithMedicalNews.medicalNews.centricity, 'event/development-centric');
+  assert.equal(research.boundaryWithMedicalNews.medicalNews.status, 'NOT_REGISTERED_THIS_BATCH');
+  const registeredIds = registry.archetypes.map((a) => a.id);
+  assert.ok(!registeredIds.includes('medical-news'));
+});
+
+test('21. evidence-safety rule forbids association-to-causation overstatement', () => {
+  assert.ok(research.evidenceSafetyRule.rule.includes('association into causation'));
+  assert.ok(research.evidenceSafetyRule.forbiddenPattern.length > 20);
+});
+
+test('22. existing Product Promotion and Product Comparison policies remain unchanged by the Research addition', () => {
+  const ids = promotion.subtypes.map((s) => s.id).sort();
+  assert.deepEqual(ids, ['same-series-variant-showcase', 'single-product-hero-promotion']);
+  assert.equal(comparison.cardinality.requiredDistinctSeriesCount, 2);
 });
