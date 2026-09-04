@@ -21,7 +21,9 @@
 - yeni-nesil-romanci: stays `PLANNED` for now by explicit user instruction; already holds its registry place.
 - [ ] Phase 2: onboard `dunya-burslari` (last remaining `PLANNED` channel with no material yet). Typography stays deferred for every channel until the whole registry reaches `LOGOS_PASS`.
 - [x] Integrate the `tip-ogrencileri-platformu` radar implementation (scan pipeline, faculty-source discovery, 77 tests) into its Channel Pack at `channels/tip-ogrencileri-platformu/{radar,scripts,sources,tests,database}/`.
-- [ ] Phase 6 (future): generalize the channel-embedded `radar` engine into the shared top-level `radar/` core (parameterize its config/root, re-verify all tests) so other channels can reuse it, per ADR-0002.
+- [ ] Phase 6 (future): if the channel-embedded `tip-ogrencileri-platformu` `radar` engine's logic is reused as part of the shared engine, the target is the Global News Hub in `channel-content-os` (parameterize/port as needed, re-verify all tests) -- not this repo's top-level `radar/`, which is retired per ADR-0003.
+- [x] Batch N1 (2026-09-04): lock Global News Hub architecture (ownership, sync model, cross-channel article model) in `channel-content-os`'s `docs/global-news-hub-contract.md`; retire this repo's empty `radar/` scaffold per ADR-0003; persist `kaduse-news` as a USER_APPROVED channel archetype/policy with a `news-sources.json` source-pack placeholder.
+- [ ] Kaduse News source pack: select and trust-tier actual sources (deferred to its own batch, per Batch N1).
 
 ## Later
 

@@ -20,6 +20,8 @@ const registry = loadJson('channels/kaduse-medikal/content/post-archetypes.json'
 const promotion = loadJson('channels/kaduse-medikal/content/policies/product-promotion.json');
 const comparison = loadJson('channels/kaduse-medikal/content/policies/product-comparison.json');
 const research = loadJson('channels/kaduse-medikal/content/policies/research.json');
+const kaduseNews = loadJson('channels/kaduse-medikal/content/policies/kaduse-news.json');
+const newsSources = loadJson('channels/kaduse-medikal/content/news-sources.json');
 
 function findArchetype(id) {
   return registry.archetypes.find((a) => a.id === id);
@@ -98,7 +100,7 @@ test('11. no unsupported suitability claims are canonicalized', () => {
 // 12: no design decisions stored in either policy file
 test('12. no layout/typography/art-direction/composition keys exist in any policy file', () => {
   const banned = ['layout', 'typography', 'font', 'fontFamily', 'artDirection', 'composition', 'canvas', 'compositionMode', 'colorPalette'];
-  const serialized = JSON.stringify(promotion) + JSON.stringify(comparison) + JSON.stringify(research);
+  const serialized = JSON.stringify(promotion) + JSON.stringify(comparison) + JSON.stringify(research) + JSON.stringify(kaduseNews) + JSON.stringify(newsSources);
   for (const term of banned) {
     // case-sensitive key-shaped check: term as a JSON key ("term":)
     assert.ok(!serialized.includes(`"${term}":`), `found banned design key "${term}"`);
@@ -124,9 +126,9 @@ test('14. existing Product Promotion evaluation case remains unchanged', () => {
 });
 
 // 15: other candidate archetypes remain unregistered (as of Batch K2A)
-test('15. the other 9 candidate post types remain unregistered', () => {
+test('15. the other candidate post types remain unregistered', () => {
   const registeredIds = registry.archetypes.map((a) => a.id);
-  assert.deepEqual(registeredIds.sort(), ['product-comparison', 'product-promotion', 'research']);
+  assert.deepEqual(registeredIds.sort(), ['kaduse-news', 'product-comparison', 'product-promotion', 'research']);
   const forbiddenCandidateIds = [
     'medical-news',
     'special-day',
@@ -169,9 +171,10 @@ test('19. Research is study-centric, not event-centric', () => {
   assert.equal(research.primaryEditorialQuestion, 'What did the study examine, and what did it find?');
 });
 
-test('20. Medical News is explicitly not merged into Research and remains unregistered', () => {
-  assert.equal(research.boundaryWithMedicalNews.medicalNews.centricity, 'event/development-centric');
-  assert.equal(research.boundaryWithMedicalNews.medicalNews.status, 'NOT_REGISTERED_THIS_BATCH');
+test('20. Kaduse News is explicitly not merged into Research, and Research is unaffected by its registration', () => {
+  assert.equal(research.boundaryWithKaduseNews.kaduseNews.centricity, 'event/development-centric');
+  assert.equal(research.boundaryWithKaduseNews.kaduseNews.archetypeId, 'kaduse-news');
+  assert.equal(research.boundaryWithKaduseNews.kaduseNews.status, 'REGISTERED');
   const registeredIds = registry.archetypes.map((a) => a.id);
   assert.ok(!registeredIds.includes('medical-news'));
 });
@@ -185,4 +188,67 @@ test('22. existing Product Promotion and Product Comparison policies remain unch
   const ids = promotion.subtypes.map((s) => s.id).sort();
   assert.deepEqual(ids, ['same-series-variant-showcase', 'single-product-hero-promotion']);
   assert.equal(comparison.cardinality.requiredDistinctSeriesCount, 2);
+});
+
+// --- Batch N1: Kaduse News + Global News Hub architecture lock -------------
+
+test('23. Kaduse News canonical archetype id is exactly "kaduse-news" and is USER_APPROVED', () => {
+  const entry = findArchetype('kaduse-news');
+  assert.ok(entry, 'kaduse-news missing from registry');
+  assert.equal(entry.id, 'kaduse-news');
+  assert.equal(entry.status, 'ACTIVE');
+  assert.equal(kaduseNews.archetypeId, 'kaduse-news');
+  assert.equal(kaduseNews.approvalStatus, 'USER_APPROVED');
+});
+
+test('24. Kaduse News includes external medical/industry news', () => {
+  const area = kaduseNews.coverageAreas.externalMedicalIndustryNews;
+  assert.ok(area.examples.includes('FDA approval'));
+  assert.ok(area.examples.includes('WHO development'));
+});
+
+test('25. Kaduse News includes Kaduse/company news', () => {
+  const area = kaduseNews.coverageAreas.kaduseCompanyNews;
+  assert.ok(area.examples.includes('new product arrival'));
+  assert.ok(area.examples.includes('company announcement'));
+});
+
+test('26. a separate canonical "medical-news" archetype is absent, and its retirement is recorded', () => {
+  const registeredIds = registry.archetypes.map((a) => a.id);
+  assert.ok(!registeredIds.includes('medical-news'));
+  assert.ok(kaduseNews.supersedes.note.includes('Medical News'));
+  assert.ok(kaduseNews.supersedes.note.toLowerCase().includes('retired'));
+});
+
+test('27. Research remains separate and its own approved semantics are unchanged', () => {
+  const entry = findArchetype('research');
+  assert.equal(entry.status, 'ACTIVE');
+  assert.equal(research.approvalStatus, 'USER_APPROVED');
+  assert.equal(research.centricity, 'SOURCE_STUDY_CENTRIC');
+  assert.equal(kaduseNews.boundaryWithResearch.research.archetypeId, 'research');
+  assert.ok(kaduseNews.boundaryWithResearch.rule.includes('never collapsed'));
+});
+
+test('28. Kaduse News source pack is an empty, architecture-only placeholder (no sources invented)', () => {
+  assert.equal(newsSources.status, 'EMPTY_PLACEHOLDER');
+  assert.deepEqual(newsSources.sources, []);
+  assert.ok(newsSources.sourceRecordContract.fields.length > 0);
+});
+
+test('29. Kaduse News policy names the Global News Hub as engine owner, and channel config stays here', () => {
+  assert.ok(kaduseNews.sourcingModel.engineOwner.includes('channel-content-os'));
+  assert.ok(kaduseNews.sourcingModel.channelConfigOwner.includes('multi_channel_design'));
+  assert.equal(kaduseNews.sourcingModel.sourcePackPath, 'channels/kaduse-medikal/content/news-sources.json');
+});
+
+test('30. the top-level radar/ scaffold is retired (no directory, no stray files)', () => {
+  assert.ok(!existsSync(path.join(repoRoot, 'radar')));
+});
+
+test('31. ADR-0003 exists and explicitly supersedes ADR-0002\'s radar-location decision', () => {
+  const adr3 = readFileSync(path.join(repoRoot, 'docs/decisions/0003-global-news-hub-supersedes-radar-location.md'), 'utf-8');
+  assert.ok(adr3.includes('Global News Hub'));
+  assert.ok(adr3.includes('Supersedes'));
+  const adr2 = readFileSync(path.join(repoRoot, 'docs/decisions/0002-portfolio-architecture.md'), 'utf-8');
+  assert.ok(adr2.includes('Superseded in part by ADR-0003'));
 });

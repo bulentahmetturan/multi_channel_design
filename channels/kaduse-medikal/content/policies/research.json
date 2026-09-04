@@ -55,17 +55,19 @@
     "The study reported..."
   ],
   "contentDirective": "The post should explain the STUDY, not merely announce that something happened.",
-  "boundaryWithMedicalNews": {
+  "boundaryWithKaduseNews": {
+    "$comment": "Renamed from boundaryWithMedicalNews (Batch N1, 2026-09-04): 'Medical News' as a standalone term is retired -- it is now one of Kaduse News's two coverage areas, not a sibling archetype that might later be registered on its own. See channels/kaduse-medikal/content/policies/kaduse-news.json.",
     "research": {
       "centricity": "study-centric",
       "primaryQuestion": "What did the study investigate and find?"
     },
-    "medicalNews": {
+    "kaduseNews": {
+      "archetypeId": "kaduse-news",
       "centricity": "event/development-centric",
       "primaryQuestion": "What happened?",
-      "status": "NOT_REGISTERED_THIS_BATCH"
+      "status": "REGISTERED"
     },
-    "rule": "Research and Medical News are separate semantic content problems and must NOT be merged. The same scientific development may support both a Medical News post about the development and a separate Research post explaining the underlying paper. Medical News is not implemented or registered in Batch K2B -- it remains pending user review."
+    "rule": "Research and Kaduse News are separate semantic content problems and must NOT be merged. The same underlying development (including a scientific development) may support both a Kaduse News post about the development itself and a separate Research post explaining the underlying paper. Research is registered and unchanged by the Kaduse News registration (Batch N1)."
   },
   "evidenceSafetyRule": {
     "rule": "Do NOT transform association into causation. Do NOT overstate preliminary findings, small studies, observational research, surrogate outcomes, or animal/in-vitro results. Preserve the strength of evidence represented by the source.",

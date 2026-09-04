@@ -6,7 +6,7 @@ Build a portable, local-first operating system for multi-channel Instagram desig
 
 ## Architecture
 
-- Keep layouts channel-independent; Channel Packs live under `channels/<channel-id>/`. Radar (source monitoring) is a shared core serving every channel, not tied to one channel; each channel keeps its own sources within its own Channel Pack.
+- Keep layouts channel-independent; Channel Packs live under `channels/<channel-id>/`. The shared, channel-agnostic source-monitoring/news engine is the Global News Hub, owned by the sibling `channel-content-os` repo (see `docs/decisions/0003-global-news-hub-supersedes-radar-location.md` and that repo's `docs/global-news-hub-contract.md`) -- not a directory in this repo. This repo owns each channel's own source pack and news/content policy within its own Channel Pack (`channels/<channel-id>/content/`).
 - Compose posts as content-based layout + Channel Pack + typography pair + assets + format profile.
 - Keep cross-channel design data (schemas, layouts, safe zones, typography library) as versioned JSON under `design-system/`; keep mutable workflow state in SQLite behind adapters.
 - Keep external integrations optional. Do not use MCP for local repository access.

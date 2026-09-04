@@ -11,7 +11,7 @@ Phase 2 — in progress
 - Environment inspected: Git, Node.js 24, npm, pnpm, and Python 3.11 are available.
 - Docker and Yarn are not required.
 - Technical foundation approved and recorded in ADR-0001.
-- Portfolio layout approved and recorded in ADR-0002: `channels/`, `design-system/`, `apps/dashboard`, `apps/worker`, `radar/` (shared core, not channel-specific), `data/`.
+- Portfolio layout approved and recorded in ADR-0002: `channels/`, `design-system/`, `apps/dashboard`, `apps/worker`, `data/`. (ADR-0002's separate `radar/` shared-core-location decision is superseded by ADR-0003, 2026-09-04 -- see "Radar (source monitoring)" below.)
 - Concise cross-agent instructions and selective context routing established.
 - Workspace boundaries and the initial repository skeleton established.
 - Initial channel, layout, format, content-item, and typography-pair schemas validated.
@@ -68,9 +68,11 @@ Per explicit user instruction, fonts already documented or licensed by individua
 
 None.
 
-## Radar (source monitoring)
+## Radar (source monitoring) / Global News Hub
 
-A working, tested source-monitoring implementation for `tip-ogrencileri-platformu` (scan pipeline, faculty-source discovery scripts, official source inventory, 77 passing tests) arrived from a separate session and was integrated at `channels/tip-ogrencileri-platformu/{radar,scripts,sources,tests,database}/`. It is still channel-embedded, not yet generalized into the shared top-level `radar/` core defined in ADR-0002 — see that ADR's follow-up section and `TASKS.md` for the deferred generalization work.
+A working, tested source-monitoring implementation for `tip-ogrencileri-platformu` (scan pipeline, faculty-source discovery scripts, official source inventory, 77 passing tests) arrived from a separate session and was integrated at `channels/tip-ogrencileri-platformu/{radar,scripts,sources,tests,database}/`. It remains channel-embedded and untouched.
+
+**Superseded (ADR-0003, 2026-09-04):** the shared, channel-agnostic engine this implementation was meant to eventually generalize into is no longer a top-level `radar/` directory in this repo -- it is the **Global News Hub**, owned by the sibling `channel-content-os` repo (contract: that repo's `docs/global-news-hub-contract.md`). This repo's empty `radar/` scaffold has been retired. `kaduse-medikal` is the first channel with a news archetype/policy persisted against this model: `channels/kaduse-medikal/content/policies/kaduse-news.json`, with an empty `channels/kaduse-medikal/content/news-sources.json` source-pack placeholder (actual source selection deferred to its own batch).
 
 ## Last updated
 

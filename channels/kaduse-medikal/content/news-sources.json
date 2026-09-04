@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "channelId": "kaduse-medikal",
+  "$comment": "Architectural placeholder only (Batch N1, 2026-09-04). Not validated against a JSON Schema -- deliberately minimal, same convention as the policies/ files. This is the channel-owned News Source Pack that the Global News Hub (channel-content-os) syncs/loads at runtime; it is NOT a second engine and NOT itself the engine's runtime index. Per explicit user instruction, no actual sources are selected in this batch -- source-by-source selection with trust tiers is deferred to its own batch ('Kaduse News Source Pack -- source selection + trust tiers').",
+  "status": "EMPTY_PLACEHOLDER",
+  "sourceRecordContract": {
+    "note": "Minimum contract each source entry is expected to carry once populated -- not a frozen larger ontology. See channel-content-os's docs/global-news-hub-contract.md, 'Minimum source-pack contract'.",
+    "fields": [
+      "id",
+      "name",
+      "type (e.g. official | regulator | manufacturer | discovery)",
+      "url (canonical URL or feed endpoint)",
+      "enabled",
+      "trustTier",
+      "topic / category",
+      "locale / region",
+      "priority (optional)",
+      "freshness expectations",
+      "verificationRole (e.g. primary/original vs discovery, per the source authority principle)"
+    ]
+  },
+  "sources": []
+}

@@ -1,6 +1,6 @@
 # Channel System
 
-Every current and planned brand is indexed in `channels/registry.json` (schema: `design-system/schemas/src/channel-registry.schema.json`). Each onboarded channel lives in `channels/<channel-id>/` and owns brand identity, not layouts. Radar (source monitoring) is a shared core under `radar/`, not part of any single Channel Pack; once a channel is onboarded it lists its own sources within its Channel Pack.
+Every current and planned brand is indexed in `channels/registry.json` (schema: `design-system/schemas/src/channel-registry.schema.json`). Each onboarded channel lives in `channels/<channel-id>/` and owns brand identity, not layouts. Source monitoring is the Global News Hub, a shared engine owned by the sibling `channel-content-os` repo (see `docs/decisions/0003-global-news-hub-supersedes-radar-location.md`), not a top-level directory in this repo; once a channel is onboarded it lists its own source pack and news/content policy within its Channel Pack.
 
 Required onboarding progression:
 

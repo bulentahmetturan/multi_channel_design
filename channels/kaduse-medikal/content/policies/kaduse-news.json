@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0.0",
+  "channelId": "kaduse-medikal",
+  "archetypeId": "kaduse-news",
+  "approvalStatus": "USER_APPROVED",
+  "approvedAt": "2026-09-04",
+  "$comment": "Not validated against a JSON Schema -- same minimal convention as product-promotion.json/product-comparison.json/research.json. This file records user-approved content rules only; it MUST NOT contain layout, typography, art-direction, canvas, or composition decisions (see designIndependence below). It also does NOT contain the actual source list -- see news-sources.json (placeholder, empty) and channel-content-os's docs/global-news-hub-contract.md for the ingestion/routing architecture this policy will feed.",
+  "purpose": "Cover both external medical/healthcare/industry news and Kaduse/company-specific news for the channel.",
+  "centricity": "EVENT_DEVELOPMENT_CENTRIC",
+  "primaryEditorialQuestion": "What happened?",
+  "supersedes": {
+    "note": "Any earlier assumption that 'Medical News' would exist as a separate top-level Kaduse archetype from 'Kaduse News' is retired. Medical News (external medical/healthcare/industry news) is one of the two coverage areas INSIDE Kaduse News, not a sibling archetype. Do not register a separate canonical medical-news archetype for this channel."
+  },
+  "coverageAreas": {
+    "externalMedicalIndustryNews": {
+      "label": "External medical / healthcare / industry news",
+      "examples": [
+        "WHO development",
+        "FDA approval",
+        "EMA decision",
+        "Turkish health-policy development",
+        "medical-device regulation",
+        "important healthcare industry development"
+      ]
+    },
+    "kaduseCompanyNews": {
+      "label": "Kaduse / company-specific news",
+      "examples": [
+        "new product arrival",
+        "company announcement",
+        "event/fair participation",
+        "partnership",
+        "store/company development",
+        "relevant commercial/company announcement"
+      ]
+    }
+  },
+  "boundaryWithResearch": {
+    "kaduseNews": {
+      "centricity": "event/development-centric",
+      "primaryQuestion": "What happened?"
+    },
+    "research": {
+      "archetypeId": "research",
+      "centricity": "study/paper-centric",
+      "primaryQuestion": "What did the study examine and find?"
+    },
+    "rule": "Research remains its own separate, unchanged, approved archetype -- it is NOT merged into Kaduse News. The same underlying scientific development may produce one Kaduse News candidate (the development itself) and one separate Research candidate (the underlying paper) if the editorial treatment is genuinely different, but the two archetypes are never collapsed into one."
+  },
+  "sourcingModel": {
+    "engineOwner": "channel-content-os (Global News Hub) -- see that repo's docs/global-news-hub-contract.md for the full ingestion/routing/delivery architecture",
+    "channelConfigOwner": "multi_channel_design, this channel's Channel Pack (channels/kaduse-medikal/content/)",
+    "sourcePackPath": "channels/kaduse-medikal/content/news-sources.json",
+    "sourcePackStatus": "PLACEHOLDER_EMPTY",
+    "note": "Actual source selection (which specific sites/feeds, trust tiers) is deferred to its own batch, source-by-source, per explicit user instruction. This file records editorial coverage rules, not the source list."
+  },
+  "sourceAuthorityPrinciple": "A discovery source (e.g. a media publication reporting a development) may identify a candidate. A primary/original source (e.g. the regulator or manufacturer itself), when available, should be preferred for factual verification of that candidate before publication.",
+  "designIndependence": "This policy file encodes content/coverage rules only. It does NOT and must NOT encode layout IDs, typography decisions, art-direction decisions, visual-direction approvals, composition coordinates, or design-family assignments. The pipeline is: post archetype -> news candidate (from the Global News Hub, routed to this channel) -> ContentBrief -> deterministic classification -> design retrieval -> layout/typography/art-direction/composition (out of scope here)."
+}

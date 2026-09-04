@@ -24,7 +24,15 @@
       "id": "research",
       "channelId": "kaduse-medikal",
       "label": "Research / Scientific Research",
-      "description": "Presents and explains a specific published study (study-centric: what did the study examine and find) -- distinct from Medical News (event/development-centric: what happened). Supersedes the earlier candidate label 'Clinical Evidence / Research Summary', which is not a separate active canonical archetype. User-approved 2026-09-04 (Batch K2B). Detailed content-structure/evidence rules live in channels/kaduse-medikal/content/policies/research.json.",
+      "description": "Presents and explains a specific published study (study-centric: what did the study examine and find) -- distinct from Kaduse News (event/development-centric: what happened). Supersedes the earlier candidate label 'Clinical Evidence / Research Summary', which is not a separate active canonical archetype. User-approved 2026-09-04 (Batch K2B). Note (Batch N1): the boundary partner's name changed from the earlier 'Medical News' working label to the canonical 'Kaduse News' (id: kaduse-news) -- this archetype's own approved semantics are unchanged. Detailed content-structure/evidence rules live in channels/kaduse-medikal/content/policies/research.json.",
+      "status": "ACTIVE"
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "kaduse-news",
+      "channelId": "kaduse-medikal",
+      "label": "Kaduse News",
+      "description": "Covers both external medical/healthcare/industry news (e.g. WHO/FDA/EMA developments, Turkish health-policy news, medical-device regulation) and Kaduse/company-specific news (new product arrival, company announcement, event/fair participation, partnership, store/company development) -- event/development-centric: what happened. Distinct from Research (study/paper-centric). Supersedes any earlier assumption that a separate top-level 'Medical News' archetype would exist alongside Kaduse News -- that model is retired; Medical News is a subset of Kaduse News, not a sibling archetype. User-approved 2026-09-04 (Batch N1). Detailed content rules live in channels/kaduse-medikal/content/policies/kaduse-news.json; source pack (placeholder, empty) at channels/kaduse-medikal/content/news-sources.json.",
       "status": "ACTIVE"
     }
   ]

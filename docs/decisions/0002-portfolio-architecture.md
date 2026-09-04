@@ -1,8 +1,9 @@
 # ADR-0002: Portfolio layout — channels, design-system, radar as a shared core
 
-- Status: Accepted
+- Status: Accepted (partially superseded -- see note below)
 - Date: 2026-09-01
 - Supersedes: the folder-layout portion of ADR-0001 (`catalog/` and `packages/schemas/`). The technology choices in ADR-0001 (pnpm workspaces, Next.js, Node worker, SQLite, no Docker) are unchanged.
+- **Superseded in part by ADR-0003 (2026-09-04):** the decision below to home the shared source-monitoring core at a top-level `radar/` directory in this repo is superseded -- that shared engine is now the Global News Hub, owned by the sibling `channel-content-os` repo. This repo's `radar/` scaffold (never implemented beyond `.gitkeep` placeholders) has been retired. Every other decision in this ADR (the `channels/`, `design-system/`, `apps/dashboard`, `data/` layout; `channels/registry.json`; asset-filename convention) remains in force. See ADR-0003 for the current model.
 
 ## Context
 
