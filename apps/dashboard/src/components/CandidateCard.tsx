@@ -34,6 +34,10 @@ export function CandidateCard({ candidate, channelName }: { candidate: Candidate
           <StatusPill kind="content" value={candidate.contentStatus} label={contentStatusLabel(candidate.contentStatus)} />
           <StatusPill kind="design" value={candidate.designStatus} label={designStatusLabel(candidate.designStatus)} />
           <StatusPill kind="review" value={candidate.reviewStatus} label={reviewStatusLabel(candidate.reviewStatus)} />
+          {candidate.evidenceStatus && (
+            <StatusPill kind="review" value={candidate.evidenceStatus === 'VERIFIED' ? 'APPROVED' : candidate.evidenceStatus === 'BLOCKED' ? 'BLOCKED' : 'NOT_READY'} label={`Evidence: ${candidate.evidenceStatus}`} />
+          )}
+          {candidate.sourcesUsed && <span className="pill pill-not-ready">Sources: {candidate.sourcesUsed.length}</span>}
         </div>
       </div>
       <div style={{ textAlign: 'right' }}>

@@ -38,6 +38,15 @@
       "description": "Covers both external medical/healthcare/industry news (e.g. WHO/FDA/EMA developments, Turkish health-policy news, medical-device regulation) and Kaduse/company-specific news (new product arrival, company announcement, event/fair participation, partnership, store/company development) -- event/development-centric: what happened. Distinct from Research (study/paper-centric). Supersedes any earlier assumption that a separate top-level 'Medical News' archetype would exist alongside Kaduse News -- that model is retired; Medical News is a subset of Kaduse News, not a sibling archetype. User-approved 2026-09-04 (Batch N1). Detailed content rules live in channels/kaduse-medikal/content/policies/kaduse-news.json; source pack (placeholder, empty) at channels/kaduse-medikal/content/news-sources.json.",
       "status": "ACTIVE",
       "order": 4
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "clinical-education",
+      "channelId": "kaduse-medikal",
+      "label": "Clinical Education / Auscultation Education",
+      "description": "STRICTLY stethoscope-related technical education only (how to use a stethoscope, bell vs diaphragm, cardiac/lung auscultation technique, sound-category identification, Korotkoff sound technique, digital stethoscope operation, cleaning/maintenance, common auscultation mistakes) -- NEVER diagnosis, treatment, medication, referral, or general disease education with no direct stethoscope connection. Evergreen/editorially-planned, not calendar-triggered (typical triggerType: EVERGREEN_TOPIC or CONTENT_PLANNER). Every technical claim must be backed by a verified source from the dedicated Clinical Education source registry (channel-content-os mcp-server/src/clinical-education/source-registry.ts) -- never the News or Observance registries, never LLM memory. User-approved 2026-09-04 (Batch CE1). Topic registry: channels/kaduse-medikal/content/clinical-education-topics.json.",
+      "status": "ACTIVE",
+      "order": 5
     }
   ]
 }

@@ -16,6 +16,15 @@ export type DesignStatus = 'NOT_STARTED' | 'GENERATING' | 'DESIGN_READY' | 'BLOC
 export type ReviewStatus = 'NOT_READY' | 'READY_FOR_REVIEW' | 'APPROVED' | 'REJECTED' | 'REVISION_REQUESTED';
 export type PublishStatus = 'NOT_READY' | 'READY_TO_SCHEDULE' | 'SCHEDULED' | 'PUBLISHED' | 'CANCELLED';
 
+export type EvidenceStatus = 'UNVERIFIED' | 'VERIFIED' | 'BLOCKED';
+
+export interface CandidateSourceRef {
+  sourceId: string;
+  sourceName: string;
+  sourceRole: string;
+  sourceUrl: string;
+}
+
 export interface CandidateLabel {
   candidateId: string;
   channelId: string;
@@ -34,6 +43,8 @@ export interface CandidateLabel {
   publishDate: string | null;
   isDemo: boolean;
   renderUrl: string | null;
+  evidenceStatus: EvidenceStatus | null;
+  sourcesUsed: CandidateSourceRef[] | null;
   createdAt: string;
   updatedAt: string;
 }

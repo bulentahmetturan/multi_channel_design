@@ -1,0 +1,144 @@
+{
+  "schemaVersion": "1.0.0",
+  "channelId": "kaduse-medikal",
+  "postArchetypeId": "clinical-education",
+  "$comment": "Batch CE1 (2026-09-04). Kaduse-owned Topic Registry -- distinct from the Source/Evidence Registry (owned in channel-content-os, mcp-server/src/clinical-education/). Answers 'what can we write about', never 'where does the evidence come from'. Stores NO generated post copy -- only the topic identity and eligibility metadata. Every topic below has at least one CANONICAL_ACTIVE or CONDITIONAL_VERIFIED source available for its allowedSourceRoles (verified against the sibling repo's registry as of this batch); none was seeded without a real source.",
+  "topicFamilies": [
+    "STETHOSCOPE_BASICS",
+    "CARDIAC_AUSCULTATION",
+    "PULMONARY_AUSCULTATION",
+    "PEDIATRIC_AUSCULTATION",
+    "NEONATAL_AUSCULTATION",
+    "BLOOD_PRESSURE_AUSCULTATION",
+    "ABDOMINAL_AUSCULTATION",
+    "VASCULAR_AUSCULTATION",
+    "DIGITAL_STETHOSCOPE",
+    "PHONOCARDIOGRAPHY",
+    "DEVICE_CARE",
+    "AUSCULTATION_ERRORS",
+    "AUDIO_TRAINING"
+  ],
+  "topicCount": 12,
+  "topics": [
+    {
+      "topicId": "ce-eartip-direction",
+      "title": "Eartip Nasıl Doğru Yöne Çevrilir?",
+      "topicFamily": "STETHOSCOPE_BASICS",
+      "postArchetypeId": "clinical-education",
+      "postSubtype": "auscultation-education",
+      "allowedSourceRoles": ["ACADEMIC_EXAM_EDUCATION", "MANUFACTURER_AUSCULTATION_EDUCATION"],
+      "status": "ACTIVE",
+      "notes": "Sourceable via Stanford Medicine 25 general exam-technique guidance and Littmann official education."
+    },
+    {
+      "topicId": "ce-bell-vs-diaphragm",
+      "title": "Bell ve Diyafram Ne Zaman Kullanılır?",
+      "topicFamily": "STETHOSCOPE_BASICS",
+      "postArchetypeId": "clinical-education",
+      "postSubtype": "auscultation-education",
+      "allowedSourceRoles": ["ACADEMIC_EXAM_EDUCATION", "PROFESSIONAL_CLINICAL_REFERENCE"],
+      "status": "ACTIVE",
+      "notes": "Sourceable via University of Washington physdx technique page (bell = low-pitched sounds) and Merck Manual Professional cardiac auscultation."
+    },
+    {
+      "topicId": "ce-systematic-listening",
+      "title": "Akciğerler Sistematik Olarak Karşılaştırmalı Nasıl Dinlenir?",
+      "topicFamily": "PULMONARY_AUSCULTATION",
+      "postArchetypeId": "clinical-education",
+      "postSubtype": "auscultation-education",
+      "allowedSourceRoles": ["ACADEMIC_EXAM_EDUCATION", "PROFESSIONAL_CLINICAL_REFERENCE"],
+      "status": "ACTIVE",
+      "notes": "Sourceable via University of Washington pulmonary exam techniques page and Merck Manual Professional pulmonary section."
+    },
+    {
+      "topicId": "ce-s3-vs-s4",
+      "title": "S3 ve S4 Kalp Seslerini Dinleme Eğitimi",
+      "topicFamily": "CARDIAC_AUSCULTATION",
+      "postArchetypeId": "clinical-education",
+      "postSubtype": "auscultation-education",
+      "allowedSourceRoles": ["ACADEMIC_EXAM_EDUCATION", "PROFESSIONAL_CLINICAL_REFERENCE"],
+      "status": "ACTIVE",
+      "notes": "Sourceable via Stanford Medicine 25 (Cardiac Second Sounds page) and Merck Manual Professional (S3/S4 gallop audio)."
+    },
+    {
+      "topicId": "ce-wheeze-vs-crackles",
+      "title": "Wheeze ve Crackles Dinleme Eğitiminde Temel Farklar",
+      "topicFamily": "PULMONARY_AUSCULTATION",
+      "postArchetypeId": "clinical-education",
+      "postSubtype": "auscultation-education",
+      "allowedSourceRoles": ["ACADEMIC_EXAM_EDUCATION", "PROFESSIONAL_CLINICAL_REFERENCE"],
+      "status": "ACTIVE",
+      "notes": "Sourceable via Merck Manual Professional pulmonary-disorders section (acoustic character only, no disease-diagnosis claim such as 'wheeze means asthma')."
+    },
+    {
+      "topicId": "ce-korotkoff-technique",
+      "title": "Manuel Tansiyon Ölçümünde Korotkoff Sesleri Nasıl Dinlenir?",
+      "topicFamily": "BLOOD_PRESSURE_AUSCULTATION",
+      "postArchetypeId": "clinical-education",
+      "postSubtype": "auscultation-education",
+      "allowedSourceRoles": ["BLOOD_PRESSURE_TECHNIQUE_REFERENCE"],
+      "status": "ACTIVE",
+      "notes": "Sourceable via the AHA Scientific Statement on blood pressure measurement (Korotkoff phase technique)."
+    },
+    {
+      "topicId": "ce-newborn-cardiac-listening",
+      "title": "Yenidoğanda Kardiyak Dinleme Sırası",
+      "topicFamily": "NEONATAL_AUSCULTATION",
+      "postArchetypeId": "clinical-education",
+      "postSubtype": "auscultation-education",
+      "allowedSourceRoles": ["ACADEMIC_EXAM_EDUCATION"],
+      "status": "ACTIVE",
+      "notes": "Sourceable via Stanford Medicine 25's dedicated Newborn Cardiac Examination guide."
+    },
+    {
+      "topicId": "ce-digital-auscultation-workflow",
+      "title": "Dijital Oskültasyonda Kayıt ve Amplifikasyon İş Akışı",
+      "topicFamily": "DIGITAL_STETHOSCOPE",
+      "postArchetypeId": "clinical-education",
+      "postSubtype": "auscultation-education",
+      "allowedSourceRoles": ["MANUFACTURER_AUSCULTATION_EDUCATION", "DEVICE_IFU"],
+      "status": "ACTIVE",
+      "notes": "Sourceable via Eko Academy (recording/amplification/filtering education) and Thinklabs teaching resources."
+    },
+    {
+      "topicId": "ce-chestpiece-cleaning",
+      "title": "Stetoskop Temizliği ve Diyafram Bakımı",
+      "topicFamily": "DEVICE_CARE",
+      "postArchetypeId": "clinical-education",
+      "postSubtype": "auscultation-education",
+      "allowedSourceRoles": ["DEVICE_IFU"],
+      "status": "ACTIVE",
+      "notes": "Sourceable via MDF Instruments' official user-manual cleaning/care pages -- device-specific cleaning claims are routed to official IFU, never generalized across manufacturers."
+    },
+    {
+      "topicId": "ce-common-auscultation-mistakes",
+      "title": "Yaygın Oskültasyon Hataları ve Nasıl Önlenir?",
+      "topicFamily": "AUSCULTATION_ERRORS",
+      "postArchetypeId": "clinical-education",
+      "postSubtype": "auscultation-education",
+      "allowedSourceRoles": ["ACADEMIC_EXAM_EDUCATION", "ACADEMIC_EDUCATIONAL_MODULE"],
+      "status": "ACTIVE",
+      "notes": "Sourceable via the verified MedEdPORTAL module (Professional Skill Builder: Mastering Cardiac Auscultation in Under 4 Hours) and University of Michigan Heart Sound & Murmur Library."
+    },
+    {
+      "topicId": "ce-audio-comparison-s1-s2",
+      "title": "S1 ve S2 Arasındaki Temporal Farkı Dinleyerek Ayırt Etme",
+      "topicFamily": "AUDIO_TRAINING",
+      "postArchetypeId": "clinical-education",
+      "postSubtype": "auscultation-education",
+      "allowedSourceRoles": ["AUSCULTATION_AUDIO_LIBRARY", "ACADEMIC_EXAM_EDUCATION"],
+      "status": "ACTIVE",
+      "notes": "Sourceable via Thinklabs Sound Library audio examples plus Stanford Medicine 25 technique guidance."
+    },
+    {
+      "topicId": "ce-abdominal-vascular-bruit",
+      "title": "Abdominal Oskültasyon ve Vasküler Üfürüm Dinleme Tekniği",
+      "topicFamily": "VASCULAR_AUSCULTATION",
+      "postArchetypeId": "clinical-education",
+      "postSubtype": "auscultation-education",
+      "allowedSourceRoles": ["ACADEMIC_EXAM_EDUCATION"],
+      "status": "PENDING_SOURCE_CONFIRMATION",
+      "notes": "No specific verified source page for abdominal/vascular auscultation was confirmed in this batch (Stanford 25 and UW physdx were only confirmed for cardiac/pulmonary) -- registered as PENDING, not ACTIVE, until a specific source page is verified. Per the hard rule, this topic must not be selected for candidate generation while pending."
+    }
+  ]
+}

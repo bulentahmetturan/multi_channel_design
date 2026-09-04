@@ -42,6 +42,8 @@ function candidate(overrides: Partial<CandidateLabel> = {}): CandidateLabel {
     publishDate: '2027-03-14',
     isDemo: true,
     renderUrl: null,
+    evidenceStatus: null,
+    sourcesUsed: null,
     createdAt: '2026-09-04T00:00:00.000Z',
     updatedAt: '2026-09-04T00:00:00.000Z',
     ...overrides,
@@ -214,5 +216,75 @@ describe('Content Operations UI (Batch P1)', () => {
     // never guessed by title-casing the raw channelId.
     expect(within(card).getByText('Test Channel B')).toBeInTheDocument();
     expect(within(card).getByText('01 · Match Recap')).toBeInTheDocument();
+  });
+
+  describe('Batch CE1: Clinical Education candidate display', () => {
+    const ceCandidate = candidate({
+      candidateId: 'ce-1',
+      postArchetypeId: 'clinical-education',
+      postArchetypeOrder: 5,
+      postArchetypeLabel: 'Clinical Education / Auscultation Education',
+      postSubtype: 'auscultation-education',
+      triggerType: 'EVERGREEN_TOPIC',
+      triggerId: 'ce-bell-vs-diaphragm',
+      triggerLabel: 'Bell ve Diyafram Ne Zaman Kullanılır?',
+      prepDate: null,
+      publishDate: '2027-04-05',
+      evidenceStatus: 'VERIFIED',
+      sourcesUsed: [
+        { sourceId: 'stanford-medicine-25', sourceName: 'Stanford Medicine 25', sourceRole: 'ACADEMIC_EXAM_EDUCATION', sourceUrl: 'https://med.stanford.edu/stanfordmedicine25/the25.html' },
+        { sourceId: 'merck-manual-professional-cardiac', sourceName: 'Merck Manual Professional -- Cardiac Auscultation', sourceRole: 'PROFESSIONAL_CLINICAL_REFERENCE', sourceUrl: 'https://www.merckmanuals.com/professional/cardiovascular-disorders/approach-to-the-cardiac-patient/cardiac-auscultation' },
+      ],
+    });
+
+    it('1/2/3. Clinical Education card renders with Kaduse channel tag and 05 · Clinical Education tag', async () => {
+      vi.spyOn(api, 'fetchCandidates').mockResolvedValue([ceCandidate]);
+      vi.spyOn(api, 'fetchChannels').mockResolvedValue([KADUSE_CHANNEL]);
+      renderAt('/queue');
+      const card = await screen.findByTestId('candidate-card');
+      expect(within(card).getByText('Kaduse Medikal')).toBeInTheDocument();
+      expect(within(card).getByText('05 · Clinical Education / Auscultation Education')).toBeInTheDocument();
+    });
+
+    it('4/5. subtype and trigger visible', async () => {
+      vi.spyOn(api, 'fetchCandidates').mockResolvedValue([ceCandidate]);
+      vi.spyOn(api, 'fetchChannels').mockResolvedValue([KADUSE_CHANNEL]);
+      renderAt('/queue');
+      const card = await screen.findByTestId('candidate-card');
+      expect(within(card).getByText('Auscultation Education')).toBeInTheDocument();
+      expect(within(card).getByText('Evergreen Topic')).toBeInTheDocument();
+    });
+
+    it('6/7. evidence status and source count visible on the card', async () => {
+      vi.spyOn(api, 'fetchCandidates').mockResolvedValue([ceCandidate]);
+      vi.spyOn(api, 'fetchChannels').mockResolvedValue([KADUSE_CHANNEL]);
+      renderAt('/queue');
+      const card = await screen.findByTestId('candidate-card');
+      expect(within(card).getByText('Evidence: VERIFIED')).toBeInTheDocument();
+      expect(within(card).getByText('Sources: 2')).toBeInTheDocument();
+    });
+
+    it('8. candidate detail shows the sources list', async () => {
+      vi.spyOn(api, 'fetchCandidate').mockResolvedValue(ceCandidate);
+      renderAt('/candidate/ce-1');
+      await screen.findByRole('heading', { name: /Bell ve Diyafram/ });
+      expect(screen.getByText('Stanford Medicine 25')).toBeInTheDocument();
+      expect(screen.getByText('Merck Manual Professional -- Cardiac Auscultation')).toBeInTheDocument();
+      expect(screen.getByText('ACADEMIC_EXAM_EDUCATION')).toBeInTheDocument();
+    });
+
+    it('9/10/11. channel + archetype filters still work; no separate Clinical Education app was created (same Queue component)', async () => {
+      const spy = vi.spyOn(api, 'fetchCandidates').mockResolvedValue([ceCandidate]);
+      vi.spyOn(api, 'fetchChannels').mockResolvedValue([{ ...KADUSE_CHANNEL, archetypes: [...KADUSE_CHANNEL.archetypes, { id: 'clinical-education', order: 5, label: 'Clinical Education / Auscultation Education' }] }]);
+      renderAt('/queue');
+      await screen.findByTestId('candidate-card');
+      const user = userEvent.setup();
+      await user.selectOptions(screen.getByLabelText('Channel'), 'kaduse-medikal');
+      await user.selectOptions(screen.getByLabelText('Post Archetype'), 'clinical-education');
+      await waitFor(() => {
+        const lastCall = spy.mock.calls[spy.mock.calls.length - 1][0];
+        expect(lastCall?.postArchetypeId).toBe('clinical-education');
+      });
+    });
   });
 });

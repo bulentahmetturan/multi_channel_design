@@ -103,6 +103,23 @@ export function CandidateDetail() {
             <Field k="Publish Date" v={formatDate(candidate.publishDate) ?? 'Not applicable'} />
           </div>
 
+          {(candidate.evidenceStatus || candidate.sourcesUsed) && (
+            <div className="detail-section">
+              <h3>Evidence</h3>
+              {candidate.evidenceStatus && <Field k="Status" v={candidate.evidenceStatus} />}
+              {candidate.sourcesUsed && candidate.sourcesUsed.length > 0 && (
+                <div style={{ marginTop: 8 }}>
+                  {candidate.sourcesUsed.map((s) => (
+                    <div key={s.sourceId} className="detail-field">
+                      <span>{s.sourceName}</span>
+                      <span className="k">{s.sourceRole}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
           <div className="detail-section">
             <h3>Design</h3>
             {candidate.renderUrl ? (
