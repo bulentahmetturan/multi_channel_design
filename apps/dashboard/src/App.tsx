@@ -51,8 +51,8 @@ export default function App() {
             element={
               <Queue
                 title="Publish Queue"
-                subtitle="Approved candidates on their way to a future publish adapter — no Instagram/Graph API integration exists yet"
-                fixedFilters={{ reviewStatus: 'APPROVED' }}
+                subtitle="Candidates explicitly marked ready to schedule — no Instagram/Graph API integration exists yet"
+                fixedFilters={{ publishStatus: 'READY_TO_SCHEDULE' }}
               />
             }
           />

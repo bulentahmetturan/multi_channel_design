@@ -56,6 +56,15 @@
       "description": "Merges two never-separately-registered candidate archetypes ('Stethoscope Usage/Maintenance/Troubleshooting' and 'Product Selection Guide') into one archetype with three subtypes: USAGE, MAINTENANCE_TROUBLESHOOTING, PRODUCT_SELECTION. Covers how to use/maintain/troubleshoot a Littmann stethoscope and how to choose between Kaduse's real catalog series (Classic III, Cardiology IV, Master Cardiology, Pediatrik/Classic II Pediatric) using only official technical facts -- never price-based selection, never an unauthorized source (marketplaces, blogs, forums, reviewer/affiliate sites). Every technical claim must be backed by a verified source from the dedicated Stethoscope Guide source registry (channel-content-os mcp-server/src/stethoscope-guide/source-registry.ts), with an explicit precedence hierarchy (Littmann Global Official > Country Official > Certified Distributor > Authorized Reseller) resolving any conflict -- never the News, Observance, or Clinical Education registries. User-approved 2026-09-04 (Batch SG1). Topic registry: channels/kaduse-medikal/content/stethoscope-guide-topics.json.",
       "status": "ACTIVE",
       "order": 6
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "special-day",
+      "channelId": "kaduse-medikal",
+      "label": "Special Day / Celebration / Condolence",
+      "description": "Covers scheduled national/religious celebrations, commemorations/memorials, and healthcare-profession/awareness observances -- never commercial/product-placement/CTA content (per explicit instruction, all such content is disabled for every mapped observance). Source truth is NOT owned here: global observance identity lives in channel-content-os (mcp-server/src/observance/global-observance-registry.ts); Kaduse's own applicability/treatment decisions live in channels/kaduse-medikal/content/observances.json (Layer A mappings) and health-observances.json (Layer B, Kaduse-only health/profession/awareness calendar, 57 entries). Batch F1 (2026-09-05) registers this archetype canonically -- it was previously referenced by real demo/runtime data (candidate id demo-special-day-tip-bayrami, trigger SCHEDULED_OBSERVANCE) without ever being added to this registry, causing it to render as an unresolved raw id. Known subtype vocabulary already in use by the two source files above: NATIONAL_CELEBRATION, RELIGIOUS_CELEBRATION, NATIONAL_COMMEMORATION, MEMORIAL (observances.json), PROFESSION_RECOGNITION (health-observances.json's routing hint). No new subtype taxonomy is introduced here. Candidate materialization from the observance calendars into this archetype is NOT built in this batch (remains F2).",
+      "status": "ACTIVE",
+      "order": 7
     }
   ]
 }

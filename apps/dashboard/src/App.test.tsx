@@ -12,6 +12,9 @@ const KADUSE_CHANNEL: Channel = {
   archetypes: [
     { id: 'product-promotion', order: 1, label: 'Product Promotion' },
     { id: 'kaduse-news', order: 4, label: 'Kaduse News' },
+    // Batch F1: special-day is now canonically registered (order 7) --
+    // this fixture reflects the corrected /api/channels truth.
+    { id: 'special-day', order: 7, label: 'Special Day / Celebration / Condolence' },
   ],
 };
 
@@ -28,8 +31,8 @@ function candidate(overrides: Partial<CandidateLabel> = {}): CandidateLabel {
     candidateId: 'demo-1',
     channelId: 'kaduse-medikal',
     postArchetypeId: 'special-day',
-    postArchetypeOrder: 4,
-    postArchetypeLabel: 'Special Day',
+    postArchetypeOrder: 7,
+    postArchetypeLabel: 'Special Day / Celebration / Condolence',
     postSubtype: 'healthcare-profession-recognition',
     triggerType: 'SCHEDULED_OBSERVANCE',
     triggerId: 'kaduse-tip-bayrami',
@@ -78,7 +81,10 @@ describe('Content Operations UI (Batch P1)', () => {
     renderAt('/queue');
     const card = await screen.findByTestId('candidate-card');
     expect(within(card).getByText('Kaduse Medikal')).toBeInTheDocument();
-    expect(within(card).getByText('04 · Special Day')).toBeInTheDocument();
+    // Batch F1: special-day is now canonically registered at order 7 with
+    // its full label -- must render resolved, never the raw "special-day" id.
+    expect(within(card).getByText('07 · Special Day / Celebration / Condolence')).toBeInTheDocument();
+    expect(within(card).queryByText('special-day')).not.toBeInTheDocument();
     expect(within(card).getByText('14 Mart — Tıp Bayramı')).toBeInTheDocument();
   });
 
@@ -140,7 +146,7 @@ describe('Content Operations UI (Batch P1)', () => {
     renderAt('/candidate/demo-1');
     expect(await screen.findByRole('heading', { name: /14 Mart/ })).toBeInTheDocument();
     expect(screen.getByText('Kaduse Medikal')).toBeInTheDocument();
-    expect(screen.getByText('04 · Special Day')).toBeInTheDocument();
+    expect(screen.getByText('07 · Special Day / Celebration / Condolence')).toBeInTheDocument();
     expect(screen.getByText('Healthcare Profession Recognition')).toBeInTheDocument();
     expect(screen.getByText('Scheduled Observance')).toBeInTheDocument();
     expect(screen.getByText('08 Mar')).toBeInTheDocument();
@@ -185,13 +191,14 @@ describe('Content Operations UI (Batch P1)', () => {
     expect(await screen.findAllByText('Rejected')).not.toHaveLength(0);
   });
 
-  it('12. Publish Queue excludes unapproved candidates (fixed filter forces reviewStatus=APPROVED)', async () => {
+  it('12. Publish Queue filters by publishStatus=READY_TO_SCHEDULE, distinct from the Approved view (Batch F1 -- was reviewStatus=APPROVED pre-F1, which made /approved and /publish functionally identical)', async () => {
     const spy = vi.spyOn(api, 'fetchCandidates').mockResolvedValue([]);
     vi.spyOn(api, 'fetchChannels').mockResolvedValue([KADUSE_CHANNEL]);
     renderAt('/publish');
     await waitFor(() => expect(spy).toHaveBeenCalled());
     const lastCall = spy.mock.calls[spy.mock.calls.length - 1][0];
-    expect(lastCall?.reviewStatus).toBe('APPROVED');
+    expect(lastCall?.publishStatus).toBe('READY_TO_SCHEDULE');
+    expect(lastCall?.reviewStatus).toBeUndefined();
   });
 
   it('13. real preview appears when a render artifact exists', async () => {
@@ -391,6 +398,101 @@ describe('Content Operations UI (Batch P1)', () => {
         const lastCall = spy.mock.calls[spy.mock.calls.length - 1][0];
         expect(lastCall?.postArchetypeId).toBe('research');
       });
+    });
+  });
+
+  describe('Batch F1: evidence fail-closed + publish queue separation', () => {
+    it('Approve is disabled for a BLOCKED-evidence candidate even when reviewStatus is READY_FOR_REVIEW, with the reason visible', async () => {
+      const blocked = candidate({
+        candidateId: 'f1-blocked-1',
+        postArchetypeId: 'clinical-education',
+        postArchetypeOrder: 5,
+        postArchetypeLabel: 'Clinical Education / Auscultation Education',
+        reviewStatus: 'READY_FOR_REVIEW',
+        contentStatus: 'BLOCKED', // backend's resolveContentStatus() when evidenceStatus is blocking
+        designStatus: 'DESIGN_READY',
+        evidenceStatus: 'BLOCKED',
+      });
+      vi.spyOn(api, 'fetchCandidate').mockResolvedValue(blocked);
+      renderAt('/candidate/f1-blocked-1');
+      await screen.findByRole('heading', { name: /14 Mart|Untitled/ });
+      const approveButton = screen.getByRole('button', { name: 'Approve' });
+      expect(approveButton).toBeDisabled();
+      expect(screen.getByTestId('approve-blocked-reason').textContent).toMatch(/blocked/i);
+    });
+
+    it('Approve remains enabled for a VERIFIED-evidence candidate that is otherwise ready', async () => {
+      const ready = candidate({
+        candidateId: 'f1-ready-1',
+        reviewStatus: 'READY_FOR_REVIEW',
+        contentStatus: 'CONTENT_READY',
+        designStatus: 'DESIGN_READY',
+        evidenceStatus: 'VERIFIED',
+      });
+      vi.spyOn(api, 'fetchCandidate').mockResolvedValue(ready);
+      renderAt('/candidate/f1-ready-1');
+      await screen.findByRole('heading', { name: /14 Mart|Untitled/ });
+      expect(screen.getByRole('button', { name: 'Approve' })).toBeEnabled();
+      expect(screen.queryByTestId('approve-blocked-reason')).not.toBeInTheDocument();
+    });
+
+    it('Approve remains enabled for a non-evidence candidate (evidenceStatus null) -- unaffected by the fail-closed rule', async () => {
+      const nonEvidence = candidate({
+        candidateId: 'f1-non-evidence-1',
+        postArchetypeId: 'product-promotion',
+        reviewStatus: 'READY_FOR_REVIEW',
+        contentStatus: 'CONTENT_READY',
+        designStatus: 'DESIGN_READY',
+        evidenceStatus: null,
+      });
+      vi.spyOn(api, 'fetchCandidate').mockResolvedValue(nonEvidence);
+      renderAt('/candidate/f1-non-evidence-1');
+      await screen.findByRole('heading', { name: /14 Mart|Untitled/ });
+      expect(screen.getByRole('button', { name: 'Approve' })).toBeEnabled();
+    });
+
+    it('/approved queries reviewStatus=APPROVED; an APPROVED-but-NOT_READY-to-publish candidate appears here', async () => {
+      const approvedNotQueued = candidate({ candidateId: 'f1-approved-only', reviewStatus: 'APPROVED', publishStatus: 'NOT_READY' });
+      const spy = vi.spyOn(api, 'fetchCandidates').mockResolvedValue([approvedNotQueued]);
+      vi.spyOn(api, 'fetchChannels').mockResolvedValue([KADUSE_CHANNEL]);
+      renderAt('/approved');
+      await screen.findByTestId('candidate-card');
+      expect(spy.mock.calls[0][0]).toEqual({ reviewStatus: 'APPROVED' });
+    });
+
+    it('/publish queries publishStatus=READY_TO_SCHEDULE, NOT reviewStatus -- an approved-but-not-yet-queued candidate does not appear', async () => {
+      const spy = vi.spyOn(api, 'fetchCandidates').mockResolvedValue([]); // backend would exclude a NOT_READY-to-publish candidate from this filter
+      vi.spyOn(api, 'fetchChannels').mockResolvedValue([KADUSE_CHANNEL]);
+      renderAt('/publish');
+      await waitFor(() => expect(screen.getByText(/No candidates match/)).toBeInTheDocument());
+      expect(spy.mock.calls[0][0]).toEqual({ publishStatus: 'READY_TO_SCHEDULE' });
+    });
+
+    it('a READY_TO_SCHEDULE candidate appears in Publish Queue', async () => {
+      const queued = candidate({ candidateId: 'f1-queued', reviewStatus: 'APPROVED', publishStatus: 'READY_TO_SCHEDULE' });
+      vi.spyOn(api, 'fetchCandidates').mockResolvedValue([queued]);
+      vi.spyOn(api, 'fetchChannels').mockResolvedValue([KADUSE_CHANNEL]);
+      renderAt('/publish');
+      const card = await screen.findByTestId('candidate-card');
+      expect(within(card).getByText('14 Mart — Tıp Bayramı')).toBeInTheDocument();
+    });
+
+    it('Stethoscope Guide candidate with a newly aligned trigger (OFFICIAL_SOURCE_UPDATE) resolves its trigger label without error', async () => {
+      const sgCandidate = candidate({
+        candidateId: 'f1-sg-trigger',
+        postArchetypeId: 'stethoscope-guide',
+        postArchetypeOrder: 6,
+        postArchetypeLabel: 'Stethoscope Guide',
+        postSubtype: 'USAGE',
+        triggerType: 'OFFICIAL_SOURCE_UPDATE' as CandidateLabel['triggerType'],
+        triggerLabel: 'Littmann warranty page updated',
+      });
+      vi.spyOn(api, 'fetchCandidates').mockResolvedValue([sgCandidate]);
+      vi.spyOn(api, 'fetchChannels').mockResolvedValue([KADUSE_CHANNEL]);
+      renderAt('/queue');
+      const card = await screen.findByTestId('candidate-card');
+      expect(within(card).getByText('06 · Stethoscope Guide')).toBeInTheDocument();
+      expect(within(card).getByText('Littmann warranty page updated')).toBeInTheDocument();
     });
   });
 });

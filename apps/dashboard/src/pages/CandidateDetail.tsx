@@ -64,6 +64,15 @@ export function CandidateDetail() {
   const subtype = subtypeLabel(candidate.postSubtype);
   const trigger = triggerTypeLabel(candidate.triggerType);
   const isReadyForReview = candidate.reviewStatus === 'READY_FOR_REVIEW';
+  // Batch F1: mirrors the backend's canApprove() (contentStatus/designStatus
+  // both ready) -- the backend already rejects an 'accept' otherwise, but
+  // the frontend must REFLECT that eligibility, not just isReadyForReview,
+  // so a BLOCKED-evidence candidate never shows an enabled Approve button.
+  const canApprove = candidate.contentStatus === 'CONTENT_READY' && candidate.designStatus === 'DESIGN_READY';
+  const blockedReason =
+    candidate.contentStatus === 'BLOCKED' && candidate.evidenceStatus
+      ? `Evidence ${candidate.evidenceStatus.replace(/_/g, ' ').toLowerCase()} -- cannot approve until resolved.`
+      : null;
 
   return (
     <div>
@@ -167,8 +176,13 @@ export function CandidateDetail() {
             {!isReadyForReview && candidate.reviewStatus !== 'APPROVED' && (
               <p style={{ fontSize: 13, color: 'var(--text-muted)' }}>Not ready for review yet.</p>
             )}
+            {blockedReason && (
+              <p style={{ fontSize: 13, color: 'var(--text-muted)' }} data-testid="approve-blocked-reason">
+                {blockedReason}
+              </p>
+            )}
             <div className="review-actions">
-              <button className="btn btn-approve" disabled={!isReadyForReview} onClick={() => act('accept')}>
+              <button className="btn btn-approve" disabled={!isReadyForReview || !canApprove} onClick={() => act('accept')}>
                 Approve
               </button>
               <button className="btn" disabled={!isReadyForReview} onClick={() => setShowRevisionInput((s) => !s)}>
