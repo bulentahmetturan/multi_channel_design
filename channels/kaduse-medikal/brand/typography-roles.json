@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "1.0.0",
+  "channelId": "kaduse-medikal",
+  "version": "2.0.0",
+  "approvalStatus": "USER_CONFIRMED",
+  "note": "Channel-owned typography role model. Ranges are preferred calibration bands, not universal aesthetic gates. Every live choice requires real pre-render glyph measurement and post-render bounds/computed-font verification.",
+  "maxMainFamiliesPerPost": 2,
+  "maxMainFamiliesRule": "The two primary families are EB Garamond plus either Inter or IBM Plex Sans. IBM Plex Mono is a restricted utility face and is permitted only for eyebrow, footer, and trackedClosingSignature roles.",
+  "combinations": {
+    "kaduse-product-editorial": { "headlineFamily": "EB Garamond", "headlineStyle": "Roman", "headlineEmphasisStyle": "Italic", "bodyFamily": "Inter", "description": "Product-led editorial register." },
+    "kaduse-clinical-information": { "headlineFamily": "EB Garamond", "headlineStyle": "Roman", "headlineEmphasisStyle": "Italic", "bodyFamily": "IBM Plex Sans", "description": "Research and clinical-information register." }
+  },
+  "sharedFamilies": {
+    "utilityMono": { "family": "IBM Plex Mono", "allowedRoles": ["eyebrow", "footer", "trackedClosingSignature"] }
+  },
+  "kaduseScopedExclusions": ["Adelle", "Libre Franklin", "Source Sans 3", "Stack Sans Notch"],
+  "turkishGlyphSupport": {
+    "requirement": "Every family used in a live render (headline, body, headline emphasis, eyebrow, footer, or tracked closing signature) must render the full Turkish character set correctly: İ i I ı, Ş ş, Ğ ğ, Ü ü, Ö ö, Ç ç, and Turkish punctuation/quote conventions.",
+    "verification": "Verify per-family via real fontkit glyph coverage measurement (not visual assumption) before the family is used in a live Kaduse render. Record the result against the family's row in font-pool.json rather than re-deriving it per post."
+  },
+  "roles": {
+    "brandProductFamily": {
+      "label": "Brand/product family",
+      "example": "3M Littmann",
+      "family": "headline",
+      "weightRange": [500, 700],
+      "sizeRangePx": [26, 40],
+      "trackingEm": [0.0, 0.02],
+      "notes": "Secondary rank to the hero headline and to Kaduse's own logo -- never the single dominant text element. Establishes which manufacturer/product line this is without competing with the post's own creative thesis."
+    },
+    "productModel": {
+      "label": "Product model",
+      "example": "Classic III",
+      "family": "headline",
+      "weightRange": [600, 700],
+      "sizeRangePx": [32, 52],
+      "trackingEm": [-0.01, 0.01],
+      "notes": "May sit adjacent to or as part of the hero headline's composition when the model name IS the creative hook; otherwise ranks below the hero headline per the dominant-gesture rule (creative-north-star-and-art-direction-programme.md §4)."
+    },
+    "skuVariant": {
+      "label": "SKU / variant",
+      "example": "5647 · Fuşya · Bakır Aynalı",
+      "family": "body",
+      "weightRange": [400, 500],
+      "sizeRangePx": [16, 24],
+      "trackingEm": [0.02, 0.08],
+      "notes": "Functional identifier, not a creative element. Fine to set as a small tag/pill; must still clear the minimum-contrast gate against its own background region, not the canvas average."
+    },
+    "heroHeadline": {
+      "label": "Hero headline",
+      "family": "headline",
+      "weightRange": [600, 800],
+      "sizeRangePxByDensity": { "DENSE": [52, 72], "MEDIUM": [64, 96], "SPARSE": [84, 140] },
+      "lineHeight": [0.95, 1.15],
+      "trackingEm": [-0.02, 0.0],
+      "notes": "May be the dominant gesture, but dominance is contextual and may instead belong to the product, product detail, statistic, date, or clinical illustration. Size bands guide hierarchy and calibration; they are not universal area or scale gates."
+    },
+    "supportingLine": {
+      "label": "Supporting line",
+      "family": "body",
+      "weightRange": [400, 500],
+      "sizeRangePx": [22, 34],
+      "lineHeight": [1.2, 1.4],
+      "notes": "Qualifies or extends the hero headline. Must stay visually subordinate to it (smaller size and/or lighter weight) -- never sized or weighted to compete for dominance."
+    },
+    "featureFact": {
+      "label": "Feature / fact text",
+      "family": "body",
+      "weightRange": [500, 600],
+      "sizeRangePx": [26, 36],
+      "minSizePx": 24,
+      "lineHeight": [1.25, 1.45],
+      "notes": "HARD FLOOR: never render below minSizePx to solve overflow -- overflow is solved by shortening copy, restructuring the fact cluster, or choosing a different density band, never by shrinking fact text past this floor (VISUAL-SYSTEM.md §1). Weight is medium/semibold, heavier than a typical body paragraph, specifically so facts read as content, not fine print. Prefer short label+value pairs or a tight fact cluster over paragraph-style sentences."
+    },
+    "annotation": {
+      "label": "Annotation",
+      "example": "garanti koşulları için bkz. — kaynak/tarih notu",
+      "family": "body",
+      "weightRange": [400, 500],
+      "sizeRangePx": [14, 18],
+      "notes": "Smallest permitted role. Never carries a claim, price, date, or fact that must itself be legible at feed-thumbnail size without zooming -- if the content matters at thumbnail scale, it belongs in featureFact, not here."
+    },
+    "cta": {
+      "label": "CTA",
+      "family": "body",
+      "weightRange": [600, 700],
+      "sizeRangePx": [20, 30],
+      "trackingEm": [0.01, 0.04],
+      "notes": "Distinguish from the hero headline by weight/treatment/containment (e.g. set inside a footer pill or frame-connected block, often uppercase), not by introducing a third family. One CTA per post."
+    },
+    "footer": {
+      "label": "Footer",
+      "family": "utilityMono",
+      "weightRange": [400, 500],
+      "sizeRangePx": [16, 22],
+      "notes": "Kaduse signature / trust line / series identifier text (see feed-grammar.json footer rules). Keep a consistent size band across posts for feed continuity -- do not vary footer type size post-to-post without a stated reason."
+    },
+    "eyebrow": {
+      "label": "Eyebrow",
+      "family": "utilityMono",
+      "weightRange": [400, 600],
+      "notes": "Optional orientation device. Uses IBM Plex Mono only and must remain outside the stable logo zone."
+    },
+    "headlineEmphasis": {
+      "label": "Headline emphasis",
+      "family": "headline",
+      "style": "Italic",
+      "maxUsesPerComposition": 1,
+      "notes": "Optional INLINE_ITALIC or ITALIC_NEGATIVE_TAG using the real EB Garamond Italic face. It remains part of one grammatical headline and never behaves as a CTA or sticker."
+    },
+    "trackedClosingSignature": {
+      "label": "Tracked closing signature",
+      "family": "utilityMono",
+      "weightRange": [400, 600],
+      "notes": "Preferred feed-continuity closure when compositionally justified; IBM Plex Mono only."
+    }
+  }
+}

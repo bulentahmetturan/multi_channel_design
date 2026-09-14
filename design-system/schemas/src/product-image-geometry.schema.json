@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://multi-channel-design.local/schemas/product-image-geometry.schema.json",
+  "title": "Product Image Geometry",
+  "description": "Compact, retrievable metadata about a real product cutout PNG's alpha mask -- produced once by a channel's own analyze_product_image.py script (real PIL/numpy/scipy computation on the actual pixels), never hand-authored or estimated by a model. Consumers (composition/QA code) retrieve this file narrowly instead of re-deriving it from raw pixels per request (AGENTS.md hard rule: 'Analyze binary references once, store compact metadata, and retrieve narrowly'). Every field is either a directly measured quantity or an explicitly labeled heuristic candidate (see each field's own `note`) -- never asserted as verified anatomical ground truth.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["sourceFile", "analysisMethod", "canvas", "alphaMask", "visiblePixelBounds", "dominantAxis", "openLoopRegions", "criticalRegions", "suggestedCrops"],
+  "properties": {
+    "sourceFile": { "type": "string", "minLength": 1 },
+    "analysisMethod": { "type": "string", "minLength": 1 },
+    "canvas": { "$ref": "#/$defs/dimensions" },
+    "alphaMask": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["opaquePx", "canvasPx", "pctOpaque"],
+      "properties": {
+        "opaquePx": { "type": "number" },
+        "canvasPx": { "type": "number" },
+        "pctOpaque": { "type": "number" }
+      }
+    },
+    "visiblePixelBounds": { "$ref": "#/$defs/rect" },
+    "negativeSpaceMarginsPct": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "top": { "type": "number" },
+        "bottom": { "type": "number" },
+        "left": { "type": "number" },
+        "right": { "type": "number" }
+      }
+    },
+    "dominantAxis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["centroid", "angleDegFromHorizontal", "note"],
+      "properties": {
+        "centroid": { "$ref": "#/$defs/point" },
+        "angleDegFromHorizontal": { "type": "number" },
+        "eigenvalueRatio": { "type": "number" },
+        "note": { "type": "string", "minLength": 1 }
+      }
+    },
+    "chestpieceCandidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["center", "estimatedRadiusPx", "circularity", "note"],
+      "properties": {
+        "center": { "$ref": "#/$defs/point" },
+        "estimatedRadiusPx": { "type": "number" },
+        "circularity": { "type": "number", "minimum": 0, "maximum": 1 },
+        "note": { "type": "string", "minLength": 1 }
+      }
+    },
+    "openLoopRegions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["bbox", "areaPx", "pctOfCanvas"],
+        "properties": {
+          "bbox": { "$ref": "#/$defs/rect" },
+          "areaPx": { "type": "number" },
+          "pctOfCanvas": { "type": "number" }
+        }
+      }
+    },
+    "criticalRegions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["role", "reason", "approxCenter", "approxRadiusPx"],
+        "properties": {
+          "role": { "type": "string", "minLength": 1 },
+          "reason": { "type": "string", "minLength": 1 },
+          "approxCenter": { "$ref": "#/$defs/point" },
+          "approxRadiusPx": { "type": "number" }
+        }
+      }
+    },
+    "suggestedCrops": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "fullProductHero": { "$ref": "#/$defs/rect" },
+        "macroChestpieceDetail": { "$ref": "#/$defs/rect" }
+      }
+    }
+  },
+  "$defs": {
+    "dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["width", "height"],
+      "properties": { "width": { "type": "number" }, "height": { "type": "number" } }
+    },
+    "point": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "y"],
+      "properties": { "x": { "type": "number" }, "y": { "type": "number" } }
+    },
+    "rect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "y", "width", "height"],
+      "properties": {
+        "x": { "type": "number" },
+        "y": { "type": "number" },
+        "width": { "type": "number" },
+        "height": { "type": "number" }
+      }
+    }
+  }
+}

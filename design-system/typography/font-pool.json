@@ -1,12 +1,231 @@
 {
   "schemaVersion": "1.0.0",
-  "version": "0.1.0",
-  "status": "COLLECTING",
-  "note": "Central catalog of fonts already documented or licensed by individual channel projects, gathered ahead of the Phase 4 central typography library per explicit user instruction. This is data collection only -- no channel has been moved to TYPOGRAPHY_PASS, and typography onboarding for any channel stays deferred until every registry entry reaches LOGOS_PASS (see ROADMAP.md Phase 2, docs/ONBOARDING-ORCHESTRATION.md). Commercial/licensed font BINARIES are intentionally not copied into this repo -- only their family names, roles, and source locations are recorded, to avoid redistributing fonts whose license terms are unverified.",
+  "version": "0.5.0",
+  "status": "OPEN_FIRST_ACTIVE",
+  "sourceDoc": "Font Pool v5 -- Open-First Channel Combinations (user-supplied decision doc, 2026-09-11; supersedes v4/font-pool-v4-channel-combinations.md, which is not checked into this repo).",
+  "note": "Central typography catalog. Supersedes this file's own prior v0.1.0 'data collection only' state -- Font Pool v5 is an active decision document, not a collection pass. Typography onboarding for OTHER channels beyond what v5 explicitly names is still deferred per the portfolio-wide rule (ROADMAP.md Phase 2, docs/ONBOARDING-ORCHESTRATION.md); v5 is itself the user's own explicit, documented exception opening typography for the channels listed in channelCombinations below, on an open-license-first basis. Commercial/licensed font BINARIES are never copied into this repo -- only family names, roles, statuses, and verified source locations are recorded.",
+  "statusModel": {
+    "READY_OPEN": "Open-license font with a verifiable source; eligible for renderer registration when a channel needs it. Can appear in a live rendered post.",
+    "LICENSE_REQUIRED": "Commercial/Adobe/foundry font retained as a creative direction. Needs a documented license AND an authorized, renderer-accessible source before activation. Cannot appear in a live rendered post.",
+    "REFERENCE_ONLY": "Useful visual reference, but no usable license/source is available. Not exposed in the channel selector."
+  },
+  "globalPool": {
+    "headlineDisplay": {
+      "status": "READY_OPEN",
+      "families": ["Source Sans 3", "Libre Franklin", "Inter", "Overpass", "Sofia Sans", "Ubuntu", "Montserrat", "Roboto", "Ancizar Sans", "Ancizar Serif", "Vollkorn", "Crimson Pro", "Literata", "Quando", "Montagu Slab", "MuseoModerno"]
+    },
+    "bodyEditorial": {
+      "status": "READY_OPEN",
+      "families": ["Source Sans 3", "Libre Franklin", "Inter", "Overpass", "Sofia Sans", "Ubuntu", "Roboto", "Ancizar Sans", "Ancizar Serif", "Vollkorn", "Crimson Pro", "Literata", "IBM Plex Sans", "IBM Plex Serif"]
+    },
+    "metadata": {
+      "status": "READY_OPEN",
+      "families": ["IBM Plex Mono", "DM Mono", "Ubuntu Mono", "Lekton", "IBM Plex Sans", "Inter"],
+      "note": "Metadata is a recurring functional layer -- source, date, SKU, score, slide number, edition, category, or legal note. Not a rare/display role."
+    },
+    "rareOccasionalDisplay": {
+      "status": "READY_OPEN",
+      "families": ["Stack Sans Notch", "Caacupe One", "Parisienne", "Bungee Tint", "Geo", "Italianno", "Kenia", "Major Mono Display", "Rakkas"],
+      "rule": "Rare means maximum one focal use in a composition: a cover phrase, section marker, campaign moment, or occasional accent. Must never carry paragraph copy, product facts, medical information, dates, or legal text."
+    },
+    "arabicRtl": {
+      "status": "READY_OPEN",
+      "families": ["Cairo", "Rakkas"],
+      "note": "Cairo is the reliable Arabic information/body family. Rakkas is an occasional Arabic display face only. Arabic combinations require real RTL layout and Arabic glyph shaping -- not a substitute for a Turkish/Latin combination."
+    },
+    "licenseRequiredCreativePool": {
+      "status": "LICENSE_REQUIRED",
+      "families": ["Placard Next Compressed", "Le Monde Journal", "Adelle", "Lorimer No. 2", "Lexia", "Kulturista", "Lust Didone", "Grafolita Script", "Samantha", "JOC", "LTR NCND Variable", "Vandertak", "PF Fuel", "Gunplay Damage", "Nouvelle Vague Medium", "Teddy Regular", "Divulga Regular", "AM Assab Regular", "Flegrei Regular", "Legitima Regular", "Chicago MN Regular", "Aldhabi Regular"],
+      "note": "Visible as future art-direction options; disabled in production until a documented license and an authorized, renderer-accessible source are recorded per family. Adobe Creative Cloud availability alone is not treated as proof of backend embedding or self-hosting rights."
+    }
+  },
+  "channelCombinations": {
+    "tip-ogrencileri-platformu": {
+      "combinations": [
+        { "id": "tip-ogrencileri-a", "headline": "Overpass", "body": "Libre Franklin", "status": "READY_OPEN" },
+        { "id": "tip-ogrencileri-b", "headline": "IBM Plex Serif", "body": "Overpass", "status": "READY_OPEN" }
+      ],
+      "metadata": "IBM Plex Mono",
+      "rare": null,
+      "futureConditional": []
+    },
+    "kaduse-medikal": {
+      "combinations": [
+        { "id": "kaduse-product-editorial", "headline": "EB Garamond", "headlineEmphasis": "EB Garamond Italic", "body": "Inter", "status": "READY_OPEN", "description": "Product-led editorial register." },
+        { "id": "kaduse-clinical-information", "headline": "EB Garamond", "headlineEmphasis": "EB Garamond Italic", "body": "IBM Plex Sans", "status": "READY_OPEN", "description": "Research and clinical-information register." }
+      ],
+      "utilityMono": { "family": "IBM Plex Mono", "status": "READY_OPEN", "allowedRoles": ["eyebrow", "footer", "trackedClosingSignature"] },
+      "rare": null,
+      "futureConditional": [],
+      "kaduseScopedExclusions": ["Adelle", "Libre Franklin", "Source Sans 3", "Stack Sans Notch"],
+      "registeredFonts": {
+        "note": "Repository-side manifests, authoritative source URLs, checksums, licence provenance, and Turkish glyph verification exist in channel-content-os. The final Kaduse font set is not registered in production D1 and is not deployed; older rows do not authorize removed families for new Kaduse compositions. Production registration is reserved for an explicitly authorized future milestone."
+      }
+    },
+    "turkiye-scholarships": {
+      "combinations": [
+        { "id": "turkiye-scholarships-a", "headline": "IBM Plex Serif", "body": "IBM Plex Sans", "status": "READY_OPEN" },
+        { "id": "turkiye-scholarships-b", "headline": "Montagu Slab", "body": "Libre Franklin", "status": "READY_OPEN" }
+      ],
+      "metadata": "IBM Plex Mono",
+      "rare": null,
+      "futureConditional": [
+        { "direction": "Adelle + Libre Franklin", "status": "LICENSE_REQUIRED" },
+        { "direction": "Le Monde Journal + IBM Plex Sans", "status": "LICENSE_REQUIRED" }
+      ]
+    },
+    "futboscope": {
+      "combinations": [
+        { "id": "futboscope-a", "headline": "Inter", "body": "Libre Franklin", "status": "READY_OPEN" },
+        { "id": "futboscope-b", "headline": "Overpass", "body": "Inter", "status": "READY_OPEN" }
+      ],
+      "metadata": "DM Mono",
+      "rare": { "family": "Stack Sans Notch or Kenia", "status": "READY_OPEN" },
+      "futureConditional": [
+        { "direction": "PF Fuel or Gunplay Damage as rare event display only", "status": "LICENSE_REQUIRED" }
+      ],
+      "legacyCandidates": "Söhne and Tungsten (see `fonts` array below) remain REFERENCE_ONLY -- trial-license files only, never verified for production/redistribution, not part of v5's open-first pool."
+    },
+    "macaristan-rehberi": {
+      "combinations": [
+        { "id": "macaristan-a", "headline": "Ubuntu", "body": "Vollkorn", "status": "READY_OPEN" },
+        { "id": "macaristan-b", "headline": "Montagu Slab", "body": "Libre Franklin", "status": "READY_OPEN" }
+      ],
+      "metadata": "Ubuntu Mono",
+      "rare": null,
+      "futureConditional": [
+        { "direction": "Adelle + Libre Franklin", "status": "LICENSE_REQUIRED" },
+        { "direction": "Lorimer No. 2 as a rare travel marker", "status": "LICENSE_REQUIRED" }
+      ]
+    },
+    "dua-mecmuasi": {
+      "combinations": [
+        { "id": "dua-mecmuasi-arabic", "headline": "Cairo", "body": "Cairo", "status": "READY_OPEN", "description": "Arabic/RTL posts." },
+        { "id": "dua-mecmuasi-latin", "headline": "Vollkorn", "body": "Libre Franklin", "status": "READY_OPEN", "description": "Turkish/Latin posts." }
+      ],
+      "metadata": "IBM Plex Mono",
+      "rare": { "family": "Rakkas", "status": "READY_OPEN", "rule": "Arabic cover/accent moments only." },
+      "futureConditional": [
+        { "direction": "Aldhabi Regular, only after Arabic licence and real glyph/render validation", "status": "LICENSE_REQUIRED" }
+      ]
+    },
+    "folk-saying": {
+      "combinations": [
+        { "id": "folk-saying-a", "headline": "Literata", "body": "Vollkorn", "status": "READY_OPEN" },
+        { "id": "folk-saying-b", "headline": "Crimson Pro", "body": "Libre Franklin", "status": "READY_OPEN" }
+      ],
+      "metadata": "Lekton",
+      "rare": { "family": "Caacupe One or Parisienne", "status": "READY_OPEN" },
+      "futureConditional": [
+        { "direction": "Le Monde Journal + Libre Franklin", "status": "LICENSE_REQUIRED" }
+      ]
+    },
+    "turkish-context": {
+      "combinations": [
+        { "id": "turkish-context-a", "headline": "Ancizar Serif", "body": "Libre Franklin", "status": "READY_OPEN" },
+        { "id": "turkish-context-b", "headline": "Montagu Slab", "body": "Ancizar Sans", "status": "READY_OPEN" }
+      ],
+      "metadata": "Lekton",
+      "rare": null,
+      "futureConditional": [
+        { "direction": "Le Monde Journal + Libre Franklin", "status": "LICENSE_REQUIRED" },
+        { "direction": "Kulturista + Ancizar Serif", "status": "LICENSE_REQUIRED" },
+        { "direction": "Placard / Flegrei / Vandertak rare moments", "status": "LICENSE_REQUIRED" }
+      ]
+    },
+    "scope-turkiye": {
+      "combinations": [
+        { "id": "scope-turkiye-a", "headline": "Montagu Slab", "body": "Libre Franklin", "status": "READY_OPEN" },
+        { "id": "scope-turkiye-b", "headline": "Ancizar Sans", "body": "Inter", "status": "READY_OPEN" }
+      ],
+      "metadata": "IBM Plex Mono",
+      "rare": { "family": "Quando", "status": "READY_OPEN" },
+      "futureConditional": [
+        { "direction": "Le Monde Journal + Libre Franklin", "status": "LICENSE_REQUIRED" },
+        { "direction": "Adelle + Ancizar Sans", "status": "LICENSE_REQUIRED" },
+        { "direction": "Divulga rare moments", "status": "LICENSE_REQUIRED" }
+      ]
+    },
+    "iyilesme-kanali": {
+      "combinations": [
+        { "id": "iyilesme-a", "headline": "Sofia Sans", "body": "Crimson Pro", "status": "READY_OPEN" },
+        { "id": "iyilesme-b", "headline": "Literata", "body": "Sofia Sans", "status": "READY_OPEN" }
+      ],
+      "metadata": "Crimson Pro Italic",
+      "rare": null,
+      "futureConditional": [
+        { "direction": "Teddy Regular for rare warmth, after licensing", "status": "LICENSE_REQUIRED" }
+      ],
+      "legacyCandidates": "Ofelia Text and Placard Next Condensed (see `fonts` array below) remain REFERENCE_ONLY -- brand-deck-documented, files never located. Cormorant Garamond was previously cataloged as an open candidate but is not part of v5's real combinations for this channel."
+    },
+    "yeni-nesil-romanci": {
+      "displayName": "Literotik",
+      "combinations": [
+        { "id": "literotik-a", "headline": "Literata", "body": "Crimson Pro", "status": "READY_OPEN" },
+        { "id": "literotik-b", "headline": "Crimson Pro", "body": "Literata", "status": "READY_OPEN" }
+      ],
+      "metadata": "Crimson Pro Italic",
+      "rare": { "family": "Parisienne or Italianno", "status": "READY_OPEN", "rule": "Short emotional accent only." },
+      "futureConditional": [
+        { "direction": "Le Monde Journal + Literata", "status": "LICENSE_REQUIRED" },
+        { "direction": "Placard Next, Lust Didone, Grafolita Script, Samantha, JOC, or Nouvelle Vague as rare, copy-limited accents", "status": "LICENSE_REQUIRED" }
+      ],
+      "note": "Channel registryStatus is still PLANNED (channels/registry.json) -- these are design-pool assignments only, not an onboarding-status change."
+    },
+    "dunya-burslari": {
+      "combinations": [
+        { "id": "dunya-burslari-a", "headline": "Montagu Slab", "body": "Ancizar Sans", "status": "READY_OPEN" },
+        { "id": "dunya-burslari-b", "headline": "IBM Plex Serif", "body": "Libre Franklin", "status": "READY_OPEN" }
+      ],
+      "metadata": "IBM Plex Mono",
+      "rare": null,
+      "futureConditional": [
+        { "direction": "Adelle + Libre Franklin", "status": "LICENSE_REQUIRED" },
+        { "direction": "Legitima as an occasional award/editorial marker", "status": "LICENSE_REQUIRED" }
+      ],
+      "note": "Channel registryStatus is still PLANNED -- design-pool assignment only."
+    },
+    "fenerbahce-cephesi": {
+      "combinations": [
+        { "id": "fenerbahce-a", "headline": "Libre Franklin", "body": "Inter", "status": "READY_OPEN" },
+        { "id": "fenerbahce-b", "headline": "Overpass", "body": "Inter", "status": "READY_OPEN" }
+      ],
+      "metadata": "DM Mono",
+      "rare": { "family": "Stack Sans Notch, Bungee Tint, or Kenia", "status": "READY_OPEN" },
+      "futureConditional": [
+        { "direction": "PF Fuel or Gunplay Damage as rare match-day display only", "status": "LICENSE_REQUIRED" }
+      ],
+      "note": "Channel registryStatus is still PLANNED -- design-pool assignment only."
+    },
+    "footballevo": {
+      "combinations": [
+        { "id": "footballevo-a", "headline": "Inter", "body": "Libre Franklin", "status": "READY_OPEN" },
+        { "id": "footballevo-b", "headline": "Overpass", "body": "Inter", "status": "READY_OPEN" }
+      ],
+      "metadata": "DM Mono",
+      "rare": { "family": "Stack Sans Notch, MuseoModerno, or Geo", "status": "READY_OPEN" },
+      "futureConditional": [
+        { "direction": "PF Fuel, LTR NCND Variable, or Chicago MN as rare product/campaign display only", "status": "LICENSE_REQUIRED" }
+      ],
+      "note": "Channel registryStatus is still PLANNED -- design-pool assignment only. Distinct channel from futboscope, confirmed separately (not the same project)."
+    }
+  },
+  "activationContract": [
+    "Its license permits the intended server-side rendering and artifact output.",
+    "A legitimate, stable file source is recorded; no unlicensed web download is acceptable.",
+    "Required Turkish and/or Arabic glyph coverage, weights, and italics are verified for the assigned role.",
+    "It passes the existing font-resolution and composition-fit path with a real post sample."
+  ],
+  "guardrails": [
+    "No commercial font is silently substituted during rendering; the system reports the actual blocked state.",
+    "No rare face is used for body copy, medical claims, prices, dates, footnotes, or metadata.",
+    "A channel may rotate between combination A and B, but each individual post uses one coherent combination.",
+    "This pool is a design inventory; it is not a permission to use every listed font in production."
+  ],
   "fonts": [
     {
       "family": "Söhne",
-      "role": "candidate",
+      "role": "REFERENCE_ONLY",
       "source": "Klim Type Foundry (commercial)",
       "channels": ["futboscope"],
       "location": "futboscope project folder, brand/fonts/sohne/ (local, not in this repo)",
@@ -17,7 +236,7 @@
     },
     {
       "family": "Tungsten",
-      "role": "candidate",
+      "role": "REFERENCE_ONLY",
       "source": "Hoefler&Co (commercial)",
       "channels": ["futboscope"],
       "location": "futboscope project folder, brand/fonts/tungsten/ (local, not in this repo)",
@@ -27,7 +246,7 @@
     },
     {
       "family": "Ofelia Text",
-      "role": "candidate (body)",
+      "role": "REFERENCE_ONLY",
       "source": "documented in brand deck, files not located",
       "channels": ["iyilesme-kanali"],
       "location": "iyilesme_kanali_brandkit.png ('Body text, aciklamalar, carousel icerikleri, egitici metinler icin. Modern, okunabilir ve premium.')",
@@ -35,32 +254,24 @@
     },
     {
       "family": "Placard Next Condensed",
-      "role": "candidate (headline)",
+      "role": "REFERENCE_ONLY",
       "source": "documented in brand deck, files not located",
       "channels": ["iyilesme-kanali"],
       "location": "iyilesme_kanali_brandkit.png ('Basliklar, posterler, reel kapaklari ve guclu vurgu metinleri icin. Cesur, modern, carpici.')"
     },
     {
       "family": "Cormorant Garamond",
-      "role": "candidate (accent)",
+      "role": "READY_OPEN (not part of v5's real combinations for this channel)",
       "source": "Google Fonts (open license)",
       "channels": ["iyilesme-kanali"],
       "location": "iyilesme_kanali_brandkit.png ('Alintilar, ozel vurgu metinleri, felsefi icerikler icin. Zamansiz, zarif, entellektuel.')"
-    },
-    {
-      "family": "IBM Plex Sans",
-      "role": "candidate (base UI)",
-      "source": "IBM (open license, SIL OFL)",
-      "channels": ["turkiye-scholarships"],
-      "location": "already the locked runtime base font for turkiye-scholarships' own website (website/docs/05_BRAND_AND_DESIGN.md, website/lib/fonts.ts), loaded via next/font -- not yet evaluated for Instagram-post use specifically",
-      "note": "This is the website's own UI font choice, not yet a channel typography-pair decision for Instagram content."
     },
     {
       "family": "IBM Plex Sans Arabic",
       "role": "candidate (RTL base UI)",
       "source": "IBM (open license, SIL OFL)",
       "channels": ["turkiye-scholarships"],
-      "location": "same as IBM Plex Sans; used for the website's Arabic/Persian RTL locales"
+      "location": "already the locked runtime base font for turkiye-scholarships' own website (website/docs/05_BRAND_AND_DESIGN.md, website/lib/fonts.ts), used for the website's Arabic/Persian RTL locales -- not part of v5's Instagram-post combinations for this channel"
     }
   ]
 }

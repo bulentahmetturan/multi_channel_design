@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "channelId": "kaduse-medikal",
-  "$comment": "Channel-owned, extensible list -- validates against design-system/schemas/src/post-archetype.schema.json, one entry per element. NOT a closed global enum; only the archetype(s) actually exercised so far are listed here.",
+  "$comment": "Channel-owned, extensible list -- validates against design-system/schemas/src/post-archetype.schema.json, one entry per element. NOT a closed global enum; only the archetype(s) actually exercised so far are listed here. Project decision (2026-09-12): the current canonical active set is intentionally these 7 -- Doctor/Student Experience Testimonial-UGC, Campaign/Offer/Giveaway, and Community/Event/Social Responsibility are deliberately deferred (expected to be rare) and must NOT be added as placeholder entries, rubrics, candidate routes, trigger enums, or reserved ids. Add one only when a real, focused need appears, as its own batch. This supersedes any earlier '10 archetypes' framing.",
   "archetypes": [
     {
       "schemaVersion": "1.0.0",

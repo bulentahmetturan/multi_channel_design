@@ -2,6 +2,8 @@
 
 ## Current
 
+- [ ] Kaduse Medikal Visual Quality P2 (started 2026-09-14, see `docs/STATUS.md` for full detail). Done: production/GitHub drift audit + `v2-production-baseline` tag (channel-content-os, local); persistent Claude/Codex routing (`AGENTS.md`, `docs/INDEX.md`, `channels/kaduse-medikal/{AGENTS,CLAUDE}.md`); `channels/kaduse-medikal/VISUAL-SYSTEM.md`; `brand/typography-roles.json`; `brand/feed-grammar.json`; real product-image analysis (`scripts/analyze_product_image.py` + metadata + schema/tests) for the two real product cutouts; two real bugs fixed + tested in channel-content-os (safe-zone admission gap, Visual Diagnosis INCOMPLETE_REVIEW vs. silent PASS). Blocked on live MCP access (user's connector token, 401 since a 2026-09-13 Cloudflare Access change) for: rules ingestion into `get_project_context`, the three new Product Promotion renders, live Visual Diagnosis, 3x3 feed preview, and user aesthetic approval. Not yet started: frame/footer as composable modules, a channel-content-os consumer of the new product-image-geometry metadata, render-level visual-language diversity comparison.
+
 - [x] Phase 2: collect and validate the primary logo for `tip-ogrencileri-platformu`. All 12 logo slots PASS. Channel status advanced to `LOGOS_PASS`.
 - [x] Phase 2: create the central Channel Registry (`channels/registry.json`) with all 11 current/planned brands.
 - [x] Phase 2: migrate the repository to the portfolio layout (`channels/`, `design-system/`, `apps/dashboard`, `apps/worker`, `radar/`, `data/`), recorded in ADR-0002.

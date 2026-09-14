@@ -20,5 +20,7 @@ Read `AGENTS.md` first, then use only the route matching the task.
 | Change monitoring or inbox state | `docs/CONTENT-MONITORING.md`, `design-system/schemas/src/content-item.schema.json` |
 | Change QA or preference feedback | `docs/QA-AND-FEEDBACK.md` |
 | Add an external integration | `docs/MCP-POLICY.md`, relevant provider documentation |
+| Judge, plan, or review creative/art-direction quality | `docs/creative-north-star-and-art-direction-programme.md` |
+| Kaduse Medikal visual production, composition, feed design, or visual QA | `channels/kaduse-medikal/AGENTS.md`, `channels/kaduse-medikal/VISUAL-SYSTEM.md` |
 
 Architecture decisions live in `docs/decisions/`. Do not read unrelated ADRs unless the task changes their decision.

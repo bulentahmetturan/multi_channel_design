@@ -3,5 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "files": ["src"]
+  "files": ["src"],
+  "scripts": {
+    "test": "node --test src/product-image-geometry.test.mjs"
+  }
 }

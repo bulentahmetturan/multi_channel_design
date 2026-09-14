@@ -32,3 +32,5 @@ Requested behavior is implemented, relevant deterministic validation passes, doc
 ## Context
 
 Read `docs/INDEX.md`, then only the task-specific files it routes to. Do not load the entire documentation set by default.
+
+- Kaduse Medikal visual, design, composition, or rendering work: read `channels/kaduse-medikal/AGENTS.md` first; it routes to `channels/kaduse-medikal/VISUAL-SYSTEM.md`, the canonical source for that channel's visual rules. Do not load Kaduse's visual instructions for other channels' work.

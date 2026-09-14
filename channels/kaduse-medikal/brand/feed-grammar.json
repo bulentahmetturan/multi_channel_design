@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "1.0.0",
+  "channelId": "kaduse-medikal",
+  "version": "1.0.0",
+  "approvalStatus": "DRAFT",
+  "note": "Feed-level continuity and variation rules for Kaduse Medikal, Category 8 of the Visual Quality P2 programme (see VISUAL-SYSTEM.md). Governs rhythm and controlled variation across posts -- it does NOT force a rigid checkerboard or a fixed rotation order. Every rule here is a soft target band a composition should move toward, evaluated against the channel's own recent history, not a hard per-post gate. Consumed as feed-context input to composition (recentPosts, targetGridPosition, recentSurfaceModes, recentDominantColors, recentProductCrops, recentModuleFamilies) -- see feedContextInput below for the exact shape.",
+
+  "rollingWindow": {
+    "size": 9,
+    "reason": "Matches a 3x3 Instagram profile-grid preview -- the unit both the surface-rhythm and archetype-distribution targets below are evaluated against."
+  },
+
+  "surfaceRhythm": {
+    "modes": ["CLINICAL_LIGHT", "MOONLIT_NAVY", "PREMIUM_SOLID", "MACRO_PHOTO_FIELD", "SCULPTURAL_GRADIENT", "TECHNICAL_EDITORIAL"],
+    "darkLightBand": { "darkShareAdvisory": [0.35, 0.55], "admissionGate": false, "note": "Relational feed guidance derived from the approved North Star and reference feed. It must never hard-fail a post or force a checkerboard." },
+    "maxConsecutiveSameMode": 2,
+    "note": "Prefer breaking a run of 2 consecutive posts in the identical surface mode before starting a 3rd, unless the composition's own thesis genuinely calls for continuing the run (e.g. a stated 2-3 post visual sub-series)."
+  },
+
+  "archetypeDistribution": {
+    "rollingWindowShareTarget": {
+      "product-promotion": [0.35, 0.55],
+      "clinical-education": [0.10, 0.20],
+      "stethoscope-guide": [0.10, 0.20],
+      "research": [0.05, 0.15],
+      "product-comparison": [0.00, 0.10],
+      "kaduse-news": [0.00, 0.10],
+      "special-day": [0.00, 0.10]
+    },
+    "note": "Guidance for feed variety, not a content-selection rule -- content/archetype selection itself stays owned by each archetype's own policy file under content/policies/. This block only informs composition of how visually 'product-heavy' the current window already is."
+  },
+
+  "logoZones": {
+    "preferredDefault": "top-left-icon-lockup",
+    "rotationIsDefault": false,
+    "exceptions": ["footer-signature", "frame-corner-mark"],
+    "rule": "Keep a stable top-left logo anchor by default. Use another approved zone only when the composition provides an explicit rationale; every placement remains subject to logo safe-zone and integrity checks."
+  },
+
+  "frameContinuity": {
+    "families": ["full-perimeter", "partial-edge", "double-line-clinical", "frame-interrupted-by-product", "frame-connected-to-footer", "light-frame-on-dark", "dark-frame-on-light", "none"],
+    "maxConsecutiveSameFamily": 2,
+    "note": "'none' (no frame) is a real, countable option in this rotation -- a frame is a preferred default for feed coherence, not a mandatory element on every post (VISUAL-SYSTEM.md §4)."
+  },
+
+  "footerContinuity": {
+    "families": ["NEGATIVE_NAVY", "NEGATIVE_BLUE", "MINIMAL_LIGHT", "none"],
+    "typeSizeBand": "Hold footer text inside typography-roles.json's footer role sizeRangePx across posts that do carry a footer -- do not vary the footer type scale post-to-post without a stated compositional reason.",
+    "note": "'none' is valid when a full-bleed or sculptural composition is clearly stronger (VISUAL-SYSTEM.md §5); it is still a countable feed state so two consecutive footer-less posts register the same as any other repeated family."
+  },
+
+  "accentColorFrequency": {
+    "coral500": {
+      "asPrimaryAccentFieldOrShape": { "maxShareOfWindow": 0.33 },
+      "asSmallDotOrCtaOrDetail": "unrestricted",
+      "note": "Operationalizes 'coral stays a selective accent, not a routine decorative color' (VISUAL-SYSTEM.md §7). The cap applies to coral used as a large/primary compositional field or shape -- not to a small CTA chip, accent dot, or single-word highlight, which are unrestricted."
+    }
+  },
+
+  "imageDensityRhythm": {
+    "bands": ["IMAGE_FORWARD", "TYPOGRAPHY_FORWARD", "BALANCED"],
+    "adjacentTileRule": "Avoid the same band on 3+ consecutive posts; specifically avoid three consecutive full-bleed product-photo tiles reading as one undifferentiated block in the grid.",
+    "note": "IMAGE_FORWARD = full product hero / macro / sculptural tubing composition dominates the frame. TYPOGRAPHY_FORWARD = message-led, no or minimal product image. BALANCED = deliberate product+type composition, neither dominates."
+  },
+
+  "typographyRhythm": {
+    "combinationSelection": ["kaduse-clinical-information", "kaduse-product-editorial"],
+    "note": "Select the combination by archetype and content role. Both combinations share EB Garamond; body treatment changes between Inter and IBM Plex Sans. No rare-accent layer exists for Kaduse.",
+    "headlineEmphasis": { "frequency": "RENDER_CALIBRATION_REQUIRED", "mandatory": false },
+    "eyebrow": { "frequency": "RENDER_CALIBRATION_REQUIRED", "mandatory": false }
+  },
+
+  "cropRepetitionPrevention": {
+    "trackedCropFamilies": ["full-product-hero", "macro-chestpiece-detail", "sculptural-tubing-composition", "edge-crop", "product-extending-beyond-frame", "no-product-message-led"],
+    "maxConsecutiveSameCrop": 1,
+    "note": "Stricter than the frame/surface rules by design -- identical product crop back-to-back is the single most common source of the 'PNG pasted on a canvas, again' complaint this programme exists to fix. A different crop family is required on the very next product-bearing post, not merely preferred."
+  },
+
+  "neighboringGridRelationship": {
+    "consider": ["surfaceMode", "dominantColors", "productCrop", "frameFamily"],
+    "rule": "When composing a new post, check the most recent 1-2 posts (its likely adjacent tiles in a 3-column profile grid) for these four properties and prefer a composition that reads as distinct from its immediate neighbors, even if the rolling-window targets above are otherwise satisfied.",
+    "note": "This is a local (adjacent-tile) check layered on top of the window-level targets above, not a replacement for them."
+  },
+
+  "feedContextInput": {
+    "shape": {
+      "recentPosts": "array of the last N published/approved posts: { postId, archetype, surfaceMode, dominantColors, productCrop, frameFamily, footerFamily, typographyCombinationId, publishedAt }",
+      "targetGridPosition": "0-based index of the new post's expected position in the 3x3 preview",
+      "recentSurfaceModes": "derived: recentPosts[].surfaceMode",
+      "recentDominantColors": "derived: recentPosts[].dominantColors",
+      "recentProductCrops": "derived: recentPosts[].productCrop",
+      "recentModuleFamilies": "derived: recentPosts[].frameFamily + .footerFamily"
+    },
+    "note": "Add this block to composition input where technically appropriate (channel-content-os's compose_post / Creative Director candidate assembly) -- this file defines the contract shape; it does not itself implement the wiring."
+  },
+
+  "previewRequirement": {
+    "individualPostApproval": ["individual-post-preview"],
+    "feedSystemApproval": ["individual-post-preview", "three-by-three-feed-preview"],
+    "note": "A single post may receive INDIVIDUAL_POST_APPROVAL without a complete 3x3. FEED_SYSTEM_APPROVAL requires a real multi-post preview. PUBLISH_APPROVAL is always separate."
+  }
+}
