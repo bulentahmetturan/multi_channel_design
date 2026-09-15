@@ -1,0 +1,26 @@
+{
+  "_comment": "Declarative mirror of channel-content-os/mcp-server/src/format-spec/product-families/littmann-classic-iii-56.ts. Lives outside any one format on purpose -- the same physical-product truth applies to Product Promotion, Product Comparison, Product Detail, and any future compatible format. That TypeScript file is the executable source of truth; keep both in sync by hand.",
+  "productFamilyId": "littmann-classic-iii-56",
+  "variableRegion": "TUBING",
+  "ringPolicy": {
+    "blackRingSkus": ["5620"],
+    "nonBlackRingHex": "#808285"
+  },
+  "metalPreservation": "PRESERVE_SOURCE",
+  "logoPreservation": "PRESERVE_FROM_VERIFIED_ASSET",
+  "engravingMode": "PRESERVE_FROM_VERIFIED_ASSET",
+  "littmannMarkReferenceHex": "#1F1F1F",
+  "campaign": {
+    "id": "KAD-CLASSICIII-56-COLOR",
+    "skus": [
+      { "sku": "5620", "label": "SİYAH" },
+      { "sku": "5621", "label": "GRİ" },
+      { "sku": "5622", "label": "LACİVERT" },
+      { "sku": "5623", "label": "KARAYİP MAVİSİ" },
+      { "sku": "5627", "label": "BORDO" },
+      { "sku": "5630", "label": "BUZ MAVİSİ" },
+      { "sku": "5633", "label": "İNCİ PEMBESİ" },
+      { "sku": "5648", "label": "FUŞYA" }
+    ]
+  }
+}

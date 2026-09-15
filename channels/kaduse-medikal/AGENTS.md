@@ -6,11 +6,14 @@ Canonical, scoped instructions for any agent (Claude, Codex, GPT Work) doing vis
 
 `VISUAL-SYSTEM.md`, `brand/feed-grammar.json`, `brand/typography-roles.json`, and `content/visual-directions/` have been removed as part of a global visual-system reset — see `channel-content-os/VISUAL_SYSTEM_RESET.md` for the full rationale and inventory. They are not archived elsewhere in this repo; do not re-derive their content from git history or prior chat context and re-introduce it.
 
-**Do not invent a replacement.** Visual/design/composition authority for this channel now lives in an explicit FORMAT SPEC, registered in `channel-content-os`'s `format-spec/format-registry.ts`. That registry is intentionally empty until the first format (`KAD-PP-SPHF-01`, "Single Product Hero Feature") is authorized and its full specification supplied. Until then:
+**Do not invent a replacement.** Visual/design/composition authority for this channel lives in an explicit FORMAT SPEC, registered in `channel-content-os`'s `format-spec/format-registry.ts`.
 
-- Do not propose, write, or apply layout, typography-pairing, background/frame/footer, spacing, or composition rules for this channel.
+**Update, 2026-09-16 (same day, later batch):** the first format, `KAD-PP-SPHF-01` v1.0.0 ("Single Product Hero Feature" / "Tek Ürün Hero + Özellik", `product-promotion` archetype only), is now implemented and registered. See `channel-content-os/KAD-PP-SPHF-01.md` for the full implementation record, and this channel's own `formats/KAD-PP-SPHF-01.json` + `product-catalog/product-families/littmann-classic-iii-56.json` for the declarative mirror. It supports exactly one SKU / one dominant product image / one feature block per slide — it does not support comparison, multi-product, pricing, dense-research, or bundle layouts. For any of those, or for any other archetype, no FormatSpec is registered yet:
+
+- Do not propose, write, or apply layout, typography-pairing, background/frame/footer, spacing, or composition rules not already declared in a registered FormatSpec.
 - Do not treat any deleted file's remembered content, a prior render, or general design instinct as authoritative.
-- A visual/design/composition task for this channel that has no registered FormatSpec should report that gap (`NEW_VISUAL_SPEC_INCOMPLETE`) rather than improvise.
+- A visual/design/composition task for this channel that has no registered FormatSpec for its (archetype, format) should report that gap (`NEW_VISUAL_SPEC_INCOMPLETE`) rather than improvise.
+- A known gap on the registered format itself: none of KAD-PP-SPHF-01's custom typefaces (Cyntho Next, Spectral, Zilla Slab, Titillium Web, Saira, Raphiola) are registered as available fonts yet — see the implementation record's "Known gap" section before assuming a real render can execute.
 
 ## What is still authoritative
 

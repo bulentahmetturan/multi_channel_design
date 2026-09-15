@@ -1,0 +1,226 @@
+{
+  "_comment": "Declarative mirror of channel-content-os/mcp-server/src/format-spec/formats/kad-pp-sphf-01.ts. That TypeScript file is the executable source of truth; this JSON carries the same canonical values for documentation and cross-repo review. Keep both in sync by hand when either changes -- there is exactly one authoring point (the .ts file), this file is a transcription of it, never an independent decision.",
+  "projectId": "kaduse-medikal",
+  "archetypeId": "product-promotion",
+  "formatId": "KAD-PP-SPHF-01",
+  "formatVersion": "1.0.0",
+  "formatName": "Single Product Hero Feature",
+  "turkishName": "Tek Ürün Hero + Özellik",
+
+  "canvas": { "width": 1080, "height": 1350 },
+
+  "safeZones": [
+    { "id": "POST_SAFE_ZONE", "box": { "x1": 70, "x2": 1010, "y1": 70, "y2": 1280 } },
+    { "id": "INSTAGRAM_PROFILE_FEED_CROP", "box": { "x1": 0, "x2": 1080, "y1": 135, "y2": 1215 } },
+    { "id": "FEED_SAFE_ZONE", "box": { "x1": 70, "x2": 1010, "y1": 167, "y2": 1183 } },
+    { "id": "GRID_CORE", "box": { "x1": 96, "x2": 984, "y1": 168, "y2": 1184 } }
+  ],
+
+  "grid": {
+    "x1": 96,
+    "x2": 984,
+    "columnWidth": 52,
+    "gutter": 24,
+    "columns": [
+      { "x1": 96, "x2": 148, "y1": 168, "y2": 1184 },
+      { "x1": 172, "x2": 224, "y1": 168, "y2": 1184 },
+      { "x1": 248, "x2": 300, "y1": 168, "y2": 1184 },
+      { "x1": 324, "x2": 376, "y1": 168, "y2": 1184 },
+      { "x1": 400, "x2": 452, "y1": 168, "y2": 1184 },
+      { "x1": 476, "x2": 528, "y1": 168, "y2": 1184 },
+      { "x1": 552, "x2": 604, "y1": 168, "y2": 1184 },
+      { "x1": 628, "x2": 680, "y1": 168, "y2": 1184 },
+      { "x1": 704, "x2": 756, "y1": 168, "y2": 1184 },
+      { "x1": 780, "x2": 832, "y1": 168, "y2": 1184 },
+      { "x1": 856, "x2": 908, "y1": 168, "y2": 1184 },
+      { "x1": 932, "x2": 984, "y1": 168, "y2": 1184 }
+    ]
+  },
+
+  "spacingTokens": {
+    "space.hero_to_rule": 20,
+    "space.rule_to_script": 18,
+    "space.script_to_sku": 70,
+    "space.rule_to_sku_without_script": 64,
+    "space.sku_to_feature": 60,
+    "space.feature_index_to_text_x": 32,
+    "offset.feature_text_from_index_y": 32,
+    "space.feature_to_breathing_zone": 64,
+    "space.hero_to_product_x": 64,
+    "clearance.text_to_product_opaque_min": 24,
+    "space.product_to_footer": 280,
+    "header.logo_to_motto_clearance": 317
+  },
+
+  "typographyRoles": {
+    "HERO": { "primary": "Cyntho Next Bold", "fallbacks": ["Spectral Bold / ExtraBold", "Zilla Slab Bold"] },
+    "SKU": { "primary": "Cyntho Next Regular", "fallbacks": ["Titillium Web", "Saira"] },
+    "EDITORIAL": { "primary": "Titillium Web", "fallbacks": ["Saira"] },
+    "UTILITY": { "primary": "IBM Plex Mono", "fallbacks": ["IBM Plex Sans", "Source Sans 3", "Inter"] },
+    "SCRIPT": { "primary": "Raphiola", "fallbacks": [] }
+  },
+
+  "opticalLimits": {
+    "text": { "x": 4, "y": 4 },
+    "logo": { "x": 6, "y": 6 },
+    "script": { "x": 8, "y": 8 },
+    "product": { "x": 12, "y": 16 }
+  },
+  "opticalExceptions": {
+    "product_visual_block": { "x": 14, "y": 6 }
+  },
+
+  "blocks": {
+    "logo_block": {
+      "presence": "REQUIRED",
+      "bbox": { "x1": 133, "x2": 415, "y1": 168, "y2": 243 },
+      "alignment": ["WEST_LOCKED", "NORTH_LOCKED"],
+      "feedCritical": true
+    },
+    "motto_block": {
+      "presence": "SOFT_OPTIONAL",
+      "bbox": { "x1": 732, "x2": 984, "y1": 168, "y2": 221 },
+      "alignment": ["EAST_LOCKED", "NORTH_LOCKED"],
+      "feedCritical": true,
+      "typographyRole": "UTILITY",
+      "fontChain": { "primary": "IBM Plex Mono", "fallbacks": ["IBM Plex Sans", "Source Sans 3", "Inter"] },
+      "sizeReference": 15,
+      "weight": 400,
+      "trackingReference": 0,
+      "lineHeight": 1.5,
+      "exactLines": 2,
+      "exactText": "Hep birlikte,\ndaha sağlıklı günlere"
+    },
+    "hero_title_block": {
+      "presence": "REQUIRED",
+      "bbox": { "x1": 96, "x2": 528, "y1": 464, "y2": 576 },
+      "alignment": ["WEST_LOCKED", "NORTH_LOCKED"],
+      "feedCritical": true,
+      "typographyRole": "HERO",
+      "fontChain": { "primary": "Cyntho Next Bold", "fallbacks": ["Spectral Bold / ExtraBold", "Zilla Slab Bold"] },
+      "sizeReference": 35,
+      "trackingReference": 50,
+      "lineHeight": 1.5,
+      "caseTransform": "UPPERCASE",
+      "exactLines": 2
+    },
+    "hero_rule": {
+      "presence": "REQUIRED",
+      "bbox": { "x1": 96, "x2": 264, "y1": 596, "y2": 598 },
+      "alignment": ["WEST_LOCKED", "NORTH_LOCKED"],
+      "feedCritical": false
+    },
+    "script_block": {
+      "presence": "OPTIONAL",
+      "bbox": { "x1": 176, "x2": 448, "y1": 616, "y2": 666 },
+      "alignment": ["WEST_LOCKED", "NORTH_LOCKED"],
+      "feedCritical": true,
+      "typographyRole": "SCRIPT",
+      "fontChain": { "primary": "Raphiola", "fallbacks": [] },
+      "sizeReference": 26,
+      "exactLines": 1,
+      "rotationDeg": -10
+    },
+    "sku_block": {
+      "presence": "REQUIRED",
+      "bbox": { "x1": 96, "x2": 528, "y1": 736, "y2": 776 },
+      "alignment": ["WEST_LOCKED"],
+      "feedCritical": true,
+      "typographyRole": "SKU",
+      "fontChain": { "primary": "Cyntho Next Regular", "fallbacks": ["Titillium Web", "Saira"] },
+      "sizeReference": 26,
+      "trackingReference": 150,
+      "lineHeight": 1.5,
+      "caseTransform": "UPPERCASE",
+      "exactLines": 1
+    },
+    "feature_index": {
+      "presence": "STRUCTURAL",
+      "parent": "feature_block",
+      "bbox": { "x1": 96, "x2": 152, "y1": 836, "y2": 868 },
+      "alignment": ["WEST_LOCKED", "NORTH_LOCKED"],
+      "feedCritical": true,
+      "typographyRole": "UTILITY",
+      "fontChain": { "primary": "IBM Plex Mono", "fallbacks": ["IBM Plex Sans", "Source Sans 3", "Inter"] },
+      "sizeReference": 30,
+      "weight": 700,
+      "trackingReference": 50,
+      "exactLines": 1
+    },
+    "feature_text": {
+      "presence": "STRUCTURAL",
+      "parent": "feature_block",
+      "bbox": { "x1": 184, "x2": 632, "y1": 868, "y2": 936 },
+      "alignment": ["WEST_LOCKED"],
+      "feedCritical": true,
+      "typographyRole": "EDITORIAL",
+      "fontChain": { "primary": "Titillium Web", "fallbacks": ["Saira"] },
+      "sizeReference": 24,
+      "weight": 400,
+      "lineHeight": 1.4,
+      "maxLines": 2
+    },
+    "product_visual_block": {
+      "presence": "REQUIRED",
+      "bbox": { "x1": 552, "x2": 984, "y1": 352, "y2": 1008 },
+      "alignment": ["CENTER_XY"],
+      "feedCritical": true
+    },
+    "footer_background": {
+      "presence": "REQUIRED",
+      "bbox": { "x1": 0, "x2": 1080, "y1": 1280, "y2": 1350 },
+      "alignment": ["CENTER_Y"],
+      "feedCritical": false
+    },
+    "footer_website": {
+      "presence": "SOFT_OPTIONAL",
+      "bbox": { "x1": 144, "x2": 544, "y1": 1280, "y2": 1350 },
+      "alignment": ["CENTER_X", "CENTER_Y"],
+      "feedCritical": false,
+      "typographyRole": "UTILITY",
+      "fontChain": { "primary": "IBM Plex Mono", "fallbacks": ["IBM Plex Sans", "Source Sans 3", "Inter"] },
+      "sizeReference": 19,
+      "trackingReference": 150,
+      "lineHeight": 1.4,
+      "exactLines": 1
+    },
+    "footer_phone": {
+      "presence": "SOFT_OPTIONAL",
+      "bbox": { "x1": 632, "x2": 920, "y1": 1280, "y2": 1350 },
+      "alignment": ["CENTER_X", "CENTER_Y"],
+      "feedCritical": false,
+      "typographyRole": "UTILITY",
+      "fontChain": { "primary": "IBM Plex Mono", "fallbacks": ["IBM Plex Sans", "Source Sans 3", "Inter"] },
+      "sizeReference": 19,
+      "trackingReference": 150,
+      "lineHeight": 1.4,
+      "exactLines": 1
+    },
+    "footer_separator": {
+      "presence": "SOFT_OPTIONAL",
+      "bbox": { "x1": 586, "x2": 590, "y1": 1280, "y2": 1350 },
+      "alignment": ["CENTER_X", "CENTER_Y"],
+      "feedCritical": false
+    }
+  },
+
+  "blockOrder": ["hero_title_block", "hero_rule", "script_block", "sku_block", "feature_index", "feature_text"],
+
+  "supported": [
+    "one Instagram 4:5 post",
+    "one slide inside a carousel",
+    "exactly one SKU",
+    "exactly one dominant product image",
+    "one product/SKU label",
+    "one principal feature block"
+  ],
+  "unsupported": [
+    "side-by-side comparison",
+    "multiple hero products",
+    "comparison tables",
+    "pricing matrices",
+    "dense research layouts",
+    "long clinical education layouts",
+    "bundles"
+  ]
+}
