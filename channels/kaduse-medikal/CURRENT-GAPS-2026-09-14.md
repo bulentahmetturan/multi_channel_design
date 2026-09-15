@@ -1,8 +1,8 @@
 # Kaduse Visual Quality P2 — Dated Gap Appendix
 
 **Snapshot date:** 2026-09-14  
-**Status:** implementation evidence only; not permanent visual truth.  
-**Authority:** `VISUAL-SYSTEM.md` and the latest explicit user decision supersede this snapshot.
+**Status:** implementation evidence only; not permanent visual truth. Superseded 2026-09-16 by the global visual system reset (`VISUAL-SYSTEM.md`, referenced below, has been removed — see `channel-content-os/VISUAL_SYSTEM_RESET.md`).  
+**Authority:** the latest explicit user decision supersedes this snapshot.
 
 ## Confirmed negative evidence
 

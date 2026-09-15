@@ -50,17 +50,10 @@
       "futureConditional": []
     },
     "kaduse-medikal": {
-      "combinations": [
-        { "id": "kaduse-product-editorial", "headline": "EB Garamond", "headlineEmphasis": "EB Garamond Italic", "body": "Inter", "status": "READY_OPEN", "description": "Product-led editorial register." },
-        { "id": "kaduse-clinical-information", "headline": "EB Garamond", "headlineEmphasis": "EB Garamond Italic", "body": "IBM Plex Sans", "status": "READY_OPEN", "description": "Research and clinical-information register." }
-      ],
-      "utilityMono": { "family": "IBM Plex Mono", "status": "READY_OPEN", "allowedRoles": ["eyebrow", "footer", "trackedClosingSignature"] },
+      "note": "Visual system reset (2026-09-16): the prior combinations/utilityMono/kaduseScopedExclusions entries here were part of the removed Kaduse aesthetic typography policy (channel-content-os typography/kaduse-typography-policy.ts, deleted) -- a font-pairing decision, not a font-availability fact. Removed pending the new KAD-PP-SPHF-01 format spec, which will own Kaduse's typography roles going forward. This does not affect any other channel's entry in this file.",
+      "combinations": [],
       "rare": null,
-      "futureConditional": [],
-      "kaduseScopedExclusions": ["Adelle", "Libre Franklin", "Source Sans 3", "Stack Sans Notch"],
-      "registeredFonts": {
-        "note": "Repository-side manifests, authoritative source URLs, checksums, licence provenance, and Turkish glyph verification exist in channel-content-os. The final Kaduse font set is not registered in production D1 and is not deployed; older rows do not authorize removed families for new Kaduse compositions. Production registration is reserved for an explicitly authorized future milestone."
-      }
+      "futureConditional": []
     },
     "turkiye-scholarships": {
       "combinations": [
