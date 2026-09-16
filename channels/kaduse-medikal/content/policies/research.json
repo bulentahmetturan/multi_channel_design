@@ -55,6 +55,17 @@
     "The study reported..."
   ],
   "contentDirective": "The post should explain the STUDY, not merely announce that something happened.",
+  "audienceObjective": {
+    "approvedAt": "2026-09-17",
+    "statement": "Select scientifically credible, genuinely informative studies whose findings are attention-grabbing and understandable to a general/student reader -- not just technically correct but interesting enough to earn attention. The goal is to grow followers and retain them as consistent, repeat readers -- medical students should follow this channel for its research content itself, not only for stethoscope/product content.",
+    "selectionCriteria": [
+      "Scientifically credible (per evidenceSafetyRule and the integrity gate -- never traded off against attention)",
+      "Genuinely informative -- explains a real finding, not padding",
+      "Understandable conclusion -- a general/student reader can grasp what was found without a medical-statistics background",
+      "Attention-grabbing / broadly interesting -- likely to be discussed, shared, or remembered, not just technically publishable"
+    ],
+    "nonNegotiable": "Attention/interest is a SELECTION criterion among several, never a reason to relax evidenceSafetyRule (no overstating preliminary/observational/small-study findings) or the integrity gate (no retracted papers, no preprint-as-peer-reviewed). Credibility always outranks attention when the two conflict."
+  },
   "boundaryWithKaduseNews": {
     "$comment": "Renamed from boundaryWithMedicalNews (Batch N1, 2026-09-04): 'Medical News' as a standalone term is retired -- it is now one of Kaduse News's two coverage areas, not a sibling archetype that might later be registered on its own. See channels/kaduse-medikal/content/policies/kaduse-news.json.",
     "research": {
