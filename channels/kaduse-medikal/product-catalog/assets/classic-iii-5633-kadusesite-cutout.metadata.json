@@ -1,0 +1,71 @@
+{
+  "sourceFile": "classic-iii-5633-kadusesite-cutout.png",
+  "analysisMethod": "channels/kaduse-medikal/scripts/analyze_product_image.py (alpha-threshold=32, real PIL/numpy/scipy computation, not a manual estimate)",
+  "canvas": {
+    "width": 737,
+    "height": 1298
+  },
+  "alphaMask": {
+    "opaquePx": 555641,
+    "canvasPx": 956626,
+    "pctOpaque": 58.1
+  },
+  "visiblePixelBounds": {
+    "x": 0,
+    "y": 0,
+    "width": 737,
+    "height": 1298
+  },
+  "negativeSpaceMarginsPct": {
+    "top": 0.0,
+    "bottom": 0.0,
+    "left": 0.0,
+    "right": 0.0
+  },
+  "dominantAxis": {
+    "centroid": {
+      "x": 369.8,
+      "y": 505.4
+    },
+    "angleDegFromHorizontal": 93.9,
+    "eigenvalueRatio": 1.74,
+    "note": "angleDegFromHorizontal is the dominant axis of the alpha-weighted pixel mass (PCA major eigenvector), 0=horizontal, 90=vertical. eigenvalueRatio is major/minor axis spread -- higher means a more elongated (tubing-like), lower means a more compact (chestpiece-like) overall mass."
+  },
+  "chestpieceCandidate": {
+    "center": {
+      "x": 384.3,
+      "y": 406.8
+    },
+    "estimatedRadiusPx": 340.2,
+    "circularity": 1.0,
+    "note": "Heuristic candidate from the opaque mask's distance-transform peak (thickest point of the silhouette), not a verified anatomical detection. circularity is the fraction of a same-radius circle centered here that falls inside the product mask -- closer to 1.0 supports 'this is a round chestpiece-like region', not proof."
+  },
+  "measuredTubeColorHex": "#ED8FA2",
+  "measuredTubeColorMethod": "Real per-pixel sampling of the opaque cutout: pixels with r-g>15, r-b>10, r>150 (excludes near-white chrome/near-gray rings), median RGB over 83779 matching pixels -- not a manual/approximate estimate. Used only as the KAD-PP-SPHF-01 dark_stage_glow background accent for this SKU (Section 15); never applied to the product itself.",
+  "openLoopRegions": [],
+  "criticalRegions": [
+    {
+      "role": "chestpiece",
+      "reason": "The chestpiece disc is the product's primary recognizable feature -- must not be cropped or covered by text/frame.",
+      "approxCenter": {
+        "x": 384.3,
+        "y": 406.8
+      },
+      "approxRadiusPx": 340.2
+    }
+  ],
+  "suggestedCrops": {
+    "fullProductHero": {
+      "x": 0,
+      "y": 0,
+      "width": 737,
+      "height": 1298
+    },
+    "macroChestpieceDetail": {
+      "x": 0,
+      "y": 0,
+      "width": 737,
+      "height": 1157
+    }
+  }
+}
