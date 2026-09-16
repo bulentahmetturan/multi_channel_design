@@ -222,5 +222,25 @@
     "dense research layouts",
     "long clinical education layouts",
     "bundles"
-  ]
+  ],
+
+  "visual": {
+    "_comment": "Phase 2D (2026-09-16). Mirrors FormatSpec.visual in kad-pp-sphf-01.ts. backgroundFamilyId's full declarative data (gradient, ambient lights, patterns, floor, vignette, SKU-accent rule) lives in channel-content-os/mcp-server/src/format-spec/background-families/dark-stage-glow.ts -- not duplicated here, since it is a large, code-shaped structure (functions, not just values) that would immediately drift if hand-mirrored as JSON.",
+    "backgroundFamilyId": "dark_stage_glow",
+    "colorTokens": {
+      "hero_text": "#F7F5F2",
+      "motto_text": "rgba(247,245,242,0.92)",
+      "sku_text": "rgba(247,245,242,0.94)",
+      "feature_index": "#F7F5F2",
+      "feature_text": "#F7F5F2",
+      "script_text": "#F7F5F2",
+      "footer_text": "rgba(247,245,242,0.94)",
+      "hero_rule": "#35BCD1"
+    },
+    "logoTreatment": "horizontal_white",
+    "footerSurface": {
+      "backgroundColor": "rgba(3,10,15,0.96)",
+      "topSeparator": { "widthPx": 1, "color": "rgba(53,188,209,0.12)" }
+    }
+  }
 }
