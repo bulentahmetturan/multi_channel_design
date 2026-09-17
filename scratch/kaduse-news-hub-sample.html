@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Global News Hub</title>
+<style>
+  :root {
+    --bg: #F4F6F8;
+    --surface: #FFFFFF;
+    --surface-2: #EDF1F4;
+    --sidebar-bg: #0B2233;
+    --sidebar-text: #C9DAE3;
+    --sidebar-text-dim: #7C93A1;
+    --sidebar-active: #14344A;
+    --border: #DCE3E8;
+    --text: #0B2233;
+    --text-dim: #52697A;
+    --text-faint: #8A9BA8;
+    --navy: #0B3654;
+    --blue: #1178BB;
+    --turquoise: #35BCD1;
+    --ok: #1A8754;
+    --ok-bg: #E7F6ED;
+    --hold: #A9720A;
+    --hold-bg: #FFF3DF;
+    --danger: #C4392B;
+    --danger-bg: #FBEAE8;
+    --shadow: 0 1px 2px rgba(11,34,51,.06), 0 4px 14px rgba(11,34,51,.05);
+    --radius: 12px;
+    --sidebar-w: 232px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0B1620;
+      --surface: #10202E;
+      --surface-2: #14293A;
+      --sidebar-bg: #060F17;
+      --sidebar-text: #C9DAE3;
+      --sidebar-text-dim: #607585;
+      --sidebar-active: #14293A;
+      --border: #223A4A;
+      --text: #E9F1F5;
+      --text-dim: #9DB4C2;
+      --text-faint: #6C8494;
+      --navy: #35BCD1;
+      --blue: #4FC3E8;
+      --turquoise: #35BCD1;
+      --ok: #4ADE94;
+      --ok-bg: #123424;
+      --hold: #F5C265;
+      --hold-bg: #3A2A0C;
+      --danger: #FF7A6B;
+      --danger-bg: #3A1815;
+      --shadow: 0 1px 2px rgba(0,0,0,.35), 0 8px 24px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0B1620;
+    --surface: #10202E;
+    --surface-2: #14293A;
+    --sidebar-bg: #060F17;
+    --sidebar-text: #C9DAE3;
+    --sidebar-text-dim: #607585;
+    --sidebar-active: #14293A;
+    --border: #223A4A;
+    --text: #E9F1F5;
+    --text-dim: #9DB4C2;
+    --text-faint: #6C8494;
+    --navy: #35BCD1;
+    --blue: #4FC3E8;
+    --turquoise: #35BCD1;
+    --ok: #4ADE94;
+    --ok-bg: #123424;
+    --hold: #F5C265;
+    --hold-bg: #3A2A0C;
+    --danger: #FF7A6B;
+    --danger-bg: #3A1815;
+    --shadow: 0 1px 2px rgba(0,0,0,.35), 0 8px 24px rgba(0,0,0,.35);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  .app {
+    display: grid;
+    grid-template-columns: var(--sidebar-w) 1fr;
+    min-height: 100vh;
+  }
+
+  /* ---------- Sidebar (mailbox-style) ---------- */
+  .sidebar {
+    background: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    padding: 18px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 6px;
+  }
+  .brand-mark {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    background: linear-gradient(145deg, var(--blue), var(--turquoise));
+    flex-shrink: 0;
+  }
+  .brand h1 {
+    font-size: .95rem;
+    font-weight: 700;
+    margin: 0;
+    color: #fff;
+    letter-spacing: -0.01em;
+  }
+  .brand .subtitle {
+    font-size: .68rem;
+    color: var(--sidebar-text-dim);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .nav-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .64rem;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--sidebar-text-dim);
+    padding: 0 10px;
+    margin-bottom: 2px;
+  }
+  .project-nav { display: flex; flex-direction: column; gap: 2px; }
+  .project-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 10px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-size: .86rem;
+    font-weight: 600;
+    color: var(--sidebar-text);
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+  }
+  .project-item:hover { background: rgba(255,255,255,.05); }
+  .project-item.active { background: var(--sidebar-active); color: #fff; }
+  .project-item .p-icon { font-size: 1rem; flex-shrink: 0; }
+  .project-item .p-label { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .project-item .p-count {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .68rem;
+    background: rgba(255,255,255,.12);
+    color: #fff;
+    border-radius: 20px;
+    padding: 1px 7px;
+    min-width: 18px;
+    text-align: center;
+  }
+  .project-item.active .p-count { background: var(--turquoise); color: #06222b; }
+
+  .sidebar-footnote {
+    margin-top: auto;
+    font-size: .68rem;
+    color: var(--sidebar-text-dim);
+    padding: 0 8px;
+    line-height: 1.5;
+  }
+
+  /* ---------- Main content ---------- */
+  .main { padding: 22px 24px 48px; max-width: 780px; }
+
+  .main-header { margin-bottom: 16px; }
+  .main-header h2 { font-size: 1.15rem; margin: 0 0 2px; letter-spacing: -0.01em; }
+  .main-header .main-sub { font-size: .8rem; color: var(--text-faint); font-family: 'IBM Plex Mono', monospace; }
+
+  .pillbar {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .pill {
+    font: inherit;
+    font-weight: 600;
+    font-size: .82rem;
+    color: var(--text-dim);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 7px 14px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .pill.active { background: var(--navy); color: #fff; border-color: transparent; }
+  :root[data-theme="dark"] .pill.active,
+  :root:not([data-theme="light"]) .pill.active { color: #06222b; }
+  .pill .p-count {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .68rem;
+    background: rgba(0,0,0,.08);
+    border-radius: 20px;
+    padding: 1px 7px;
+  }
+  .pill.active .p-count { background: rgba(255,255,255,.25); }
+
+  .lane-note {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    margin-bottom: 18px;
+    font-size: .82rem;
+    color: var(--text-dim);
+    box-shadow: var(--shadow);
+  }
+  .lane-note b { color: var(--text); }
+  .lane-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--turquoise);
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+  .lane-dot.deleted { background: var(--danger); }
+  .lane-dot.production { background: var(--ok); }
+
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--text-faint);
+    margin: 22px 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-label::after {
+    content: "";
+    height: 1px;
+    background: var(--border);
+    flex: 1;
+  }
+
+  .card-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 14px 16px;
+    transition: opacity .35s ease, transform .35s ease;
+  }
+  .card.leaving { opacity: 0; transform: scale(.97); }
+  .card.in-production { border-left: 3px solid var(--ok); }
+  .card.in-trash { border-left: 3px solid var(--danger); opacity: .8; }
+  .card.in-hold { border-left: 3px solid var(--hold); }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .68rem;
+    color: var(--text-faint);
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .pub-pill {
+    background: var(--surface-2);
+    color: var(--text-dim);
+    border-radius: 20px;
+    padding: 2px 9px;
+    font-weight: 600;
+  }
+  .status-pill {
+    border-radius: 20px;
+    padding: 2px 9px;
+    font-weight: 600;
+  }
+  .status-pill.production { background: var(--ok-bg); color: var(--ok); }
+  .status-pill.trash { background: var(--danger-bg); color: var(--danger); }
+  .status-pill.hold { background: var(--hold-bg); color: var(--hold); }
+
+  .card-title {
+    font-size: .95rem;
+    font-weight: 600;
+    line-height: 1.35;
+    margin: 0 0 3px;
+  }
+  .card-title a { color: var(--text); text-decoration: none; }
+  .card-title a:hover { color: var(--blue); text-decoration: underline; }
+
+  .original-title {
+    font-size: .72rem;
+    color: var(--text-faint);
+    font-style: italic;
+    margin: 0 0 8px;
+    line-height: 1.4;
+  }
+
+  .gist {
+    font-size: .87rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+    margin: 0 0 12px;
+    padding-left: 10px;
+    border-left: 2px solid var(--turquoise);
+  }
+  .gist .alt-tag {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .62rem;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--turquoise);
+    margin-bottom: 3px;
+  }
+
+  .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn {
+    font: inherit;
+    font-size: .78rem;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 7px 12px;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--text);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .btn:hover { filter: brightness(0.97); }
+  :root[data-theme="dark"] .btn:hover,
+  :root:not([data-theme="light"]) .btn:hover { filter: brightness(1.15); }
+  .btn-promote { background: var(--ok-bg); color: var(--ok); border-color: transparent; }
+  .btn-delete { background: var(--danger-bg); color: var(--danger); border-color: transparent; }
+  .btn-revise { background: var(--surface); }
+  .btn-undo { background: var(--surface); color: var(--blue); }
+  .btn-hold { background: var(--hold-bg); color: var(--hold); border-color: transparent; }
+
+  .filtered-toggle {
+    font: inherit;
+    font-size: .8rem;
+    font-weight: 600;
+    color: var(--blue);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .filtered-list { display: none; flex-direction: column; gap: 8px; margin-top: 8px; }
+  .filtered-list.open { display: flex; }
+  .filtered-card {
+    background: var(--surface-2);
+    border: 1px dashed var(--border);
+    border-radius: 10px;
+    padding: 10px 13px;
+    font-size: .8rem;
+  }
+  .filtered-card .ft-title { color: var(--text-dim); font-weight: 600; margin-bottom: 3px; }
+  .filtered-card .ft-reason {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .68rem;
+    color: var(--text-faint);
+  }
+
+  .empty {
+    text-align: center;
+    color: var(--text-faint);
+    font-size: .85rem;
+    padding: 30px 10px;
+    border: 1px dashed var(--border);
+    border-radius: var(--radius);
+  }
+
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: max(20px, env(safe-area-inset-bottom, 0px) + 20px);
+    transform: translateX(-50%) translateY(20px);
+    background: var(--navy);
+    color: #fff;
+    font-size: .82rem;
+    font-weight: 600;
+    padding: 10px 18px;
+    border-radius: 30px;
+    box-shadow: var(--shadow);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s ease, transform .25s ease;
+    z-index: 20;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  .footnote {
+    margin-top: 26px;
+    font-size: .74rem;
+    color: var(--text-faint);
+    line-height: 1.6;
+    border-top: 1px solid var(--border);
+    padding-top: 14px;
+  }
+
+  @media (max-width: 720px) {
+    .app { grid-template-columns: 1fr; }
+    .sidebar {
+      flex-direction: row;
+      align-items: center;
+      overflow-x: auto;
+      padding: 12px;
+      gap: 14px;
+    }
+    .brand .subtitle { display: none; }
+    .nav-label { display: none; }
+    .project-nav { flex-direction: row; gap: 6px; }
+    .project-item { white-space: nowrap; }
+    .sidebar-footnote { display: none; }
+    .main { padding: 16px 16px 40px; }
+  }
+</style>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+</head>
+<body>
+
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark"></div>
+      <div>
+        <h1>GLOBAL NEWS HUB</h1>
+        <div class="subtitle">kaduse-medikal &middot; tıp-öğrencileri-platformu</div>
+      </div>
+    </div>
+    <div>
+      <div class="nav-label">Projeler</div>
+      <nav class="project-nav" id="projectNav"></nav>
+    </div>
+    <div class="sidebar-footnote">Örnek dilim &middot; 3 gerçek kaynak &middot; 17 Eylül 2026</div>
+  </aside>
+
+  <main class="main">
+    <div class="main-header">
+      <h2 id="mainTitle"></h2>
+      <div class="main-sub" id="mainSub"></div>
+    </div>
+
+    <div class="pillbar" id="pillbar"></div>
+
+    <div class="lane-note" id="laneNote"></div>
+
+    <div id="pendingView">
+      <div class="card-list" id="pendingList"></div>
+      <div class="empty" id="emptyState" hidden>Bekleyen öğe yok — hepsi işlendi.</div>
+
+      <div id="filteredWrap">
+        <button class="filtered-toggle" id="filteredToggle">
+          <span id="filteredToggleIcon">▸</span> Elenenleri göster (<span id="filteredCount">0</span>)
+        </button>
+        <div class="filtered-list" id="filteredList"></div>
+      </div>
+    </div>
+
+    <div id="holdView" hidden>
+      <div class="card-list" id="holdList"></div>
+      <div class="empty" id="holdEmpty" hidden>Beklemede bir şey yok.</div>
+    </div>
+
+    <div id="productionView" hidden>
+      <div class="card-list" id="productionList"></div>
+      <div class="empty" id="productionEmpty" hidden>Henüz üretime aktarılan bir şey yok.</div>
+    </div>
+
+    <div id="trashView" hidden>
+      <div class="card-list" id="trashList"></div>
+      <div class="empty" id="trashEmpty" hidden>Silinen bir şey yok.</div>
+    </div>
+
+    <div class="footnote" id="footnote"></div>
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function () {
+  // Real items only, fetched live from three real sources on 2026-09-17.
+  // `titleTr`: genuine Turkish translation of the source's real title,
+  // shown as the primary heading; the untranslated original (when the
+  // source itself is in English) is kept as a small caption underneath --
+  // never dropped, since the link and downstream production step still
+  // need the exact original.
+  var LANES = {
+    'kaduse-news': {
+      label: 'Kaduse News',
+      icon: '🌐',
+      selective: true,
+      noteTitle: 'Seçici mod aktif.',
+      noteBody: 'Sadece Kaduse’nin editöryel kapsamına giren gelişmeler görünür (cihaz onayı, güvenlik/regülasyon, önemli sektör gelişmesi). Kurumsal duyuru, atama, ortaklık haberi gibi düşük alaka sinyalleri otomatik elenir — ama gizlenmez, aşağıda denetleyebilirsin.',
+      footnote: 'Kaynak: WHO Newsroom’un herkese açık gerçek JSON API’si (<code>who.int/api/news/newsitems</code>), 17 Eylül 2026 itibarıyla canlı veri.',
+      items: [
+        { id: 'who-rsv-prequal', titleTr: 'DSÖ çok dozlu RSV aşı flakonunu ön onayladı, daha fazla bebeğin korunmasının önünü açıyor', titleOrig: 'WHO prequalifies multi-dose RSV vaccine vial, paving the way to protecting more infants globally', url: 'https://www.who.int/news/item/09-09-2026-who-prequalifies-multi-dose-rsv-vaccine-vial--paving-the-way-to-protecting-more-infants-globally', pub: '9 Eylül 2026', publisher: 'WHO Newsroom', relevant: true,
+          gists: ['DSÖ, çok dozlu RSV aşı flakonunu ön onayladı; bu adım dünya genelinde daha fazla bebeğin korunmasının yolunu açıyor.', 'DSÖ’nün RSV aşı flakonuna verdiği ön onay, aşının daha çok ülkede ve daha düşük maliyetle dağıtılmasını mümkün kılıyor.'] },
+        { id: 'who-trad-med-research', titleTr: 'DSÖ, artan sağlık ihtiyaçları için geleneksel tıpta daha fazla araştırma çağrısı yapıyor', titleOrig: 'WHO calls for more research into traditional medicine to meet growing health needs', url: 'https://www.who.int/news/item/17-09-2026-who-calls-for-more-research-into-traditional-medicine-to-meet-growing-health-needs', pub: '17 Eylül 2026', publisher: 'WHO Newsroom', relevant: false, reason: 'Cihaz/regülasyon dışı, genel politika çağrısı',
+          gists: ['DSÖ, artan sağlık ihtiyaçlarını karşılamak için geleneksel tıp üzerine daha fazla araştırma yapılmasını istiyor.'] },
+        { id: 'who-cancer-med-market', titleTr: 'Çocukluk çağı kanser ilaçları için daha sağlıklı bir pazar kurma stratejisi açıklandı', titleOrig: 'New strategy to build a healthier market for childhood cancer medicines', url: 'https://www.who.int/news/item/15-09-2026-new-strategy-to-build-a-healthier-market-for-childhood-cancer-medicines', pub: '15 Eylül 2026', publisher: 'WHO Newsroom', relevant: false, reason: 'İlaç piyasası stratejisi, cihazla ilgisiz',
+          gists: ['DSÖ, çocukluk çağı kanser ilaçları için daha sağlıklı bir pazar oluşturmak amacıyla yeni bir strateji açıkladı.'] },
+        { id: 'who-commonwealth-partnership', titleTr: 'DSÖ ve Commonwealth Sekretaryası, sağlık sistemlerini güçlendirmek için ortaklığı yeniledi', titleOrig: 'WHO and Commonwealth Secretariat renew partnership to strengthen health systems and advance universal health coverage', url: 'https://www.who.int/news/item/15-09-2026-who-and-commonwealth-secretariat-renew-partnership-to-strengthen-health-systems-and-advance-universal-health-coverage', pub: '15 Eylül 2026', publisher: 'WHO Newsroom', relevant: false, reason: 'Kurumsal ortaklık duyurusu',
+          gists: ['DSÖ ve Commonwealth Sekretaryası, sağlık sistemlerini güçlendirmek için ortaklığı yeniledi.'] },
+        { id: 'who-public-health-institutions', titleTr: 'Ülkeler, artan baskılara rağmen halk sağlığı kurumlarını güçlendirme yoluna gidiyor', titleOrig: 'Countries move to strengthen public health institutions and services amid mounting pressures', url: 'https://www.who.int/news/item/14-09-2026-countries-move-to-strengthen-public-health-institutions-and-services-amid-mounting-pressures', pub: '14 Eylül 2026', publisher: 'WHO Newsroom', relevant: false, reason: 'Genel politika, ürün/cihaz sinyali yok',
+          gists: ['Ülkeler, artan baskılara rağmen halk sağlığı kurumlarını ve hizmetlerini güçlendirme yoluna gidiyor.'] },
+        { id: 'who-chile-rabies', titleTr: 'Şili, köpek kaynaklı kuduzu ortadan kaldıran ilk Güney Amerika ülkesi oldu', titleOrig: 'Chile becomes first country in South America validated for eliminating dog-transmitted rabies as a public health problem', url: 'https://www.who.int/news/item/14-09-2026-chile-becomes-first-country-in-south-america-validated-for-eliminating-dog-transmitted-rabies-as-a-public-health-problem', pub: '14 Eylül 2026', publisher: 'WHO Newsroom', relevant: false, reason: 'Halk sağlığı kilometre taşı, ama cihaz/sektör dışı',
+          gists: ['Şili, köpek kaynaklı kuduzu halk sağlığı sorunu olmaktan çıkaran Güney Amerika’daki ilk ülke oldu.'] },
+        { id: 'who-brics-trad-med', titleTr: 'BRICS liderleri Yeni Delhi Deklarasyonu’nda geleneksel tıp taahhüdünü ilerletti', titleOrig: 'BRICS leaders advance commitment for traditional medicine in New Delhi Declaration', url: 'https://www.who.int/news/item/14-09-2026-brics-leaders-advance-commitment-for-traditional-medicine-in-new-delhi-declaration', pub: '14 Eylül 2026', publisher: 'WHO Newsroom', relevant: false, reason: 'Siyasi deklarasyon, editöryel kapsam dışı',
+          gists: ['BRICS liderleri, Yeni Delhi Deklarasyonu’nda geleneksel tıbba yönelik taahhütlerini ilerletti.'] },
+        { id: 'who-envoy-appointment', titleTr: 'Dr. Vanessa Kerry, DSÖ Sağlık Dayanıklılığı Özel Temsilcisi olarak atandı', titleOrig: 'Dr Vanessa Kerry appointed to new role as WHO Director-General’s Special Envoy for Health Resilience', url: 'https://www.who.int/news/item/09-09-2026-dr-vanessa-kerry-appointed-to-new-role-as-who-director-general-s-special-envoy-for-health-resilience', pub: '9 Eylül 2026', publisher: 'WHO Newsroom', relevant: false, reason: 'Personel ataması, kurumsal gürültü',
+          gists: ['Dr. Vanessa Kerry, DSÖ Genel Direktörü’nün Sağlık Dayanıklılığı Özel Temsilcisi olarak yeni bir göreve atandı.'] }
+      ]
+    },
+    'kaduse-research': {
+      label: 'Kaduse Research',
+      icon: '🧪',
+      selective: true,
+      noteTitle: 'Seçici mod aktif.',
+      noteBody: 'Sadece kalp/dolaşım tanısı, stetoskopla komşu teknolojiler ve geniş "AI × Tıp" temasına giren, anlaşılır bir sonucu olan çalışmalar görünür. Dar branşa özel veya doğrudan bir hikaye açısı taşımayan çalışmalar elenir.',
+      footnote: 'Kaynak: Europe PMC REST API (<code>ebi.ac.uk/europepmc</code>), gerçek DOI’li makaleler, 17 Eylül 2026 itibarıyla canlı sorgu.',
+      items: [
+        { id: 'epmc-ecg-deep-learning', titleTr: 'Yapısal, Metabolik ve Sistemik Hastalık Tespiti İçin 12 Elektrotlu EKG’lere Uygulanan Derin Öğrenme', titleOrig: 'Deep Learning Applied to 12-Lead ECGs for Detection of Structural, Metabolic and Systemic Disease', url: 'https://doi.org/10.3390/diagnostics16172834', pub: '3 Eylül 2026 · Diagnostics (Basel)', publisher: 'Europe PMC', relevant: true,
+          gists: ['Derin öğrenme tabanlı EKG analizi, geleneksel aritmi tespitinin ötesinde kalp yapısı ve sistemik hastalıkları da tespit edebiliyor.', '12 elektrotlu EKG’ye uygulanan yapay zeka, sadece ritim bozukluğu değil, kalbin yapısal ve sistemik hastalıklarını da yakalayabiliyor.'] },
+        { id: 'epmc-ai-ethics', titleTr: 'Yapay Zeka, Sağlık ve Sağlık Hizmetlerinde Etik Değerlendirmeler: Her Parıldayan Altın Değildir', titleOrig: 'Ethical Considerations on Artificial Intelligence, Health and Health Care. All That Glisters Is Not Gold', url: 'https://doi.org/10.1111/eci.70254', pub: '1 Eylül 2026 · Eur J Clin Invest', publisher: 'Europe PMC', relevant: true,
+          gists: ['Sağlıkta yapay zeka kullanımının etik sınırlarını irdeleyen çalışma, "her parıldayan altın değildir" diyerek temkinli iyimserlik çağrısı yapıyor.'] },
+        { id: 'epmc-ocular-fundus', titleTr: 'Acil Servislerde Yeterince Kullanılmayan Göz Dibi: Görüntüleme ve Yapay Zekada Mevcut İlerleme ve Gelecek Beklentisi', titleOrig: 'The Underutilized Ocular Fundus in Emergency Departments: Current Progress and Future Prospect of Imaging and Artificial Intelligence for Patient Care', url: 'https://doi.org/10.1016/j.xops.2026.101338', pub: '28 Temmuz 2026 · Ophthalmol Sci', publisher: 'Europe PMC', relevant: false, reason: 'Oftalmoloji-spesifik, kalp/stetoskop temasıyla bağı zayıf',
+          gists: ['Acil servislerde göz dibi görüntülemesinin yapay zeka ile birlikte yeterince kullanılmadığı, bunun hasta bakımını iyileştirebileceği öne sürülüyor.'] },
+        { id: 'epmc-virtual-clinic-africa', titleTr: 'Sahra-altı Afrika’nın Uzak, Kırsal ve Hizmet Yetersiz Bölgeleri İçin Kullanıcı Odaklı Sanal Klinik Hizmetleri', titleOrig: 'User-Centered Virtual Clinic Services for Remote, Rural, and Underserved Sub-Saharan Africa: Development and Usability Study', url: 'https://doi.org/10.2196/84272', pub: '2026 · JMIR Hum Factors', publisher: 'Europe PMC', relevant: false, reason: 'Sağlık erişimi/dijital sağlık hikayesi, ürün açısı yok',
+          gists: ['Sahra-altı Afrika’nın kırsal ve hizmet yetersiz bölgeleri için kullanıcı odaklı bir sanal klinik hizmeti geliştirilip kullanılabilirlik açısından test edildi.'] }
+      ]
+    },
+    'top': {
+      label: 'Tıp Öğrencileri',
+      icon: '🎓',
+      selective: false,
+      noteTitle: 'Filtresiz mod.',
+      noteBody: 'Bu şeritte hiçbir alaka filtresi uygulanmaz — kayıtlı kaynaktan gelen her duyuru, tek cümlelik özetiyle birlikte doğrudan önüne düşer. Hiçbir şey atlanmaz; sana ait olan tek karar sil / üretime aktar.',
+      footnote: 'Kaynak: Aydın Adnan Menderes Üniversitesi Tıp Fakültesi’nin gerçek, canlı duyuru sayfası (<code>fakulte.adu.edu.tr/med</code>) — <code>faculty_verified.yaml</code>’deki 109 doğrulanmış kaynaktan biri, 17 Eylül 2026 itibarıyla canlı.',
+      items: [
+        { id: 'adu-tum-ogrenciler', titleTr: 'TÜM ÖĞRENCİLERİMİZİN DİKKATİNE', titleOrig: null, url: 'https://fakulte.adu.edu.tr/med/tr/duyurular/tum-ogrencilerimizin-dikkatine-16149', pub: '1 Eylül 2026', publisher: 'ADÜ Tıp Fakültesi', relevant: true,
+          gists: ['Fakülte, tüm öğrencileri ilgilendiren bir duyuru yayımladı — başlık genel, içerik sayfadan kontrol edilmeli.'] },
+        { id: 'adu-af-kanunu', titleTr: '7592 Sayılı Af Kanunu Kanunu Duyurusu (Tıpta Uzmanlık Öğrencileri İçin)', titleOrig: null, url: 'https://fakulte.adu.edu.tr/med/tr/duyurular/7592-sayili-af-kanunu-kanunu-duyurusu-tipta-uzmanlik-ogrencileri-icin--16152', pub: '7 Eylül 2026', publisher: 'ADÜ Tıp Fakültesi', relevant: true,
+          gists: ['Tıpta uzmanlık öğrencilerini ilgilendiren 7592 sayılı Af Kanunu ile ilgili resmi bir duyuru yapıldı.'] },
+        { id: 'adu-tev-burs', titleTr: 'TEV 2026 Burs Duyurusu', titleOrig: null, url: 'https://fakulte.adu.edu.tr/med/tr/duyurular/tev-2026-burs-duyurusu-16151', pub: '7 Eylül 2026', publisher: 'ADÜ Tıp Fakültesi', relevant: true,
+          gists: ['Türk Eğitim Vakfı (TEV), 2026 yılı burs başvurularının açıldığını duyurdu.'] },
+        { id: 'adu-eydts', titleTr: '2026 Elektronik Yabancı Dil Olarak Türkçe Sınavı (e-YDTS)', titleOrig: null, url: 'https://fakulte.adu.edu.tr/med/tr/duyurular/2026-elektronik-yabanci-dil-olarak-turkce-sinavi-e-ydts--16150', pub: '7 Eylül 2026', publisher: 'ADÜ Tıp Fakültesi', relevant: true,
+          gists: ['2026 yılı Elektronik Yabancı Dil Olarak Türkçe Sınavı (e-YDTS) ile ilgili duyuru yayımlandı.'] },
+        { id: 'adu-genclik-bilgilendirme', titleTr: 'Gençlik Bilgilendirme Servisi Duyurusu', titleOrig: null, url: 'https://fakulte.adu.edu.tr/med/tr/duyurular/genclik-bilgilendirme-servisi-duyurusu-14147', pub: '3 Haziran 2026', publisher: 'ADÜ Tıp Fakültesi', relevant: true,
+          gists: ['Gençlik Bilgilendirme Servisi ile ilgili bir duyuru fakülte sayfasında paylaşıldı.'] }
+      ]
+    }
+  };
+
+  var LANE_ORDER = ['kaduse-news', 'kaduse-research', 'top'];
+  var STORAGE_KEY = 'kaduse-news-hub-sample-v3';
+  var state = null;
+
+  function loadState() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) return JSON.parse(raw);
+    } catch (e) {}
+    var s = { activeLane: 'kaduse-news', activeView: 'pending', decisions: {}, gistIndex: {} };
+    return s;
+  }
+  function saveState() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  state = loadState();
+  if (!state.activeView) state.activeView = 'pending';
+
+  var projectNavEl = document.getElementById('projectNav');
+  var pillbarEl = document.getElementById('pillbar');
+  var mainTitleEl = document.getElementById('mainTitle');
+  var mainSubEl = document.getElementById('mainSub');
+  var laneNoteEl = document.getElementById('laneNote');
+  var pendingViewEl = document.getElementById('pendingView');
+  var holdViewEl = document.getElementById('holdView');
+  var productionViewEl = document.getElementById('productionView');
+  var trashViewEl = document.getElementById('trashView');
+  var pendingListEl = document.getElementById('pendingList');
+  var holdListEl = document.getElementById('holdList');
+  var productionListEl = document.getElementById('productionList');
+  var trashListEl = document.getElementById('trashList');
+  var filteredWrapEl = document.getElementById('filteredWrap');
+  var filteredListEl = document.getElementById('filteredList');
+  var emptyStateEl = document.getElementById('emptyState');
+  var holdEmptyEl = document.getElementById('holdEmpty');
+  var productionEmptyEl = document.getElementById('productionEmpty');
+  var trashEmptyEl = document.getElementById('trashEmpty');
+  var filteredCountEl = document.getElementById('filteredCount');
+  var footnoteEl = document.getElementById('footnote');
+  var toastEl = document.getElementById('toast');
+  var toastTimer = null;
+
+  function showToast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.classList.remove('show'); }, 2400);
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function decisionKey(laneId, itemId) { return laneId + ':' + itemId; }
+
+  function countFor(laneId, view) {
+    var lane = LANES[laneId];
+    var base = lane.items.filter(function (it) { return lane.selective ? it.relevant : true; });
+    if (view === 'pending') return base.filter(function (it) { return !state.decisions[decisionKey(laneId, it.id)]; }).length;
+    if (view === 'hold') return base.filter(function (it) { return state.decisions[decisionKey(laneId, it.id)] === 'hold'; }).length;
+    if (view === 'production') return base.filter(function (it) { return state.decisions[decisionKey(laneId, it.id)] === 'promote'; }).length;
+    if (view === 'trash') return base.filter(function (it) { return state.decisions[decisionKey(laneId, it.id)] === 'delete'; }).length;
+    return 0;
+  }
+
+  function renderSidebar() {
+    projectNavEl.innerHTML = '';
+    LANE_ORDER.forEach(function (laneId) {
+      var lane = LANES[laneId];
+      var pendingCount = countFor(laneId, 'pending');
+      var btn = document.createElement('button');
+      btn.className = 'project-item' + (laneId === state.activeLane ? ' active' : '');
+      btn.setAttribute('data-lane', laneId);
+      btn.innerHTML = '<span class="p-icon">' + lane.icon + '</span><span class="p-label">' + escapeHtml(lane.label) + '</span><span class="p-count">' + pendingCount + '</span>';
+      projectNavEl.appendChild(btn);
+    });
+  }
+
+  function renderPillbar(laneId) {
+    var views = [
+      { id: 'pending', label: 'Gelen Kutusu', icon: '📥' },
+      { id: 'hold', label: 'Beklemede', icon: '⏳' },
+      { id: 'production', label: 'Üretime Aktarılanlar', icon: '✅' },
+      { id: 'trash', label: 'Silinenler', icon: '🗑️' }
+    ];
+    pillbarEl.innerHTML = '';
+    views.forEach(function (v) {
+      var count = countFor(laneId, v.id);
+      var btn = document.createElement('button');
+      btn.className = 'pill' + (state.activeView === v.id ? ' active' : '');
+      btn.setAttribute('data-view', v.id);
+      btn.innerHTML = v.icon + ' ' + v.label + ' <span class="p-count">' + count + '</span>';
+      pillbarEl.appendChild(btn);
+    });
+  }
+
+  function cardHtml(laneId, it, mode) {
+    var gKey = decisionKey(laneId, it.id);
+    var gIdx = state.gistIndex[gKey] || 0;
+    var gist = it.gists[gIdx % it.gists.length];
+    var extraClass = mode === 'production' ? ' in-production' : mode === 'trash' ? ' in-trash' : mode === 'hold' ? ' in-hold' : '';
+    var statusPill = mode === 'production'
+      ? '<span class="status-pill production">✓ üretimde</span>'
+      : mode === 'trash' ? '<span class="status-pill trash">✕ silindi</span>'
+      : mode === 'hold' ? '<span class="status-pill hold">⏳ beklemede</span>' : '';
+    var actionsHtml;
+    if (mode === 'pending') {
+      actionsHtml =
+        '<button class="btn btn-promote" data-action="promote" data-id="' + it.id + '">✓ Üretime Aktar</button>' +
+        '<button class="btn btn-hold" data-action="hold" data-id="' + it.id + '">⏳ Beklet</button>' +
+        '<button class="btn btn-revise" data-action="revise" data-id="' + it.id + '">↻ Özeti Revize Et</button>' +
+        '<button class="btn btn-delete" data-action="delete" data-id="' + it.id + '">✕ Sil</button>';
+    } else if (mode === 'hold') {
+      // Held items are the ones actively being reconsidered -- give the
+      // full decision set directly here, not just "back to inbox".
+      actionsHtml =
+        '<button class="btn btn-promote" data-action="promote" data-id="' + it.id + '">✓ Üretime Aktar</button>' +
+        '<button class="btn btn-delete" data-action="delete" data-id="' + it.id + '">✕ Sil</button>' +
+        '<button class="btn btn-undo" data-action="undo" data-id="' + it.id + '">↩ Gelen Kutusuna Taşı</button>';
+    } else {
+      actionsHtml = '<button class="btn btn-undo" data-action="undo" data-id="' + it.id + '">↩ Geri Al (bekleyene taşı)</button>';
+    }
+    return (
+      '<div class="card' + extraClass + '" id="card-' + laneId + '-' + it.id + '">' +
+        '<div class="card-meta"><span class="pub-pill">' + escapeHtml(it.publisher) + '</span><span>' + escapeHtml(it.pub) + '</span>' + statusPill + '</div>' +
+        '<p class="card-title"><a href="' + it.url + '" target="_blank" rel="noopener">' + escapeHtml(it.titleTr) + '</a></p>' +
+        (it.titleOrig ? '<p class="original-title">Orijinal: ' + escapeHtml(it.titleOrig) + '</p>' : '') +
+        '<p class="gist">' + (gIdx > 0 ? '<span class="alt-tag">revize edilmiş özet</span><br>' : '') + escapeHtml(gist) + '</p>' +
+        '<div class="actions">' + actionsHtml + '</div>' +
+      '</div>'
+    );
+  }
+
+  function render() {
+    renderSidebar();
+    var laneId = state.activeLane;
+    var lane = LANES[laneId];
+    renderPillbar(laneId);
+
+    mainTitleEl.textContent = lane.icon + ' ' + lane.label;
+    mainSubEl.textContent = lane.selective ? 'seçici mod' : 'filtresiz mod';
+
+    laneNoteEl.innerHTML = '<div class="lane-dot"></div><div><b>' + escapeHtml(lane.noteTitle) + '</b> ' + lane.noteBody + '</div>';
+    footnoteEl.innerHTML = lane.footnote + ' Bu bir küçük örnek dilim; "Üretime Aktar"/"Sil" burada yalnızca bu tarayıcıda geçici olarak saklanır, gerçek sistemde adayı kalıcı olarak veri tabanına yazar. "Özeti Revize Et", gerçek sistemde özeti yeniden üretecek adımın yerini tutan bir gösterimdir.';
+
+    pendingViewEl.hidden = state.activeView !== 'pending';
+    holdViewEl.hidden = state.activeView !== 'hold';
+    productionViewEl.hidden = state.activeView !== 'production';
+    trashViewEl.hidden = state.activeView !== 'trash';
+
+    var relevantItems = lane.items.filter(function (it) { return lane.selective ? it.relevant : true; });
+    var filteredItems = lane.selective ? lane.items.filter(function (it) { return !it.relevant; }) : [];
+
+    if (state.activeView === 'pending') {
+      var pendingRelevant = relevantItems.filter(function (it) { return !state.decisions[decisionKey(laneId, it.id)]; });
+      pendingListEl.innerHTML = pendingRelevant.map(function (it) { return cardHtml(laneId, it, 'pending'); }).join('');
+      emptyStateEl.hidden = pendingRelevant.length > 0;
+
+      filteredWrapEl.style.display = lane.selective ? '' : 'none';
+      filteredCountEl.textContent = String(filteredItems.length);
+      filteredListEl.innerHTML = filteredItems.map(function (it) {
+        return '<div class="filtered-card"><div class="ft-title">' + escapeHtml(it.titleTr) + '</div><div class="ft-reason">elenme nedeni: ' + escapeHtml(it.reason) + '</div></div>';
+      }).join('');
+    }
+
+    if (state.activeView === 'hold') {
+      var held = relevantItems.filter(function (it) { return state.decisions[decisionKey(laneId, it.id)] === 'hold'; });
+      holdListEl.innerHTML = held.map(function (it) { return cardHtml(laneId, it, 'hold'); }).join('');
+      holdEmptyEl.hidden = held.length > 0;
+    }
+
+    if (state.activeView === 'production') {
+      var produced = relevantItems.filter(function (it) { return state.decisions[decisionKey(laneId, it.id)] === 'promote'; });
+      productionListEl.innerHTML = produced.map(function (it) { return cardHtml(laneId, it, 'production'); }).join('');
+      productionEmptyEl.hidden = produced.length > 0;
+    }
+
+    if (state.activeView === 'trash') {
+      var trashed = relevantItems.filter(function (it) { return state.decisions[decisionKey(laneId, it.id)] === 'delete'; });
+      trashListEl.innerHTML = trashed.map(function (it) { return cardHtml(laneId, it, 'trash'); }).join('');
+      trashEmptyEl.hidden = trashed.length > 0;
+    }
+  }
+
+  function handleAction(action, id) {
+    var laneId = state.activeLane;
+    var lane = LANES[laneId];
+    var item = lane.items.filter(function (it) { return it.id === id; })[0];
+    if (!item) return;
+    var key = decisionKey(laneId, id);
+
+    if (action === 'revise') {
+      state.gistIndex[key] = ((state.gistIndex[key] || 0) + 1) % item.gists.length;
+      saveState();
+      render();
+      showToast('Özet yeniden üretildi (örnek gösterim)');
+      return;
+    }
+
+    var cardEl = document.getElementById('card-' + laneId + '-' + id);
+    if (cardEl) cardEl.classList.add('leaving');
+
+    setTimeout(function () {
+      if (action === 'undo') {
+        delete state.decisions[key];
+        showToast('Gelen Kutusu’na geri taşındı');
+      } else {
+        state.decisions[key] = action;
+        var msg = action === 'promote'
+          ? '✓ Üretime Aktarılanlar’a taşındı — üstteki sekmeden görebilirsin'
+          : action === 'hold'
+            ? '⏳ Beklemede’ye alındı — üstteki sekmeden görebilirsin'
+            : 'Silindi — Silinenler sekmesinde durur';
+        showToast(msg);
+      }
+      saveState();
+      render();
+    }, 200);
+  }
+
+  document.addEventListener('click', function (e) {
+    var laneBtn = e.target.closest('[data-lane]');
+    if (laneBtn) {
+      state.activeLane = laneBtn.getAttribute('data-lane');
+      state.activeView = 'pending';
+      saveState();
+      render();
+      return;
+    }
+    var viewBtn = e.target.closest('[data-view]');
+    if (viewBtn) {
+      state.activeView = viewBtn.getAttribute('data-view');
+      saveState();
+      render();
+      return;
+    }
+    var actionBtn = e.target.closest('[data-action]');
+    if (actionBtn) {
+      handleAction(actionBtn.getAttribute('data-action'), actionBtn.getAttribute('data-id'));
+      return;
+    }
+    if (e.target.closest('#filteredToggle')) {
+      var open = filteredListEl.classList.toggle('open');
+      document.getElementById('filteredToggleIcon').textContent = open ? '▾' : '▸';
+    }
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

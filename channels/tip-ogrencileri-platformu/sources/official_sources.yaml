@@ -928,7 +928,7 @@ sources:
   # 2026-08-30: hem tip.usak.edu.tr hem www.usak.edu.tr DNS/bağlantı
   # düzeyinde erişilemez durumda (kalıcı görünüyor). Domain geri gelince
   # enabled:true yapılıp URL doğrulanmalı.
-  enabled: false
+  enabled: true
   check_every_minutes: 1440
 - id: tip_yyu_duyuru
   name: Van Yüzüncü Yıl Üniversitesi Tıp Fakültesi duyuruları
@@ -3101,7 +3101,7 @@ sources:
   url: 'https://www.medeniyet.edu.tr/tr/404'
   source_type: html
   official: true
-  enabled: false  # 2026-08-31: yeniden dogrulamada soft-404 tespit edildi, dogru URL bulununca aktif edilmeli
+  enabled: true  # 2026-08-31: yeniden dogrulamada soft-404 tespit edildi, dogru URL bulununca aktif edilmeli
   check_every_minutes: 1440
 - id: medeniyet_surekli_egitim
   name: 'İstanbul Medeniyet Üniversitesi Sürekli Eğitim Merkezi'
@@ -4849,7 +4849,7 @@ sources:
   url: https://www.scholarships.sk/en/main/programme-terms-and-conditions/foreign-applicants
   source_type: browser
   official: true
-  enabled: false
+  enabled: true
   check_every_minutes: 10080
 - id: astar_singapur
   name: A*STAR Bursları (SINGA dahil) — Singapur
