@@ -22,7 +22,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-TRANSIENT_MARKERS = ("timed out", "timeout", "temporarily", "connection", "reset", "502", "503", "504", "degraded")
+TRANSIENT_MARKERS = ("timed out", "timeout", "temporarily", "connection", "reset", "502", "503", "504", "429", "degraded")
 
 
 def select_sources(spec: str) -> list[str]:

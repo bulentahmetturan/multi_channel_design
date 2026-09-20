@@ -332,13 +332,24 @@ def _composite_trovanorme_get(url: str, transport, max_pages: int = 13) -> Trans
     return TransportResult(http_status=200 if bodies else 502, body="\n".join(bodies), tls_ok=True, requested_url=url)
 
 
+# Narrow host scope for pinned public intermediates (see content/certs/README.md). A pin never applies elsewhere.
+PINNED_INTERMEDIATE_HOSTS = {
+    "fnmt-ac-componentes-informaticos.pem": ("universidades.gob.es",),
+    "geotrust-tls-rsa-ca-g1.pem": ("resmigazete.gov.tr",),
+    "sectigo-public-server-auth-ca-dv-r36.pem": ("ttb.org.tr",),
+}
+
+
 def _pinned_intermediates_get(url: str, timeout: float) -> TransportResult | None:
     """Verified GET that adds pinned PUBLIC intermediates (content/certs/*.pem) as an extra trust path.
 
     Used only after a normal verification failure. Verification stays ON (partial chain); nothing is disabled.
     """
     from pathlib import Path as _Path
-    certs = sorted((_Path(__file__).resolve().parents[1] / "content" / "certs").glob("*.pem"))
+    host = (urllib.parse.urlparse(url).hostname or "").lower()
+    certs_dir = _Path(__file__).resolve().parents[1] / "content" / "certs"
+    certs = [certs_dir / name for name, suffixes in PINNED_INTERMEDIATE_HOSTS.items()
+             if any(host == x or host.endswith("." + x) for x in suffixes) and (certs_dir / name).is_file()]
     if not certs:
         return None
     ctx = ssl.create_default_context()
