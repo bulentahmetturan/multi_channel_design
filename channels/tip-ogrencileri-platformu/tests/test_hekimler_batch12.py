@@ -37,7 +37,7 @@ class Batch12Tests(unittest.TestCase):
     def test_manual_sources_carry_written_evidence(self):
         reg = json.loads((Path(__file__).parents[1] / "content" / "source-registry-abroad-career-v1.json").read_text(encoding="utf-8"))
         by = {s["source_id"]: s for s in reg["sources"]}
-        for sid in ("abroad_us_ecfmg_intealth", "abroad_uk_gmc", "abroad_uk_oriel", "abroad_de_make_it_in_germany", "abroad_it_salute_foreign_qual"):
+        for sid in ("abroad_us_ecfmg_intealth", "abroad_uk_gmc", "abroad_de_make_it_in_germany"):
             self.assertTrue(by[sid].get("manual_intake_reason"), sid)
             self.assertFalse(by[sid].get("fetch_enabled"), sid)
 
@@ -64,6 +64,27 @@ class Batch12Tests(unittest.TestCase):
             db.init()
             res = ingest_one_source(profile, db=db, dry_run=True, transport=transport, force_due=True)
         self.assertEqual(res.newest_record_date, "2026-09-02")
+
+    def test_trovanorme_parser_uses_official_act_metadata(self):
+        body = (FIX / "pyrows_trovanorme.html").read_text(encoding="utf-8")
+        items = parse_raw_items(source_id="abroad_it_salute_foreign_qual", source_url="https://www.trovanorme.salute.gov.it/norme/archivioNewsletter", body=body, fetch_method="list-page", fetched_at="t")
+        self.assertGreater(len(items), 5)
+        self.assertTrue(all("dettaglioAtto.spring?id=" in i.canonical_item_url for i in items))
+        titles = " | ".join(i.title for i in items)
+        self.assertIn("Professioni sanitarie", titles)  # normalized from decree metadata, not "In G.U. ... pubblicato il decreto"
+        self.assertFalse(any(i.title.startswith("In G.U.") for i in items))
+        self.assertTrue(all(i.published_at and i.published_at.startswith("2026") for i in items))
+
+    def test_italy_gate_rejects_medicinal_products_but_keeps_health_professions(self):
+        from radar.hekimler_activation import all_sources
+        from radar.hekimler_fetch import classify_with_congress_gate
+        from radar.hekimler_integrity import resolve_effective_registry
+
+        p = [s for s in all_sources(resolve_effective_registry()) if s["source_id"] == "abroad_it_salute_foreign_qual"][0]
+        bad = classify_with_congress_gate(p, title="Monitoraggio confezioni medicinali", body="Istituzione Banca dati centrale dei medicinali")
+        ok = classify_with_congress_gate(p, title="Professioni sanitarie — assegnazione borse di studio", body="specialisti da formare per odontoiatra, medico veterinario")
+        self.assertEqual(bad.decision, "DISCARD")
+        self.assertEqual(ok.decision, "ACCEPT")
 
 
 if __name__ == "__main__":

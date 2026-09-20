@@ -317,6 +317,21 @@ def _os_trust_get(url: str, timeout: float) -> TransportResult | None:
     return TransportResult(http_status=status, body=body, tls_ok=True, requested_url=url, failure_reason=None if status < 400 else f"HTTP {status}")
 
 
+def _composite_trovanorme_get(url: str, transport, max_pages: int = 13) -> TransportResult:
+    """Archive page -> the latest weekly newsletters (last ~90 days), concatenated for one parse."""
+    archive = transport(url)
+    if not archive.body or (archive.http_status or 0) >= 400:
+        return archive
+    ids = list(dict.fromkeys(re.findall(r"renderArchivioNews\?id=(news\d{8}\.htm)", archive.body)))[:max_pages]
+    bodies: list[str] = []
+    base = url.split("/norme/")[0]
+    for nid in ids:
+        r = transport(f"{base}/norme/renderArchivioNews?id={nid}")
+        if r.body and (r.http_status or 0) < 400:
+            bodies.append(r.body)
+    return TransportResult(http_status=200 if bodies else 502, body="\n".join(bodies), tls_ok=True, requested_url=url)
+
+
 def tls_verified_get(url: str, timeout: float = 30.0) -> TransportResult:
     """HTTP GET with mandatory certificate verification. Never disables TLS checks."""
     ctx = ssl.create_default_context()
@@ -569,6 +584,63 @@ def date_exempt_run(method: str) -> bool:
     return method == "eutilities_api"
 
 
+def _parse_trovanorme_newsletters(
+    *, source_id: str, source_url: str, body: str, fetched_at: str, fetch_method: str
+) -> list[RawItem]:
+    """Ministry of Health 'Trova Norme' weekly newsletters (one or several concatenated).
+
+    Each block <td class="singolaNorma"> has an <h4> ("dd/mm/yyyy - Category - subject" in 'In evidenza', or the
+    issuing body in 'Norme della settimana'), a description paragraph and the official act link (dettaglioAtto).
+    The description is the meaningful text, so the title is normalized from official metadata + description.
+    """
+    import html as _html
+    from datetime import date as _date
+
+    def _txt(x: str) -> str:
+        return re.sub(r"\s+", " ", _html.unescape(re.sub(r"<[^>]+>", " ", re.sub(r"<!--.*?-->", " ", x, flags=re.S)))).strip()
+
+    out: list[RawItem] = []
+    parts = re.split(r"(?=<h1>\s*Newsletter del )", body)
+    for part in parts:
+        nm = re.search(r"Newsletter del (\d{2})/(\d{2})/(20\d{2})", part)
+        if not nm:
+            continue
+        nl_date = f"{nm.group(3)}-{nm.group(2)}-{nm.group(1)}"
+        for blk in re.findall(r'<td class="singolaNorma[^"]*">(.*?)</td>', part, flags=re.S):
+            h4 = re.search(r"<h4>(.*?)</h4>", blk, re.S)
+            link = re.search(r'href="[^"]*dettaglioAtto\.spring\?id=(\d+)', re.sub(r"<!--.*?-->", " ", blk, flags=re.S))
+            if not h4 or not link:
+                continue
+            head = _txt(h4.group(1))
+            paras = [ _txt(x) for x in re.findall(r"<p>(.*?)</p>", re.sub(r"<!--.*?-->", " ", blk, flags=re.S), flags=re.S) ]
+            desc = " ".join(p_ for p_ in paras if p_)
+            dm = re.match(r"(\d{2})/(\d{2})/(20\d{2})\s*-\s*(.+)", head)
+            if dm:
+                pub = f"{dm.group(3)}-{dm.group(2)}-{dm.group(1)}"
+                title = dm.group(4).replace(" - ", " — ", 1)
+            else:
+                pub = nl_date
+                act = paras[0] if paras else head
+                short = desc[len(act):].strip(" -–")
+                title = f"{head}: {act} — {short[:150]}".rstrip(" —")
+            url = f"https://www.trovanorme.salute.gov.it/norme/dettaglioAtto.spring?id={link.group(1)}"
+            full = f"{title} — {desc}"[:600]
+            out.append(
+                RawItem(
+                    source_id=source_id,
+                    source_url=source_url,
+                    canonical_item_url=url,
+                    title=title[:300],
+                    published_at=pub,
+                    fetched_at=fetched_at,
+                    content_hash=_hash_text(source_id, url, title),
+                    fetch_method=fetch_method,
+                    raw_excerpt=full,
+                )
+            )
+    return out
+
+
 def _adjacent_date(body: str, pos: int) -> str | None:
     """Date shown right after a list anchor (e.g. <a>title</a> <span>16/09/2026</span>), before the next anchor."""
     from .hekimler_dates import extract_dates
@@ -604,6 +676,10 @@ def parse_raw_items(
         )
         if rows:
             return rows
+    if 'class="singolaNorma' in body and "Newsletter del " in body:
+        return _parse_trovanorme_newsletters(
+            source_id=source_id, source_url=source_url, body=body, fetched_at=fetched_at, fetch_method=fetch_method
+        )
     if "hbranabaslik" in body and "SliderUrl(" in body:
         return _parse_tuik_carousel(
             source_id=source_id, source_url=source_url, body=body, fetched_at=fetched_at, fetch_method=fetch_method
@@ -981,7 +1057,10 @@ def ingest_one_source(
                 commit_target=commit_target,
             )
 
-        transport_result = transport(listing)
+        if plan.get("composite") == "trovanorme_weekly_newsletters":
+            transport_result = _composite_trovanorme_get(listing, transport, int(plan.get("composite_max_pages") or 13))
+        else:
+            transport_result = transport(listing)
         if not transport_result.tls_ok:
             outcome = evaluate_tls_failure(sid, listing)
             return SourceRunResult(

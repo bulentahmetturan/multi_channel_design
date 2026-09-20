@@ -996,5 +996,53 @@
     ],
     "undated_sample": [],
     "result": "HAS_CANDIDATES"
+  },
+  {
+    "source_id": "abroad_uk_oriel",
+    "url": "https://medical.hee.nhs.uk/medical-training-recruitment/news",
+    "http": 200,
+    "failure": null,
+    "parsed": 26,
+    "accepted_pre_date": 9,
+    "fresh": 4,
+    "active": 0,
+    "undated": 0,
+    "stale": 5,
+    "accepted": 4,
+    "sample": [
+      {
+        "title": "National Webinar on careers in Medical Oncology",
+        "url": "https://medical.hee.nhs.uk/medical-training-recruitment/news/careers-in-medical-oncology",
+        "date": "2026-09-07"
+      },
+      {
+        "title": "Important Update for Applicants Interested in 2027 Medical Specialty Recruitment",
+        "url": "https://medical.hee.nhs.uk/medical-training-recruitment/news/important-update-for-applicants-interested-in-2027-medical-specialty-recruitment",
+        "date": "2026-08-24"
+      },
+      {
+        "title": "Expansion of Medical Specialty Training Posts from February 2027",
+        "url": "https://medical.hee.nhs.uk/medical-training-recruitment/news/expansion-of-medical-specialty-training-posts-from-february-2027",
+        "date": "2026-08-10"
+      }
+    ],
+    "undated_sample": [],
+    "result": "HAS_CANDIDATES"
+  },
+  {
+    "source_id": "abroad_it_salute_foreign_qual",
+    "url": "https://www.trovanorme.salute.gov.it/norme/archivioNewsletter",
+    "http": 200,
+    "failure": null,
+    "parsed": 881,
+    "accepted_pre_date": 0,
+    "fresh": 0,
+    "active": 0,
+    "undated": 0,
+    "stale": 0,
+    "accepted": 0,
+    "sample": [],
+    "undated_sample": [],
+    "result": "NO_CANDIDATES"
   }
 ]

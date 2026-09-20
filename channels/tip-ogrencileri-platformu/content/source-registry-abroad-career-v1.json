@@ -114,9 +114,9 @@
       "publication_eligible": false,
       "pipeline_wiring_enabled": false,
       "runtime_activation": "MANUAL_INTAKE",
-      "manual_intake_reason": "HTTP 403 (bot protection) on /news/, /news/feed, /news/rss, /rss, /sitemap.xml with an honest user agent; /news/feed answered 200 once and 403 afterwards (intermittent WAF). Protection not bypassed. Alternatives tried: RSS, sitemap, alternate list URLs.",
+      "manual_intake_reason": "BLOCKED_EXTERNAL: every official Intealth/ECFMG host (ecfmg.org, intealth.org, www3/iwa, /news/, /news/feed, /news/category/*, /news/YYYY/MM/, sitemap.xml, robots.txt) returns HTTP 403 with a bot challenge page. No public API/feed found; USMLE-side exam notices are already covered by abroad_us_usmle, but ECFMG certification/pathway notices have no accessible official channel. Protection not bypassed (curl variance not exploited).",
       "source_health": "MANUAL_REVIEW_REQUIRED",
-      "manual_review_reason": "HTTP 403 (bot protection) on /news/, /news/feed, /news/rss, /rss, /sitemap.xml with an honest user agent; /news/feed answered 200 once and 403 afterwards (intermittent WAF). Protection not bypassed. Alternatives tried: RSS, sitemap, alternate list URLs."
+      "manual_review_reason": "BLOCKED_EXTERNAL: every official Intealth/ECFMG host (ecfmg.org, intealth.org, www3/iwa, /news/, /news/feed, /news/category/*, /news/YYYY/MM/, sitemap.xml, robots.txt) returns HTTP 403 with a bot challenge page. No public API/feed found; USMLE-side exam notices are already covered by abroad_us_usmle, but ECFMG certification/pathway notices have no accessible official channel. Protection not bypassed (curl variance not exploited)."
     },
     {
       "source_id": "abroad_us_usmle",
@@ -451,43 +451,112 @@
       "publication_eligible": false,
       "pipeline_wiring_enabled": false,
       "runtime_activation": "MANUAL_INTAKE",
-      "manual_intake_reason": "HTTP 403 (bot protection) on the PLAB page, /news, /about/news, /rss, /news/rss and /sitemap.xml. No public alternative found. Protection not bypassed.",
+      "manual_intake_reason": "BLOCKED_EXTERNAL: gmc-uk.org (all paths incl. robots.txt, sitemap.xml, /news, /rss, PLAB pages) returns HTTP 403 with a bot challenge page; the related regulator host fsmb.org is challenged as well. No accessible official replacement found. Protection not bypassed.",
       "source_health": "MANUAL_REVIEW_REQUIRED",
-      "manual_review_reason": "HTTP 403 (bot protection) on the PLAB page, /news, /about/news, /rss, /news/rss and /sitemap.xml. No public alternative found. Protection not bypassed."
+      "manual_review_reason": "BLOCKED_EXTERNAL: gmc-uk.org (all paths incl. robots.txt, sitemap.xml, /news, /rss, PLAB pages) returns HTTP 403 with a bot challenge page; the related regulator host fsmb.org is challenged as well. No accessible official replacement found. Protection not bypassed."
     },
     {
       "source_id": "abroad_uk_oriel",
       "name": "Oriel — NHS specialty training applications",
       "country": "United Kingdom",
       "coverage_class": "CORE_PATHWAY_DOSSIER",
-      "canonical_url": "https://www.oriel.nhs.uk/",
-      "source_url": "https://www.oriel.nhs.uk/",
-      "primary_url": "https://www.oriel.nhs.uk/",
+      "canonical_url": "https://medical.hee.nhs.uk/medical-training-recruitment/news",
+      "source_url": "https://medical.hee.nhs.uk/medical-training-recruitment/news",
+      "primary_url": "https://medical.hee.nhs.uk/medical-training-recruitment/news",
       "allowed_hostnames": [
-        "www.oriel.nhs.uk",
-        "oriel.nhs.uk"
+        "medical.hee.nhs.uk"
       ],
       "upstream_source_id": null,
       "source_tier": "OFFICIAL_PRIMARY",
       "source_role": "official_graduate_medical_training_body",
-      "status": "configured_not_wired",
-      "fetch_mode": "not_wired",
+      "status": "active",
+      "fetch_mode": "list-page",
       "allowed_scope": [
         "residency_or_match",
         "specialty_recognition"
       ],
       "allowed_path_patterns": [
-        "/"
+        "/medical-training-recruitment/news"
       ],
       "statement_treatment": "official_guidance",
-      "fetch_enabled": false,
-      "scheduled_fetch_enabled": false,
-      "candidate_emission_enabled": false,
+      "fetch_enabled": true,
+      "scheduled_fetch_enabled": true,
+      "candidate_emission_enabled": true,
       "publication_eligible": false,
-      "pipeline_wiring_enabled": false,
+      "pipeline_wiring_enabled": true,
       "notes": "Restrict to specialty/foundation training application notices; not generic NHS news.",
-      "manual_intake_reason": "oriel.nhs.uk is a login-only application portal (\"Please login to continue\"); no public dated announcement list, RSS, API or sitemap. Vacancies require an account.",
-      "manual_review_reason": "oriel.nhs.uk is a login-only application portal (\"Please login to continue\"); no public dated announcement list, RSS, API or sitemap. Vacancies require an account."
+      "include_keywords": [
+        "recruitment",
+        "specialty",
+        "training",
+        "applicants",
+        "posts",
+        "round",
+        "Oriel",
+        "foundation",
+        "international",
+        "IMG",
+        "application",
+        "timeline",
+        "webinar",
+        "career"
+      ],
+      "exclude_keywords": [
+        "health plan",
+        "10-year"
+      ],
+      "allowed_routes": [
+        "ABROAD_CAREER",
+        "ABROAD_OPPORTUNITY_WATCH",
+        "NEEDS_REVIEW",
+        "DISCARD"
+      ],
+      "default_route_on_accept": "NEEDS_REVIEW",
+      "source_health": "HEALTHY",
+      "runtime_activation": "AUTOMATION_READY",
+      "fetch_plan": {
+        "primary_method": "list-page",
+        "tls_verification_required": true,
+        "allowed_hostnames": [
+          "medical.hee.nhs.uk"
+        ],
+        "allowed_path_patterns": [
+          "/medical-training-recruitment/news"
+        ],
+        "forbidden_hosts": [],
+        "forbidden_path_patterns": [],
+        "notes": "Official public replacement for the login-only Oriel portal: NHS England Medical Training Recruitment Hub news (server-rendered, dated). Oriel itself is not scraped.",
+        "expected_check_interval_minutes": 1440,
+        "source_health": "HEALTHY",
+        "coverage_status": "configured",
+        "coverage_policy": {
+          "sparse_source_allowed": true,
+          "expected_eligible_frequency": "rare",
+          "coverage_watch_window": 4,
+          "require_in_scope_for_low_coverage": true
+        },
+        "initial_backfill": {
+          "lookback_days": 60,
+          "retain_active_or_future_deadline": true,
+          "historical_priority": "backfill_low",
+          "undated_as_current": true
+        },
+        "surfaces": [
+          {
+            "id": "list",
+            "url": "https://medical.hee.nhs.uk/medical-training-recruitment/news",
+            "role": "primary",
+            "health": "HEALTHY"
+          }
+        ],
+        "fetch_enabled": true,
+        "scheduled_fetch_enabled": true,
+        "candidate_emission_enabled": true
+      },
+      "item_url_patterns": [
+        "medical\\.hee\\.nhs\\.uk/medical-training-recruitment/news/[^/?#]+$"
+      ],
+      "execution": "python_runner"
     },
     {
       "source_id": "abroad_de_anerkennung",
@@ -631,8 +700,8 @@
       "publication_eligible": false,
       "pipeline_wiring_enabled": false,
       "notes": "Physician-regulated-profession pages only — not general migration marketing.",
-      "manual_intake_reason": "Radware bot challenge (\"Verifying your browser before proceeding\") on every path incl. /en/, /en/news, /en/rss. Not bypassed. Recognition news is covered by abroad_de_anerkennung (official BQ portal).",
-      "manual_review_reason": "Radware bot challenge (\"Verifying your browser before proceeding\") on every path incl. /en/, /en/news, /en/rss. Not bypassed. Recognition news is covered by abroad_de_anerkennung (official BQ portal)."
+      "manual_intake_reason": "BLOCKED_EXTERNAL: Radware Bot Manager CAPTCHA on every make-it-in-germany.com path (also via the fetch tool). Its physician content is static guidance (recognition, Approbation, visa, in-demand professions) with no dated news list. Recognition scope is covered by abroad_de_anerkennung; visa/relocation guidance is NOT covered and cannot be monitored. Not classified COVERED because overlap cannot be proven.",
+      "manual_review_reason": "BLOCKED_EXTERNAL: Radware Bot Manager CAPTCHA on every make-it-in-germany.com path (also via the fetch tool). Its physician content is static guidance (recognition, Approbation, visa, in-demand professions) with no dated news list. Recognition scope is covered by abroad_de_anerkennung; visa/relocation guidance is NOT covered and cannot be monitored. Not classified COVERED because overlap cannot be proven."
     },
     {
       "source_id": "abroad_ca_mcc_img_pathways",
@@ -1590,21 +1659,19 @@
       "name": "Italy — Ministry of Health foreign health qualifications",
       "country": "Italy",
       "coverage_class": "OFFICIAL_PATHWAY_DOSSIER",
-      "canonical_url": "https://www.salute.gov.it/new/it/ministero/non-eu-country/",
-      "source_url": "https://www.salute.gov.it/new/it/ministero/non-eu-country/",
-      "primary_url": "https://www.salute.gov.it/new/it/ministero/non-eu-country/",
+      "canonical_url": "https://www.trovanorme.salute.gov.it/norme/archivioNewsletter",
+      "source_url": "https://www.trovanorme.salute.gov.it/norme/archivioNewsletter",
+      "primary_url": "https://www.trovanorme.salute.gov.it/norme/archivioNewsletter",
       "allowed_hostnames": [
-        "www.salute.gov.it",
-        "salute.gov.it"
+        "www.trovanorme.salute.gov.it"
       ],
       "upstream_source_id": null,
       "source_tier": "OFFICIAL_PRIMARY",
       "source_role": "government_recognition_portal",
-      "status": "manual_review",
-      "source_health": "MANUAL_REVIEW_REQUIRED",
+      "status": "active",
+      "source_health": "HEALTHY",
       "manual_review_required": true,
-      "manual_review_reason": "Gcore cookie/JS security challenge on salute.gov.it (all paths). Not bypassed. Reachable alternative trovanorme.salute.gov.it publishes weekly norm/competition newsletters, but item titles are generic (\"In G.U. ... pubblicato il decreto\", \"CONCORSO\") so a dedicated parser is still needed.",
-      "fetch_mode": "not_wired",
+      "fetch_mode": "list-page",
       "allowed_scope": [
         "degree_recognition",
         "registration_or_licensure",
@@ -1613,16 +1680,102 @@
       "jurisdiction_required": true,
       "jurisdiction_label": "competent_authority_or_region",
       "allowed_path_patterns": [
-        "/new/it/ministero/non-eu-country/",
-        "/"
+        "/norme/"
       ],
       "statement_treatment": "official_guidance",
-      "fetch_enabled": false,
-      "scheduled_fetch_enabled": false,
-      "candidate_emission_enabled": false,
+      "fetch_enabled": true,
+      "scheduled_fetch_enabled": true,
+      "candidate_emission_enabled": true,
       "publication_eligible": false,
-      "pipeline_wiring_enabled": false,
-      "manual_intake_reason": "Gcore cookie/JS security challenge on salute.gov.it (all paths). Not bypassed. Reachable alternative trovanorme.salute.gov.it publishes weekly norm/competition newsletters, but item titles are generic (\"In G.U. ... pubblicato il decreto\", \"CONCORSO\") so a dedicated parser is still needed."
+      "pipeline_wiring_enabled": true,
+      "include_keywords": [
+        "dei medici",
+        "medici chirurghi",
+        "medico chirurgo",
+        "odontoiatr",
+        "medico veterinario",
+        "professioni sanitarie",
+        "riconoscimento dei titoli",
+        "riconoscimento",
+        "titoli di studio esteri",
+        "qualifiche professionali",
+        "specializzazione",
+        "abilitazione all'esercizio",
+        "esame di stato",
+        "tirocinio",
+        "borse di studio",
+        "direttiva 2005/36",
+        "paesi terzi",
+        "formazione medica",
+        "ordine dei medici",
+        "enpam"
+      ],
+      "exclude_keywords": [
+        "alimento",
+        "doping",
+        "mangimi",
+        "additivi",
+        "dispositivi medici",
+        "fitosanitari",
+        "biocidi",
+        "regolamento di esecuzione",
+        "confezioni medicinali",
+        "medicinali",
+        "rettifica del regolamento"
+      ],
+      "allowed_routes": [
+        "ABROAD_CAREER",
+        "ABROAD_OPPORTUNITY_WATCH",
+        "NEEDS_REVIEW",
+        "DISCARD"
+      ],
+      "default_route_on_accept": "NEEDS_REVIEW",
+      "runtime_activation": "AUTOMATION_READY",
+      "fetch_plan": {
+        "primary_method": "list-page",
+        "tls_verification_required": true,
+        "allowed_hostnames": [
+          "www.trovanorme.salute.gov.it"
+        ],
+        "allowed_path_patterns": [
+          "/norme/"
+        ],
+        "forbidden_hosts": [],
+        "forbidden_path_patterns": [],
+        "notes": "salute.gov.it is behind a Gcore challenge (not bypassed). Official alternative: Trova Norme weekly newsletters (archive -> last 13 weeks), parsed from official act metadata (date, category, description, dettaglioAtto link).",
+        "expected_check_interval_minutes": 1440,
+        "source_health": "HEALTHY",
+        "coverage_status": "configured",
+        "coverage_policy": {
+          "sparse_source_allowed": true,
+          "expected_eligible_frequency": "rare",
+          "coverage_watch_window": 4,
+          "require_in_scope_for_low_coverage": true
+        },
+        "initial_backfill": {
+          "lookback_days": 60,
+          "retain_active_or_future_deadline": true,
+          "historical_priority": "backfill_low",
+          "undated_as_current": true
+        },
+        "surfaces": [
+          {
+            "id": "list",
+            "url": "https://www.trovanorme.salute.gov.it/norme/archivioNewsletter",
+            "role": "primary",
+            "health": "HEALTHY"
+          }
+        ],
+        "fetch_enabled": true,
+        "scheduled_fetch_enabled": true,
+        "candidate_emission_enabled": true,
+        "composite": "trovanorme_weekly_newsletters",
+        "composite_max_pages": 13
+      },
+      "item_url_patterns": [
+        "trovanorme\\.salute\\.gov\\.it/norme/dettaglioAtto\\.spring\\?id=\\d+"
+      ],
+      "execution": "python_runner"
     },
     {
       "source_id": "abroad_sa_scfhs_watch",

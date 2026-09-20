@@ -100,7 +100,16 @@
       "medical board",
       "specialist pathway",
       "saudi board",
-      "saudi board programs"
+      "saudi board programs",
+      "odontoiatra",
+      "odontoiatri",
+      "medico veterinario",
+      "professioni sanitarie",
+      "riconoscimento dei titoli",
+      "dei medici",
+      "medici chirurghi",
+      "medico chirurgo",
+      "enpam"
     ],
     "dental": [
       "dis hekim",
@@ -186,7 +195,8 @@
     "halk_sagligi_yeterlik",
     "abroad_au_medical_board",
     "abroad_au_amc",
-    "tihud_internal_medicine"
+    "tihud_internal_medicine",
+    "abroad_uk_oriel"
   ],
   "rules": [
     "A generic term alone (KPSS, memur, personel alımı, burs, sınav takvimi) never qualifies; it needs a profession/learner term from physician, dental, veterinary or a named medical exam/pathway.",
