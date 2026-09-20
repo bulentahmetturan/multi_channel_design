@@ -351,7 +351,8 @@
       "scheduled_fetch_enabled": false,
       "candidate_emission_enabled": false,
       "publication_eligible": false,
-      "pipeline_wiring_enabled": false
+      "pipeline_wiring_enabled": false,
+      "execution": "python_runner"
     },
     {
       "source_id": "tuik_medical_public_health",
@@ -615,7 +616,8 @@
         "fetch_enabled": true,
         "scheduled_fetch_enabled": true,
         "candidate_emission_enabled": true
-      }
+      },
+      "execution": "python_runner"
     },
     {
       "source_id": "hsgm_public_health",
@@ -827,7 +829,8 @@
       },
       "item_url_patterns": [
         "ttb\\.org\\.tr/(haber|duyuru)_goster\\.php"
-      ]
+      ],
+      "execution": "python_runner"
     },
     {
       "source_id": "turkmsic_medical_students",
@@ -926,7 +929,8 @@
       },
       "item_url_patterns": [
         "turkmsic\\.org/(index\\.php/haberler/)?[a-z0-9-]{25,}/?$"
-      ]
+      ],
+      "execution": "python_runner"
     },
     {
       "source_id": "tepdad_medical_accreditation",
@@ -1670,7 +1674,8 @@
         "fetch_enabled": true,
         "scheduled_fetch_enabled": true,
         "candidate_emission_enabled": true
-      }
+      },
+      "execution": "python_runner"
     },
     {
       "source_id": "tpd_psychiatry",
@@ -1890,7 +1895,8 @@
         "fetch_enabled": true,
         "scheduled_fetch_enabled": true,
         "candidate_emission_enabled": true
-      }
+      },
+      "execution": "python_runner"
     },
     {
       "source_id": "tahud_family_medicine",
@@ -2001,7 +2007,8 @@
       },
       "item_url_patterns": [
         "/haber/[a-z0-9-]{10,}"
-      ]
+      ],
+      "execution": "python_runner"
     },
     {
       "source_id": "tihud_internal_medicine",
@@ -2205,7 +2212,8 @@
         "fetch_enabled": true,
         "scheduled_fetch_enabled": true,
         "candidate_emission_enabled": true
-      }
+      },
+      "execution": "python_runner"
     },
     {
       "source_id": "tatd_emergency_medicine",
@@ -2315,7 +2323,8 @@
         "fetch_enabled": true,
         "scheduled_fetch_enabled": true,
         "candidate_emission_enabled": true
-      }
+      },
+      "execution": "python_runner"
     }
   ],
   "secondary_sources": [

@@ -617,7 +617,8 @@
         "fetch_enabled": true,
         "scheduled_fetch_enabled": true,
         "candidate_emission_enabled": true
-      }
+      },
+      "execution": "python_runner"
     }
   ]
 }

@@ -12,7 +12,8 @@ class SchedulerTests(unittest.TestCase):
     def test_all_python_selects_only_python_runner_sources(self):
         ids = sched.select_sources("all-python")
         self.assertIn("abroad_ie_medical_council", ids)
-        self.assertNotIn("moh_physician_workforce", ids)
+        self.assertIn("moh_physician_workforce", ids)  # every ready source now runs through the Python path
+        self.assertNotIn("abroad_uk_gmc", ids)
 
     def test_explicit_selection_ignores_unknown_and_manual_sources(self):
         ids = sched.select_sources("abroad_uk_gmc,abroad_uk_oriel,nope")

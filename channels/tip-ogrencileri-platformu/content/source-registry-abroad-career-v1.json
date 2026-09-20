@@ -216,7 +216,8 @@
       },
       "item_url_patterns": [
         "usmle\\.org/[a-z0-9-]{30,}$"
-      ]
+      ],
+      "execution": "python_runner"
     },
     {
       "source_id": "abroad_us_aamc_eras",
@@ -414,7 +415,8 @@
       },
       "item_url_patterns": [
         "nrmp\\.org/about/news/20\\d\\d/"
-      ]
+      ],
+      "execution": "python_runner"
     },
     {
       "source_id": "abroad_uk_gmc",
@@ -809,7 +811,8 @@
       },
       "item_url_patterns": [
         "mcc\\.ca/news/[a-z0-9-]{10,}"
-      ]
+      ],
+      "execution": "python_runner"
     },
     {
       "source_id": "abroad_ca_carms",

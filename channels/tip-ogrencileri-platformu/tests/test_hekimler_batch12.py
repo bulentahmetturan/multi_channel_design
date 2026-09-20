@@ -15,9 +15,10 @@ class Batch12Tests(unittest.TestCase):
         all_ids = {p["source_id"] for p in export_automation_ready_profiles()}
         worker_ids = {p["source_id"] for p in export_automation_ready_profiles(worker_only=True)}
         heavy = all_ids - worker_ids
-        for sid in ("tihud_internal_medicine", "abroad_ie_medical_council", "abroad_es_mir_fse"):
+        for sid in ("tihud_internal_medicine", "abroad_ie_medical_council", "abroad_es_mir_fse", "moh_physician_workforce"):
             self.assertIn(sid, heavy)
-        self.assertTrue(worker_ids)
+        # Architecture: the Worker is a lightweight authenticated ingest endpoint only; its cron parses nothing.
+        self.assertEqual(worker_ids, set())
 
     def test_dated_rows_parser_reads_title_and_date_without_links(self):
         body = (FIX / "pyrows_tihud.html").read_text(encoding="utf-8")

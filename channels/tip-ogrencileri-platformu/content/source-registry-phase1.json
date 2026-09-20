@@ -794,7 +794,8 @@
       "publication_eligible": false,
       "pipeline_wiring_enabled": true,
       "runtime_activation": "AUTOMATION_READY",
-      "parser_profile": "daily_toc_fihrist"
+      "parser_profile": "daily_toc_fihrist",
+      "execution": "python_runner"
     },
     {
       "source_id": "tuik_medical_public_health",

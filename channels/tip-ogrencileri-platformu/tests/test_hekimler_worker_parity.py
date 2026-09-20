@@ -87,12 +87,20 @@ class WorkerListingAllowlistTests(unittest.TestCase):
 
     @unittest.skipUnless(shutil.which("node") and (HUB / "node_modules" / "esbuild").exists(), "node/esbuild not available")
     def test_every_ready_profile_listing_passes_worker_allowlist(self):
+        import os
+        import tempfile
+
+        from radar.hekimler_continuous_runner import export_automation_ready_profiles
+
+        with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False, encoding="utf-8") as fh:
+            json.dump({"profiles": export_automation_ready_profiles()}, fh, ensure_ascii=False)
         proc = subprocess.run(
             ["node", "scripts/hekimler-listing-check.mjs"],
             cwd=HUB, capture_output=True, text=True, encoding="utf-8", timeout=120,
+            env={**os.environ, "HEKIMLER_PARITY_PROFILES": fh.name},
         )
         self.assertEqual(proc.returncode, 0, proc.stderr[-800:])
         rows = json.loads(proc.stdout.strip().splitlines()[-1])
-        self.assertGreater(len(rows), 8)
+        self.assertGreater(len(rows), 30)
         blocked = [(r["source_id"], r["listing"]) for r in rows if not r["allowed"]]
         self.assertEqual(blocked, [])
