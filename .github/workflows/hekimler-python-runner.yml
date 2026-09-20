@@ -53,7 +53,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: python -m pip install --disable-pip-version-check pyyaml
+        run: python -m pip install --disable-pip-version-check -r requirements-runner.txt
 
       - name: Run sources
         env:

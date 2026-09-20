@@ -1,0 +1,54 @@
+name: Hekimler Türkiye-region runner
+
+# Optional. Runs the SAME adapter/ingest contract for sources tagged runner_region=TR (currently hsgm_public_health)
+# on a self-hosted runner located in Türkiye (labels: self-hosted, tr). Manual dispatch only: without such a runner
+# the job simply waits and nothing is ingested. No credentials are embedded; the ingest token is the repo secret.
+
+on:
+  workflow_dispatch:
+    inputs:
+      sources:
+        description: "tr-runner | comma-separated ids"
+        default: "tr-runner"
+      timeout:
+        default: "240"
+      retries:
+        default: "2"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hekimler-tr-runner
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: [self-hosted, tr]
+    timeout-minutes: 60
+    defaults:
+      run:
+        working-directory: channels/tip-ogrencileri-platformu
+    env:
+      GCOS_HUB_URL: https://global-content-os.channel-content-os-mcp.workers.dev
+      HEKIMLER_CONTINUOUS_INGESTION_ENABLED: "true"
+      PYTHONIOENCODING: utf-8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install --disable-pip-version-check -r requirements-runner.txt
+      - name: Run sources
+        env:
+          TIP_RADAR_INGEST_TOKEN: ${{ secrets.TIP_RADAR_INGEST_TOKEN }}
+          SOURCES: ${{ github.event.inputs.sources }}
+          SOURCE_TIMEOUT: ${{ github.event.inputs.timeout }}
+          SOURCE_RETRIES: ${{ github.event.inputs.retries }}
+        run: python scripts/hekimler_scheduled_run.py --sources "$SOURCES" --timeout "$SOURCE_TIMEOUT" --retries "$SOURCE_RETRIES" --report-dir report
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hekimler-tr-run-report
+          path: channels/tip-ogrencileri-platformu/report/
+          retention-days: 30
