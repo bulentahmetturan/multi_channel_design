@@ -1073,6 +1073,11 @@ def ingest_one_source(
             newest_dates += _extract_dates(it0.published_at)
         else:
             newest_dates += _extract_dates(it0.canonical_item_url or "")
+            from .hekimler_dates import extract_url_month as _url_month
+
+            _est0 = _url_month(it0.canonical_item_url or "")
+            if _est0 is not None:
+                month_estimates.append(_est0[1])
     for item in items:
         # Audience gate: nav/menu links never become candidates when the source pins a post-URL shape.
         if item_url_patterns and not any(x.search(item.canonical_item_url or "") for x in item_url_patterns):
@@ -1254,7 +1259,9 @@ def ingest_one_source(
     )
 
     if not newest_dates and items and not date_exempt_run(method):
-        # Recency proof for sources whose list carries no dates: read up to 5 detail pages.
+        from .hekimler_dates import extract_page_date
+
+        # Recency proof for sources whose list carries no dates: read up to 12 detail pages.
         hosts_ok = {h.lower() for h in plan.get("allowed_hostnames") or []}
         probed = 0
         seen_urls: set[str] = set()
@@ -1272,7 +1279,7 @@ def ingest_one_source(
             probed += 1
             if pd1:
                 newest_dates.append(pd1)
-            if probed >= 5:
+            if probed >= 12:
                 break
     newest_record_date = max(newest_dates).isoformat() if newest_dates else None
     if newest_record_date is None and month_estimates:

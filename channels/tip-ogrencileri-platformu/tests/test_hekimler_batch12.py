@@ -41,6 +41,30 @@ class Batch12Tests(unittest.TestCase):
             self.assertTrue(by[sid].get("manual_intake_reason"), sid)
             self.assertFalse(by[sid].get("fetch_enabled"), sid)
 
+    def test_recency_probe_runs_even_when_no_item_is_eligible(self):
+        """Regression: with zero eligible items the newest-date probe must still read detail pages."""
+        from radar.config import settings
+        from radar.database import Database
+        from radar.hekimler_activation import all_sources
+        from radar.hekimler_integrity import resolve_effective_registry
+        from radar.phase1_ingestion_canary import TransportResult, ingest_one_source
+
+        profile = dict([s for s in all_sources(resolve_effective_registry()) if s["source_id"] == "abroad_us_aamc_eras"][0])
+        listing = '<a href="https://www.aamc.org/news/some-long-news-slug-about-something">A long enough news headline text</a>'
+        detail = '<script type="application/ld+json">{"datePublished":"2026-09-02T10:00:00Z"}</script>'
+
+        def transport(url):
+            return TransportResult(200, detail if "some-long-news-slug" in url else listing, True, url)
+
+        import os
+        from unittest import mock
+
+        with mock.patch.dict(os.environ, {"HEKIMLER_CONTINUOUS_INGESTION_ENABLED": "true"}):
+            db = Database(settings.db_path)
+            db.init()
+            res = ingest_one_source(profile, db=db, dry_run=True, transport=transport, force_due=True)
+        self.assertEqual(res.newest_record_date, "2026-09-02")
+
 
 if __name__ == "__main__":
     unittest.main()
