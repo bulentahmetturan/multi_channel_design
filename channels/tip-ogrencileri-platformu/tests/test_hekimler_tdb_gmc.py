@@ -32,6 +32,8 @@ class TdbTests(unittest.TestCase):
             "9 EYLÜL İZMİR'İN DÜŞMAN İŞGALİNDEN KURTULUŞU KUTLU OLSUN...": "DISCARD",
             "TDB ÜYELERİNE ÖZEL, %2,29'DAN BAŞLAYAN FAİZ ORANLARI ING KAZANÇLI KREDİ": "DISCARD",
             "4 - 11 EYLÜL 1919 SİVAS KONGRESİ": "DISCARD",
+            "TDB AKADEMİ & VAN DİŞHEKİMLERİ ODASI BİLİMSEL ETKİNLİĞİ GERÇEKLEŞTİRİLDİ": "DISCARD",
+            "TDB AKADEMİ & VAN DİŞHEKİMLERİ ODASI BİLİMSEL ETKİNLİĞİ": "ACCEPT",
             "2026 DİŞHEKİMLİĞİ FAKÜLTESİ KONTENJANLARI BELLİ OLDU!": "ACCEPT",
             "FDI 2026 DÜNYA DİŞHEKİMLİĞİ KONGRESİ'NE İNDİRİMLİ KAYIT": "ACCEPT",
         }

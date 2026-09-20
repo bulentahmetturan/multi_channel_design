@@ -554,7 +554,12 @@
         "oda seçim",
         "iftar",
         "kutlama",
-        "yarışma"
+        "yarışma",
+        "merkez konseyi toplant",
+        "yedimevsim",
+        "haysiyet divan",
+        "indirimli",
+        "ziyaret"
       ],
       "allow_congress": true,
       "allowed_routes": [
@@ -697,7 +702,9 @@
         "demokrasi ve milli birlik",
         "web sitemiz",
         "basın açıklamasına bekliyoruz",
-        "başkanlar konseyi"
+        "başkanlar konseyi",
+        "gerçekleştirildi",
+        "yapıldı"
       ],
       "allow_congress": true,
       "allowed_routes": [
