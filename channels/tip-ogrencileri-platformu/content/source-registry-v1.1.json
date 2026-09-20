@@ -132,7 +132,10 @@
       "pipeline_wiring_enabled": false,
       "item_url_patterns": [
         "osym\\.gov\\.tr/[a-z0-9-]{20,}$"
-      ]
+      ],
+      "dedupe_group": "osym_exam_announcements",
+      "dedupe_by": "url",
+      "execution": "python_runner"
     },
     {
       "source_id": "yok_medical_education",
@@ -186,7 +189,8 @@
       "scheduled_fetch_enabled": false,
       "candidate_emission_enabled": false,
       "publication_eligible": false,
-      "pipeline_wiring_enabled": false
+      "pipeline_wiring_enabled": false,
+      "execution": "python_runner"
     },
     {
       "source_id": "yokak_medical_accreditation",
@@ -235,7 +239,8 @@
       "scheduled_fetch_enabled": false,
       "candidate_emission_enabled": false,
       "publication_eligible": false,
-      "pipeline_wiring_enabled": false
+      "pipeline_wiring_enabled": false,
+      "execution": "python_runner"
     },
     {
       "source_id": "tuk_specialty_training",
@@ -288,7 +293,8 @@
       "scheduled_fetch_enabled": false,
       "candidate_emission_enabled": false,
       "publication_eligible": false,
-      "pipeline_wiring_enabled": false
+      "pipeline_wiring_enabled": false,
+      "execution": "python_runner"
     },
     {
       "source_id": "resmi_gazete_medical_regulation",
@@ -712,7 +718,8 @@
         "fetch_enabled": true,
         "scheduled_fetch_enabled": true,
         "candidate_emission_enabled": true
-      }
+      },
+      "execution": "python_runner"
     },
     {
       "source_id": "ttb_national",
@@ -1015,7 +1022,8 @@
         "fetch_enabled": true,
         "scheduled_fetch_enabled": true,
         "candidate_emission_enabled": true
-      }
+      },
+      "execution": "python_runner"
     },
     {
       "source_id": "teged_medical_education",
@@ -1117,7 +1125,8 @@
         "fetch_enabled": true,
         "scheduled_fetch_enabled": true,
         "candidate_emission_enabled": true
-      }
+      },
+      "execution": "python_runner"
     },
     {
       "source_id": "hasuder_public_health",
@@ -1222,7 +1231,8 @@
       },
       "item_url_patterns": [
         "hasuder\\.org\\.tr/[a-z0-9-]+/detay/[a-z0-9-]+"
-      ]
+      ],
+      "execution": "python_runner"
     },
     {
       "source_id": "halk_sagligi_yeterlik",
@@ -1325,7 +1335,8 @@
         "fetch_enabled": true,
         "scheduled_fetch_enabled": true,
         "candidate_emission_enabled": true
-      }
+      },
+      "execution": "python_runner"
     },
     {
       "source_id": "tkd_cardiology",
@@ -1433,7 +1444,8 @@
       },
       "item_url_patterns": [
         "/duyuru/\\d+/"
-      ]
+      ],
+      "execution": "python_runner"
     },
     {
       "source_id": "ttd_thoracic",
@@ -1549,7 +1561,8 @@
         "fetch_enabled": true,
         "scheduled_fetch_enabled": true,
         "candidate_emission_enabled": true
-      }
+      },
+      "execution": "python_runner"
     },
     {
       "source_id": "klimık_infectious_diseases",
@@ -1768,7 +1781,8 @@
       },
       "item_url_patterns": [
         "psikiyatri\\.org\\.tr/\\d{3,5}/[a-z0-9-]{8,}"
-      ]
+      ],
+      "execution": "python_runner"
     },
     {
       "source_id": "trd_radiology",
@@ -2334,7 +2348,8 @@
       "source_health": "HEALTHY",
       "item_url_patterns": [
         "aa\\.com\\.tr/tr/(saglik|gundem|bilim-teknoloji)/.+/\\d+$"
-      ]
+      ],
+      "execution": "python_runner"
     }
   ],
   "approved_source_ids": [

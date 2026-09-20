@@ -332,6 +332,29 @@ def _composite_trovanorme_get(url: str, transport, max_pages: int = 13) -> Trans
     return TransportResult(http_status=200 if bodies else 502, body="\n".join(bodies), tls_ok=True, requested_url=url)
 
 
+def _pinned_intermediates_get(url: str, timeout: float) -> TransportResult | None:
+    """Verified GET that adds pinned PUBLIC intermediates (content/certs/*.pem) as an extra trust path.
+
+    Used only after a normal verification failure. Verification stays ON (partial chain); nothing is disabled.
+    """
+    from pathlib import Path as _Path
+    certs = sorted((_Path(__file__).resolve().parents[1] / "content" / "certs").glob("*.pem"))
+    if not certs:
+        return None
+    ctx = ssl.create_default_context()
+    for pem in certs:
+        ctx.load_verify_locations(cafile=str(pem))
+    ctx.verify_flags |= getattr(ssl, "VERIFY_X509_PARTIAL_CHAIN", 0)
+    req = urllib.request.Request(url, headers={"User-Agent": "HekimlerContinuousWorker/1.0 (+review-only)"}, method="GET")
+    try:
+        with urllib.request.urlopen(req, context=ctx, timeout=timeout) as resp:
+            return TransportResult(http_status=getattr(resp, "status", 200) or 200, body=resp.read().decode("utf-8", errors="replace"), tls_ok=True, requested_url=url)
+    except urllib.error.HTTPError as exc:
+        return TransportResult(http_status=exc.code, body=(exc.read() or b"").decode("utf-8", errors="replace"), tls_ok=True, requested_url=url, failure_reason=f"HTTP {exc.code}")
+    except Exception:  # noqa: BLE001 — stay fail-closed
+        return None
+
+
 def tls_verified_get(url: str, timeout: float = 30.0) -> TransportResult:
     """HTTP GET with mandatory certificate verification. Never disables TLS checks."""
     ctx = ssl.create_default_context()
@@ -353,7 +376,7 @@ def tls_verified_get(url: str, timeout: float = 30.0) -> TransportResult:
     except ssl.SSLError as exc:
         # Some official hosts serve an incomplete chain that Python's OpenSSL cannot complete but the OS trust
         # store can (AIA fetching). curl (schannel/system trust) still VERIFIES the certificate; never disable it.
-        os_result = _os_trust_get(url, timeout)
+        os_result = _pinned_intermediates_get(url, timeout) or _os_trust_get(url, timeout)
         if os_result is not None:
             return os_result
         return TransportResult(
@@ -373,7 +396,7 @@ def tls_verified_get(url: str, timeout: float = 30.0) -> TransportResult:
         )
     except Exception as exc:  # noqa: BLE001 — fail closed
         if "CERTIFICATE_VERIFY_FAILED" in str(exc):
-            os_result = _os_trust_get(url, timeout)
+            os_result = _pinned_intermediates_get(url, timeout) or _os_trust_get(url, timeout)
             if os_result is not None:
                 return os_result
         return TransportResult(
@@ -639,6 +662,26 @@ def _parse_trovanorme_newsletters(
                 )
             )
     return out
+
+
+_LEAD_DATE = re.compile(r"^\s*(\d{1,2})\s+(Ocak|Şubat|Mart|Nisan|Mayıs|Haziran|Temmuz|Ağustos|Eylül|Ekim|Kasım|Aralık)\s+(20\d{2})\s+(.+)$", re.S | re.I)
+
+
+def _clean_title(raw: str) -> tuple[str, str | None]:
+    """Unescape HTML, collapse whitespace and split a leading 'dd Month yyyy' date off the title."""
+    import html as _html
+    from .hekimler_dates import extract_dates as _ed
+
+    text = re.sub(r"\s+", " ", _html.unescape(raw or "")).strip()
+    m = _LEAD_DATE.match(text)
+    if m:
+        ds = _ed(f"{m.group(1)} {m.group(2)} {m.group(3)}")
+        return m.group(4).strip(), (ds[0].isoformat() if ds else None)
+    return text, None
+
+
+def _norm_title_key(title: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "", (title or "").casefold())
 
 
 def _adjacent_date(body: str, pos: int) -> str | None:
@@ -1141,6 +1184,19 @@ def ingest_one_source(
     stale_discarded = 0
     rej_shape = rej_audience = rej_keyword = 0
     method = str(plan.get("primary_method") or "")
+    # Normalise every parsed title once (entities, whitespace, leading date) BEFORE gating/dedupe/recency proof.
+    group = profile.get("dedupe_group")
+    for it_ in items:
+        new_title, lead = _clean_title(it_.title)
+        if lead and not it_.published_at:
+            it_.published_at = lead
+        if new_title != it_.title:
+            it_.title = new_title
+            it_.raw_excerpt = _clean_title(it_.raw_excerpt or new_title)[0] if it_.raw_excerpt else new_title
+            it_.content_hash = _hash_text(sid, it_.canonical_item_url, new_title)
+        if group:
+            key = _norm_title_key(it_.title) if profile.get("dedupe_by") == "title" else (it_.canonical_item_url or "")
+            it_.content_hash = _hash_text(group, key)
     newest_dates: list = []
     month_estimates: list[str] = []
     from .hekimler_dates import extract_dates as _extract_dates
@@ -1288,6 +1344,7 @@ def ingest_one_source(
                 created_at=item.fetched_at,
                 institution=cand.institution,
                 event_date=None if date_precision == "month" else item.published_at,
+                dedupe_group=group,
             )
             delivery = deliver_hekimler_candidate(payload, hub_client)
             if not delivery.delivered:

@@ -150,12 +150,13 @@
       "source_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
       "primary_url": "https://pubmed.ncbi.nlm.nih.gov/",
       "include_keywords": [
-        "medical education",
         "residency",
+        "specialty training",
+        "postgraduate medical",
+        "practice guideline",
         "clinical guideline",
         "physician workforce",
-        "specialty training",
-        "practice guideline"
+        "medical student"
       ],
       "exclude_keywords": [
         "veterinary only",
@@ -176,14 +177,14 @@
       ],
       "approved_query_pack": [
         {
-          "id": "meded_specialty_training",
-          "term": "(\"medical education\"[Title] OR \"specialty training\"[Title] OR residency[Title]) AND (Turkey[Affiliation] OR Turkish[Language])",
-          "retmax": 10
+          "id": "residency_specialty_training_tr",
+          "term": "(residency[Title] OR \"specialty training\"[Title] OR \"postgraduate medical education\"[Title]) AND (Turkey[Affiliation] OR Türkiye[Affiliation])",
+          "retmax": 5
         },
         {
-          "id": "clinical_guideline_update",
-          "term": "(\"practice guideline\"[Publication Type] OR \"clinical guideline\"[Title]) AND 2024:2026[dp]",
-          "retmax": 8
+          "id": "practice_guideline_tr",
+          "term": "\"practice guideline\"[Publication Type] AND (Turkey[Affiliation] OR Türkiye[Affiliation])",
+          "retmax": 5
         }
       ],
       "reject_unrestricted_search": true,
@@ -214,7 +215,9 @@
           "email": "hekimler-radar@local.invalid",
           "timeout_ms": 12000,
           "retry_max": 2,
-          "inter_query_delay_ms": 400
+          "inter_query_delay_ms": 400,
+          "reldate_days": 90,
+          "max_total": 8
         },
         "initial_backfill": {
           "lookback_days": 30,
@@ -241,7 +244,8 @@
       "pipeline_wiring_enabled": true,
       "publication_eligible": false,
       "status": "active",
-      "statement_treatment": "scientific_index"
+      "statement_treatment": "scientific_index",
+      "execution": "python_runner"
     },
     {
       "source_id": "osym_dus_dental_exams",
@@ -365,7 +369,10 @@
       "source_health": "HEALTHY",
       "item_url_patterns": [
         "osym\\.gov\\.tr/[a-z0-9-]{20,}$"
-      ]
+      ],
+      "dedupe_group": "osym_exam_announcements",
+      "dedupe_by": "url",
+      "execution": "python_runner"
     },
     {
       "source_id": "osym_ydus_subspecialty_exams",
@@ -489,7 +496,10 @@
       "source_health": "HEALTHY",
       "item_url_patterns": [
         "osym\\.gov\\.tr/[a-z0-9-]{20,}$"
-      ]
+      ],
+      "dedupe_group": "osym_exam_announcements",
+      "dedupe_by": "url",
+      "execution": "python_runner"
     },
     {
       "source_id": "tvhb_veterinary",

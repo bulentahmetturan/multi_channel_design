@@ -229,7 +229,10 @@
       "runtime_activation": "AUTOMATION_READY",
       "item_url_patterns": [
         "osym\\.gov\\.tr/[a-z0-9-]{20,}$"
-      ]
+      ],
+      "dedupe_group": "osym_exam_announcements",
+      "dedupe_by": "url",
+      "execution": "python_runner"
     },
     {
       "source_id": "yok_medical_education",
@@ -374,7 +377,8 @@
         "egitim",
         "kontenjan",
         "akademi"
-      ]
+      ],
+      "execution": "python_runner"
     },
     {
       "source_id": "yokak_medical_accreditation",
@@ -507,7 +511,8 @@
         "akredit",
         "program",
         "standart"
-      ]
+      ],
+      "execution": "python_runner"
     },
     {
       "source_id": "tuk_specialty_training",
@@ -642,7 +647,8 @@
       "candidate_emission_enabled": true,
       "publication_eligible": false,
       "pipeline_wiring_enabled": true,
-      "runtime_activation": "AUTOMATION_READY"
+      "runtime_activation": "AUTOMATION_READY",
+      "execution": "python_runner"
     },
     {
       "source_id": "resmi_gazete_medical_regulation",
@@ -1046,7 +1052,8 @@
       "source_health": "HEALTHY",
       "item_url_patterns": [
         "aa\\.com\\.tr/tr/(saglik|gundem|bilim-teknoloji)/.+/\\d+$"
-      ]
+      ],
+      "execution": "python_runner"
     }
   ],
   "primary_source_count": 6,

@@ -60,6 +60,7 @@ class HubCandidatePayload:
     created_at: str | None = None
     discovered_at: str | None = None
     event_date: str | None = None  # official publication date (ISO day) when known
+    dedupe_group: str | None = None  # overlapping sources share one dedupe namespace
 
     def validate(self) -> str | None:
         if not (self.channel_id or "").strip():
@@ -81,7 +82,7 @@ class HubCandidatePayload:
         return None
 
     def dedupe_key(self) -> str:
-        return f"hekimler:{self.channel_id}:{self.source_id}:{self.content_hash}"
+        return f"hekimler:{self.channel_id}:{self.dedupe_group or self.source_id}:{self.content_hash}"
 
     def to_hub_json(self) -> dict[str, Any]:
         return {
@@ -108,6 +109,7 @@ class HubCandidatePayload:
             "createdAt": self.created_at,
             "discoveredAt": self.discovered_at or self.fetched_at or self.created_at,
             "eventDate": self.event_date,
+            "dedupeGroup": self.dedupe_group,
             "status": "review",
             "category": None,  # do not overload category as channel identity
             "auto_publish": False,
@@ -418,6 +420,7 @@ def build_hekimler_hub_payload(
     created_at: str | None = None,
     institution: str | None = None,
     event_date: str | None = None,
+    dedupe_group: str | None = None,
 ) -> HubCandidatePayload:
     return HubCandidatePayload(
         external_id=f"{source_id}:{content_hash[:16]}",
@@ -442,5 +445,6 @@ def build_hekimler_hub_payload(
         fetched_at=fetched_at,
         created_at=created_at or fetched_at,
         event_date=event_date,
+        dedupe_group=dedupe_group,
         discovered_at=fetched_at,
     )

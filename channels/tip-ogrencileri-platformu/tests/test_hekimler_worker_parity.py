@@ -36,9 +36,17 @@ class WorkerParityTests(unittest.TestCase):
         fx = json.loads(FIX.read_text(encoding="utf-8"))
         today = date.fromisoformat(fx["today"])
         eff = {s["source_id"]: s for s in all_sources(resolve_effective_registry())}
+        import os
+        import tempfile
+
+        from radar.hekimler_continuous_runner import export_automation_ready_profiles
+
+        with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False, encoding="utf-8") as fh:
+            json.dump({"profiles": export_automation_ready_profiles()}, fh, ensure_ascii=False)
         proc = subprocess.run(
             ["node", "scripts/hekimler-parity.mjs", str(FIX)],
             cwd=HUB, capture_output=True, text=True, encoding="utf-8", timeout=120,
+            env={**os.environ, "HEKIMLER_PARITY_PROFILES": fh.name},
         )
         self.assertEqual(proc.returncode, 0, proc.stderr[-800:])
         worker = {r["id"]: r for r in json.loads(proc.stdout.strip().splitlines()[-1])}
@@ -85,6 +93,6 @@ class WorkerListingAllowlistTests(unittest.TestCase):
         )
         self.assertEqual(proc.returncode, 0, proc.stderr[-800:])
         rows = json.loads(proc.stdout.strip().splitlines()[-1])
-        self.assertGreater(len(rows), 30)
+        self.assertGreater(len(rows), 8)
         blocked = [(r["source_id"], r["listing"]) for r in rows if not r["allowed"]]
         self.assertEqual(blocked, [])

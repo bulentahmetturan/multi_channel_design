@@ -664,7 +664,8 @@
         "fetch_enabled": true,
         "scheduled_fetch_enabled": true,
         "candidate_emission_enabled": true
-      }
+      },
+      "execution": "python_runner"
     },
     {
       "source_id": "abroad_de_make_it_in_germany",
@@ -908,7 +909,8 @@
       },
       "item_url_patterns": [
         "carms\\.ca/news/[a-z0-9-]{10,}"
-      ]
+      ],
+      "execution": "python_runner"
     },
     {
       "source_id": "abroad_au_amc",
@@ -943,19 +945,17 @@
       "pipeline_wiring_enabled": true,
       "notes": "IMG pathways, assessment, verification, exams, deadlines only.",
       "include_keywords": [
-        "international medical graduate",
-        "IMG",
         "MCQ",
         "clinical examination",
         "assessment",
-        "accreditation",
         "pathway",
-        "specialist",
-        "prevocational",
-        "medical school",
+        "accreditation",
+        "IMG",
+        "international medical graduate",
         "exam",
         "candidates",
-        "registration"
+        "workplace-based",
+        "prevocational"
       ],
       "exclude_keywords": [
         "award",
@@ -1014,7 +1014,10 @@
         "fetch_enabled": true,
         "scheduled_fetch_enabled": true,
         "candidate_emission_enabled": true
-      }
+      },
+      "dedupe_group": "au_medical_regulators",
+      "dedupe_by": "title",
+      "execution": "python_runner"
     },
     {
       "source_id": "abroad_au_medical_board",
@@ -1050,15 +1053,16 @@
         "international medical graduate",
         "specialist pathway",
         "registration standard",
-        "registration",
-        "English language",
+        "guidelines",
+        "policy",
+        "consultation",
         "CPD",
         "supervised practice",
         "expedited",
         "area of need",
-        "doctors",
-        "medical practitioner",
-        "workforce"
+        "professional performance",
+        "telehealth",
+        "standard"
       ],
       "exclude_keywords": [
         "cancel",
@@ -1067,7 +1071,9 @@
         "tribunal",
         "court",
         "disciplinary",
-        "newsletter"
+        "newsletter",
+        "registration fees",
+        "renewal"
       ],
       "allowed_routes": [
         "ABROAD_CAREER",
@@ -1122,7 +1128,10 @@
       },
       "item_url_patterns": [
         "medicalboard\\.gov\\.au/News/20\\d\\d-\\d\\d-\\d\\d-"
-      ]
+      ],
+      "dedupe_group": "au_medical_regulators",
+      "dedupe_by": "title",
+      "execution": "python_runner"
     },
     {
       "source_id": "abroad_au_ahpra",
@@ -1154,13 +1163,18 @@
       "publication_eligible": false,
       "pipeline_wiring_enabled": true,
       "include_keywords": [
-        "international medical graduate",
-        "medical practitioner",
+        "registration",
+        "registered",
+        "licence",
+        "licensing",
+        "practitioner registration",
+        "specialist registration",
+        "graduate registration",
         "doctors",
-        "medical board",
-        "specialist pathway",
-        "expedited",
-        "registration standard"
+        "medical practitioner",
+        "provisional registration",
+        "re-registration",
+        "renewal"
       ],
       "exclude_keywords": [
         "nurse",
@@ -1174,7 +1188,8 @@
         "prosecut",
         "tribunal",
         "court",
-        "disciplinary"
+        "disciplinary",
+        "fee deferral"
       ],
       "allowed_routes": [
         "ABROAD_CAREER",
@@ -1229,7 +1244,10 @@
       },
       "item_url_patterns": [
         "ahpra\\.gov\\.au/News/20\\d\\d-\\d\\d-\\d\\d-"
-      ]
+      ],
+      "dedupe_group": "au_medical_regulators",
+      "dedupe_by": "title",
+      "execution": "python_runner"
     },
     {
       "source_id": "abroad_ie_medical_council",
@@ -1441,7 +1459,8 @@
       },
       "item_url_patterns": [
         "bigregister\\.nl/latest/news/20\\d\\d/"
-      ]
+      ],
+      "execution": "python_runner"
     },
     {
       "source_id": "abroad_es_universidades_homologacion",

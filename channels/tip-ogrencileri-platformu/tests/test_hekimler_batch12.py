@@ -86,6 +86,39 @@ class Batch12Tests(unittest.TestCase):
         self.assertEqual(bad.decision, "DISCARD")
         self.assertEqual(ok.decision, "ACCEPT")
 
+    def test_titles_are_unescaped_and_leading_date_is_split(self):
+        from radar.phase1_ingestion_canary import _clean_title
+
+        title, lead = _clean_title("17
+   Eyl&#xFC;l 2026
+  2026-TUS 2. D&#xF6;nem S&#x131;nav Sonu&#xE7;lar&#x131;")
+        self.assertEqual(title, "2026-TUS 2. Dönem Sınav Sonuçları")
+        self.assertEqual(lead, "2026-09-17")
+
+    def test_overlapping_sources_share_a_dedupe_group(self):
+        from radar.hekimler_activation import all_sources
+        from radar.hekimler_integrity import resolve_effective_registry
+
+        eff = {s["source_id"]: s for s in all_sources(resolve_effective_registry())}
+        for sid in ("osym_medical_exams", "osym_dus_dental_exams", "osym_ydus_subspecialty_exams"):
+            self.assertEqual(eff[sid]["dedupe_group"], "osym_exam_announcements")
+        for sid in ("abroad_au_ahpra", "abroad_au_amc", "abroad_au_medical_board"):
+            self.assertEqual(eff[sid]["dedupe_group"], "au_medical_regulators")
+        # distinct scopes: registration/licensing vs exams/pathways vs board policy
+        self.assertIn("licensing", eff["abroad_au_ahpra"]["include_keywords"])
+        self.assertIn("MCQ", eff["abroad_au_amc"]["include_keywords"])
+        self.assertIn("policy", eff["abroad_au_medical_board"]["include_keywords"])
+
+    def test_pubmed_is_date_windowed_and_bounded(self):
+        from radar.hekimler_activation import all_sources
+        from radar.hekimler_integrity import resolve_effective_registry
+
+        p = [s for s in all_sources(resolve_effective_registry()) if s["source_id"] == "pubmed_biomedical_evidence"][0]
+        ep = p["fetch_plan"]["eutilities"]
+        self.assertEqual(ep["reldate_days"], 90)
+        self.assertLessEqual(ep["max_total"], 8)
+        self.assertTrue(all(q["retmax"] <= 5 for q in p["approved_query_pack"]))
+
 
 if __name__ == "__main__":
     unittest.main()

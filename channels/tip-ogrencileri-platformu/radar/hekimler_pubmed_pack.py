@@ -82,7 +82,9 @@ def fetch_approved_query_pack(profile: dict[str, Any]) -> list[dict[str, Any]]:
 
     for q in profile.get("approved_query_pack") or []:
         term = str(q.get("term") or "").strip()
-        retmax = min(int(q.get("retmax") or 10), 20)
+        retmax = min(int(q.get("retmax") or 5), 10)
+        if len(out) >= int(eutils.get("max_total") or 8):
+            break
         qs = urllib.parse.urlencode(
             {
                 "db": "pubmed",
@@ -91,6 +93,10 @@ def fetch_approved_query_pack(profile: dict[str, Any]) -> list[dict[str, Any]]:
                 "tool": tool,
                 "email": email,
                 "term": term,
+                # Date window enforced by the API itself (Entrez date), default last 90 days.
+                "reldate": str(int(eutils.get("reldate_days") or 90)),
+                "datetype": "edat",
+                "sort": "date",
             }
         )
         search_url = f"https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?{qs}"
