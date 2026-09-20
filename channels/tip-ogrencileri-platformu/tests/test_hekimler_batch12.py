@@ -117,6 +117,17 @@ class Batch12Tests(unittest.TestCase):
         self.assertLessEqual(ep["max_total"], 8)
         self.assertTrue(all(q["retmax"] <= 5 for q in p["approved_query_pack"]))
 
+    def test_turkish_dotted_capital_i_folds_like_the_worker(self):
+        from radar.hekimler_registry import _fold
+
+        self.assertEqual(_fold("HEKİM GEÇİCİ GÖREVLENDİRMELERİ"), "hekim gecici gorevlendirmeleri")
+        self.assertEqual(_fold("ISPARTA"), "isparta")
+
+    def test_python_parser_uses_the_same_title_floor_as_the_worker(self):
+        body = '<a href="/category/duyurular/">Duyurular</a> <a href="/haber/uzun-bir-haber-basligi">Uzun bir haber başlığı burada</a>'
+        items = parse_raw_items(source_id="x", source_url="https://x.org/", body=body, fetch_method="list-page", fetched_at="t")
+        self.assertEqual([i.title for i in items], ["Uzun bir haber başlığı burada"])
+
 
 if __name__ == "__main__":
     unittest.main()

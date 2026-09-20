@@ -36,11 +36,12 @@ ORGANISATION_POSITION_IDS = frozenset({"ttb_national", "hasuder_public_health"})
 
 
 def _fold(text: str) -> str:
-    text = unicodedata.normalize("NFKC", text or "").casefold()
-    # Common Turkish foldings for keyword gates
+    text = unicodedata.normalize("NFKC", text or "")
+    # Turkish-aware lowering BEFORE casefold: Python's casefold turns 'İ' into 'i' + combining dot (so 'HEKİM' would
+    # never match 'hekim'), while the Worker uses toLocaleLowerCase('tr-TR').
+    text = text.replace("İ", "i").replace("I", "ı").casefold()
     return (
         text.replace("ı", "i")
-        .replace("İ", "i")
         .replace("ş", "s")
         .replace("ğ", "g")
         .replace("ü", "u")

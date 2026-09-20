@@ -719,7 +719,8 @@
         "scheduled_fetch_enabled": true,
         "candidate_emission_enabled": true
       },
-      "execution": "python_runner"
+      "execution": "python_runner",
+      "http_timeout_seconds": 90
     },
     {
       "source_id": "ttb_national",

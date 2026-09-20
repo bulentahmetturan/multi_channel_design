@@ -139,6 +139,13 @@
    "source_id": "osym_medical_exams",
    "title": "17 Eyl&#xFC;l 2026 2026-TUS 2. D&#xF6;nem S&#x131;nav Sonu&#xE7;lar&#x131;",
    "expect": "ACCEPT"
+  },
+  {
+   "id": "ttb_uppercase_turkish_i",
+   "source_id": "ttb_national",
+   "title": "HEKİM GEÇİCİ GÖREVLENDİRMELERİ",
+   "published_at": "2026-09-10",
+   "expect": "ACCEPT"
   }
  ]
 }

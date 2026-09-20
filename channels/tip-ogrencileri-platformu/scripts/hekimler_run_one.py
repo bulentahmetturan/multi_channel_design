@@ -22,6 +22,13 @@ def main() -> int:
     dry_run = "--dry-run" in sys.argv
     os.environ.setdefault("HEKIMLER_CONTINUOUS_INGESTION_ENABLED", "true")
 
+    from radar.hekimler_activation import all_sources
+    from radar.hekimler_integrity import resolve_effective_registry
+
+    prof = [s for s in all_sources(resolve_effective_registry()) if s["source_id"] == source_id]
+    if prof and prof[0].get("http_timeout_seconds"):
+        os.environ["HEKIMLER_HTTP_TIMEOUT"] = str(int(prof[0]["http_timeout_seconds"]))
+
     from radar.config import settings
     from radar.database import Database
     from radar.hekimler_continuous_runner import default_hub_client, run_continuous_ingestion

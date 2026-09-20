@@ -355,8 +355,9 @@ def _pinned_intermediates_get(url: str, timeout: float) -> TransportResult | Non
         return None
 
 
-def tls_verified_get(url: str, timeout: float = 30.0) -> TransportResult:
+def tls_verified_get(url: str, timeout: float | None = None) -> TransportResult:
     """HTTP GET with mandatory certificate verification. Never disables TLS checks."""
+    timeout = float(timeout if timeout is not None else os.environ.get("HEKIMLER_HTTP_TIMEOUT") or 30.0)
     ctx = ssl.create_default_context()
     # TLS verification remains on for every canary request.
     req = urllib.request.Request(
@@ -772,7 +773,7 @@ def parse_raw_items(
         href, inner = match.group(1), re.sub(r"<[^>]+>", "", match.group(2)).strip()
         if _GENERIC_LINK_TEXT.match(inner):
             inner = _card_heading_before(body, match.start()) or inner
-        if len(inner) < 8 or _GENERIC_LINK_TEXT.match(inner):
+        if len(inner) < 12 or _GENERIC_LINK_TEXT.match(inner):  # same floor as the Worker parser
             continue
         item_url = urljoin(source_url, href)
         items.append(
