@@ -50,3 +50,24 @@ class SchedulerTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ExitStatusTests(unittest.TestCase):
+    def _run(self, results):
+        import tempfile
+        from unittest import mock
+
+        def fake(sid, timeout, retries, dry_run):
+            return {"source_id": sid, "ok": results[sid], "attempts": 1, "operator_status": "x", "parsed": 1}
+
+        with tempfile.TemporaryDirectory() as d, mock.patch.object(sched, "run_source", side_effect=fake),                 mock.patch.object(sched, "select_sources", return_value=list(results)),                 mock.patch("sys.argv", ["x", "--dry-run", "--report-dir", d]):
+            return sched.main()
+
+    def test_all_ok_is_zero(self):
+        self.assertEqual(self._run({"a": True, "b": True}), 0)
+
+    def test_partial_failure_is_nonzero(self):
+        self.assertEqual(self._run({"a": True, "b": False}), 1)
+
+    def test_all_failed_is_nonzero(self):
+        self.assertEqual(self._run({"a": False, "b": False}), 1)

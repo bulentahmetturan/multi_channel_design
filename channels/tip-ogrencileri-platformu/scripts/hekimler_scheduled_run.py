@@ -3,7 +3,8 @@
 * one subprocess per source (hard per-source timeout, failure isolation);
 * bounded retry with exponential backoff for transient fetch/network failures only;
 * writes a non-secret JSON + Markdown report and appends the table to the GitHub job summary;
-* exit code is 0 unless the runner itself crashed or EVERY source failed.
+* exit code is 1 when ANY source failed (partial failure turns the workflow red; the report/summary/artifact are
+  written first, and upload steps run with if: always()); 2 when the ingest token is missing.
 
 Usage:
   python scripts/hekimler_scheduled_run.py --sources all-python|all|tr-runner|id1,id2 [--timeout 240] [--retries 2]
@@ -167,7 +168,9 @@ def main() -> int:
     print(md)
     failed = [r for r in rows if not r["ok"]]
     print(f"sources={len(rows)} ok={len(rows) - len(failed)} failed={len(failed)}")
-    return 1 if failed and len(failed) == len(rows) else 0
+    if failed:
+        print(f"::error::{len(failed)} of {len(rows)} sources failed: {', '.join(r['source_id'] for r in failed)}")
+    return 1 if failed else 0
 
 
 if __name__ == "__main__":

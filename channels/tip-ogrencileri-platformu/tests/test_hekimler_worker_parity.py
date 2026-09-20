@@ -53,6 +53,22 @@ class WorkerParityTests(unittest.TestCase):
         for c in fx["cases"]:
             py = python_decision(eff[c["source_id"]], c, today)
             self.assertEqual(worker[c["id"]]["decision"], py, f"{c['id']}: worker={worker[c['id']]} python={py}")
+            # date decision parity as well (FRESH/ACTIVE/UNDATED/STALE) whenever the keyword gate accepted the title
+            if py != "DISCARD" or worker[c["id"]].get("date_verdict"):
+                pv, _ = date_verdict(c["source_id"], published_at=c.get("published_at"), title=c["title"], url=c.get("url", ""), today=today)
+                self.assertEqual(worker[c["id"]].get("date_verdict"), pv, f"{c['id']}: date verdict")
+            # rejection category parity (include/exclude/audience/stale) between the two engines
+            d = classify_with_congress_gate(eff[c["source_id"]], title=c["title"], body="")
+            if d.decision == "DISCARD":
+                wr = worker[c["id"]]["reason"]
+                def cat(r):
+                    r = (r or "").lower()
+                    for key in ("exclude", "no include", "out_of_audience", "congress", "stale"):
+                        if r.startswith(key):
+                            return key
+                    return r.split(":")[0]
+
+                self.assertEqual(cat(wr), cat(d.reason), f"{c['id']}: reason python={d.reason} worker={wr}")
 
 
 if __name__ == "__main__":
@@ -77,8 +93,17 @@ class WorkerParseParityTests(unittest.TestCase):
         for name, w_items in worker.items():
             body = (fixtures / name).read_text(encoding="utf-8")
             py = parse_raw_items(source_id="x", source_url="https://example.org/list", body=body, fetch_method="list-page", fetched_at="t")
-            py_items = [(i.title, i.canonical_item_url, i.published_at) for i in py]
-            w_pairs = [(i["title"], i["url"], i["published_at"]) for i in w_items]
+            # Intentional stage difference (documented): the Python runner normalises titles (unescape, whitespace,
+            # leading-date split) in ingest, right after parsing; the Worker's parser normalises while parsing but keeps
+            # a leading date in the title. Compare both AFTER the Python normalisation so the final title/url/date agree.
+            from radar.phase1_ingestion_canary import _clean_title
+
+            def norm(title, published):
+                clean, lead = _clean_title(title)
+                return clean, published or lead
+
+            py_items = [norm(i.title, i.published_at)[:1] + (i.canonical_item_url,) + norm(i.title, i.published_at)[1:] for i in py]
+            w_pairs = [norm(i["title"], i["published_at"])[:1] + (i["url"],) + norm(i["title"], i["published_at"])[1:] for i in w_items]
             self.assertEqual(w_pairs, py_items, name)
 
 
