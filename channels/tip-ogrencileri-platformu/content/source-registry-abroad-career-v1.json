@@ -1143,8 +1143,7 @@
         "language_requirement"
       ],
       "allowed_path_patterns": [
-        "/",
-        "/latest/"
+        "/"
       ],
       "statement_treatment": "official_guidance",
       "fetch_enabled": true,
@@ -1184,14 +1183,11 @@
           "www.bigregister.nl"
         ],
         "allowed_path_patterns": [
-          "/",
-          "/latest/"
-        ],
-        "forbidden_hosts": [],
-        "forbidden_path_patterns": [
           "/"
         ],
-        "notes": "Homepage news teasers pinned by dated URLs.",
+        "forbidden_hosts": [],
+        "forbidden_path_patterns": [],
+        "notes": "Homepage news teasers only; posts pinned by item_url_patterns (dated /latest/news/YYYY/ URLs).",
         "expected_check_interval_minutes": 1440,
         "source_health": "HEALTHY",
         "coverage_status": "configured",

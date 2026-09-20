@@ -72,3 +72,19 @@ class WorkerParseParityTests(unittest.TestCase):
             py_items = [(i.title, i.canonical_item_url, i.published_at) for i in py]
             w_pairs = [(i["title"], i["url"], i["published_at"]) for i in w_items]
             self.assertEqual(w_pairs, py_items, name)
+
+
+class WorkerListingAllowlistTests(unittest.TestCase):
+    """The Worker's own host/path allowlist must accept every ready source's listing URL."""
+
+    @unittest.skipUnless(shutil.which("node") and (HUB / "node_modules" / "esbuild").exists(), "node/esbuild not available")
+    def test_every_ready_profile_listing_passes_worker_allowlist(self):
+        proc = subprocess.run(
+            ["node", "scripts/hekimler-listing-check.mjs"],
+            cwd=HUB, capture_output=True, text=True, encoding="utf-8", timeout=120,
+        )
+        self.assertEqual(proc.returncode, 0, proc.stderr[-800:])
+        rows = json.loads(proc.stdout.strip().splitlines()[-1])
+        self.assertGreater(len(rows), 30)
+        blocked = [(r["source_id"], r["listing"]) for r in rows if not r["allowed"]]
+        self.assertEqual(blocked, [])
