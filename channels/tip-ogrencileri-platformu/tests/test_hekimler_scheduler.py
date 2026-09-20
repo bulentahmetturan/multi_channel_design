@@ -13,11 +13,17 @@ class SchedulerTests(unittest.TestCase):
         ids = sched.select_sources("all-python")
         self.assertIn("abroad_ie_medical_council", ids)
         self.assertIn("moh_physician_workforce", ids)  # every ready source now runs through the Python path
-        self.assertNotIn("abroad_uk_gmc", ids)
+        self.assertIn("abroad_uk_gmc", ids)  # official gov.uk feed substitute (partial)
+        self.assertNotIn("hsgm_public_health", ids)  # runner_region=TR: needs a Türkiye-based runner
+        self.assertIn("tdb_dental", ids)
 
     def test_explicit_selection_ignores_unknown_and_manual_sources(self):
-        ids = sched.select_sources("abroad_uk_gmc,abroad_uk_oriel,nope")
+        ids = sched.select_sources("abroad_us_ecfmg_intealth,abroad_uk_oriel,nope")
         self.assertEqual(ids, ["abroad_uk_oriel"])
+
+    def test_tr_runner_selection(self):
+        self.assertEqual(sched.select_sources("tr-runner"), ["hsgm_public_health"])
+        self.assertNotIn("hsgm_public_health", sched.select_sources("all"))
 
     def test_one_failing_source_does_not_stop_the_batch_and_is_reported(self):
         def fake_once(sid, timeout, dry_run):

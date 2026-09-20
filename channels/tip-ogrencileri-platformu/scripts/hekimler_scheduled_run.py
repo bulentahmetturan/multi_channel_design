@@ -6,7 +6,7 @@
 * exit code is 0 unless the runner itself crashed or EVERY source failed.
 
 Usage:
-  python scripts/hekimler_scheduled_run.py --sources all-python|all|id1,id2 [--timeout 240] [--retries 2]
+  python scripts/hekimler_scheduled_run.py --sources all-python|all|tr-runner|id1,id2 [--timeout 240] [--retries 2]
                                             [--report-dir report] [--dry-run]
 """
 from __future__ import annotations
@@ -34,10 +34,15 @@ def select_sources(spec: str) -> list[str]:
         s for s in all_sources(resolve_effective_registry())
         if compute_activation_state(s) == ACTIVATION_AUTOMATION_READY
     ]
+    # Sources tagged runner_region=TR only work from a Turkish network; the GitHub-hosted runner skips them and an
+    # operator-run job selects them with --sources tr-runner (same adapter, same authenticated ingest contract).
+    hosted = [s for s in ready if not s.get("runner_region")]
     if spec == "all":
-        return [s["source_id"] for s in ready]
+        return [s["source_id"] for s in hosted]
     if spec == "all-python":
-        return [s["source_id"] for s in ready if s.get("execution") == "python_runner"]
+        return [s["source_id"] for s in hosted if s.get("execution") == "python_runner"]
+    if spec == "tr-runner":
+        return [s["source_id"] for s in ready if s.get("runner_region") == "TR"]
     wanted = [x.strip() for x in spec.split(",") if x.strip()]
     known = {s["source_id"] for s in ready}
     unknown = [w for w in wanted if w not in known]

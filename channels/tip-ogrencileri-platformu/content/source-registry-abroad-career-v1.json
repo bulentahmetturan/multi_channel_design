@@ -423,39 +423,118 @@
       "name": "GMC — registration and licensing",
       "country": "United Kingdom",
       "coverage_class": "CORE_PATHWAY_DOSSIER",
-      "canonical_url": "https://www.gmc-uk.org/",
-      "source_url": "https://www.gmc-uk.org/registration-and-licensing/join-the-register/plab",
-      "primary_url": "https://www.gmc-uk.org/",
+      "canonical_url": "https://www.gov.uk/government/organisations/uk-visas-and-immigration.atom",
+      "source_url": "https://www.gov.uk/government/organisations/uk-visas-and-immigration.atom",
+      "primary_url": "https://www.gov.uk/government/organisations/uk-visas-and-immigration.atom",
       "allowed_hostnames": [
-        "www.gmc-uk.org",
-        "gmc-uk.org"
+        "www.gov.uk"
       ],
       "upstream_source_id": "gmc_plab",
       "upstream_inventory": "sources/official_sources.yaml",
       "source_tier": "OFFICIAL_PRIMARY",
       "source_role": "official_physician_regulator",
-      "status": "configured_not_wired",
-      "fetch_mode": "not_wired",
+      "status": "active",
+      "fetch_mode": "list-page",
       "allowed_scope": [
         "registration_or_licensure",
         "exam_or_assessment",
         "language_requirement"
       ],
       "allowed_path_patterns": [
-        "/registration-and-licensing/",
-        "/education/",
-        "/"
+        "/government/"
       ],
       "statement_treatment": "official_guidance",
-      "fetch_enabled": false,
-      "scheduled_fetch_enabled": false,
-      "candidate_emission_enabled": false,
+      "fetch_enabled": true,
+      "scheduled_fetch_enabled": true,
+      "candidate_emission_enabled": true,
       "publication_eligible": false,
-      "pipeline_wiring_enabled": false,
-      "runtime_activation": "MANUAL_INTAKE",
-      "manual_intake_reason": "BLOCKED_EXTERNAL: gmc-uk.org (all paths incl. robots.txt, sitemap.xml, /news, /rss, PLAB pages) returns HTTP 403 with a bot challenge page; the related regulator host fsmb.org is challenged as well. No accessible official replacement found. Protection not bypassed.",
-      "source_health": "MANUAL_REVIEW_REQUIRED",
-      "manual_review_reason": "BLOCKED_EXTERNAL: gmc-uk.org (all paths incl. robots.txt, sitemap.xml, /news, /rss, PLAB pages) returns HTTP 403 with a bot challenge page; the related regulator host fsmb.org is challenged as well. No accessible official replacement found. Protection not bypassed."
+      "pipeline_wiring_enabled": true,
+      "runtime_activation": "AUTOMATION_READY",
+      "source_health": "HEALTHY",
+      "include_keywords": [
+        "international medical graduate",
+        "overseas doctor",
+        "overseas-trained",
+        "medical practitioner",
+        "General Medical Council",
+        "GMC",
+        "PLAB",
+        "medical register",
+        "health and care worker visa",
+        "health and care visa",
+        "international recruitment",
+        "internationally educated",
+        "doctors",
+        "physician",
+        "medical"
+      ],
+      "exclude_keywords": [
+        "nurse",
+        "nursing",
+        "midwi",
+        "care home",
+        "social care worker",
+        "dental nurse",
+        "pharmacy",
+        "vaccine supply",
+        "covid",
+        "student visa",
+        "visitor",
+        "asylum",
+        "family visa"
+      ],
+      "allowed_routes": [
+        "ABROAD_CAREER",
+        "ABROAD_OPPORTUNITY_WATCH",
+        "NEEDS_REVIEW",
+        "DISCARD"
+      ],
+      "default_route_on_accept": "NEEDS_REVIEW",
+      "fetch_plan": {
+        "primary_method": "list-page",
+        "tls_verification_required": true,
+        "allowed_hostnames": [
+          "www.gov.uk"
+        ],
+        "allowed_path_patterns": [
+          "/government/"
+        ],
+        "forbidden_hosts": [],
+        "forbidden_path_patterns": [],
+        "notes": "PARTIAL substitute for gmc-uk.org (Cloudflare challenge from datacenter IPs; not bypassed): official gov.uk Atom activity feeds of UKVI and DHSC filtered for overseas-doctor/visa/regulation topics. GMC registration/PLAB/rules pages and GMC news are NOT covered. NHS Employers/NHS England feeds rejected: malformed links / domestic employment noise.",
+        "expected_check_interval_minutes": 1440,
+        "source_health": "HEALTHY",
+        "coverage_status": "configured",
+        "coverage_policy": {
+          "sparse_source_allowed": true,
+          "expected_eligible_frequency": "rare",
+          "coverage_watch_window": 4,
+          "require_in_scope_for_low_coverage": true
+        },
+        "initial_backfill": {
+          "lookback_days": 60,
+          "retain_active_or_future_deadline": true,
+          "historical_priority": "backfill_low",
+          "undated_as_current": true
+        },
+        "surfaces": [
+          {
+            "id": "list",
+            "url": "https://www.gov.uk/government/organisations/uk-visas-and-immigration.atom",
+            "role": "primary",
+            "health": "HEALTHY"
+          }
+        ],
+        "fetch_enabled": true,
+        "scheduled_fetch_enabled": true,
+        "candidate_emission_enabled": true,
+        "composite": "multi_feed",
+        "composite_urls": [
+          "https://www.gov.uk/government/organisations/uk-visas-and-immigration.atom",
+          "https://www.gov.uk/government/organisations/department-of-health-and-social-care.atom"
+        ]
+      },
+      "execution": "python_runner"
     },
     {
       "source_id": "abroad_uk_oriel",

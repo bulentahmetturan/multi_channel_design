@@ -722,7 +722,9 @@
         "candidate_emission_enabled": true
       },
       "execution": "python_runner",
-      "http_timeout_seconds": 90
+      "http_timeout_seconds": 90,
+      "runner_region": "TR",
+      "runner_region_reason": "hsgm.saglik.gov.tr does not accept TCP connections from GitHub/Cloudflare datacenter egress (diagnosis run 35532846118); reachable from Turkish networks."
     },
     {
       "source_id": "ttb_national",

@@ -38,7 +38,7 @@ class Batch12Tests(unittest.TestCase):
     def test_manual_sources_carry_written_evidence(self):
         reg = json.loads((Path(__file__).parents[1] / "content" / "source-registry-abroad-career-v1.json").read_text(encoding="utf-8"))
         by = {s["source_id"]: s for s in reg["sources"]}
-        for sid in ("abroad_us_ecfmg_intealth", "abroad_uk_gmc", "abroad_de_make_it_in_germany"):
+        for sid in ("abroad_us_ecfmg_intealth", "abroad_de_make_it_in_germany"):
             self.assertTrue(by[sid].get("manual_intake_reason"), sid)
             self.assertFalse(by[sid].get("fetch_enabled"), sid)
 

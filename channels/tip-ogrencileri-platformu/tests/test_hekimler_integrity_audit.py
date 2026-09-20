@@ -115,7 +115,7 @@ class IntegrityAuditTests(unittest.TestCase):
             if s["source_tier"] == "OFFICIAL_PRIMARY" and not s["source_id"].startswith("abroad_")
         )
         self.assertEqual(domestic_op, 10)
-        self.assertEqual(counts["PROFESSIONAL_BODY"], 4)
+        self.assertEqual(counts["PROFESSIONAL_BODY"], 5)  # + tdb_dental (tracked separately from the 46)
         self.assertEqual(counts["PROFESSIONAL_GUIDANCE"], 12)
         self.assertEqual(counts["SECONDARY_NEWSWIRE"], 1)
         self.assertEqual(set(PROFESSIONAL_BODY_IDS), {

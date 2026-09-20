@@ -332,6 +332,92 @@ def _composite_trovanorme_get(url: str, transport, max_pages: int = 13) -> Trans
     return TransportResult(http_status=200 if bodies else 502, body="\n".join(bodies), tls_ok=True, requested_url=url)
 
 
+def _atom_to_rss_items(body: str) -> str:
+    """Normalise Atom <entry> blocks (gov.uk activity feeds) to the RSS <item> shape parsed downstream."""
+    import html as _html
+    from datetime import datetime as _dt
+    from email.utils import format_datetime
+
+    out = []
+    for block in re.findall(r"<entry[\s>].*?</entry>", body, flags=re.S | re.I):
+        t = re.search(r"<title[^>]*>(.*?)</title>", block, re.S | re.I)
+        l = re.search(r"<link[^>]*?href=[\"']([^\"']+)[\"']", block, re.S | re.I)
+        u = re.search(r"<(?:updated|published)[^>]*>(.*?)</(?:updated|published)>", block, re.S | re.I)
+        sm = re.search(r"<summary[^>]*>(.*?)</summary>", block, re.S | re.I)
+        if not t or not l:
+            continue
+        pub = ""
+        if u:
+            try:
+                pub = format_datetime(_dt.fromisoformat(u.group(1).strip().replace("Z", "+00:00")))
+            except ValueError:
+                pub = ""
+        out.append(
+            f"<item><title>{t.group(1)}</title><link>{_html.escape(l.group(1))}</link>"
+            f"<pubDate>{pub}</pubDate><description>{sm.group(1) if sm else ''}</description></item>"
+        )
+    return "\n".join(out)
+
+
+def _composite_multi_feed_get(urls: list[str], transport) -> TransportResult:
+    """Several official RSS/Atom feeds -> one RSS-shaped body (each item keeps its upstream canonical link)."""
+    parts: list[str] = []
+    for u in urls:
+        r = transport(u)
+        if not r.body or (r.http_status or 0) >= 400:
+            continue
+        parts.append(_atom_to_rss_items(r.body) if re.search(r"<entry[\s>]", r.body) else "\n".join(
+            re.findall(r"<item[\s>].*?</item>", r.body, flags=re.S | re.I)))
+    return TransportResult(http_status=200 if parts else 502, body="<rss><channel>" + "\n".join(parts) + "</channel></rss>", tls_ok=True, requested_url=urls[0] if urls else "")
+
+
+def _tdb_news_json_to_rss(body: str, web_base: str) -> str:
+    """TDB's official site publishes news through its own public JSON API (publishedAt is the real date).
+
+    Converted to RSS-shaped items; canonical URL is the public detail page on the official site.
+    """
+    import html as _html
+    from datetime import datetime as _dt
+    from email.utils import format_datetime
+
+    try:
+        rows = json.loads(body).get("data") or []
+    except (ValueError, AttributeError):
+        return ""
+    items = []
+    for r in rows:
+        title = ((r.get("title") or {}).get("tr") or "").strip()
+        slug = (r.get("slug") or "").strip()
+        if not title or not slug or r.get("status") not in (None, "published") or r.get("isActive") is False:
+            continue
+        pub = ""
+        raw = r.get("publishedAt") or ""
+        if raw:
+            try:
+                pub = format_datetime(_dt.fromisoformat(raw.replace("Z", "+00:00")))
+            except ValueError:
+                pub = ""
+        excerpt = (r.get("excerpt") or {}).get("tr") if isinstance(r.get("excerpt"), dict) else r.get("excerpt")
+        text = re.sub(r"<[^>]+>", " ", (excerpt or ((r.get("body") or {}).get("tr") or "")))
+        text = re.sub(r"\s+", " ", _html.unescape(text)).strip()[:500]
+        link = f"{web_base.rstrip('/')}/basin-odasi/haber-arsivi/{slug}/detay"
+        items.append(
+            f"<item><title>{_html.escape(title)}</title><link>{_html.escape(link)}</link>"
+            f"<pubDate>{pub}</pubDate><description>{_html.escape(text)}</description></item>"
+        )
+    return "\n".join(items)
+
+
+def _composite_tdb_news_get(api_url: str, web_base: str, transport) -> TransportResult:
+    r = transport(api_url)
+    if not r.body or (r.http_status or 0) >= 400:
+        return r
+    items = _tdb_news_json_to_rss(r.body, web_base)
+    return TransportResult(
+        http_status=200 if items else 502, body="<rss><channel>" + items + "</channel></rss>", tls_ok=True, requested_url=api_url
+    )
+
+
 # Narrow host scope for pinned public intermediates (see content/certs/README.md). A pin never applies elsewhere.
 PINNED_INTERMEDIATE_HOSTS = {
     "fnmt-ac-componentes-informaticos.pem": ("universidades.gob.es",),
@@ -1112,7 +1198,13 @@ def ingest_one_source(
                 commit_target=commit_target,
             )
 
-        if plan.get("composite") == "trovanorme_weekly_newsletters":
+        if plan.get("composite") == "multi_feed":
+            allowed = {h.lower() for h in (profile.get("allowed_hostnames") or [])}
+            feeds = [u for u in (plan.get("composite_urls") or []) if (urllib.parse.urlparse(u).hostname or "").lower() in allowed]
+            transport_result = _composite_multi_feed_get(feeds, transport)
+        elif plan.get("composite") == "tdb_news_api":
+            transport_result = _composite_tdb_news_get(str(plan["api_url"]), str(plan["web_base"]), transport)
+        elif plan.get("composite") == "trovanorme_weekly_newsletters":
             transport_result = _composite_trovanorme_get(listing, transport, int(plan.get("composite_max_pages") or 13))
         else:
             transport_result = transport(listing)

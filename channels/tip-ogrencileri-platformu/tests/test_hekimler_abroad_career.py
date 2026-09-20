@@ -196,7 +196,7 @@ class AbroadCareerRegistryTests(unittest.TestCase):
         ]
         self.assertEqual(len(abroad_op), 19)
         self.assertEqual(counts["OFFICIAL_PRIMARY"], 10 + 19)
-        self.assertEqual(counts["PROFESSIONAL_BODY"], 4)
+        self.assertEqual(counts["PROFESSIONAL_BODY"], 5)  # + tdb_dental (tracked separately from the 46)
         self.assertEqual(counts["PROFESSIONAL_GUIDANCE"], 12)
         self.assertEqual(counts["SECONDARY_NEWSWIRE"], 1)
 

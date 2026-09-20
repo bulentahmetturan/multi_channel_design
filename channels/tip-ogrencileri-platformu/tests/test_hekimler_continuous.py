@@ -92,15 +92,15 @@ class ActivationAndContinuousTests(unittest.TestCase):
                 force_due=True,
                 transport=self._transport({}),
                 hub_client=self.hub,
-                source_id="abroad_uk_gmc",
+                source_id="abroad_de_make_it_in_germany",
             )
-        # GMC (403 bot protection) is not AUTOMATION_READY → not selected → no HTTP
+        # Make it in Germany (Radware CAPTCHA) is not AUTOMATION_READY → not selected → no HTTP
         self.assertEqual(summary.due_count, 0)
         self.assertEqual(self.requests, [])
         tuik = next(
             s
             for s in self.effective["sources"]
-            if s["source_id"] == "abroad_uk_gmc"
+            if s["source_id"] == "abroad_de_make_it_in_germany"
         )
         self.assertEqual(compute_activation_state(tuik), ACTIVATION_MANUAL_INTAKE)
 

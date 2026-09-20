@@ -38,7 +38,7 @@ DOMESTIC_OFFICIAL_PRIMARY_IDS = frozenset(
 OFFICIAL_PRIMARY_IDS = DOMESTIC_OFFICIAL_PRIMARY_IDS
 
 PROFESSIONAL_BODY_IDS = frozenset(
-    {"ttb_national", "turkmsic_medical_students", "hasuder_public_health", "tvhb_veterinary"}
+    {"ttb_national", "turkmsic_medical_students", "hasuder_public_health", "tvhb_veterinary", "tdb_dental"}
 )
 PROFESSIONAL_GUIDANCE_IDS = frozenset(
     {

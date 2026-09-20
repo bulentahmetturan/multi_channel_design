@@ -619,6 +619,153 @@
         "candidate_emission_enabled": true
       },
       "execution": "python_runner"
+    },
+    {
+      "source_id": "tdb_dental",
+      "name": "Türk Dişhekimleri Birliği",
+      "label": "TDB — Türk Dişhekimleri Birliği",
+      "country": "Türkiye",
+      "canonical_url": "https://tdb.org.tr/basin-odasi/haber-arsivi",
+      "source_url": "https://api.tdb.org.tr/news?pageSize=50",
+      "primary_url": "https://tdb.org.tr/basin-odasi/haber-arsivi",
+      "allowed_hostnames": [
+        "api.tdb.org.tr",
+        "tdb.org.tr",
+        "www.tdb.org.tr"
+      ],
+      "source_tier": "PROFESSIONAL_BODY",
+      "status": "active",
+      "fetch_mode": "list-page",
+      "medical_scope": "dentistry_profession_regulation_education_scientific_meetings",
+      "audience_scope": [
+        "dental_student",
+        "dentist",
+        "specialist_dentist"
+      ],
+      "audience_segments": [
+        "dental_student",
+        "dentist",
+        "specialist_dentist"
+      ],
+      "include_keywords": [
+        "dişhekim",
+        "diş hekim",
+        "dishekim",
+        "ağız ve diş",
+        "diş hekimliği",
+        "dişhekimliği",
+        "mevzuat",
+        "yönetmelik",
+        "uzmanlık",
+        "eğitim",
+        "kontenjan",
+        "burs",
+        "kongre",
+        "bilimsel etkinlik",
+        "akademi",
+        "fdi",
+        "sertifika",
+        "kurs",
+        "muvazaa",
+        "danıştay",
+        "daire başkanlığı",
+        "tanıtım rehberi",
+        "tdbd"
+      ],
+      "exclude_keywords": [
+        "kutlu olsun",
+        "kutlarız",
+        "taziye",
+        "başımız sağ",
+        "başı sağ",
+        "vefat",
+        "anma",
+        "unutmadık",
+        "1919",
+        "faiz",
+        "kredi",
+        "sigorta",
+        "aidat",
+        "fotoğraf yarışması",
+        "ziyaret",
+        "seçim",
+        "iftar",
+        "bayram",
+        "içimiz yanıyor",
+        "gemi kazası",
+        "barış günü",
+        "demokrasi ve milli birlik",
+        "web sitemiz",
+        "basın açıklamasına bekliyoruz",
+        "başkanlar konseyi"
+      ],
+      "allow_congress": true,
+      "allowed_routes": [
+        "PROFESSIONAL_BRIEF",
+        "EDUCATION",
+        "NEEDS_REVIEW",
+        "DISCARD"
+      ],
+      "default_route_on_accept": "PROFESSIONAL_BRIEF",
+      "statement_treatment": "professional_guidance",
+      "evidence_rule": "official_url_required",
+      "transform_rule": "attribute_society_document_date_audience",
+      "source_health": "HEALTHY",
+      "fetch_enabled": true,
+      "scheduled_fetch_enabled": true,
+      "candidate_emission_enabled": true,
+      "pipeline_wiring_enabled": true,
+      "publication_eligible": false,
+      "runtime_activation": "AUTOMATION_READY",
+      "fetch_plan": {
+        "primary_method": "list-page",
+        "tls_verification_required": true,
+        "allowed_hostnames": [
+          "api.tdb.org.tr",
+          "tdb.org.tr",
+          "www.tdb.org.tr"
+        ],
+        "allowed_path_patterns": [
+          "/news",
+          "/basin-odasi/haber-arsivi/"
+        ],
+        "forbidden_hosts": [],
+        "forbidden_path_patterns": [],
+        "notes": "Official TDB public JSON API used by tdb.org.tr itself (publishedAt = real publication date; sitemap lastmod unreliable, SPA has no server-rendered list). No auth, no bypass.",
+        "expected_check_interval_minutes": 1440,
+        "source_health": "HEALTHY",
+        "coverage_status": "configured",
+        "coverage_policy": {
+          "sparse_source_allowed": true,
+          "expected_eligible_frequency": "moderate",
+          "coverage_watch_window": 4,
+          "require_in_scope_for_low_coverage": true
+        },
+        "initial_backfill": {
+          "lookback_days": 60,
+          "retain_active_or_future_deadline": true,
+          "historical_priority": "backfill_low",
+          "undated_as_current": true
+        },
+        "surfaces": [
+          {
+            "id": "news_api",
+            "url": "https://api.tdb.org.tr/news?pageSize=50",
+            "role": "primary",
+            "health": "HEALTHY"
+          }
+        ],
+        "fetch_enabled": true,
+        "scheduled_fetch_enabled": true,
+        "candidate_emission_enabled": true,
+        "composite": "tdb_news_api",
+        "api_url": "https://api.tdb.org.tr/news?pageSize=50",
+        "web_base": "https://tdb.org.tr"
+      },
+      "execution": "python_runner",
+      "item_url_patterns": [
+        "^https://tdb\\.org\\.tr/basin-odasi/haber-arsivi/[^/]+/detay$"
+      ]
     }
   ]
 }

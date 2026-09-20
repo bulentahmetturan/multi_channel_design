@@ -196,7 +196,8 @@
     "abroad_au_medical_board",
     "abroad_au_amc",
     "tihud_internal_medicine",
-    "abroad_uk_oriel"
+    "abroad_uk_oriel",
+    "tdb_dental"
   ],
   "rules": [
     "A generic term alone (KPSS, memur, personel alımı, burs, sınav takvimi) never qualifies; it needs a profession/learner term from physician, dental, veterinary or a named medical exam/pathway.",
