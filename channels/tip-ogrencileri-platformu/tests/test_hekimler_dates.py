@@ -64,6 +64,17 @@ class DatePolicyTests(unittest.TestCase):
         self.assertEqual(extract_dates("https://x.org/detail/duyuru-202609041409"), [date(2026, 9, 4)])
         self.assertEqual(extract_dates("https://x.org/detail/id-123456789012345"), [])
 
+    def test_tuik_home_slider_parser(self):
+        from pathlib import Path
+        from radar.phase1_ingestion_canary import parse_raw_items
+
+        body = (Path(__file__).parent / "fixtures" / "parse_tuik_home.html").read_text(encoding="utf-8", errors="replace")
+        items = parse_raw_items(source_id="tuik_medical_public_health", source_url="https://www.tuik.gov.tr/", body=body, fetch_method="list-page", fetched_at="t")
+        self.assertGreaterEqual(len(items), 4)
+        self.assertTrue(all("veriportali.tuik.gov.tr/tr/press/" in i.canonical_item_url for i in items))
+        self.assertEqual(len({i.canonical_item_url for i in items}), len(items))
+        self.assertTrue(any(i.published_at for i in items))
+
 
 if __name__ == "__main__":
     unittest.main()

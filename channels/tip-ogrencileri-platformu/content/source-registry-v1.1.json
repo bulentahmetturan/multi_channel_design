@@ -350,15 +350,14 @@
     {
       "source_id": "tuik_medical_public_health",
       "name": "TÜİK — Health and public-health data only",
-      "canonical_url": "https://data.tuik.gov.tr/",
+      "canonical_url": "https://www.tuik.gov.tr/",
       "allowed_hostnames": [
-        "data.tuik.gov.tr",
         "www.tuik.gov.tr",
         "tuik.gov.tr"
       ],
       "source_tier": "OFFICIAL_PRIMARY",
-      "fetch_mode": "official_bulletin_discovery",
-      "status": "manual_review",
+      "fetch_mode": "list-page",
+      "status": "active",
       "phase1_ref": "source-registry-phase1.json",
       "medical_scope": "health_expenditure mortality obesity tobacco healthcare_use",
       "audience_scope": [
@@ -369,14 +368,24 @@
       ],
       "include_keywords": [
         "sağlık",
+        "hekim",
+        "hastane",
         "ölüm",
+        "doğum",
+        "yaşam",
+        "engelli",
+        "sağlık harcama",
+        "sağlık personeli",
         "obezite",
         "tütün"
       ],
       "exclude_keywords": [
         "enflasyon",
         "turizm",
-        "tarım"
+        "tarım",
+        "fiyat endeksi",
+        "motorlu",
+        "konut"
       ],
       "allowed_routes": [
         "DATA_INSIGHT",
@@ -385,7 +394,7 @@
       "statement_treatment": "official_data",
       "evidence_rule": "retain_denominator_time_period_geography",
       "transform_rule": "never_infer_causality; preserve numerator denominator population geography time_period",
-      "source_url": "https://data.tuik.gov.tr/kategori/getkategori?p=saglik-ve-sosyal-koruma-101",
+      "source_url": "https://www.tuik.gov.tr/",
       "primary_url": "https://data.tuik.gov.tr/",
       "content_angle": "public_health_data",
       "medical_relevance": "high",
@@ -403,14 +412,57 @@
         "comparison_period",
         "source_table_or_report_url"
       ],
-      "source_health": "MANUAL_REVIEW_REQUIRED",
-      "fetch_enabled": false,
-      "scheduled_fetch_enabled": false,
-      "candidate_emission_enabled": false,
+      "source_health": "HEALTHY",
+      "fetch_enabled": true,
+      "scheduled_fetch_enabled": true,
+      "candidate_emission_enabled": true,
       "publication_eligible": false,
-      "pipeline_wiring_enabled": false,
-      "runtime_activation": "MANUAL_INTAKE",
-      "manual_intake_reason": "TÜİK health category is SPA (veriportali shell); no verified structured API for automation."
+      "pipeline_wiring_enabled": true,
+      "runtime_activation": "AUTOMATION_READY",
+      "item_url_patterns": [
+        "veriportali\\.tuik\\.gov\\.tr/tr/press/\\d+"
+      ],
+      "fetch_plan": {
+        "primary_method": "list-page",
+        "tls_verification_required": true,
+        "allowed_hostnames": [
+          "www.tuik.gov.tr",
+          "tuik.gov.tr"
+        ],
+        "allowed_path_patterns": [
+          "/"
+        ],
+        "forbidden_hosts": [],
+        "forbidden_path_patterns": [],
+        "notes": "Official server-rendered home page bulletin slider (latest bulletins: title, period, veriportali press URL). veriportali/data.tuik.gov.tr are JS-only shells; press API not reachable without the portal proxy.",
+        "expected_check_interval_minutes": 1440,
+        "source_health": "HEALTHY",
+        "coverage_status": "configured",
+        "coverage_policy": {
+          "sparse_source_allowed": true,
+          "expected_eligible_frequency": "rare",
+          "coverage_watch_window": 4,
+          "require_in_scope_for_low_coverage": true
+        },
+        "initial_backfill": {
+          "lookback_days": 60,
+          "retain_active_or_future_deadline": true,
+          "historical_priority": "backfill_low",
+          "undated_as_current": true
+        },
+        "surfaces": [
+          {
+            "id": "home_slider",
+            "url": "https://www.tuik.gov.tr/",
+            "role": "primary",
+            "health": "HEALTHY"
+          }
+        ],
+        "fetch_enabled": true,
+        "scheduled_fetch_enabled": true,
+        "candidate_emission_enabled": true
+      },
+      "execution": "python_runner"
     },
     {
       "source_id": "moh_physician_workforce",
@@ -1939,14 +1991,14 @@
     {
       "source_id": "tihud_internal_medicine",
       "name": "Türk İç Hastalıkları Uzmanlık Derneği",
-      "canonical_url": "https://www.tihud.org.tr/",
+      "canonical_url": "https://www.tihud.org.tr/HaberlerveDuyurular?sayfa=1&menu=1",
       "allowed_hostnames": [
         "www.tihud.org.tr",
         "tihud.org.tr"
       ],
       "source_tier": "PROFESSIONAL_GUIDANCE",
-      "fetch_mode": "scoped_listing",
-      "status": "manual_review",
+      "fetch_mode": "list-page",
+      "status": "active",
       "medical_scope": "internal_medicine_guidelines",
       "audience_scope": [
         "physician",
@@ -1955,13 +2007,24 @@
       ],
       "include_keywords": [
         "kılavuz",
-        "konsensus",
-        "iç hastalıkları"
+        "rehber",
+        "uzmanlık",
+        "asistan",
+        "eğitim",
+        "kongre",
+        "yeterlik",
+        "sınav",
+        "desteği",
+        "okulu",
+        "webinar",
+        "başvuru",
+        "akademi"
       ],
       "exclude_keywords": [
-        "kongre",
-        "sempozyum",
-        "sponsor"
+        "aidat",
+        "başsağlığı",
+        "vefat",
+        "kampanya"
       ],
       "allowed_routes": [
         "CLINICAL_UPDATE",
@@ -1970,8 +2033,8 @@
       "statement_treatment": "professional_guidance",
       "evidence_rule": "direct_guideline_document_url_required",
       "transform_rule": "attribute_society_document_date_audience",
-      "source_url": "https://www.tihud.org.tr/",
-      "primary_url": "https://www.tihud.org.tr/",
+      "source_url": "https://www.tihud.org.tr/HaberlerveDuyurular?sayfa=1&menu=1",
+      "primary_url": "https://www.tihud.org.tr/HaberlerveDuyurular?sayfa=1&menu=1",
       "content_angle": "clinical_update",
       "medical_relevance": "high",
       "actionability": "medium",
@@ -1980,15 +2043,55 @@
       "viral_signal": "ignored_for_priority",
       "review_status": "mandatory",
       "requires_direct_document_url": true,
-      "manual_review_reason": "Specialty society fetch deferred.",
-      "source_health": "MANUAL_REVIEW_REQUIRED",
-      "fetch_enabled": false,
-      "scheduled_fetch_enabled": false,
-      "candidate_emission_enabled": false,
+      "source_health": "HEALTHY",
+      "fetch_enabled": true,
+      "scheduled_fetch_enabled": true,
+      "candidate_emission_enabled": true,
       "publication_eligible": false,
-      "pipeline_wiring_enabled": false,
-      "runtime_activation": "MANUAL_INTAKE",
-      "manual_intake_reason": "/HaberlerveDuyurular 500; alternate query has nav tabs only, no item list."
+      "pipeline_wiring_enabled": true,
+      "runtime_activation": "AUTOMATION_READY",
+      "allow_congress": true,
+      "execution": "python_runner",
+      "fetch_plan": {
+        "primary_method": "list-page",
+        "tls_verification_required": true,
+        "allowed_hostnames": [
+          "www.tihud.org.tr",
+          "tihud.org.tr"
+        ],
+        "allowed_path_patterns": [
+          "/HaberlerveDuyurular"
+        ],
+        "forbidden_hosts": [],
+        "forbidden_path_patterns": [],
+        "notes": "Server-rendered dated rows (title + dd/mm/yyyy). 3.6 MB page: Python runner only (Workers Free CPU limit).",
+        "expected_check_interval_minutes": 1440,
+        "source_health": "HEALTHY",
+        "coverage_status": "configured",
+        "coverage_policy": {
+          "sparse_source_allowed": true,
+          "expected_eligible_frequency": "rare",
+          "coverage_watch_window": 4,
+          "require_in_scope_for_low_coverage": true
+        },
+        "initial_backfill": {
+          "lookback_days": 60,
+          "retain_active_or_future_deadline": true,
+          "historical_priority": "backfill_low",
+          "undated_as_current": true
+        },
+        "surfaces": [
+          {
+            "id": "haber_duyuru",
+            "url": "https://www.tihud.org.tr/HaberlerveDuyurular?sayfa=1&menu=1",
+            "role": "primary",
+            "health": "HEALTHY"
+          }
+        ],
+        "fetch_enabled": true,
+        "scheduled_fetch_enabled": true,
+        "candidate_emission_enabled": true
+      }
     },
     {
       "source_id": "turk_pediatri_kurumu",

@@ -39,6 +39,7 @@ class Phase1RegistryTests(unittest.TestCase):
             "yokak_medical_accreditation",
             "tuk_specialty_training",
             "resmi_gazete_medical_regulation",
+            "tuik_medical_public_health",  # wired via the official home-page bulletin slider (2026-09-20)
         }
         for s in sources:
             self.assertEqual(s["source_tier"], "OFFICIAL_PRIMARY")

@@ -87,6 +87,8 @@ def _utcnow_iso() -> str:
 
 def export_automation_ready_profiles(
     effective: dict[str, Any] | None = None,
+    *,
+    worker_only: bool = False,
 ) -> list[dict[str, Any]]:
     """Profiles the generic runner will schedule (metadata only — no secrets)."""
     reg = effective or resolve_effective_registry()
@@ -94,6 +96,8 @@ def export_automation_ready_profiles(
     for src in all_sources(reg):
         if compute_activation_state(src) != ACTIVATION_AUTOMATION_READY:
             continue
+        if worker_only and src.get("execution") == "python_runner":
+            continue  # heavy pages exceed the Worker CPU budget; ingested by the Python runner
         out.append(
             {
                 "source_id": src["source_id"],
@@ -132,7 +136,7 @@ def export_automation_ready_profiles(
 
 def write_worker_profile_bundle(dest: Path | None = None) -> Path:
     """Sync AUTOMATION_READY profiles into global-content-os for the Worker runner."""
-    profiles = export_automation_ready_profiles()
+    profiles = export_automation_ready_profiles(worker_only=True)
     root = Path(__file__).resolve().parents[3]  # multi_channel_design
     sibling = root.parent / "global-content-os" / "apps" / "worker" / "src" / "ingress"
     path = dest or (sibling / "hekimler-automation-ready.ts")

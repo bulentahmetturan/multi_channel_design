@@ -411,16 +411,16 @@ class Phase1CanaryTests(unittest.TestCase):
                 self.assertGreaterEqual(len(self.hub.items), 1)
 
     def test_tuik_registry_plan_is_manual_review_blocked(self):
-        """Live registry marks TÜİK MANUAL_REVIEW_REQUIRED — canary must not HTTP."""
+        """A MANUAL_REVIEW_REQUIRED registry source (ECFMG, 403 bot protection) must never be fetched."""
         with _enabled_env():
             summary = run_phase1_canary(
                 db=self.db,
                 dry_run=True,
-                source_id="tuik_medical_public_health",
+                source_id="abroad_us_ecfmg_intealth",
                 transport=self._transport({}),
                 force_due=True,
             )
-        self.assertEqual(summary.results[0].operator_status, "blocked_manual_review")
+        self.assertIn(summary.results[0].operator_status, {"blocked_manual_review", "blocked_excluded_source"})
         self.assertEqual(self.requests, [])
 
     def test_tuik_medical_scope_passes_when_plan_healthy(self):

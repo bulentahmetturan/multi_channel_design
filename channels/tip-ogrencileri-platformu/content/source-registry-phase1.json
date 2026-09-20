@@ -795,9 +795,9 @@
       "label": "TÜİK — medical and public-health statistics only",
       "source_tier": "OFFICIAL_PRIMARY",
       "role": "official medical and public-health data authority",
-      "fetch_mode": "official_bulletin_discovery",
-      "source_url": "https://data.tuik.gov.tr/kategori/getkategori?p=saglik-ve-sosyal-koruma-101",
-      "primary_url": "https://data.tuik.gov.tr/kategori/getkategori?p=saglik-ve-sosyal-koruma-101",
+      "fetch_mode": "list-page",
+      "source_url": "https://www.tuik.gov.tr/",
+      "primary_url": "https://data.tuik.gov.tr/",
       "related_list_urls": [
         "https://www.tuik.gov.tr/"
       ],
@@ -812,32 +812,25 @@
         "demographic-only-when-direct-health-planning-impact"
       ],
       "include_keywords": [
-        "sağlık harcama",
-        "Türkiye Sağlık Araştırması",
-        "ölüm neden",
-        "ölüm istatistik",
-        "yaşam süresi",
-        "hayat tablosu",
-        "doğum istatistik",
-        "obezite",
-        "tütün",
-        "alkol",
-        "fiziksel aktivite",
+        "sağlık",
+        "hekim",
+        "hastane",
+        "ölüm",
+        "doğum",
+        "yaşam",
         "engelli",
-        "yaralanma",
-        "sağlık hizmeti kullanım",
-        "sağlık istatistik"
+        "sağlık harcama",
+        "sağlık personeli",
+        "obezite",
+        "tütün"
       ],
       "exclude_keywords": [
         "enflasyon",
-        "TÜFE",
-        "dış ticaret",
         "turizm",
         "tarım",
-        "GSYH",
-        "sanayi üretimi",
-        "konut satış",
-        "işgücü genel"
+        "fiyat endeksi",
+        "motorlu",
+        "konut"
       ],
       "audience_segments": [
         "medical_student",
@@ -865,56 +858,59 @@
       "policy_notes": "Only health/social-protection category items that match include keywords. Economy/tourism releases are DISCARD.",
       "fetch_notes": "list-page on health category portal; SPA may limit HTML parsing — automation may require API or manual follow-up for some bulletins.",
       "fetch_plan": {
-        "primary_method": "official_bulletin_discovery",
-        "fallback_methods": [],
+        "primary_method": "list-page",
+        "tls_verification_required": true,
         "allowed_hostnames": [
-          "data.tuik.gov.tr",
           "www.tuik.gov.tr",
           "tuik.gov.tr"
         ],
         "allowed_path_patterns": [
-          "/kategori/",
-          "/Bulten/",
-          "/HbGetir",
-          "/media/",
           "/"
         ],
+        "forbidden_hosts": [],
+        "forbidden_path_patterns": [],
+        "notes": "Official server-rendered home page bulletin slider (latest bulletins: title, period, veriportali press URL). veriportali/data.tuik.gov.tr are JS-only shells; press API not reachable without the portal proxy.",
         "expected_check_interval_minutes": 1440,
-        "last_success_at": null,
-        "last_content_hash": null,
-        "last_item_timestamp": null,
-        "failure_count": 0,
-        "source_health": "MANUAL_REVIEW_REQUIRED",
-        "coverage_status": "partial",
-        "manual_review_reason": "SPA data portal has no verified public API in-repo; dataset surface is manual until verified API or safe browser adapter exists.",
-        "tls_verification_required": true,
+        "source_health": "HEALTHY",
+        "coverage_status": "configured",
+        "coverage_policy": {
+          "sparse_source_allowed": true,
+          "expected_eligible_frequency": "rare",
+          "coverage_watch_window": 4,
+          "require_in_scope_for_low_coverage": true
+        },
+        "initial_backfill": {
+          "lookback_days": 60,
+          "retain_active_or_future_deadline": true,
+          "historical_priority": "backfill_low",
+          "undated_as_current": true
+        },
         "surfaces": [
           {
-            "id": "official_bulletin_discovery",
+            "id": "home_slider",
             "url": "https://www.tuik.gov.tr/",
-            "role": "bulletin_discovery",
+            "role": "primary",
             "health": "HEALTHY"
-          },
-          {
-            "id": "official_dataset_access",
-            "url": "https://data.tuik.gov.tr/kategori/getkategori?p=saglik-ve-sosyal-koruma-101",
-            "role": "dataset_portal",
-            "health": "MANUAL_REVIEW_REQUIRED"
           }
         ],
-        "fetch_enabled": false,
-        "scheduled_fetch_enabled": false,
-        "candidate_emission_enabled": false
+        "fetch_enabled": true,
+        "scheduled_fetch_enabled": true,
+        "candidate_emission_enabled": true
       },
       "status": "manual_review",
-      "canonical_url": "https://data.tuik.gov.tr/kategori/getkategori?p=saglik-ve-sosyal-koruma-101",
+      "canonical_url": "https://www.tuik.gov.tr/",
       "statement_treatment": "official_data",
-      "fetch_enabled": false,
-      "scheduled_fetch_enabled": false,
-      "candidate_emission_enabled": false,
+      "fetch_enabled": true,
+      "scheduled_fetch_enabled": true,
+      "candidate_emission_enabled": true,
       "publication_eligible": false,
-      "pipeline_wiring_enabled": false,
-      "runtime_activation": "MANUAL_INTAKE"
+      "pipeline_wiring_enabled": true,
+      "runtime_activation": "AUTOMATION_READY",
+      "item_url_patterns": [
+        "veriportali\\.tuik\\.gov\\.tr/tr/press/\\d+"
+      ],
+      "source_health": "HEALTHY",
+      "execution": "python_runner"
     }
   ],
   "hardenedAt": "2026-09-19",

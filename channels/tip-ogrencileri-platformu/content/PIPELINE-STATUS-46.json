@@ -848,5 +848,153 @@
     ],
     "undated_sample": [],
     "result": "HAS_CANDIDATES"
+  },
+  {
+    "source_id": "tuik_medical_public_health",
+    "url": "https://www.tuik.gov.tr/",
+    "http": 200,
+    "failure": null,
+    "parsed": 5,
+    "accepted_pre_date": 0,
+    "fresh": 0,
+    "active": 0,
+    "undated": 0,
+    "stale": 0,
+    "accepted": 0,
+    "sample": [],
+    "undated_sample": [],
+    "result": "NO_CANDIDATES"
+  },
+  {
+    "source_id": "tihud_internal_medicine",
+    "url": "https://www.tihud.org.tr/HaberlerveDuyurular?sayfa=1&menu=1",
+    "http": 200,
+    "failure": null,
+    "parsed": 762,
+    "accepted_pre_date": 146,
+    "fresh": 0,
+    "active": 0,
+    "undated": 0,
+    "stale": 146,
+    "accepted": 0,
+    "sample": [],
+    "undated_sample": [],
+    "result": "NO_CANDIDATES"
+  },
+  {
+    "source_id": "abroad_ie_medical_council",
+    "url": "https://www.medicalcouncil.ie/news-and-publications/press-releases/press-release/press-releases.html",
+    "http": 200,
+    "failure": null,
+    "parsed": 181,
+    "accepted_pre_date": 26,
+    "fresh": 4,
+    "active": 0,
+    "undated": 2,
+    "stale": 20,
+    "accepted": 6,
+    "sample": [
+      {
+        "title": "World Patient Safety Day: Medical Council highlights importance of patients and doctors working in partnership",
+        "url": "https://www.medicalcouncil.ie/news-and-publications/press-releases/press-release/items/world-patient-safety-day-medical-council-highlights-importance-of-patients-and-doctors-working-in-partnership.html",
+        "date": "2026-09-17"
+      },
+      {
+        "title": "Record number of doctors now working in Ireland, new Medical Council workforce report finds",
+        "url": "https://www.medicalcouncil.ie/news-and-publications/press-releases/press-release/items/record-number-of-doctors-now-working-in-ireland.html",
+        "date": "2026-08-31"
+      },
+      {
+        "title": "Doctors invited to renew their registration with the Medical Council",
+        "url": "https://www.medicalcouncil.ie/news-and-publications/press-releases/press-release/items/doctors-invited-to-renew-their-registration-with-the-medical-council.html",
+        "date": "2026-06-30"
+      }
+    ],
+    "undated_sample": [
+      "Medical Workforce Intelligence Report 2023 spotlights reliance on international doctors an",
+      "New edition of Guide to Professional Conduct and Ethics for Registered Medical Practitione"
+    ],
+    "result": "HAS_CANDIDATES"
+  },
+  {
+    "source_id": "abroad_es_mir_fse",
+    "url": "https://www.sanidad.gob.es/gabinete/notasPrensa.do",
+    "http": 200,
+    "failure": null,
+    "parsed": 4548,
+    "accepted_pre_date": 7,
+    "fresh": 1,
+    "active": 0,
+    "undated": 0,
+    "stale": 6,
+    "accepted": 1,
+    "sample": [
+      {
+        "title": "Sanidad abre a audiencia pública la reforma que limita las guardias, mejora los descansos y actualiza las retr",
+        "url": "https://www.sanidad.gob.es/gabinete/notasPrensa.do?id=6952",
+        "date": "2026-07-01"
+      }
+    ],
+    "undated_sample": [],
+    "result": "HAS_CANDIDATES"
+  },
+  {
+    "source_id": "abroad_es_universidades_homologacion",
+    "url": "https://www.universidades.gob.es/Noticias.html",
+    "http": 200,
+    "failure": null,
+    "parsed": 108,
+    "accepted_pre_date": 0,
+    "fresh": 0,
+    "active": 0,
+    "undated": 0,
+    "stale": 0,
+    "accepted": 0,
+    "sample": [],
+    "undated_sample": [],
+    "result": "NO_CANDIDATES"
+  },
+  {
+    "source_id": "abroad_us_aamc_eras",
+    "url": "https://www.aamc.org/news",
+    "http": 200,
+    "failure": null,
+    "parsed": 132,
+    "accepted_pre_date": 0,
+    "fresh": 0,
+    "active": 0,
+    "undated": 0,
+    "stale": 0,
+    "accepted": 0,
+    "sample": [],
+    "undated_sample": [],
+    "result": "NO_CANDIDATES"
+  },
+  {
+    "source_id": "abroad_sa_scfhs_watch",
+    "url": "https://scfhs.org.sa/en/news",
+    "http": 200,
+    "failure": null,
+    "parsed": 54,
+    "accepted_pre_date": 2,
+    "fresh": 2,
+    "active": 0,
+    "undated": 0,
+    "stale": 0,
+    "accepted": 2,
+    "sample": [
+      {
+        "title": "SCFHS Announces Admission Results for the 2026 Saudi Board Programs",
+        "url": "https://scfhs.org.sa/en/news/scfhs-announces-admission-results-2026-saudi-board-programs",
+        "date": "2026-08-23"
+      },
+      {
+        "title": "SCFHS Announces the Opening of Applications for the 2027 Saudi Board Programs in Medical and Surgical Subspeci",
+        "url": "https://scfhs.org.sa/en/news/scfhs-announces-opening-applications-2027-saudi-board-programs-medical-and-surgical",
+        "date": "2026-07-06"
+      }
+    ],
+    "undated_sample": [],
+    "result": "HAS_CANDIDATES"
   }
 ]

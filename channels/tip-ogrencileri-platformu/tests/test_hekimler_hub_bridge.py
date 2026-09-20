@@ -245,7 +245,7 @@ class HekimlerHubBridgeTests(unittest.TestCase):
             tuik = run_phase1_canary(
                 db=self.db,
                 dry_run=False,
-                source_id="tuik_medical_public_health",
+                source_id="abroad_uk_gmc",
                 transport=self._transport({}),
                 force_due=True,
                 hub_client=self.hub,
@@ -253,12 +253,12 @@ class HekimlerHubBridgeTests(unittest.TestCase):
             aa = run_phase1_canary(
                 db=self.db,
                 dry_run=False,
-                source_id="anadolu_ajansi_medical_radar",
+                source_id="abroad_it_salute_foreign_qual",
                 transport=self._transport({}),
                 force_due=True,
                 hub_client=self.hub,
             )
-        self.assertEqual(tuik.results[0].operator_status, "blocked_manual_review")
+        self.assertEqual(tuik.results[0].operator_status, "blocked_excluded_source")
         self.assertEqual(aa.results[0].operator_status, "blocked_excluded_source")
         self.assertEqual(self.requests, [])
         self.assertEqual(len(self.hub.items), 0)

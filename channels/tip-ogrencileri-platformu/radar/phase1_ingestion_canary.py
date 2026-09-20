@@ -286,6 +286,32 @@ def is_due(
     return now >= last + timedelta(minutes=interval)
 
 
+def _os_trust_get(url: str, timeout: float) -> TransportResult | None:
+    """Verified GET through the system curl (OS trust store). Returns None when curl is unavailable/fails TLS."""
+    import shutil
+    import subprocess
+
+    curl = shutil.which("curl")
+    if not curl:
+        return None
+    try:
+        proc = subprocess.run(
+            [curl, "-sSL", "--max-time", str(int(timeout)), "-A", "HekimlerContinuousWorker/1.0 (+review-only)", "-w", "\n%{http_code}", url],
+            capture_output=True, timeout=timeout + 10,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return None
+    if proc.returncode != 0:
+        return None  # includes curl TLS verification failures (exit 35/60): stay fail-closed
+    raw = proc.stdout.decode("utf-8", errors="replace")
+    body, _, code = raw.rpartition("\n")
+    try:
+        status = int(code.strip())
+    except ValueError:
+        return None
+    return TransportResult(http_status=status, body=body, tls_ok=True, requested_url=url, failure_reason=None if status < 400 else f"HTTP {status}")
+
+
 def tls_verified_get(url: str, timeout: float = 30.0) -> TransportResult:
     """HTTP GET with mandatory certificate verification. Never disables TLS checks."""
     ctx = ssl.create_default_context()
@@ -305,6 +331,11 @@ def tls_verified_get(url: str, timeout: float = 30.0) -> TransportResult:
                 requested_url=url,
             )
     except ssl.SSLError as exc:
+        # Some official hosts serve an incomplete chain that Python's OpenSSL cannot complete but the OS trust
+        # store can (AIA fetching). curl (schannel/system trust) still VERIFIES the certificate; never disable it.
+        os_result = _os_trust_get(url, timeout)
+        if os_result is not None:
+            return os_result
         return TransportResult(
             http_status=None,
             body="",
@@ -321,6 +352,10 @@ def tls_verified_get(url: str, timeout: float = 30.0) -> TransportResult:
             failure_reason=f"HTTP {exc.code}",
         )
     except Exception as exc:  # noqa: BLE001 — fail closed
+        if "CERTIFICATE_VERIFY_FAILED" in str(exc):
+            os_result = _os_trust_get(url, timeout)
+            if os_result is not None:
+                return os_result
         return TransportResult(
             http_status=None,
             body="",
@@ -429,6 +464,102 @@ def _card_heading_before(body: str, pos: int) -> str | None:
     return text if len(text) >= 12 else None
 
 
+_TR_MONTH_NUM = {"ocak": 1, "subat": 2, "mart": 3, "nisan": 4, "mayis": 5, "haziran": 6, "temmuz": 7, "agustos": 8, "eylul": 9, "ekim": 10, "kasim": 11, "aralik": 12}
+
+
+def _parse_tuik_carousel(
+    *, source_id: str, source_url: str, body: str, fetched_at: str, fetch_method: str
+) -> list[RawItem]:
+    """TÜİK home-page bulletin slider (server-rendered): title + reference period + bulletin URL.
+
+    The period ('Ağustos 2026', '2025', '2. Çeyrek 2026') is the reference period, so the publication date is
+    approximated by the end of that period, capped at today (annual/quarter labels can end in the future).
+    """
+    import calendar
+    import html as _html
+    from datetime import date as _date
+
+    from .hekimler_registry import _fold
+
+    out: list[RawItem] = []
+    seen: set[str] = set()
+    pattern = r"SliderUrl\('([^']+)'[^>]*>.*?hbranabaslik[^>]*>(.*?)</div>.*?hbraltbaslik[^>]*>(.*?)</div>"
+    for m in re.finditer(pattern, body, flags=re.S):
+        url = m.group(1).strip()
+        if url in seen:
+            continue
+        seen.add(url)
+        title = re.sub(r"\s+", " ", _html.unescape(re.sub(r"<[^>]+>", " ", m.group(2)))).strip()
+        period = re.sub(r"\s+", " ", _html.unescape(re.sub(r"<[^>]+>", " ", m.group(3)))).strip()
+        if len(title) < 8:
+            continue
+        pub = None
+        pf = _fold(period)
+        mm = re.search(r"(ocak|subat|mart|nisan|mayis|haziran|temmuz|agustos|eylul|ekim|kasim|aralik)\s+(20\d{2})", pf)
+        qm = re.search(r"([1-4])\.?\s*ceyrek\s+(20\d{2})", pf)
+        ym = re.fullmatch(r"\s*(20\d{2})\s*", pf)
+        try:
+            if mm:
+                y, mo = int(mm.group(2)), _TR_MONTH_NUM[mm.group(1)]
+                pub = _date(y, mo, calendar.monthrange(y, mo)[1])
+            elif qm:
+                y, mo = int(qm.group(2)), int(qm.group(1)) * 3
+                pub = _date(y, mo, calendar.monthrange(y, mo)[1])
+            elif ym:
+                pub = _date(int(ym.group(1)), 12, 31)
+        except ValueError:
+            pub = None
+        if pub and pub > _date.today():
+            pub = _date.today()
+        full = f"{title}, {period}" if period else title
+        out.append(
+            RawItem(
+                source_id=source_id,
+                source_url=source_url,
+                canonical_item_url=url,
+                title=full,
+                published_at=pub.isoformat() if pub else None,
+                fetched_at=fetched_at,
+                content_hash=_hash_text(source_id, url, full),
+                fetch_method=fetch_method,
+                raw_excerpt=full,
+            )
+        )
+    return out
+
+
+def _parse_dated_rows(
+    *, source_id: str, source_url: str, body: str, fetched_at: str, fetch_method: str
+) -> list[RawItem]:
+    """Server-rendered rows: <div>TITLE</div><div class="col-lg-3 ...">dd/mm/yyyy</div> (no per-row link)."""
+    import hashlib
+    import html as _html
+
+    out: list[RawItem] = []
+    pattern = r">([^<>]{6,220})</div>\s*<div class=\"col-lg-3[^\"]*\"[^>]*>\s*(\d{2})/(\d{2})/(20\d{2})\s*</div>"
+    for m in re.finditer(pattern, body):
+        title = re.sub(r"\s+", " ", _html.unescape(m.group(1))).strip()
+        iso = f"{m.group(4)}-{m.group(3)}-{m.group(2)}"
+        if len(title) < 8:
+            continue
+        key = hashlib.sha1(f"{title}|{iso}".encode("utf-8")).hexdigest()[:10]
+        link = f"{source_url.split('#')[0]}#{key}"
+        out.append(
+            RawItem(
+                source_id=source_id,
+                source_url=source_url,
+                canonical_item_url=link,
+                title=title,
+                published_at=iso,
+                fetched_at=fetched_at,
+                content_hash=_hash_text(source_id, link, title),
+                fetch_method=fetch_method,
+                raw_excerpt=title,
+            )
+        )
+    return out
+
+
 def _adjacent_date(body: str, pos: int) -> str | None:
     """Date shown right after a list anchor (e.g. <a>title</a> <span>16/09/2026</span>), before the next anchor."""
     from .hekimler_dates import extract_dates
@@ -454,6 +585,16 @@ def parse_raw_items(
     Accepts JSON fixture ``{"items":[...]}`` or simple HTML anchor lists.
     """
     body = body or ""
+    if "col-lg-3 d-flex justify-content-end" in body[:4_000_000] and re.search(r"</div>\s*<div class=\"col-lg-3 d-flex justify-content-end\"[^>]*>\s*\d{2}/\d{2}/20\d{2}", body):
+        rows = _parse_dated_rows(
+            source_id=source_id, source_url=source_url, body=body, fetched_at=fetched_at, fetch_method=fetch_method
+        )
+        if rows:
+            return rows
+    if "hbranabaslik" in body and "SliderUrl(" in body:
+        return _parse_tuik_carousel(
+            source_id=source_id, source_url=source_url, body=body, fetched_at=fetched_at, fetch_method=fetch_method
+        )
     if re.search(r"<urlset[\s>]", body[:3000], flags=re.I) and "<news:news>" in body[:6000]:
         return _parse_news_sitemap(
             source_id=source_id, source_url=source_url, body=body, fetched_at=fetched_at, fetch_method=fetch_method

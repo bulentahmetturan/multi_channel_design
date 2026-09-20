@@ -103,9 +103,11 @@ class FetchHardenTests(unittest.TestCase):
 
     def test_tuik_dataset_surface_manual_review(self):
         tuik = get_source_profile(self.registry, "tuik_medical_public_health")
-        self.assertEqual(tuik["fetch_plan"]["source_health"], "MANUAL_REVIEW_REQUIRED")
+        # TÜİK is now read from the official server-rendered home-page bulletin slider (data portal is a JS-only shell).
+        self.assertEqual(tuik["fetch_plan"]["source_health"], "HEALTHY")
         surfaces = {s["id"]: s for s in tuik["fetch_plan"]["surfaces"]}
-        self.assertEqual(surfaces["official_dataset_access"]["health"], "MANUAL_REVIEW_REQUIRED")
+        self.assertEqual(surfaces["home_slider"]["url"], "https://www.tuik.gov.tr/")
+        self.assertTrue(tuik.get("item_url_patterns"))
 
     def test_resmi_gazete_two_stage_unclear_impact(self):
         profile = get_source_profile(self.registry, "resmi_gazete_medical_regulation")
