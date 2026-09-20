@@ -105,8 +105,70 @@ None outside the Kaduse Visual Quality P2 programme above.
 
 A working, tested source-monitoring implementation for `tip-ogrencileri-platformu` (scan pipeline, faculty-source discovery scripts, official source inventory, 77 passing tests) arrived from a separate session and was integrated at `channels/tip-ogrencileri-platformu/{radar,scripts,sources,tests,database}/`. It remains channel-embedded and untouched.
 
+**2026-09-19 — Hekimler Topluluğu Source Policy Map:** declarative routing policy at `channels/tip-ogrencileri-platformu/content/policies/hekimler-source-policy-map.json` (routes FEED/PROFESSIONAL_BRIEF/OPPORTUNITY/CONGRESS_CALENDAR/ABROAD_CAREER/TREND_INBOX/DISCARD; per-source include/exclude/evidence/transform controls). Schemas + 14 tests in `design-system/schemas/src/hekimler-source-policy-map.*`. Faculty/IG remain opportunity retention, not growth engine. Runtime fetcher not yet wired.
+
+**2026-09-19 — Source Registry Phase 1:** six medically scoped primary profiles in `content/source-registry-phase1.json` (ÖSYM exams, YÖK medical education, YÖKAK medical accreditation, TUK, Resmî Gazete medical regulation, TÜİK health stats) + keyword gate in `radar/hekimler_registry.py` + 16 accept/discard fixture tests green. No Ministry/association/congress/faculty/social/trend sources in this phase.
+
+**2026-09-19 — Phase 1 fetch harden + AA secondary + Registry v1.1:** every Phase 1 primary has a structured `fetch_plan` (`tls_verification_required: true`, source_health, surfaces). `radar/hekimler_fetch.py` fail-closes on TLS failure (DEGRADED), distinguishes NO_CHANGE vs parser DEGRADED, congress discard, route-aware virality. Anadolu Ajansı `anadolu_ajansi_medical_radar` added as `SECONDARY_NEWSWIRE` discovery-only (`NEEDS_REVIEW` / `DISCARD`, never auto-publish; `MANUAL_REVIEW_REQUIRED` pending public RSS/robots). v1.1 approved scope in `source-registry-v1.1.json` (23 primaries + AA; MoH/societies/TTB etc. manual_review). Queue wiring still disabled. **48** Hekimler tests green (`phase1` + `fetch_harden` + `v11`). TLS verification was never disabled on this path.
+
+**2026-09-19 — Research/AI/consumer policy + Opportunity pack + Integrity audit:** `hekimler-research-medical-ai-policy.json` (Kaduse evidence bundle by ID reference, PubMed EVIDENCE_INDEX, Healthline/WebMD/MNT discovery-only); `hekimler-opportunity-pack.json` maps existing `faculty_announcement` inventory without duplication; integrity overlay corrects tiers (8 OFFICIAL_PRIMARY / 3 PROFESSIONAL_BODY / 12 PROFESSIONAL_GUIDANCE / 1 SECONDARY_NEWSWIRE), statement treatments, and `fetch_enabled=false` for all MANUAL_REVIEW sources. No fetcher/queue/publishing added. **80** Hekimler tests green.
+
+**2026-09-19 — Abroad Career Registry v1:** additive `source-registry-abroad-career-v1.json` + `hekimler-abroad-career-policy.json` (US/UK/DE/CA/AU core; IE/NL/ES/IT dossiers; Saudi SCFHS watch-only). Reuses `ecfmg_*` / `gmc_plab` / `mcc_mccqe` / `germany_approbation` via `upstream_source_id`. Spain MIR left inactive pending sanidad URL verification; other Gulf regulators not invented. Merge order now phase1 → v1.1 → abroad. Effective tiers: OFFICIAL_PRIMARY 27 (8+19), PROFESSIONAL_BODY 3, PROFESSIONAL_GUIDANCE 12, SECONDARY_NEWSWIRE 1. **94** Hekimler tests green. Still registry-only.
+
+**2026-09-19 — Trusted Trend + Question Demand policy:** `hekimler-trusted-trend-question-demand-policy.json` separates `TREND_CANDIDATE` (trusted sources + independent primary_url only) from `QUESTION_BRIEF` / Question Demand Signals (Reddit, forums, search trends, social, consumer media). Evidence File / Brief / Answer Card require primary evidence; AI must not invent answers from demand. Source policy map `trend-radar` aligned. **107** Hekimler unit tests + 14 policy-map schema tests green.
+
+**2026-09-19 — Phase 1 Ingestion Canary:** `radar/phase1_ingestion_canary.py` wires the six Phase 1 official profiles into the existing tip-radar SQLite candidate/review queue (`status=review` only). Feature flag `HEKIMLER_PHASE1_INGESTION_ENABLED` defaults false; dry-run by default; TLS fail-closed; medical gates; dedupe via `UNIQUE(source_id, content_hash)`; run log in `hekimler_ingestion_runs`. No production schedule, no auto-publish, no AA/professional/abroad/trend/congress. **123** Hekimler-related unit tests green.
+
+**2026-09-19 — Phase 1 Live Canary & Runtime Audit:** runtime/storage audit concluded **BLOCKED_BY_RUNTIME_ALIGNMENT** before any live HTTP. tip-radar SQLite is local channel-pack DB only (not confirmed as deployed Candidate/Review store / Hub inbox); `channelId` / `editorialBrand` live in `raw_analysis` JSON — queryable family partition is `category='hekimler_phase1'` only; no Hub worker invokes the canary against a shared persistent store. Safety regressions added (`--force`/`--force-due` never bypass feature flag, TLS, host/path allowlist, medical gate, or MANUAL_REVIEW exclusion; dry-run persists nothing; `--commit` never approves/publishes). Live dry-runs intentionally not executed. **132** Hekimler-related unit tests green.
+
+**2026-09-19 — Hekimler Hub Ingestion Bridge v1:** resolves runtime-alignment blocker. Canonical Candidate/Review destination is Global Content OS Hub (`POST /api/ingress/tip`). Hub migration `0009_hekimler_channel_partition.sql` adds queryable `editorial_brand`, `content_family`, `source_id`, `decision_route`, `intake_meta_json` (+ indexes); seeds `hekimler-phase1-canary` feed with `channel_id=hekimler-toplulugu`. Bridge module `radar/hekimler_hub_bridge.py`; canary commit mode targets Hub (refuses silent local SQLite as SoT). Idempotency `hekimler:{channel_id}:{source_id}:{content_hash}`. Live-eligible later: five Phase 1 sources; TÜİK remains MANUAL_REVIEW blocked. No live fetch, no scheduler, no publish. **144** Hekimler-related unit tests green.
+
+**2026-09-19 — Hekimler Continuous Ingestion Fast Activation v1:** one registry-driven runner (`hekimler_activation` + `hekimler_continuous_runner` + Worker `hekimler-continuous.ts`). Activation states AUTOMATION_READY / MANUAL_INTAKE / BLOCKED. Five Phase 1 sources AUTOMATION_READY with per-source intervals (360–1440m). Worker due-check every 15 minutes (`scheduled()` + `HEKIMLER_CONTINUOUS_INGESTION_ENABLED`). Hub migrations 0009+0010 applied local+remote. Live dry-run: ÖSYM 29 / TUK 12 accepted (review-only); YÖK/YÖKAK/RG discarded-by-policy on listing noise (HEALTHY). Publishing remains disabled. **154** Hekimler-related unit tests green.
+**2026-09-20 — Hekimler Audience Scope Gate + Batch 2/3 additions:** strict audience-only gate (physicians/dentists/vets, students, abroad pathways; KPSS-type items discarded), health-system indirect layer for official sources, nav-noise gates, +5 live sources (AUTOMATION_READY 18→23), Hub "Hekimler" view coded. Production deploy blocked by permission classifier (pending). Open problems and undefined decisions are tracked in `channels/tip-ogrencileri-platformu/content/PIPELINE-ISSUES.md`; to be solved one by one.
+
+**2026-09-19 — Hekimler Live Flow Hardening + Batch 2 Activation v1:** Production cron was silently aborting before Hekimler (missing `runEnrichmentBatch` import). After fix: first completed Hub runs wrote telemetry + **28** review inbox candidates (ÖSYM 21, TUK 7). YÖK/YÖKAK/RG: HEALTHY transport, zero accepts (coverage streak started). Per-source `initial_backfill`, coverage health (`LOW_COVERAGE` after 3 zero-accept successes), ingress fail-closed auth + D1 run locks (`0011`). Batch 2: MoH/HSGM/PubMed all **MANUAL_INTAKE** (PubMed pack ready but Worker eutilities DEGRADED). Publishing/approve/render still disabled.
+
+**2026-09-19 — Hekimler MANUAL pass 2:** From remaining MANUAL, activated 6 after dry-run HEALTHY: `hasuder_public_health` (11/106 via `/listele/duyurular-hasuder-cat`), `turk_pediatri_kurumu` (13/308), `abroad_us_usmle` announcements (69/154), `abroad_us_nrmp` news (46/109), `abroad_ca_carms` news (13/60), `abroad_ca_mcc_img_pathways` news (23/100). Abroad loader now allows per-source AUTOMATION_READY while registry-level `pipeline_wiring_enabled` stays false and `publication_eligible` stays false. Kept MANUAL with reasons: TATD JS-only, AA RSS-not-wired, ECFMG/GMC Cloudflare 403, TEPDAD/TEGED/TPD/TÜİK/…. Live **18** AUTOMATION_READY / **26** MANUAL.
+
+**2026-09-19 — Hekimler domestic MANUAL pass:** From 37 MANUAL, activated 5 with verified list indexes + dry-run HEALTHY: `turkmsic_medical_students` (2/61), `ttb_national` (5/72), `hsgm_public_health` basin-odası (5/79), `klimık_infectious_diseases` (3/82), `trd_radiology` (5/71). `tpd_psychiatry` stays MANUAL (haber-duyuru emits 3000+ anchors). Abroad `not_wired`, TÜİK SPA, HASUDER 500, TEPDAD/TEGED/TKD/TTD/… keep written MANUAL reasons. Live AUTOMATION_READY **12**. Publishing still off.
+
+**2026-09-19 — Hekimler Batch 2 Source Surface Activation:** Pass-and-activate. `moh_physician_workforce` → YHGM exact kura/atama list indexes (not `www.saglik.gov.tr` homepage) **AUTOMATION_READY** (720m). `pubmed_biomedical_evidence` → hardened E-utilities (tool/email/timeout/retry, PMID required) **AUTOMATION_READY** (1440m). `hsgm_public_health` remains **MANUAL_INTAKE** (duyuru/haber 404; homepage forbidden). Live dry-run: MoH items 187/acc 98 HEALTHY; PubMed items 18/acc 12 HEALTHY. Phase1 five stay live. Worker deployed `9205e2cf`. Publishing disabled.
+
+**2026-09-18 — curated tip-student club Instagram shortlist:** 24 IG-primary sources now in `official_sources.yaml` (22 new `ig_*` + retargeted `antbat_ankara` + existing `ivsa_ankara`), mirrored in `global-content-os/config/feeds.json` with `meta.curatedClubIg`. Scope: TurkMSIC / TOB / *BAT / IVSA (+ a few faculty tip specialty clubs with page-cited handles). Not yet ingesting posts — HTML login-wall; needs Instagram Graph / social adapter.
+
 **Superseded (ADR-0003, 2026-09-04):** the shared, channel-agnostic engine this implementation was meant to eventually generalize into is no longer a top-level `radar/` directory in this repo -- it is the **Global News Hub**, owned by the sibling `channel-content-os` repo (contract: that repo's `docs/global-news-hub-contract.md`). This repo's empty `radar/` scaffold has been retired. `kaduse-medikal` is the first channel with a news archetype/policy persisted against this model: `channels/kaduse-medikal/content/policies/kaduse-news.json`, with an empty `channels/kaduse-medikal/content/news-sources.json` source-pack placeholder (actual source selection deferred to its own batch).
 
 ## Last updated
 
+2026-09-19 (Hekimler MANUAL pass 2; AUTOMATION_READY=18)
+
+2026-09-19 (Hekimler domestic MANUAL pass; AUTOMATION_READY=12)
+
+2026-09-19 (Hekimler Batch 2 Source Surface Activation; MoH+PubMed live, HSGM MANUAL)
+
+2026-09-19 (Hekimler Live Flow Pre-Expansion Hardening)
+
+2026-09-19 (Hekimler Live Flow Hardening + Batch 2; production Hub candidates)
+
+2026-09-19 (Hekimler Continuous Fast Activation v1; 154 tests)
+
+2026-09-19 (Hekimler Hub Ingestion Bridge v1; 144 tests)
+
+2026-09-19 (Phase 1 Live Canary & Runtime Audit → BLOCKED_BY_RUNTIME_ALIGNMENT; 132 tests)
+
+2026-09-19 (Phase 1 Ingestion Canary; 123 tests)
+
+2026-09-19 (Trusted Trend + Question Demand policy; 107+14 tests)
+
+2026-09-19 (Hekimler Abroad Career Registry v1; 94 tests)
+
+2026-09-19 (Hekimler research/AI/opportunity policies + integrity audit; 80 tests)
+
+2026-09-19 (Hekimler Phase1 fetch harden + AA secondary + Registry v1.1; 48 tests)
+
+2026-09-19 (Hekimler Source Registry Phase 1 + Source Policy Map schemas/tests)
+
+2026-09-18 (tip-ogrencileri-platformu: curated club IG shortlist added to sources + Hub feeds; social adapter still pending)
+
 2026-09-02 (10 of 12 registry channels onboarded to LOGOS_PASS + COLORS_PASS; 12-slot logo requirement relaxed per explicit user instruction; central font-pool data collection started; `.claude/instructions.txt` decision guide added -- commit/pull pre-authorized, push requires confirmation)
+**2026-09-20 (later) — Hekimler pipeline pass:** 35 sources AUTOMATION_READY (27 LOCAL_VERIFIED with real candidates, 8 verified-empty), 12 manual with written evidence (ECFMG/GMC 403 = MANUAL_BLOCKED; TÜİK JS shell; TLS chain failures in Python only). AA RSS frozen at 2026-04-26 → official news sitemap used (RSS_STALE_FALLBACK). Worker mirrors gates (parity tests). Hub "Hekimler" view verified in browser locally. Live deploy + smoke pending. Table: `channels/tip-ogrencileri-platformu/content/PIPELINE-STATUS-46.md`.

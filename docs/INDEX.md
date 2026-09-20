@@ -18,6 +18,7 @@ Read `AGENTS.md` first, then use only the route matching the task.
 | Change rendering | `docs/RENDERING-SYSTEM.md`, `docs/SAFE-ZONES.md` |
 | Change post records | `design-system/schemas/src/post-record.schema.json`, relevant rendering and color documents |
 | Change monitoring or inbox state | `docs/CONTENT-MONITORING.md`, `design-system/schemas/src/content-item.schema.json` |
+| Hekimler Topluluğu / tip channel source routing | `channels/tip-ogrencileri-platformu/content/README.md`, `channels/tip-ogrencileri-platformu/content/policies/hekimler-source-policy-map.json`, `design-system/schemas/src/hekimler-source-policy-map.schema.json` |
 | Change QA or preference feedback | `docs/QA-AND-FEEDBACK.md` |
 | Add an external integration | `docs/MCP-POLICY.md`, relevant provider documentation |
 | Judge, plan, or review creative/art-direction quality | `docs/creative-north-star-and-art-direction-programme.md` |
