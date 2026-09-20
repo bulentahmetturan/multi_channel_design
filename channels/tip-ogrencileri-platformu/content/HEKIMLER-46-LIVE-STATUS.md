@@ -15,3 +15,9 @@ Fixes: host-scoped pinned intermediates (GeoTrust G1 -> resmigazete.gov.tr, Sect
 Result: 43/44 python_runner sources operational (incl. TVHB as extra); HSGM BLOCKED_EXTERNAL. ECFMG/GMC/Make it in Germany remain manual/blocked. TDB not implemented.
 Not done: systematic parity fixture set, mixed-batch failure-isolation run, Hub UI verification, per-source empty/limited classification table, pip pin.
 Test suite: 1 pre-existing failure (test_hekimler_opportunity_pack, depends on unrelated club-source yaml rewrite in working tree).
+
+## Final (2026-09-21)
+Runs: 35537808504 and 35538245330 (sources=all, 45 sources, 45/45 ok, 0 new rows in both), 35537104072/35537339342 (TDB/GMC, mixed-batch on temp branch, branch deleted), 35537648610 (tests workflow green incl. TLS pins).
+Totals (canonical 46): PIPELINE_OK 27, EMPTY 13, LIMITED 2 (es_universidades, pubmed), PARTIALLY_COVERED 3 (gmc, ecfmg, make-it-in-germany), BLOCKED_EXTERNAL_RUNNER_REQUIRED 1 (hsgm), FAILED 0, NOT_RUN 0.
+Extras: tvhb_veterinary and tdb_dental operational (separate from the 46). Coverage matrices: HEKIMLER-COVERAGE-MATRIX.md. Per-source rows: legacy-cleanup/final_run_rows.json; D1 telemetry: legacy-cleanup/telemetry_snapshot_2026-09-21.json.
+Worker: de55d676 then d149b0ad (Hub labels). D1 active duplicate canonical URLs: 0.
