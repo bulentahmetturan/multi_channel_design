@@ -59,6 +59,7 @@ class HubCandidatePayload:
     fetched_at: str | None = None
     created_at: str | None = None
     discovered_at: str | None = None
+    event_date: str | None = None  # official publication date (ISO day) when known
 
     def validate(self) -> str | None:
         if not (self.channel_id or "").strip():
@@ -106,6 +107,7 @@ class HubCandidatePayload:
             "fetchedAt": self.fetched_at,
             "createdAt": self.created_at,
             "discoveredAt": self.discovered_at or self.fetched_at or self.created_at,
+            "eventDate": self.event_date,
             "status": "review",
             "category": None,  # do not overload category as channel identity
             "auto_publish": False,
@@ -130,23 +132,6 @@ class HubDeliveryResult:
 
 
 class HubDeliveryClient(Protocol):
-    def post_telemetry(self, metrics: dict) -> tuple[bool, str]:
-        """Authenticated per-source execution telemetry (never contains the token)."""
-        body = json.dumps(metrics).encode("utf-8")
-        req = urllib.request.Request(
-            self.hub_url + "/api/ingress/hekimler-telemetry",
-            data=body,
-            headers={"Content-Type": "application/json", "X-Ingest-Token": self.token, "User-Agent": "hekimler-hub-bridge/1.0"},
-            method="POST",
-        )
-        try:
-            with urllib.request.urlopen(req, timeout=self.timeout) as resp:
-                return True, resp.read().decode("utf-8")[:200]
-        except urllib.error.HTTPError as exc:
-            return False, f"HTTP {exc.code}"
-        except Exception as exc:  # noqa: BLE001
-            return False, str(exc)[:120]
-
     def deliver(self, payload: HubCandidatePayload) -> HubDeliveryResult: ...
 
 
@@ -315,6 +300,23 @@ class HttpHubDeliveryClient:
         self.token = token or os.environ.get("TIP_RADAR_INGEST_TOKEN") or "dev-tip-ingest-token"
         self.timeout = timeout
 
+    def post_telemetry(self, metrics: dict) -> tuple[bool, str]:
+        """Authenticated per-source execution telemetry (never contains the token)."""
+        body = json.dumps(metrics).encode("utf-8")
+        req = urllib.request.Request(
+            self.hub_url + "/api/ingress/hekimler-telemetry",
+            data=body,
+            headers={"Content-Type": "application/json", "X-Ingest-Token": self.token, "User-Agent": "hekimler-hub-bridge/1.0"},
+            method="POST",
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=self.timeout) as resp:
+                return True, resp.read().decode("utf-8")[:200]
+        except urllib.error.HTTPError as exc:
+            return False, f"HTTP {exc.code}"
+        except Exception as exc:  # noqa: BLE001
+            return False, str(exc)[:120]
+
     def deliver(self, payload: HubCandidatePayload) -> HubDeliveryResult:
         err = payload.validate()
         if err:
@@ -415,6 +417,7 @@ def build_hekimler_hub_payload(
     fetched_at: str,
     created_at: str | None = None,
     institution: str | None = None,
+    event_date: str | None = None,
 ) -> HubCandidatePayload:
     return HubCandidatePayload(
         external_id=f"{source_id}:{content_hash[:16]}",
@@ -438,5 +441,6 @@ def build_hekimler_hub_payload(
         provenance=dict(provenance),
         fetched_at=fetched_at,
         created_at=created_at or fetched_at,
+        event_date=event_date,
         discovered_at=fetched_at,
     )

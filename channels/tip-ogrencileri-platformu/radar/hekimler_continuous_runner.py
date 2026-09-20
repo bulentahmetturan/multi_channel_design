@@ -258,7 +258,7 @@ def run_continuous_ingestion(
             persist_run(db, result, dry_run=dry_run)
         if not dry_run and hub_client is not None and hasattr(hub_client, "post_telemetry"):
             ok_run = result.hub_delivery_failures == 0 and result.fetch_result == "ok"
-            hub_client.post_telemetry(
+            tele_ok, tele_msg = hub_client.post_telemetry(
                 {
                     "sourceId": result.source_id,
                     "executor": "python_runner",
@@ -266,7 +266,7 @@ def run_continuous_ingestion(
                     "operatorStatus": result.operator_status,
                     "fetchResult": result.fetch_result,
                     "inspected": result.item_count,
-                    "eligible": result.accepted_count,
+                    "eligible": result.accepted_count + result.duplicate_count,
                     "duplicates": result.duplicate_count,
                     "hubFailures": result.hub_delivery_failures,
                     "rejectedShape": result.rejected_shape,
@@ -278,6 +278,10 @@ def run_continuous_ingestion(
                     "contentHash": result.last_content_hash,
                 }
             )
+            if not tele_ok:
+                import sys
+
+                print(f"telemetry post failed for {result.source_id}: {tele_msg}", file=sys.stderr)
         summary.results.append(result)
 
     return summary

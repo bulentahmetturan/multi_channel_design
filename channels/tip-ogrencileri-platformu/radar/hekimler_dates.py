@@ -160,3 +160,26 @@ def extract_page_date(body: str) -> tuple[date | None, str]:
     if ds:
         return ds[0], "text_top"
     return None, ""
+
+
+_ES_EN_MONTHS = {
+    "enero": 1, "febrero": 2, "marzo": 3, "abril": 4, "mayo": 5, "junio": 6, "julio": 7, "agosto": 8,
+    "septiembre": 9, "setiembre": 9, "octubre": 10, "noviembre": 11, "diciembre": 12,
+    "january": 1, "february": 2, "march": 3, "april": 4, "may": 5, "june": 6, "july": 7, "august": 8,
+    "september": 9, "october": 10, "november": 11, "december": 12,
+}
+_RE_URL_MONTH = re.compile(r"/(20\d{2})/(" + "|".join(sorted(_ES_EN_MONTHS, key=len, reverse=True)) + r")(?:/|$)", re.I)
+
+
+def extract_url_month(url: str) -> tuple[date, str] | None:
+    """Month-precision date from URLs like /Noticias/2026/septiembre/... -> (last day of month, 'YYYY-MM').
+
+    The day is unknown: callers must keep the precision flag and never present it as an exact publication day.
+    """
+    m = _RE_URL_MONTH.search(url or "")
+    if not m:
+        return None
+    y, mo = int(m.group(1)), _ES_EN_MONTHS[m.group(2).lower()]
+    import calendar
+
+    return date(y, mo, calendar.monthrange(y, mo)[1]), f"{y}-{mo:02d}"

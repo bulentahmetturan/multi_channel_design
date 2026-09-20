@@ -1059,10 +1059,16 @@ def ingest_one_source(
     rej_shape = rej_audience = rej_keyword = 0
     method = str(plan.get("primary_method") or "")
     newest_dates: list = []
+    month_estimates: list[str] = []
     from .hekimler_dates import extract_dates as _extract_dates
 
     for it0 in items:
-        newest_dates += _extract_dates(it0.published_at or "", it0.title or "", it0.canonical_item_url or "")
+        # Recency proof uses only publication evidence (list/detail date or a dated URL) — never dates written in the
+        # title, which are usually event dates ("... in June 2027", "09-15 February 2025").
+        if it0.published_at:
+            newest_dates += _extract_dates(it0.published_at)
+        else:
+            newest_dates += _extract_dates(it0.canonical_item_url or "")
     for item in items:
         # Audience gate: nav/menu links never become candidates when the source pins a post-URL shape.
         if item_url_patterns and not any(x.search(item.canonical_item_url or "") for x in item_url_patterns):
@@ -1118,9 +1124,19 @@ def ingest_one_source(
                 page_date, date_method = extract_page_date(detail.body or "")
                 if page_date:
                     verdict, item_date = date_verdict(sid, published_at=page_date.isoformat())
-        if item_date is not None:
+        date_precision = "day"
+        if verdict == "UNDATED" and not date_exempt:
+            from .hekimler_dates import extract_url_month
+
+            est = extract_url_month(item.canonical_item_url or "")
+            if est is not None:
+                verdict, item_date = date_verdict(sid, published_at=est[0].isoformat())
+                date_precision = "month"
+                month_estimates.append(est[1])
+                date_method = "url_month_estimate"
+        if item_date is not None and date_method != "listing":
             newest_dates.append(item_date)
-        if item_date is not None and not item.published_at:
+        if item_date is not None and not item.published_at and date_precision != "month":
             item.published_at = item_date.isoformat()
         if verdict == "STALE" and not date_exempt:
             discarded += 1
@@ -1141,6 +1157,10 @@ def ingest_one_source(
         analysis = cand.raw_analysis
         analysis["date_verdict"] = verdict
         analysis["date_method"] = date_method
+        analysis["date_precision"] = date_precision
+        if date_precision == "month":
+            analysis["risk_flags"] = list(analysis.get("risk_flags") or []) + ["date_estimated_month_precision"]
+            cand.risk_flags = list(cand.risk_flags) + ["date_estimated_month_precision"]
         if date_unverified:
             analysis["route"] = "NEEDS_REVIEW"
             analysis["risk_flags"] = list(analysis.get("risk_flags") or []) + ["date_unverified_needs_review"]
@@ -1179,6 +1199,7 @@ def ingest_one_source(
                 fetched_at=item.fetched_at,
                 created_at=item.fetched_at,
                 institution=cand.institution,
+                event_date=None if date_precision == "month" else item.published_at,
             )
             delivery = deliver_hekimler_candidate(payload, hub_client)
             if not delivery.delivered:
@@ -1250,6 +1271,8 @@ def ingest_one_source(
             if probed >= 5:
                 break
     newest_record_date = max(newest_dates).isoformat() if newest_dates else None
+    if newest_record_date is None and month_estimates:
+        newest_record_date = max(month_estimates) + " (estimated, month precision)"
 
     if hub_failures > 0 and accepted == 0:
         op = "hub_delivery_failed"
