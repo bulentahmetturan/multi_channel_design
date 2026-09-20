@@ -577,7 +577,11 @@ def _adjacent_date(body: str, pos: int) -> str | None:
     cut = re.search(r"<a[\s>]", tail, flags=re.I)
     if cut:
         tail = tail[: cut.start()]
-    ds = extract_dates(re.sub(r"<[^>]+>", " ", tail))
+    text = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", tail)).strip()
+    # Only a short, date-only label counts; a date inside a teaser sentence is usually an event date.
+    if len(text) > 30:
+        return None
+    ds = extract_dates(text)
     return ds[0].isoformat() if ds else None
 
 
@@ -1187,7 +1191,7 @@ def ingest_one_source(
                 title=cand.title,
                 summary=cand.summary,
                 source_url=item.source_url,
-                primary_url=analysis.get("primary_url") or item.canonical_item_url,
+                primary_url=item.canonical_item_url,  # the item's own official URL (list page stays in source_url/provenance)
                 content_hash=item.content_hash,
                 decision="NEEDS_REVIEW",
                 decision_route=analysis.get("route") or "NEEDS_REVIEW",

@@ -75,6 +75,13 @@ class DatePolicyTests(unittest.TestCase):
         self.assertEqual(len({i.canonical_item_url for i in items}), len(items))
         self.assertTrue(any(i.published_at for i in items))
 
+    def test_teaser_sentence_date_is_not_a_publication_date(self):
+        from radar.phase1_ingestion_canary import parse_raw_items
+
+        body = '<li><a href="/news/skorton-retire-announcement">Skorton to retire as AAMC president</a> <p>He will retire in June 30, 2027 after a long tenure at the association.</p></li>'
+        items = parse_raw_items(source_id="x", source_url="https://x.org/news", body=body, fetch_method="list-page", fetched_at="t")
+        self.assertIsNone(items[0].published_at)
+
 
 if __name__ == "__main__":
     unittest.main()
