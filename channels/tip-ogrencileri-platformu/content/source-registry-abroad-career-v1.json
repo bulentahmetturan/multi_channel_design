@@ -1,0 +1,1392 @@
+{
+  "schemaVersion": "1.0.0",
+  "channelId": "tip-ogrencileri-platformu",
+  "editorialBrand": "Hekimler Topluluğu",
+  "registryId": "hekimler-abroad-career-v1",
+  "registryLayer": "abroad_career_additive",
+  "registryVersion": "1.0.0",
+  "baseRegistryRef": "source-registry-v1.1.json",
+  "loadPrecedence": "Additive after phase1 + v1.1. Never overrides existing phase1/v1.1 profiles. Unique abroad_* source_ids only.",
+  "approvalStatus": "USER_APPROVED_SCOPE",
+  "approvedAt": "2026-09-19",
+  "purpose": "Official physician-pathway sources for Turkish medical graduates considering practice, residency, recognition, research or clinical training abroad. Registry/policy only — no fetch, queue or publish.",
+  "pipeline_wiring_enabled": false,
+  "fetch_to_queue_enabled": false,
+  "congress_features_active": false,
+  "auto_publish": false,
+  "country_coverage": {
+    "CORE_PATHWAY_DOSSIER": [
+      "United States",
+      "United Kingdom",
+      "Germany",
+      "Canada",
+      "Australia"
+    ],
+    "OFFICIAL_PATHWAY_DOSSIER": [
+      "Ireland",
+      "Netherlands",
+      "Spain",
+      "Italy"
+    ],
+    "WATCH_ONLY": [
+      "Saudi Arabia",
+      "Gulf countries"
+    ]
+  },
+  "global_rules": {
+    "source_tier_for_active_profiles": "OFFICIAL_PRIMARY",
+    "no_generic_web_search": true,
+    "no_auto_publish": true,
+    "no_personalised_career_recommendations": true,
+    "no_easy_best_guaranteed_country_claims": true,
+    "never_imply_automatic_turkish_diploma_acceptance": true,
+    "jurisdiction_required_countries": [
+      "Canada",
+      "Germany",
+      "Spain",
+      "Italy"
+    ],
+    "allowed_routes": [
+      "ABROAD_CAREER",
+      "ABROAD_OPPORTUNITY_WATCH",
+      "ABROAD_WATCH_ONLY",
+      "NEEDS_REVIEW",
+      "DISCARD"
+    ],
+    "forbidden_source_classes": [
+      "blog",
+      "influencer",
+      "agency",
+      "consultant",
+      "recruiter",
+      "facebook_group",
+      "reddit",
+      "commercial_migration_site",
+      "university_ranking_site"
+    ]
+  },
+  "disabled_execution_defaults": {
+    "fetch_enabled": false,
+    "scheduled_fetch_enabled": false,
+    "candidate_emission_enabled": false,
+    "publication_eligible": false,
+    "pipeline_wiring_enabled": false
+  },
+  "sources": [
+    {
+      "source_id": "abroad_us_ecfmg_intealth",
+      "name": "ECFMG / Intealth — IMG certification",
+      "country": "United States",
+      "coverage_class": "CORE_PATHWAY_DOSSIER",
+      "canonical_url": "https://www.ecfmg.org/",
+      "source_url": "https://www.ecfmg.org/news/",
+      "primary_url": "https://www.ecfmg.org/",
+      "allowed_hostnames": [
+        "www.ecfmg.org",
+        "ecfmg.org",
+        "www.intealth.org",
+        "intealth.org"
+      ],
+      "upstream_source_id": "ecfmg_announcements",
+      "upstream_inventory": "sources/official_sources.yaml",
+      "related_upstream_source_ids": [
+        "ecfmg_sponsor_notes_policy"
+      ],
+      "source_tier": "OFFICIAL_PRIMARY",
+      "source_role": "official_exam_certification_body",
+      "status": "configured_not_wired",
+      "fetch_mode": "not_wired",
+      "allowed_scope": [
+        "credential_verification",
+        "exam_or_assessment",
+        "registration_or_licensure"
+      ],
+      "allowed_path_patterns": [
+        "/news/",
+        "/certification/",
+        "/resources/",
+        "/"
+      ],
+      "statement_treatment": "official_guidance",
+      "fetch_enabled": false,
+      "scheduled_fetch_enabled": false,
+      "candidate_emission_enabled": false,
+      "publication_eligible": false,
+      "pipeline_wiring_enabled": false,
+      "runtime_activation": "MANUAL_INTAKE",
+      "manual_intake_reason": "ecfmg.org/news Cloudflare 403 from automation egress.",
+      "source_health": "MANUAL_REVIEW_REQUIRED"
+    },
+    {
+      "source_id": "abroad_us_usmle",
+      "name": "USMLE — United States Medical Licensing Examination",
+      "country": "United States",
+      "coverage_class": "CORE_PATHWAY_DOSSIER",
+      "canonical_url": "https://www.usmle.org/announcements",
+      "source_url": "https://www.usmle.org/announcements",
+      "primary_url": "https://www.usmle.org/announcements",
+      "allowed_hostnames": [
+        "www.usmle.org",
+        "usmle.org"
+      ],
+      "upstream_source_id": null,
+      "source_tier": "OFFICIAL_PRIMARY",
+      "source_role": "official_exam_body",
+      "status": "active",
+      "fetch_mode": "list-page",
+      "allowed_scope": [
+        "exam_or_assessment"
+      ],
+      "allowed_path_patterns": [
+        "/"
+      ],
+      "statement_treatment": "official_guidance",
+      "fetch_enabled": true,
+      "scheduled_fetch_enabled": true,
+      "candidate_emission_enabled": true,
+      "publication_eligible": false,
+      "pipeline_wiring_enabled": true,
+      "include_keywords": [
+        "USMLE",
+        "Step",
+        "score",
+        "bulletin",
+        "passing standard",
+        "announcement",
+        "exam",
+        "testing"
+      ],
+      "exclude_keywords": [
+        "newsletter",
+        "privacy policy",
+        "cookie",
+        "common questions"
+      ],
+      "allowed_routes": [
+        "ABROAD_CAREER",
+        "ABROAD_OPPORTUNITY_WATCH",
+        "NEEDS_REVIEW",
+        "DISCARD"
+      ],
+      "default_route_on_accept": "NEEDS_REVIEW",
+      "source_health": "HEALTHY",
+      "runtime_activation": "AUTOMATION_READY",
+      "fetch_plan": {
+        "primary_method": "list-page",
+        "tls_verification_required": true,
+        "allowed_hostnames": [
+          "www.usmle.org",
+          "usmle.org"
+        ],
+        "allowed_path_patterns": [
+          "/announcements"
+        ],
+        "forbidden_hosts": [],
+        "forbidden_path_patterns": [
+          "/"
+        ],
+        "notes": "Announcements index only; homepage forbidden.",
+        "expected_check_interval_minutes": 1440,
+        "source_health": "HEALTHY",
+        "coverage_status": "configured",
+        "coverage_policy": {
+          "sparse_source_allowed": false,
+          "expected_eligible_frequency": "weekly",
+          "coverage_watch_window": 4,
+          "require_in_scope_for_low_coverage": true
+        },
+        "initial_backfill": {
+          "lookback_days": 60,
+          "retain_active_or_future_deadline": true,
+          "historical_priority": "backfill_low",
+          "undated_as_current": true
+        },
+        "surfaces": [
+          {
+            "id": "news_list",
+            "url": "https://www.usmle.org/announcements",
+            "role": "primary",
+            "health": "HEALTHY"
+          }
+        ],
+        "fetch_enabled": true,
+        "scheduled_fetch_enabled": true,
+        "candidate_emission_enabled": true
+      },
+      "item_url_patterns": [
+        "usmle\\.org/[a-z0-9-]{30,}$"
+      ]
+    },
+    {
+      "source_id": "abroad_us_aamc_eras",
+      "name": "AAMC ERAS — residency application",
+      "country": "United States",
+      "coverage_class": "CORE_PATHWAY_DOSSIER",
+      "canonical_url": "https://www.aamc.org/services/eras-for-applicants",
+      "source_url": "https://www.aamc.org/services/eras-for-applicants",
+      "primary_url": "https://www.aamc.org/services/eras-for-applicants",
+      "allowed_hostnames": [
+        "www.aamc.org",
+        "aamc.org"
+      ],
+      "upstream_source_id": null,
+      "source_tier": "OFFICIAL_PRIMARY",
+      "source_role": "official_matching_application_body",
+      "status": "configured_not_wired",
+      "fetch_mode": "not_wired",
+      "allowed_scope": [
+        "residency_or_match"
+      ],
+      "allowed_path_patterns": [
+        "/services/eras",
+        "/services/eras-for-applicants"
+      ],
+      "statement_treatment": "official_guidance",
+      "fetch_enabled": false,
+      "scheduled_fetch_enabled": false,
+      "candidate_emission_enabled": false,
+      "publication_eligible": false,
+      "pipeline_wiring_enabled": false
+    },
+    {
+      "source_id": "abroad_us_nrmp",
+      "name": "NRMP — Main Residency Match",
+      "country": "United States",
+      "coverage_class": "CORE_PATHWAY_DOSSIER",
+      "canonical_url": "https://www.nrmp.org/about/news/",
+      "source_url": "https://www.nrmp.org/about/news/",
+      "primary_url": "https://www.nrmp.org/about/news/",
+      "allowed_hostnames": [
+        "www.nrmp.org",
+        "nrmp.org"
+      ],
+      "upstream_source_id": null,
+      "source_tier": "OFFICIAL_PRIMARY",
+      "source_role": "official_matching_body",
+      "status": "active",
+      "fetch_mode": "list-page",
+      "allowed_scope": [
+        "residency_or_match"
+      ],
+      "allowed_path_patterns": [
+        "/"
+      ],
+      "statement_treatment": "official_guidance",
+      "fetch_enabled": true,
+      "scheduled_fetch_enabled": true,
+      "candidate_emission_enabled": true,
+      "publication_eligible": false,
+      "pipeline_wiring_enabled": true,
+      "include_keywords": [
+        "Match",
+        "NRMP",
+        "residency",
+        "IMG",
+        "ranking",
+        "signaling",
+        "deadline",
+        "applicant"
+      ],
+      "exclude_keywords": [
+        "newsletter signup",
+        "cookie"
+      ],
+      "allowed_routes": [
+        "ABROAD_CAREER",
+        "ABROAD_OPPORTUNITY_WATCH",
+        "NEEDS_REVIEW",
+        "DISCARD"
+      ],
+      "default_route_on_accept": "NEEDS_REVIEW",
+      "source_health": "HEALTHY",
+      "runtime_activation": "AUTOMATION_READY",
+      "fetch_plan": {
+        "primary_method": "list-page",
+        "tls_verification_required": true,
+        "allowed_hostnames": [
+          "www.nrmp.org",
+          "nrmp.org"
+        ],
+        "allowed_path_patterns": [
+          "/about/news/"
+        ],
+        "forbidden_hosts": [],
+        "forbidden_path_patterns": [
+          "/"
+        ],
+        "notes": "About/news list only; homepage forbidden.",
+        "expected_check_interval_minutes": 1440,
+        "source_health": "HEALTHY",
+        "coverage_status": "configured",
+        "coverage_policy": {
+          "sparse_source_allowed": false,
+          "expected_eligible_frequency": "weekly",
+          "coverage_watch_window": 4,
+          "require_in_scope_for_low_coverage": true
+        },
+        "initial_backfill": {
+          "lookback_days": 60,
+          "retain_active_or_future_deadline": true,
+          "historical_priority": "backfill_low",
+          "undated_as_current": true
+        },
+        "surfaces": [
+          {
+            "id": "news_list",
+            "url": "https://www.nrmp.org/about/news/",
+            "role": "primary",
+            "health": "HEALTHY"
+          }
+        ],
+        "fetch_enabled": true,
+        "scheduled_fetch_enabled": true,
+        "candidate_emission_enabled": true
+      },
+      "item_url_patterns": [
+        "nrmp\\.org/about/news/20\\d\\d/"
+      ]
+    },
+    {
+      "source_id": "abroad_uk_gmc",
+      "name": "GMC — registration and licensing",
+      "country": "United Kingdom",
+      "coverage_class": "CORE_PATHWAY_DOSSIER",
+      "canonical_url": "https://www.gmc-uk.org/",
+      "source_url": "https://www.gmc-uk.org/registration-and-licensing/join-the-register/plab",
+      "primary_url": "https://www.gmc-uk.org/",
+      "allowed_hostnames": [
+        "www.gmc-uk.org",
+        "gmc-uk.org"
+      ],
+      "upstream_source_id": "gmc_plab",
+      "upstream_inventory": "sources/official_sources.yaml",
+      "source_tier": "OFFICIAL_PRIMARY",
+      "source_role": "official_physician_regulator",
+      "status": "configured_not_wired",
+      "fetch_mode": "not_wired",
+      "allowed_scope": [
+        "registration_or_licensure",
+        "exam_or_assessment",
+        "language_requirement"
+      ],
+      "allowed_path_patterns": [
+        "/registration-and-licensing/",
+        "/education/",
+        "/"
+      ],
+      "statement_treatment": "official_guidance",
+      "fetch_enabled": false,
+      "scheduled_fetch_enabled": false,
+      "candidate_emission_enabled": false,
+      "publication_eligible": false,
+      "pipeline_wiring_enabled": false,
+      "runtime_activation": "MANUAL_INTAKE",
+      "manual_intake_reason": "gmc-uk.org/news Cloudflare 403; PLAB page is pathway dossier not list index.",
+      "source_health": "MANUAL_REVIEW_REQUIRED"
+    },
+    {
+      "source_id": "abroad_uk_oriel",
+      "name": "Oriel — NHS specialty training applications",
+      "country": "United Kingdom",
+      "coverage_class": "CORE_PATHWAY_DOSSIER",
+      "canonical_url": "https://www.oriel.nhs.uk/",
+      "source_url": "https://www.oriel.nhs.uk/",
+      "primary_url": "https://www.oriel.nhs.uk/",
+      "allowed_hostnames": [
+        "www.oriel.nhs.uk",
+        "oriel.nhs.uk"
+      ],
+      "upstream_source_id": null,
+      "source_tier": "OFFICIAL_PRIMARY",
+      "source_role": "official_graduate_medical_training_body",
+      "status": "configured_not_wired",
+      "fetch_mode": "not_wired",
+      "allowed_scope": [
+        "residency_or_match",
+        "specialty_recognition"
+      ],
+      "allowed_path_patterns": [
+        "/"
+      ],
+      "statement_treatment": "official_guidance",
+      "fetch_enabled": false,
+      "scheduled_fetch_enabled": false,
+      "candidate_emission_enabled": false,
+      "publication_eligible": false,
+      "pipeline_wiring_enabled": false,
+      "notes": "Restrict to specialty/foundation training application notices; not generic NHS news."
+    },
+    {
+      "source_id": "abroad_de_anerkennung",
+      "name": "Anerkennung in Deutschland — medical recognition",
+      "country": "Germany",
+      "coverage_class": "CORE_PATHWAY_DOSSIER",
+      "canonical_url": "https://www.anerkennung-in-deutschland.de/",
+      "source_url": "https://www.anerkennung-in-deutschland.de/html/en/news.php",
+      "primary_url": "https://www.anerkennung-in-deutschland.de/",
+      "allowed_hostnames": [
+        "www.anerkennung-in-deutschland.de",
+        "anerkennung-in-deutschland.de"
+      ],
+      "upstream_source_id": "germany_approbation",
+      "upstream_inventory": "sources/official_sources.yaml",
+      "source_tier": "OFFICIAL_PRIMARY",
+      "source_role": "government_recognition_portal",
+      "status": "active",
+      "fetch_mode": "list-page",
+      "allowed_scope": [
+        "degree_recognition",
+        "registration_or_licensure",
+        "specialty_recognition"
+      ],
+      "jurisdiction_required": true,
+      "jurisdiction_label": "Land",
+      "allowed_path_patterns": [
+        "/html/en/news.php",
+        "/html/en/"
+      ],
+      "statement_treatment": "official_guidance",
+      "fetch_enabled": true,
+      "scheduled_fetch_enabled": true,
+      "candidate_emission_enabled": true,
+      "publication_eligible": false,
+      "pipeline_wiring_enabled": true,
+      "include_keywords": [
+        "doctor",
+        "physician",
+        "medical",
+        "approbation",
+        "Approbation",
+        "health professions",
+        "recognition of foreign",
+        "Heilberuf",
+        "dentist"
+      ],
+      "exclude_keywords": [
+        "user testing",
+        "cookie",
+        "hotline",
+        "diversity"
+      ],
+      "item_title_patterns": [
+        "^\\d{2}\\.\\d{2}\\.\\d{4}"
+      ],
+      "allowed_routes": [
+        "ABROAD_CAREER",
+        "ABROAD_OPPORTUNITY_WATCH",
+        "NEEDS_REVIEW",
+        "DISCARD"
+      ],
+      "default_route_on_accept": "NEEDS_REVIEW",
+      "source_health": "HEALTHY",
+      "runtime_activation": "AUTOMATION_READY",
+      "fetch_plan": {
+        "primary_method": "list-page",
+        "tls_verification_required": true,
+        "allowed_hostnames": [
+          "www.anerkennung-in-deutschland.de",
+          "anerkennung-in-deutschland.de"
+        ],
+        "allowed_path_patterns": [
+          "/html/en/news.php",
+          "/html/en/"
+        ],
+        "forbidden_hosts": [],
+        "forbidden_path_patterns": [
+          "/"
+        ],
+        "notes": "English news list only.",
+        "expected_check_interval_minutes": 1440,
+        "source_health": "HEALTHY",
+        "coverage_status": "configured",
+        "coverage_policy": {
+          "sparse_source_allowed": true,
+          "expected_eligible_frequency": "rare",
+          "coverage_watch_window": 4,
+          "require_in_scope_for_low_coverage": true
+        },
+        "initial_backfill": {
+          "lookback_days": 60,
+          "retain_active_or_future_deadline": true,
+          "historical_priority": "backfill_low",
+          "undated_as_current": true
+        },
+        "surfaces": [
+          {
+            "id": "news",
+            "url": "https://www.anerkennung-in-deutschland.de/html/en/news.php",
+            "role": "primary",
+            "health": "HEALTHY"
+          }
+        ],
+        "fetch_enabled": true,
+        "scheduled_fetch_enabled": true,
+        "candidate_emission_enabled": true
+      }
+    },
+    {
+      "source_id": "abroad_de_make_it_in_germany",
+      "name": "Make it in Germany — doctors (regulated profession)",
+      "country": "Germany",
+      "coverage_class": "CORE_PATHWAY_DOSSIER",
+      "canonical_url": "https://www.make-it-in-germany.com/en/working-in-germany/types-of-employment/regulated-professions/medical-doctors",
+      "source_url": "https://www.make-it-in-germany.com/en/working-in-germany/types-of-employment/regulated-professions/medical-doctors",
+      "primary_url": "https://www.make-it-in-germany.com/en/working-in-germany/types-of-employment/regulated-professions/medical-doctors",
+      "allowed_hostnames": [
+        "www.make-it-in-germany.com",
+        "make-it-in-germany.com"
+      ],
+      "upstream_source_id": null,
+      "source_tier": "OFFICIAL_PRIMARY",
+      "source_role": "government_recognition_portal",
+      "status": "configured_not_wired",
+      "fetch_mode": "not_wired",
+      "allowed_scope": [
+        "degree_recognition",
+        "registration_or_licensure",
+        "language_requirement"
+      ],
+      "jurisdiction_required": true,
+      "jurisdiction_label": "Land",
+      "allowed_path_patterns": [
+        "/en/working-in-germany/types-of-employment/regulated-professions/medical-doctors"
+      ],
+      "statement_treatment": "official_guidance",
+      "fetch_enabled": false,
+      "scheduled_fetch_enabled": false,
+      "candidate_emission_enabled": false,
+      "publication_eligible": false,
+      "pipeline_wiring_enabled": false,
+      "notes": "Physician-regulated-profession pages only — not general migration marketing."
+    },
+    {
+      "source_id": "abroad_ca_mcc_img_pathways",
+      "name": "Medical Council of Canada — IMG pathways",
+      "country": "Canada",
+      "coverage_class": "CORE_PATHWAY_DOSSIER",
+      "canonical_url": "https://mcc.ca/news/",
+      "source_url": "https://mcc.ca/news/",
+      "primary_url": "https://mcc.ca/news/",
+      "allowed_hostnames": [
+        "mcc.ca",
+        "www.mcc.ca"
+      ],
+      "upstream_source_id": "mcc_mccqe",
+      "upstream_inventory": "sources/official_sources.yaml",
+      "source_tier": "OFFICIAL_PRIMARY",
+      "source_role": "official_exam_certification_body",
+      "status": "active",
+      "fetch_mode": "list-page",
+      "allowed_scope": [
+        "credential_verification",
+        "exam_or_assessment",
+        "registration_or_licensure"
+      ],
+      "jurisdiction_required": true,
+      "jurisdiction_label": "province_or_territory",
+      "allowed_path_patterns": [
+        "/credentials-and-services/",
+        "/examinations-assessments/",
+        "/"
+      ],
+      "statement_treatment": "official_guidance",
+      "fetch_enabled": true,
+      "scheduled_fetch_enabled": true,
+      "candidate_emission_enabled": true,
+      "publication_eligible": false,
+      "pipeline_wiring_enabled": true,
+      "notes": "Never publish pan-Canadian licensing claims without province/territory.",
+      "include_keywords": [
+        "MCCQE",
+        "NAC",
+        "TDM",
+        "IMG",
+        "examination",
+        "scheduling",
+        "assessment",
+        "MCC"
+      ],
+      "exclude_keywords": [
+        "cookie",
+        "privacy",
+        "award"
+      ],
+      "allowed_routes": [
+        "ABROAD_CAREER",
+        "ABROAD_OPPORTUNITY_WATCH",
+        "NEEDS_REVIEW",
+        "DISCARD"
+      ],
+      "default_route_on_accept": "NEEDS_REVIEW",
+      "source_health": "HEALTHY",
+      "runtime_activation": "AUTOMATION_READY",
+      "fetch_plan": {
+        "primary_method": "list-page",
+        "tls_verification_required": true,
+        "allowed_hostnames": [
+          "mcc.ca",
+          "www.mcc.ca"
+        ],
+        "allowed_path_patterns": [
+          "/news/"
+        ],
+        "forbidden_hosts": [],
+        "forbidden_path_patterns": [
+          "/"
+        ],
+        "notes": "MCC /news/ list only (not pathway dossier page). Homepage forbidden.",
+        "expected_check_interval_minutes": 1440,
+        "source_health": "HEALTHY",
+        "coverage_status": "configured",
+        "coverage_policy": {
+          "sparse_source_allowed": false,
+          "expected_eligible_frequency": "weekly",
+          "coverage_watch_window": 4,
+          "require_in_scope_for_low_coverage": true
+        },
+        "initial_backfill": {
+          "lookback_days": 60,
+          "retain_active_or_future_deadline": true,
+          "historical_priority": "backfill_low",
+          "undated_as_current": true
+        },
+        "surfaces": [
+          {
+            "id": "news_list",
+            "url": "https://mcc.ca/news/",
+            "role": "primary",
+            "health": "HEALTHY"
+          }
+        ],
+        "fetch_enabled": true,
+        "scheduled_fetch_enabled": true,
+        "candidate_emission_enabled": true
+      },
+      "item_url_patterns": [
+        "mcc\\.ca/news/[a-z0-9-]{10,}"
+      ]
+    },
+    {
+      "source_id": "abroad_ca_carms",
+      "name": "CaRMS — Canadian residency matching",
+      "country": "Canada",
+      "coverage_class": "CORE_PATHWAY_DOSSIER",
+      "canonical_url": "https://www.carms.ca/news/",
+      "source_url": "https://www.carms.ca/news/",
+      "primary_url": "https://www.carms.ca/news/",
+      "allowed_hostnames": [
+        "www.carms.ca",
+        "carms.ca"
+      ],
+      "upstream_source_id": null,
+      "source_tier": "OFFICIAL_PRIMARY",
+      "source_role": "official_matching_body",
+      "status": "active",
+      "fetch_mode": "list-page",
+      "allowed_scope": [
+        "residency_or_match"
+      ],
+      "jurisdiction_required": true,
+      "jurisdiction_label": "province_or_territory",
+      "allowed_path_patterns": [
+        "/"
+      ],
+      "statement_treatment": "official_guidance",
+      "fetch_enabled": true,
+      "scheduled_fetch_enabled": true,
+      "candidate_emission_enabled": true,
+      "publication_eligible": false,
+      "pipeline_wiring_enabled": true,
+      "include_keywords": [
+        "CaRMS",
+        "R-1",
+        "Match",
+        "IMG",
+        "eligibility",
+        "residency",
+        "application",
+        "results"
+      ],
+      "exclude_keywords": [
+        "cookie",
+        "privacy"
+      ],
+      "allowed_routes": [
+        "ABROAD_CAREER",
+        "ABROAD_OPPORTUNITY_WATCH",
+        "NEEDS_REVIEW",
+        "DISCARD"
+      ],
+      "default_route_on_accept": "NEEDS_REVIEW",
+      "source_health": "HEALTHY",
+      "runtime_activation": "AUTOMATION_READY",
+      "fetch_plan": {
+        "primary_method": "list-page",
+        "tls_verification_required": true,
+        "allowed_hostnames": [
+          "www.carms.ca",
+          "carms.ca"
+        ],
+        "allowed_path_patterns": [
+          "/news/"
+        ],
+        "forbidden_hosts": [],
+        "forbidden_path_patterns": [
+          "/"
+        ],
+        "notes": "News index only; homepage forbidden.",
+        "expected_check_interval_minutes": 1440,
+        "source_health": "HEALTHY",
+        "coverage_status": "configured",
+        "coverage_policy": {
+          "sparse_source_allowed": false,
+          "expected_eligible_frequency": "weekly",
+          "coverage_watch_window": 4,
+          "require_in_scope_for_low_coverage": true
+        },
+        "initial_backfill": {
+          "lookback_days": 60,
+          "retain_active_or_future_deadline": true,
+          "historical_priority": "backfill_low",
+          "undated_as_current": true
+        },
+        "surfaces": [
+          {
+            "id": "news_list",
+            "url": "https://www.carms.ca/news/",
+            "role": "primary",
+            "health": "HEALTHY"
+          }
+        ],
+        "fetch_enabled": true,
+        "scheduled_fetch_enabled": true,
+        "candidate_emission_enabled": true
+      },
+      "item_url_patterns": [
+        "carms\\.ca/news/[a-z0-9-]{10,}"
+      ]
+    },
+    {
+      "source_id": "abroad_au_amc",
+      "name": "Australian Medical Council — IMG",
+      "country": "Australia",
+      "coverage_class": "CORE_PATHWAY_DOSSIER",
+      "canonical_url": "https://www.amc.org.au/",
+      "source_url": "https://www.amc.org.au/feed/",
+      "primary_url": "https://www.amc.org.au/",
+      "allowed_hostnames": [
+        "www.amc.org.au",
+        "amc.org.au"
+      ],
+      "upstream_source_id": null,
+      "source_tier": "OFFICIAL_PRIMARY",
+      "source_role": "official_exam_assessment_body",
+      "status": "active",
+      "fetch_mode": "list-page",
+      "allowed_scope": [
+        "credential_verification",
+        "exam_or_assessment",
+        "degree_recognition"
+      ],
+      "allowed_path_patterns": [
+        "/feed"
+      ],
+      "statement_treatment": "official_guidance",
+      "fetch_enabled": true,
+      "scheduled_fetch_enabled": true,
+      "candidate_emission_enabled": true,
+      "publication_eligible": false,
+      "pipeline_wiring_enabled": true,
+      "notes": "IMG pathways, assessment, verification, exams, deadlines only.",
+      "include_keywords": [
+        "international medical graduate",
+        "IMG",
+        "MCQ",
+        "clinical examination",
+        "assessment",
+        "accreditation",
+        "pathway",
+        "specialist",
+        "prevocational",
+        "medical school",
+        "exam",
+        "candidates",
+        "registration"
+      ],
+      "exclude_keywords": [
+        "award",
+        "joint statement",
+        "tender",
+        "appointment",
+        "podcast"
+      ],
+      "allowed_routes": [
+        "ABROAD_CAREER",
+        "ABROAD_OPPORTUNITY_WATCH",
+        "NEEDS_REVIEW",
+        "DISCARD"
+      ],
+      "default_route_on_accept": "NEEDS_REVIEW",
+      "source_health": "HEALTHY",
+      "runtime_activation": "AUTOMATION_READY",
+      "fetch_plan": {
+        "primary_method": "list-page",
+        "tls_verification_required": true,
+        "allowed_hostnames": [
+          "www.amc.org.au",
+          "amc.org.au"
+        ],
+        "allowed_path_patterns": [
+          "/feed"
+        ],
+        "forbidden_hosts": [],
+        "forbidden_path_patterns": [
+          "/"
+        ],
+        "notes": "Official WordPress RSS; newest item matches the website news list (2026-09-13).",
+        "expected_check_interval_minutes": 1440,
+        "source_health": "HEALTHY",
+        "coverage_status": "configured",
+        "coverage_policy": {
+          "sparse_source_allowed": true,
+          "expected_eligible_frequency": "rare",
+          "coverage_watch_window": 4,
+          "require_in_scope_for_low_coverage": true
+        },
+        "initial_backfill": {
+          "lookback_days": 60,
+          "retain_active_or_future_deadline": true,
+          "historical_priority": "backfill_low",
+          "undated_as_current": true
+        },
+        "surfaces": [
+          {
+            "id": "list",
+            "url": "https://www.amc.org.au/feed/",
+            "role": "primary",
+            "health": "HEALTHY"
+          }
+        ],
+        "fetch_enabled": true,
+        "scheduled_fetch_enabled": true,
+        "candidate_emission_enabled": true
+      }
+    },
+    {
+      "source_id": "abroad_au_medical_board",
+      "name": "Medical Board of Australia",
+      "country": "Australia",
+      "coverage_class": "CORE_PATHWAY_DOSSIER",
+      "canonical_url": "https://www.medicalboard.gov.au/",
+      "source_url": "https://www.medicalboard.gov.au/News",
+      "primary_url": "https://www.medicalboard.gov.au/",
+      "allowed_hostnames": [
+        "www.medicalboard.gov.au",
+        "medicalboard.gov.au"
+      ],
+      "upstream_source_id": null,
+      "source_tier": "OFFICIAL_PRIMARY",
+      "source_role": "official_physician_regulator",
+      "status": "active",
+      "fetch_mode": "list-page",
+      "allowed_scope": [
+        "registration_or_licensure",
+        "language_requirement"
+      ],
+      "allowed_path_patterns": [
+        "/News"
+      ],
+      "statement_treatment": "official_guidance",
+      "fetch_enabled": true,
+      "scheduled_fetch_enabled": true,
+      "candidate_emission_enabled": true,
+      "publication_eligible": false,
+      "pipeline_wiring_enabled": true,
+      "include_keywords": [
+        "international medical graduate",
+        "specialist pathway",
+        "registration standard",
+        "registration",
+        "English language",
+        "CPD",
+        "supervised practice",
+        "expedited",
+        "area of need",
+        "doctors",
+        "medical practitioner",
+        "workforce"
+      ],
+      "exclude_keywords": [
+        "cancel",
+        "suspend",
+        "prosecut",
+        "tribunal",
+        "court",
+        "disciplinary",
+        "newsletter"
+      ],
+      "allowed_routes": [
+        "ABROAD_CAREER",
+        "ABROAD_OPPORTUNITY_WATCH",
+        "NEEDS_REVIEW",
+        "DISCARD"
+      ],
+      "default_route_on_accept": "NEEDS_REVIEW",
+      "source_health": "HEALTHY",
+      "runtime_activation": "AUTOMATION_READY",
+      "fetch_plan": {
+        "primary_method": "list-page",
+        "tls_verification_required": true,
+        "allowed_hostnames": [
+          "www.medicalboard.gov.au",
+          "medicalboard.gov.au"
+        ],
+        "allowed_path_patterns": [
+          "/News"
+        ],
+        "forbidden_hosts": [],
+        "forbidden_path_patterns": [
+          "/"
+        ],
+        "notes": "News list; posts pinned by dated URLs.",
+        "expected_check_interval_minutes": 1440,
+        "source_health": "HEALTHY",
+        "coverage_status": "configured",
+        "coverage_policy": {
+          "sparse_source_allowed": true,
+          "expected_eligible_frequency": "rare",
+          "coverage_watch_window": 4,
+          "require_in_scope_for_low_coverage": true
+        },
+        "initial_backfill": {
+          "lookback_days": 60,
+          "retain_active_or_future_deadline": true,
+          "historical_priority": "backfill_low",
+          "undated_as_current": true
+        },
+        "surfaces": [
+          {
+            "id": "list",
+            "url": "https://www.medicalboard.gov.au/News",
+            "role": "primary",
+            "health": "HEALTHY"
+          }
+        ],
+        "fetch_enabled": true,
+        "scheduled_fetch_enabled": true,
+        "candidate_emission_enabled": true
+      },
+      "item_url_patterns": [
+        "medicalboard\\.gov\\.au/News/20\\d\\d-\\d\\d-\\d\\d-"
+      ]
+    },
+    {
+      "source_id": "abroad_au_ahpra",
+      "name": "AHPRA — health practitioner registration",
+      "country": "Australia",
+      "coverage_class": "CORE_PATHWAY_DOSSIER",
+      "canonical_url": "https://www.ahpra.gov.au/",
+      "source_url": "https://www.ahpra.gov.au/News",
+      "primary_url": "https://www.ahpra.gov.au/",
+      "allowed_hostnames": [
+        "www.ahpra.gov.au",
+        "ahpra.gov.au"
+      ],
+      "upstream_source_id": null,
+      "source_tier": "OFFICIAL_PRIMARY",
+      "source_role": "official_physician_regulator",
+      "status": "active",
+      "fetch_mode": "list-page",
+      "allowed_scope": [
+        "registration_or_licensure"
+      ],
+      "allowed_path_patterns": [
+        "/News"
+      ],
+      "statement_treatment": "official_guidance",
+      "fetch_enabled": true,
+      "scheduled_fetch_enabled": true,
+      "candidate_emission_enabled": true,
+      "publication_eligible": false,
+      "pipeline_wiring_enabled": true,
+      "include_keywords": [
+        "international medical graduate",
+        "medical practitioner",
+        "doctors",
+        "medical board",
+        "specialist pathway",
+        "expedited",
+        "registration standard"
+      ],
+      "exclude_keywords": [
+        "nurse",
+        "nursing",
+        "pharmac",
+        "dental",
+        "physiotherap",
+        "psycholog",
+        "cancel",
+        "suspend",
+        "prosecut",
+        "tribunal",
+        "court",
+        "disciplinary"
+      ],
+      "allowed_routes": [
+        "ABROAD_CAREER",
+        "ABROAD_OPPORTUNITY_WATCH",
+        "NEEDS_REVIEW",
+        "DISCARD"
+      ],
+      "default_route_on_accept": "NEEDS_REVIEW",
+      "source_health": "HEALTHY",
+      "runtime_activation": "AUTOMATION_READY",
+      "fetch_plan": {
+        "primary_method": "list-page",
+        "tls_verification_required": true,
+        "allowed_hostnames": [
+          "www.ahpra.gov.au",
+          "ahpra.gov.au"
+        ],
+        "allowed_path_patterns": [
+          "/News"
+        ],
+        "forbidden_hosts": [],
+        "forbidden_path_patterns": [
+          "/"
+        ],
+        "notes": "News list; posts pinned by dated URLs; doctor-related only.",
+        "expected_check_interval_minutes": 1440,
+        "source_health": "HEALTHY",
+        "coverage_status": "configured",
+        "coverage_policy": {
+          "sparse_source_allowed": true,
+          "expected_eligible_frequency": "rare",
+          "coverage_watch_window": 4,
+          "require_in_scope_for_low_coverage": true
+        },
+        "initial_backfill": {
+          "lookback_days": 60,
+          "retain_active_or_future_deadline": true,
+          "historical_priority": "backfill_low",
+          "undated_as_current": true
+        },
+        "surfaces": [
+          {
+            "id": "list",
+            "url": "https://www.ahpra.gov.au/News",
+            "role": "primary",
+            "health": "HEALTHY"
+          }
+        ],
+        "fetch_enabled": true,
+        "scheduled_fetch_enabled": true,
+        "candidate_emission_enabled": true
+      },
+      "item_url_patterns": [
+        "ahpra\\.gov\\.au/News/20\\d\\d-\\d\\d-\\d\\d-"
+      ]
+    },
+    {
+      "source_id": "abroad_ie_medical_council",
+      "name": "Irish Medical Council",
+      "country": "Ireland",
+      "coverage_class": "OFFICIAL_PATHWAY_DOSSIER",
+      "canonical_url": "https://www.medicalcouncil.ie/",
+      "source_url": "https://www.medicalcouncil.ie/",
+      "primary_url": "https://www.medicalcouncil.ie/",
+      "allowed_hostnames": [
+        "www.medicalcouncil.ie",
+        "medicalcouncil.ie"
+      ],
+      "upstream_source_id": null,
+      "source_tier": "OFFICIAL_PRIMARY",
+      "source_role": "official_physician_regulator",
+      "status": "configured_not_wired",
+      "fetch_mode": "not_wired",
+      "allowed_scope": [
+        "registration_or_licensure",
+        "exam_or_assessment",
+        "language_requirement"
+      ],
+      "allowed_path_patterns": [
+        "/"
+      ],
+      "statement_treatment": "official_guidance",
+      "fetch_enabled": false,
+      "scheduled_fetch_enabled": false,
+      "candidate_emission_enabled": false,
+      "publication_eligible": false,
+      "pipeline_wiring_enabled": false,
+      "notes": "Registration, education/training and professional requirements for doctors only."
+    },
+    {
+      "source_id": "abroad_nl_big_register",
+      "name": "BIG Register — foreign diploma recognition",
+      "country": "Netherlands",
+      "coverage_class": "OFFICIAL_PATHWAY_DOSSIER",
+      "canonical_url": "https://english.bigregister.nl/",
+      "source_url": "https://english.bigregister.nl/",
+      "primary_url": "https://english.bigregister.nl/",
+      "allowed_hostnames": [
+        "english.bigregister.nl",
+        "www.bigregister.nl"
+      ],
+      "upstream_source_id": null,
+      "source_tier": "OFFICIAL_PRIMARY",
+      "source_role": "official_physician_regulator",
+      "status": "active",
+      "fetch_mode": "list-page",
+      "allowed_scope": [
+        "degree_recognition",
+        "registration_or_licensure",
+        "language_requirement"
+      ],
+      "allowed_path_patterns": [
+        "/",
+        "/latest/"
+      ],
+      "statement_treatment": "official_guidance",
+      "fetch_enabled": true,
+      "scheduled_fetch_enabled": true,
+      "candidate_emission_enabled": true,
+      "publication_eligible": false,
+      "pipeline_wiring_enabled": true,
+      "include_keywords": [
+        "physician",
+        "doctor",
+        "medical",
+        "dentist",
+        "BI-toets",
+        "AKV",
+        "language",
+        "registration",
+        "foreign"
+      ],
+      "exclude_keywords": [
+        "cookie",
+        "vacature"
+      ],
+      "allowed_routes": [
+        "ABROAD_CAREER",
+        "ABROAD_OPPORTUNITY_WATCH",
+        "NEEDS_REVIEW",
+        "DISCARD"
+      ],
+      "default_route_on_accept": "NEEDS_REVIEW",
+      "source_health": "HEALTHY",
+      "runtime_activation": "AUTOMATION_READY",
+      "fetch_plan": {
+        "primary_method": "list-page",
+        "tls_verification_required": true,
+        "allowed_hostnames": [
+          "english.bigregister.nl",
+          "www.bigregister.nl"
+        ],
+        "allowed_path_patterns": [
+          "/",
+          "/latest/"
+        ],
+        "forbidden_hosts": [],
+        "forbidden_path_patterns": [
+          "/"
+        ],
+        "notes": "Homepage news teasers pinned by dated URLs.",
+        "expected_check_interval_minutes": 1440,
+        "source_health": "HEALTHY",
+        "coverage_status": "configured",
+        "coverage_policy": {
+          "sparse_source_allowed": true,
+          "expected_eligible_frequency": "rare",
+          "coverage_watch_window": 4,
+          "require_in_scope_for_low_coverage": true
+        },
+        "initial_backfill": {
+          "lookback_days": 60,
+          "retain_active_or_future_deadline": true,
+          "historical_priority": "backfill_low",
+          "undated_as_current": true
+        },
+        "surfaces": [
+          {
+            "id": "list",
+            "url": "https://english.bigregister.nl/",
+            "role": "primary",
+            "health": "HEALTHY"
+          }
+        ],
+        "fetch_enabled": true,
+        "scheduled_fetch_enabled": true,
+        "candidate_emission_enabled": true
+      },
+      "item_url_patterns": [
+        "bigregister\\.nl/latest/news/20\\d\\d/"
+      ]
+    },
+    {
+      "source_id": "abroad_es_universidades_homologacion",
+      "name": "Spain — degree recognition portal (universidades.sede.gob.es)",
+      "country": "Spain",
+      "coverage_class": "OFFICIAL_PATHWAY_DOSSIER",
+      "canonical_url": "https://universidades.sede.gob.es/",
+      "source_url": "https://universidades.sede.gob.es/",
+      "primary_url": "https://universidades.sede.gob.es/",
+      "allowed_hostnames": [
+        "universidades.sede.gob.es"
+      ],
+      "upstream_source_id": null,
+      "source_tier": "OFFICIAL_PRIMARY",
+      "source_role": "government_recognition_portal",
+      "status": "manual_review",
+      "source_health": "MANUAL_REVIEW_REQUIRED",
+      "manual_review_required": true,
+      "manual_review_reason": "Spanish-language and region/authority-sensitive homologation material requires editorial review before any use.",
+      "fetch_mode": "not_wired",
+      "allowed_scope": [
+        "degree_recognition",
+        "specialty_recognition"
+      ],
+      "jurisdiction_required": true,
+      "jurisdiction_label": "competent_authority_or_region",
+      "allowed_path_patterns": [
+        "/"
+      ],
+      "statement_treatment": "official_guidance",
+      "fetch_enabled": false,
+      "scheduled_fetch_enabled": false,
+      "candidate_emission_enabled": false,
+      "publication_eligible": false,
+      "pipeline_wiring_enabled": false
+    },
+    {
+      "source_id": "abroad_es_mir_fse",
+      "name": "Spain — FSE/MIR (Ministry of Health)",
+      "country": "Spain",
+      "coverage_class": "OFFICIAL_PATHWAY_DOSSIER",
+      "canonical_url": null,
+      "source_url": null,
+      "primary_url": null,
+      "allowed_hostnames": [
+        "www.sanidad.gob.es",
+        "sanidad.gob.es"
+      ],
+      "upstream_source_id": null,
+      "source_tier": "OFFICIAL_PRIMARY",
+      "source_role": "official_graduate_medical_training_body",
+      "status": "inactive_pending_url_verification",
+      "source_health": "MANUAL_REVIEW_REQUIRED",
+      "manual_review_required": true,
+      "manual_review_reason": "Exact official sanidad.gob.es FSE/MIR URLs and allowed paths not verified in-repo — left inactive rather than guessed.",
+      "fetch_mode": "not_wired",
+      "allowed_scope": [
+        "residency_or_match",
+        "specialty_recognition"
+      ],
+      "jurisdiction_required": true,
+      "jurisdiction_label": "competent_authority_or_region",
+      "statement_treatment": "official_guidance",
+      "fetch_enabled": false,
+      "scheduled_fetch_enabled": false,
+      "candidate_emission_enabled": false,
+      "publication_eligible": false,
+      "pipeline_wiring_enabled": false,
+      "intentionally_inactive": true
+    },
+    {
+      "source_id": "abroad_it_salute_foreign_qual",
+      "name": "Italy — Ministry of Health foreign health qualifications",
+      "country": "Italy",
+      "coverage_class": "OFFICIAL_PATHWAY_DOSSIER",
+      "canonical_url": "https://www.salute.gov.it/new/it/ministero/non-eu-country/",
+      "source_url": "https://www.salute.gov.it/new/it/ministero/non-eu-country/",
+      "primary_url": "https://www.salute.gov.it/new/it/ministero/non-eu-country/",
+      "allowed_hostnames": [
+        "www.salute.gov.it",
+        "salute.gov.it"
+      ],
+      "upstream_source_id": null,
+      "source_tier": "OFFICIAL_PRIMARY",
+      "source_role": "government_recognition_portal",
+      "status": "manual_review",
+      "source_health": "MANUAL_REVIEW_REQUIRED",
+      "manual_review_required": true,
+      "manual_review_reason": "Italian-language and region-sensitive material; exact physician/medical-doctor recognition route must be verified before activation.",
+      "fetch_mode": "not_wired",
+      "allowed_scope": [
+        "degree_recognition",
+        "registration_or_licensure",
+        "specialty_recognition"
+      ],
+      "jurisdiction_required": true,
+      "jurisdiction_label": "competent_authority_or_region",
+      "allowed_path_patterns": [
+        "/new/it/ministero/non-eu-country/",
+        "/"
+      ],
+      "statement_treatment": "official_guidance",
+      "fetch_enabled": false,
+      "scheduled_fetch_enabled": false,
+      "candidate_emission_enabled": false,
+      "publication_eligible": false,
+      "pipeline_wiring_enabled": false
+    },
+    {
+      "source_id": "abroad_sa_scfhs_watch",
+      "name": "SCFHS — Saudi Commission for Health Specialties (watch-only)",
+      "country": "Saudi Arabia",
+      "coverage_class": "WATCH_ONLY",
+      "canonical_url": "https://www.scfhs.org.sa/",
+      "source_url": "https://www.scfhs.org.sa/",
+      "primary_url": "https://www.scfhs.org.sa/",
+      "allowed_hostnames": [
+        "www.scfhs.org.sa",
+        "scfhs.org.sa"
+      ],
+      "upstream_source_id": null,
+      "source_tier": "OFFICIAL_PRIMARY",
+      "source_role": "official_physician_regulator",
+      "status": "configured_not_wired",
+      "fetch_mode": "not_wired",
+      "allowed_scope": [
+        "registration_or_licensure",
+        "specialty_recognition",
+        "exam_or_assessment"
+      ],
+      "allowed_routes": [
+        "ABROAD_WATCH_ONLY",
+        "NEEDS_REVIEW",
+        "DISCARD"
+      ],
+      "default_route": "ABROAD_WATCH_ONLY",
+      "watch_only": true,
+      "statement_treatment": "official_guidance",
+      "fetch_enabled": false,
+      "scheduled_fetch_enabled": false,
+      "candidate_emission_enabled": false,
+      "publication_eligible": false,
+      "pipeline_wiring_enabled": false,
+      "notes": "High-impact official notices only. No routine opportunity feed or country promotion."
+    }
+  ],
+  "intentionally_unregistered": [
+    {
+      "region": "Gulf countries (UAE, Qatar, Kuwait, Bahrain, Oman)",
+      "reason": "Official regulator URLs (DHA, MOHAP, QCHP, etc.) not individually verified in this task — coverage class WATCH_ONLY retained in policy without inventing source rows."
+    },
+    {
+      "source": "Spain Ministry of Health FSE/MIR exact listing URLs",
+      "reason": "Represented as abroad_es_mir_fse with status inactive_pending_url_verification."
+    }
+  ],
+  "upstream_references_preserved": [
+    "ecfmg_announcements",
+    "ecfmg_sponsor_notes_policy",
+    "gmc_plab",
+    "mcc_mccqe",
+    "germany_approbation"
+  ],
+  "source_count": 19,
+  "active_configured_count": 18,
+  "inactive_pending_verification_count": 1,
+  "notes": "Do not copy official_sources.yaml rows. Abroad profiles reference upstream IDs where applicable. No fetch/queue/publish."
+}

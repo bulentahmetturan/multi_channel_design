@@ -1,0 +1,613 @@
+{
+  "registry_id": "hekimler-batch2-candidates-v1",
+  "channelId": "tip-ogrencileri-platformu",
+  "editorialBrand": "Hekimler Topluluğu",
+  "notes": "Batch 2+ domestic pass: activate verified list surfaces only. TurkMSIC/TTB/HSGM-basin/TPD/Klimik/TRD AUTOMATION_READY when dry-run HEALTHY.",
+  "batch2_review": {
+    "moh_physician_workforce": {
+      "decision": "AUTOMATION_READY",
+      "reason": "Verified YHGM kura/atama list indexes (not www.saglik.gov.tr homepage).",
+      "surfaces": [
+        "https://yhgm.saglik.gov.tr/TR,11622/devlet-hizmeti-yukumlulugu-kuralari.html",
+        "https://yhgm.saglik.gov.tr/TR,11621/ilk-defa-ve-yeniden-atama-kuralari.html",
+        "https://yhgm.saglik.gov.tr/TR,11623/yer-degistirme-suretiyle-atanma-kuralari.html",
+        "https://yhgm.saglik.gov.tr/TR,11624/unvan-degisikligi-kuralari.html"
+      ]
+    },
+    "hsgm_public_health": {
+      "decision": "AUTOMATION_READY",
+      "reason": "Verified /tr/basin-odasi/basin-odasi-haberler.html (legacy /tr/duyurular|/tr/haberler still 404).",
+      "surfaces": [
+        "https://hsgm.saglik.gov.tr/tr/basin-odasi/basin-odasi-haberler.html"
+      ]
+    },
+    "pubmed_biomedical_evidence": {
+      "decision": "AUTOMATION_READY",
+      "reason": "Finite approved_query_pack + hardened eutilities (tool/email, timeout, retry); PMID required."
+    },
+    "turkmsic_medical_students": {
+      "decision": "AUTOMATION_READY",
+      "reason": "Verified https://turkmsic.org/haberler list index.",
+      "surfaces": [
+        "https://turkmsic.org/haberler"
+      ]
+    },
+    "ttb_national": {
+      "decision": "AUTOMATION_READY",
+      "reason": "Verified arsiv_duyuru.php + arsiv_haber.php.",
+      "surfaces": [
+        "https://www.ttb.org.tr/arsiv_duyuru.php",
+        "https://www.ttb.org.tr/arsiv_haber.php"
+      ]
+    },
+    "tpd_psychiatry": {
+      "decision": "MANUAL_INTAKE",
+      "reason": "haber-duyuru verified but 3000+ anchors; item-path allowlist required."
+    },
+    "klimık_infectious_diseases": {
+      "decision": "AUTOMATION_READY",
+      "reason": "Verified WP category duyurular/haberler indexes."
+    },
+    "trd_radiology": {
+      "decision": "AUTOMATION_READY",
+      "reason": "Verified dernekten-haberler + duyurular indexes."
+    },
+    "tuik_medical_public_health": {
+      "decision": "MANUAL_INTAKE",
+      "reason": "TÜİK health category is SPA (veriportali shell); no verified structured API for automation."
+    },
+    "hasuder_public_health": {
+      "decision": "AUTOMATION_READY",
+      "reason": "Verified /listele/duyurular-hasuder-cat (legacy duyurular 500).",
+      "surfaces": [
+        "https://www.hasuder.org.tr/listele/duyurular-hasuder-cat"
+      ]
+    },
+    "teged_medical_education": {
+      "decision": "MANUAL_INTAKE",
+      "reason": "No announcement list; only static genel-kurul page."
+    },
+    "tepdad_medical_accreditation": {
+      "decision": "MANUAL_INTAKE",
+      "reason": "No /duyuru|/haber index (404); accreditation PDF inventory only."
+    },
+    "tahud_family_medicine": {
+      "decision": "MANUAL_INTAKE",
+      "reason": "/haberler and /guncel return empty self-href pages; not a usable HTML list."
+    },
+    "tihud_internal_medicine": {
+      "decision": "MANUAL_INTAKE",
+      "reason": "/HaberlerveDuyurular 500; alternate query has nav tabs only, no item list."
+    },
+    "tkd_cardiology": {
+      "decision": "MANUAL_INTAKE",
+      "reason": "Duyurular list is toplantı/okul series; mismatches guideline intent and kongre excludes."
+    },
+    "ttd_thoracic": {
+      "decision": "MANUAL_INTAKE",
+      "reason": "Haberler mostly webinar/kongre endorse; not guideline announcement index."
+    },
+    "halk_sagligi_yeterlik": {
+      "decision": "MANUAL_INTAKE",
+      "reason": "/list/haber-postasi-hsyk-cat is static kurumsal pages, not a news feed."
+    },
+    "anadolu_ajansi_medical_radar": {
+      "decision": "MANUAL_INTAKE",
+      "reason": "AA /tr/saglik is SPA; RSS exists but rss method not verified for continuous runner."
+    },
+    "turk_pediatri_kurumu": {
+      "decision": "AUTOMATION_READY",
+      "reason": "Verified https://turkpediatri.org.tr/haberler"
+    },
+    "abroad_us_usmle": {
+      "decision": "AUTOMATION_READY",
+      "reason": "Verified news/announcements list https://www.usmle.org/announcements",
+      "surfaces": [
+        "https://www.usmle.org/announcements"
+      ]
+    },
+    "abroad_us_nrmp": {
+      "decision": "AUTOMATION_READY",
+      "reason": "Verified news/announcements list https://www.nrmp.org/about/news/",
+      "surfaces": [
+        "https://www.nrmp.org/about/news/"
+      ]
+    },
+    "abroad_ca_carms": {
+      "decision": "AUTOMATION_READY",
+      "reason": "Verified news/announcements list https://www.carms.ca/news/",
+      "surfaces": [
+        "https://www.carms.ca/news/"
+      ]
+    },
+    "abroad_ca_mcc_img_pathways": {
+      "decision": "AUTOMATION_READY",
+      "reason": "Verified news/announcements list https://mcc.ca/news/",
+      "surfaces": [
+        "https://mcc.ca/news/"
+      ]
+    },
+    "tatd_emergency_medicine": {
+      "decision": "MANUAL_INTAKE",
+      "reason": "WP category is JS-rendered (no post hrefs in HTML); RSS/JSON not in VERIFIED_FETCH_METHODS."
+    },
+    "abroad_us_ecfmg_intealth": {
+      "decision": "MANUAL_INTAKE",
+      "reason": "ecfmg.org/news Cloudflare 403 from automation egress."
+    },
+    "abroad_uk_gmc": {
+      "decision": "MANUAL_INTAKE",
+      "reason": "gmc-uk.org/news Cloudflare 403; PLAB page is pathway dossier not list index."
+    }
+  },
+  "sources": [
+    {
+      "source_id": "pubmed_biomedical_evidence",
+      "label": "PubMed biomedical evidence (approved query pack only)",
+      "source_tier": "EVIDENCE_INDEX",
+      "role": "EVIDENCE_INDEX",
+      "fetch_mode": "eutilities_api",
+      "source_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+      "primary_url": "https://pubmed.ncbi.nlm.nih.gov/",
+      "include_keywords": [
+        "medical education",
+        "residency",
+        "clinical guideline",
+        "physician workforce",
+        "specialty training",
+        "practice guideline"
+      ],
+      "exclude_keywords": [
+        "veterinary only",
+        "plant science only",
+        "preprint only"
+      ],
+      "audience_segments": [
+        "physician",
+        "resident",
+        "academic_physician",
+        "medical_student"
+      ],
+      "default_route_on_accept": "NEEDS_REVIEW",
+      "allowed_routes": [
+        "RESEARCH_REVIEW",
+        "NEEDS_REVIEW",
+        "DISCARD"
+      ],
+      "approved_query_pack": [
+        {
+          "id": "meded_specialty_training",
+          "term": "(\"medical education\"[Title] OR \"specialty training\"[Title] OR residency[Title]) AND (Turkey[Affiliation] OR Turkish[Language])",
+          "retmax": 10
+        },
+        {
+          "id": "clinical_guideline_update",
+          "term": "(\"practice guideline\"[Publication Type] OR \"clinical guideline\"[Title]) AND 2024:2026[dp]",
+          "retmax": 8
+        }
+      ],
+      "reject_unrestricted_search": true,
+      "require_pmid": true,
+      "reject_preprint_only": true,
+      "fetch_plan": {
+        "primary_method": "eutilities_api",
+        "tls_verification_required": true,
+        "allowed_hostnames": [
+          "eutils.ncbi.nlm.nih.gov",
+          "pubmed.ncbi.nlm.nih.gov",
+          "www.ncbi.nlm.nih.gov"
+        ],
+        "allowed_path_patterns": [
+          "/entrez/eutils/"
+        ],
+        "expected_check_interval_minutes": 1440,
+        "source_health": "HEALTHY",
+        "coverage_status": "configured",
+        "coverage_policy": {
+          "sparse_source_allowed": false,
+          "expected_eligible_frequency": "daily",
+          "coverage_watch_window": 3,
+          "require_in_scope_for_low_coverage": true
+        },
+        "eutilities": {
+          "tool": "hekimler_toplulugu",
+          "email": "hekimler-radar@local.invalid",
+          "timeout_ms": 12000,
+          "retry_max": 2,
+          "inter_query_delay_ms": 400
+        },
+        "initial_backfill": {
+          "lookback_days": 30,
+          "retain_active_or_future_deadline": true,
+          "historical_priority": "backfill_low",
+          "undated_as_current": false
+        },
+        "surfaces": [
+          {
+            "id": "esearch",
+            "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+            "role": "primary",
+            "health": "HEALTHY"
+          }
+        ],
+        "fetch_enabled": true,
+        "scheduled_fetch_enabled": true,
+        "candidate_emission_enabled": true
+      },
+      "runtime_activation": "AUTOMATION_READY",
+      "fetch_enabled": true,
+      "scheduled_fetch_enabled": true,
+      "candidate_emission_enabled": true,
+      "pipeline_wiring_enabled": true,
+      "publication_eligible": false,
+      "status": "active",
+      "statement_treatment": "scientific_index"
+    },
+    {
+      "source_id": "osym_dus_dental_exams",
+      "label": "ÖSYM – DUS diş hekimliği uzmanlık sınavı",
+      "source_tier": "OFFICIAL_PRIMARY",
+      "role": "medical exam and deadline authority",
+      "fetch_mode": "dedicated_exam_listing",
+      "source_url": "https://www.osym.gov.tr/SinavGrubu/Index/9",
+      "primary_url": "https://www.osym.gov.tr/SinavGrubu/Index/9",
+      "related_list_urls": [],
+      "maps_official_source_ids": [
+        "osym_dus_dental_exams"
+      ],
+      "allowed_topics": [
+        "DUS"
+      ],
+      "include_keywords": [
+        "DUS",
+        "diş hekimliği",
+        "dis hekimligi",
+        "uzmanlık eğitimi giriş",
+        "diş hekimi",
+        "tercih",
+        "yerleştirme"
+      ],
+      "exclude_keywords": [
+        "KPSS",
+        "DGS",
+        "ALES",
+        "YKS",
+        "LGS",
+        "MSÜ",
+        "e-KPSS",
+        "polis",
+        "jandarma",
+        "öğretmenlik",
+        "hukuk fakültesi",
+        "mühendislik"
+      ],
+      "audience_segments": [
+        "dental_student",
+        "dentist",
+        "dus_candidate"
+      ],
+      "allowed_routes": [
+        "OPPORTUNITY",
+        "CAREER",
+        "PROFESSIONAL_BRIEF",
+        "DISCARD"
+      ],
+      "default_route_on_accept": "OPPORTUNITY",
+      "required_fields": [
+        "exam_name",
+        "action_type",
+        "affected_audience",
+        "application_date",
+        "exam_date",
+        "result_or_preference_date"
+      ],
+      "evidence_status": "verified_when_official_url_present",
+      "transform_rule": "Never surface raw OSYM announcement titles. Generate only: what changed / who is affected / deadline / required action. Low viral potential must never lower OPPORTUNITY priority.",
+      "virality_must_not_lower_opportunity": true,
+      "policy_notes": "Scope is this exam group only. Generic national exams are DISCARD even if posted on OSYM.",
+      "fetch_notes": "Dedicated exam-group listing.",
+      "fetch_plan": {
+        "primary_method": "dedicated_exam_listing",
+        "fallback_methods": [
+          "gated_announcement_index"
+        ],
+        "allowed_hostnames": [
+          "www.osym.gov.tr",
+          "osym.gov.tr"
+        ],
+        "allowed_path_patterns": [
+          "/SinavGrubu/",
+          "/Duyurular/"
+        ],
+        "expected_check_interval_minutes": 360,
+        "last_success_at": null,
+        "last_content_hash": null,
+        "last_item_timestamp": null,
+        "failure_count": 0,
+        "source_health": "HEALTHY",
+        "coverage_status": "configured",
+        "coverage_policy": {
+          "sparse_source_allowed": false,
+          "expected_eligible_frequency": "per_run",
+          "coverage_watch_window": 3,
+          "require_in_scope_for_low_coverage": true
+        },
+        "manual_review_reason": null,
+        "tls_verification_required": true,
+        "surfaces": [
+          {
+            "id": "group",
+            "url": "https://www.osym.gov.tr/SinavGrubu/Index/9",
+            "role": "primary",
+            "health": "HEALTHY"
+          }
+        ],
+        "fetch_enabled": true,
+        "scheduled_fetch_enabled": true,
+        "candidate_emission_enabled": true,
+        "initial_backfill": {
+          "lookback_days": 14,
+          "retain_active_or_future_deadline": true,
+          "historical_priority": "backfill_low",
+          "undated_as_current": true
+        }
+      },
+      "status": "active",
+      "canonical_url": "https://www.osym.gov.tr/SinavGrubu/Index/9",
+      "statement_treatment": "official_decision",
+      "fetch_enabled": true,
+      "scheduled_fetch_enabled": true,
+      "candidate_emission_enabled": true,
+      "publication_eligible": false,
+      "pipeline_wiring_enabled": true,
+      "runtime_activation": "AUTOMATION_READY",
+      "name": "ÖSYM – DUS diş hekimliği uzmanlık sınavı",
+      "source_health": "HEALTHY",
+      "item_url_patterns": [
+        "osym\\.gov\\.tr/[a-z0-9-]{20,}$"
+      ]
+    },
+    {
+      "source_id": "osym_ydus_subspecialty_exams",
+      "label": "ÖSYM – YDUS tıpta yan dal uzmanlık sınavı",
+      "source_tier": "OFFICIAL_PRIMARY",
+      "role": "medical exam and deadline authority",
+      "fetch_mode": "dedicated_exam_listing",
+      "source_url": "https://www.osym.gov.tr/SinavGrubu/Index/10",
+      "primary_url": "https://www.osym.gov.tr/SinavGrubu/Index/10",
+      "related_list_urls": [],
+      "maps_official_source_ids": [
+        "osym_ydus_subspecialty_exams"
+      ],
+      "allowed_topics": [
+        "YDUS"
+      ],
+      "include_keywords": [
+        "YDUS",
+        "yan dal",
+        "yandal",
+        "tıpta yan dal",
+        "uzmanlık eğitimi giriş",
+        "tercih",
+        "yerleştirme"
+      ],
+      "exclude_keywords": [
+        "KPSS",
+        "DGS",
+        "ALES",
+        "YKS",
+        "LGS",
+        "MSÜ",
+        "e-KPSS",
+        "polis",
+        "jandarma",
+        "öğretmenlik",
+        "hukuk fakültesi",
+        "mühendislik"
+      ],
+      "audience_segments": [
+        "resident",
+        "specialist",
+        "physician"
+      ],
+      "allowed_routes": [
+        "OPPORTUNITY",
+        "CAREER",
+        "PROFESSIONAL_BRIEF",
+        "DISCARD"
+      ],
+      "default_route_on_accept": "OPPORTUNITY",
+      "required_fields": [
+        "exam_name",
+        "action_type",
+        "affected_audience",
+        "application_date",
+        "exam_date",
+        "result_or_preference_date"
+      ],
+      "evidence_status": "verified_when_official_url_present",
+      "transform_rule": "Never surface raw OSYM announcement titles. Generate only: what changed / who is affected / deadline / required action. Low viral potential must never lower OPPORTUNITY priority.",
+      "virality_must_not_lower_opportunity": true,
+      "policy_notes": "Scope is this exam group only. Generic national exams are DISCARD even if posted on OSYM.",
+      "fetch_notes": "Dedicated exam-group listing.",
+      "fetch_plan": {
+        "primary_method": "dedicated_exam_listing",
+        "fallback_methods": [
+          "gated_announcement_index"
+        ],
+        "allowed_hostnames": [
+          "www.osym.gov.tr",
+          "osym.gov.tr"
+        ],
+        "allowed_path_patterns": [
+          "/SinavGrubu/",
+          "/Duyurular/"
+        ],
+        "expected_check_interval_minutes": 360,
+        "last_success_at": null,
+        "last_content_hash": null,
+        "last_item_timestamp": null,
+        "failure_count": 0,
+        "source_health": "HEALTHY",
+        "coverage_status": "configured",
+        "coverage_policy": {
+          "sparse_source_allowed": false,
+          "expected_eligible_frequency": "per_run",
+          "coverage_watch_window": 3,
+          "require_in_scope_for_low_coverage": true
+        },
+        "manual_review_reason": null,
+        "tls_verification_required": true,
+        "surfaces": [
+          {
+            "id": "group",
+            "url": "https://www.osym.gov.tr/SinavGrubu/Index/10",
+            "role": "primary",
+            "health": "HEALTHY"
+          }
+        ],
+        "fetch_enabled": true,
+        "scheduled_fetch_enabled": true,
+        "candidate_emission_enabled": true,
+        "initial_backfill": {
+          "lookback_days": 14,
+          "retain_active_or_future_deadline": true,
+          "historical_priority": "backfill_low",
+          "undated_as_current": true
+        }
+      },
+      "status": "active",
+      "canonical_url": "https://www.osym.gov.tr/SinavGrubu/Index/10",
+      "statement_treatment": "official_decision",
+      "fetch_enabled": true,
+      "scheduled_fetch_enabled": true,
+      "candidate_emission_enabled": true,
+      "publication_eligible": false,
+      "pipeline_wiring_enabled": true,
+      "runtime_activation": "AUTOMATION_READY",
+      "name": "ÖSYM – YDUS tıpta yan dal uzmanlık sınavı",
+      "source_health": "HEALTHY",
+      "item_url_patterns": [
+        "osym\\.gov\\.tr/[a-z0-9-]{20,}$"
+      ]
+    },
+    {
+      "source_id": "tvhb_veterinary",
+      "name": "Türk Veteriner Hekimleri Birliği",
+      "label": "TVHB – Türk Veteriner Hekimleri Birliği",
+      "country": "Türkiye",
+      "canonical_url": "https://www.tvhb.org.tr/feed",
+      "source_url": "https://www.tvhb.org.tr/feed",
+      "primary_url": "https://www.tvhb.org.tr/feed",
+      "allowed_hostnames": [
+        "www.tvhb.org.tr",
+        "tvhb.org.tr"
+      ],
+      "source_tier": "PROFESSIONAL_BODY",
+      "status": "active",
+      "fetch_mode": "list-page",
+      "medical_scope": "veterinary_profession_regulation_education_scientific_meetings",
+      "audience_scope": [
+        "veterinary_student",
+        "veterinarian",
+        "specialist_veterinarian"
+      ],
+      "audience_segments": [
+        "veterinary_student",
+        "veterinarian",
+        "specialist_veterinarian"
+      ],
+      "include_keywords": [
+        "veteriner hekim",
+        "mevzuat",
+        "yönetmelik",
+        "uzmanlık",
+        "eğitim",
+        "sınav",
+        "meslek",
+        "kongre",
+        "bilimsel toplantı",
+        "hayvan sağlığı",
+        "kurs",
+        "sertifika",
+        "buiatri",
+        "muayenehane",
+        "poliklinik",
+        "hastane"
+      ],
+      "exclude_keywords": [
+        "aidat",
+        "başsağlığı",
+        "vefat",
+        "taziye",
+        "genel kurul",
+        "oda seçim",
+        "iftar",
+        "kutlama",
+        "yarışma"
+      ],
+      "allow_congress": true,
+      "allowed_routes": [
+        "PROFESSIONAL_BRIEF",
+        "EDUCATION",
+        "NEEDS_REVIEW",
+        "DISCARD"
+      ],
+      "default_route_on_accept": "PROFESSIONAL_BRIEF",
+      "statement_treatment": "professional_guidance",
+      "evidence_rule": "official_url_required",
+      "transform_rule": "attribute_society_document_date_audience",
+      "source_health": "HEALTHY",
+      "fetch_enabled": true,
+      "scheduled_fetch_enabled": true,
+      "candidate_emission_enabled": true,
+      "pipeline_wiring_enabled": true,
+      "publication_eligible": false,
+      "runtime_activation": "AUTOMATION_READY",
+      "fetch_plan": {
+        "primary_method": "list-page",
+        "tls_verification_required": true,
+        "allowed_hostnames": [
+          "www.tvhb.org.tr",
+          "tvhb.org.tr"
+        ],
+        "allowed_path_patterns": [
+          "/feed"
+        ],
+        "forbidden_hosts": [],
+        "forbidden_path_patterns": [
+          "/",
+          "/tr/",
+          "/TR/"
+        ],
+        "notes": "Official RSS feed only.",
+        "expected_check_interval_minutes": 1440,
+        "source_health": "HEALTHY",
+        "coverage_status": "configured",
+        "coverage_policy": {
+          "sparse_source_allowed": true,
+          "expected_eligible_frequency": "rare",
+          "coverage_watch_window": 4,
+          "require_in_scope_for_low_coverage": true
+        },
+        "initial_backfill": {
+          "lookback_days": 60,
+          "retain_active_or_future_deadline": true,
+          "historical_priority": "backfill_low",
+          "undated_as_current": true
+        },
+        "surfaces": [
+          {
+            "id": "feed",
+            "url": "https://www.tvhb.org.tr/feed",
+            "role": "primary",
+            "health": "HEALTHY"
+          }
+        ],
+        "fetch_enabled": true,
+        "scheduled_fetch_enabled": true,
+        "candidate_emission_enabled": true
+      }
+    }
+  ]
+}
