@@ -130,6 +130,23 @@ class HubDeliveryResult:
 
 
 class HubDeliveryClient(Protocol):
+    def post_telemetry(self, metrics: dict) -> tuple[bool, str]:
+        """Authenticated per-source execution telemetry (never contains the token)."""
+        body = json.dumps(metrics).encode("utf-8")
+        req = urllib.request.Request(
+            self.hub_url + "/api/ingress/hekimler-telemetry",
+            data=body,
+            headers={"Content-Type": "application/json", "X-Ingest-Token": self.token, "User-Agent": "hekimler-hub-bridge/1.0"},
+            method="POST",
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=self.timeout) as resp:
+                return True, resp.read().decode("utf-8")[:200]
+        except urllib.error.HTTPError as exc:
+            return False, f"HTTP {exc.code}"
+        except Exception as exc:  # noqa: BLE001
+            return False, str(exc)[:120]
+
     def deliver(self, payload: HubCandidatePayload) -> HubDeliveryResult: ...
 
 

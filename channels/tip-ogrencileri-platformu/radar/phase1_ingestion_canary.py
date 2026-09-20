@@ -114,6 +114,11 @@ class SourceRunResult:
     hub_item_ids: list[str] = field(default_factory=list)
     dry_run: bool = False
     commit_target: str | None = None  # hub | local_harness | None
+    rejected_shape: int = 0
+    rejected_audience: int = 0
+    rejected_keyword: int = 0
+    rejected_date: int = 0
+    newest_record_date: str | None = None
 
 
 @dataclass
@@ -558,6 +563,10 @@ def _parse_dated_rows(
             )
         )
     return out
+
+
+def date_exempt_run(method: str) -> bool:
+    return method == "eutilities_api"
 
 
 def _adjacent_date(body: str, pos: int) -> str | None:
@@ -1047,14 +1056,22 @@ def ingest_one_source(
     item_title_patterns = [re.compile(x) for x in (profile.get("item_title_patterns") or [])]
     detail_budget = 40  # bounded detail-page date lookups per source per run
     stale_discarded = 0
+    rej_shape = rej_audience = rej_keyword = 0
     method = str(plan.get("primary_method") or "")
+    newest_dates: list = []
+    from .hekimler_dates import extract_dates as _extract_dates
+
+    for it0 in items:
+        newest_dates += _extract_dates(it0.published_at or "", it0.title or "", it0.canonical_item_url or "")
     for item in items:
         # Audience gate: nav/menu links never become candidates when the source pins a post-URL shape.
         if item_url_patterns and not any(x.search(item.canonical_item_url or "") for x in item_url_patterns):
             discarded += 1
+            rej_shape += 1
             continue
         if item_title_patterns and not any(x.search((item.title or "").strip()) for x in item_title_patterns):
             discarded += 1
+            rej_shape += 1
             continue
         medical_impact = None
         if sid == "resmi_gazete_medical_regulation":
@@ -1075,6 +1092,10 @@ def ingest_one_source(
         )
         if decision.decision == "DISCARD":
             discarded += 1
+            if decision.reason.startswith(("out_of_audience_scope", "congress")):
+                rej_audience += 1
+            else:
+                rej_keyword += 1
             continue
 
         # D9 date policy: list date -> detail-page date -> UNDATED (kept as NEEDS_REVIEW, never auto-published).
@@ -1097,6 +1118,8 @@ def ingest_one_source(
                 page_date, date_method = extract_page_date(detail.body or "")
                 if page_date:
                     verdict, item_date = date_verdict(sid, published_at=page_date.isoformat())
+        if item_date is not None:
+            newest_dates.append(item_date)
         if item_date is not None and not item.published_at:
             item.published_at = item_date.isoformat()
         if verdict == "STALE" and not date_exempt:
@@ -1205,6 +1228,29 @@ def ingest_one_source(
         parser_failed=False,
     )
 
+    if not newest_dates and items and not date_exempt_run(method):
+        # Recency proof for sources whose list carries no dates: read up to 5 detail pages.
+        hosts_ok = {h.lower() for h in plan.get("allowed_hostnames") or []}
+        probed = 0
+        seen_urls: set[str] = set()
+        for it1 in items:
+            u1 = it1.canonical_item_url or ""
+            if u1 in seen_urls or (urlparse(u1).hostname or "").lower() not in hosts_ok:
+                continue
+            if item_url_patterns and not any(x.search(u1) for x in item_url_patterns):
+                continue
+            seen_urls.add(u1)
+            try:
+                pd1, _m1 = extract_page_date(transport(u1).body or "")
+            except Exception:  # noqa: BLE001 — recency probe must never fail a run
+                pd1 = None
+            probed += 1
+            if pd1:
+                newest_dates.append(pd1)
+            if probed >= 5:
+                break
+    newest_record_date = max(newest_dates).isoformat() if newest_dates else None
+
     if hub_failures > 0 and accepted == 0:
         op = "hub_delivery_failed"
     elif accepted > 0:
@@ -1236,6 +1282,11 @@ def ingest_one_source(
         hub_item_ids=hub_item_ids,
         dry_run=dry_run,
         commit_target=commit_target,
+        rejected_shape=rej_shape,
+        rejected_audience=rej_audience,
+        rejected_keyword=rej_keyword,
+        rejected_date=stale_discarded,
+        newest_record_date=newest_record_date,
     )
 
 

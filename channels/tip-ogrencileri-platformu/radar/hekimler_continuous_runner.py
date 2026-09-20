@@ -150,6 +150,7 @@ def write_worker_profile_bundle(dest: Path | None = None) -> Path:
         "decision": "NEEDS_REVIEW",
         "auto_publish": False,
         "audience_scope": load_scope_policy(),
+        "python_runner_source_ids": sorted(p["source_id"] for p in export_automation_ready_profiles() if p["source_id"] not in {q["source_id"] for q in profiles}),
         "profiles": profiles,
     }
     # TypeScript module (avoids resolveJsonModule issues in Worker build)
@@ -255,6 +256,28 @@ def run_continuous_ingestion(
             from .phase1_ingestion_canary import persist_run
 
             persist_run(db, result, dry_run=dry_run)
+        if not dry_run and hub_client is not None and hasattr(hub_client, "post_telemetry"):
+            ok_run = result.hub_delivery_failures == 0 and result.fetch_result == "ok"
+            hub_client.post_telemetry(
+                {
+                    "sourceId": result.source_id,
+                    "executor": "python_runner",
+                    "ok": ok_run,
+                    "operatorStatus": result.operator_status,
+                    "fetchResult": result.fetch_result,
+                    "inspected": result.item_count,
+                    "eligible": result.accepted_count,
+                    "duplicates": result.duplicate_count,
+                    "hubFailures": result.hub_delivery_failures,
+                    "rejectedShape": result.rejected_shape,
+                    "rejectedAudience": result.rejected_audience,
+                    "rejectedKeyword": result.rejected_keyword,
+                    "rejectedDate": result.rejected_date,
+                    "newestRecordDate": result.newest_record_date,
+                    "error": result.error_reason,
+                    "contentHash": result.last_content_hash,
+                }
+            )
         summary.results.append(result)
 
     return summary
