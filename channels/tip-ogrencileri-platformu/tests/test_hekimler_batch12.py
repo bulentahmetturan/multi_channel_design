@@ -89,9 +89,7 @@ class Batch12Tests(unittest.TestCase):
     def test_titles_are_unescaped_and_leading_date_is_split(self):
         from radar.phase1_ingestion_canary import _clean_title
 
-        title, lead = _clean_title("17
-   Eyl&#xFC;l 2026
-  2026-TUS 2. D&#xF6;nem S&#x131;nav Sonu&#xE7;lar&#x131;")
+        title, lead = _clean_title("17\r\n   Eyl&#xFC;l 2026\r\n  2026-TUS 2. D&#xF6;nem S&#x131;nav Sonu&#xE7;lar&#x131;")
         self.assertEqual(title, "2026-TUS 2. Dönem Sınav Sonuçları")
         self.assertEqual(lead, "2026-09-17")
 
