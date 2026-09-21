@@ -27,6 +27,11 @@ from radar.phase1_ingestion_canary import (
 def _json_body(items: list[dict]) -> str:
     import json
 
+    from datetime import date
+
+    # Undated items are discarded by policy (2026-09-21); fixtures carry a fresh date.
+    today = date.today().isoformat()
+    items = [{"published_at": today, **it} for it in items]
     return json.dumps({"items": items}, ensure_ascii=False)
 
 

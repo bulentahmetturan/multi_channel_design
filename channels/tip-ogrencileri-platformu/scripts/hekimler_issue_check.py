@@ -54,6 +54,14 @@ def main() -> int:
     bad_url = [i for i in hek["items"] if not str(i["canonicalUrl"]).startswith("http")]
     check("S01c resmi URL var", not bad_url, f"URL'siz {len(bad_url)}")
 
+    # 15 tarihsiz / eski içerik Hekimler akışında görünmesin
+    from datetime import date, timedelta
+    und = [i for i in hek["items"] if not i.get("publishedAt") or "T" in str(i["publishedAt"])]
+    check("S15 Hekimler'de tarihsiz kayıt yok", not und, f"{len(und)} adet: " + "; ".join(i["title"][:30] for i in und[:3]))
+    limit = (date.today() - timedelta(days=185)).isoformat()
+    old = [i for i in hek["items"] if re.match(r"\d{4}-\d\d-\d\d", str(i.get("publishedAt") or "")) and str(i["publishedAt"])[:10] < limit]
+    check("S15b Hekimler'de 185 günden eski kayıt yok", not old, f"{len(old)} adet: " + "; ".join(str(i["publishedAt"])[:10] + " " + i["title"][:25] for i in old[:3]))
+
     # 2/3 AA sağlık dışı
     news = items("kaduse-news")
     aa = [i for i in news["items"] if i["feedId"] == "news-aa-saglik-scoped"]

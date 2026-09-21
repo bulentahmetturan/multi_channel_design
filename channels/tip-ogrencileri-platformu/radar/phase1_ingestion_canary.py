@@ -1367,7 +1367,7 @@ def ingest_one_source(
                 rej_keyword += 1
             continue
 
-        # D9 date policy: list date -> detail-page date -> UNDATED (kept as NEEDS_REVIEW, never auto-published).
+        # D9 date policy: list date -> detail-page date -> URL month estimate -> otherwise discarded (see below).
         from .hekimler_dates import date_verdict, extract_page_date
 
         date_exempt = method == "eutilities_api"  # evidence index, not news
@@ -1401,11 +1401,14 @@ def ingest_one_source(
             newest_dates.append(item_date)
         if item_date is not None and not item.published_at and date_precision != "month":
             item.published_at = item_date.isoformat()
-        if verdict == "STALE" and not date_exempt:
+        # Freshness policy (user decision 2026-09-21): an item whose date cannot be established is not news.
+        # Undated archive/list entries (e.g. MoH "115. Donem ... Kurasi") are discarded and counted in rejected_date,
+        # never shown as fresh. Evidence-index sources (date_exempt) are unaffected.
+        if verdict in ("STALE", "UNDATED") and not date_exempt:
             discarded += 1
             stale_discarded += 1
             continue
-        date_unverified = verdict == "UNDATED" and not date_exempt
+        date_unverified = False
 
         from .hekimler_backfill import classify_backfill
 

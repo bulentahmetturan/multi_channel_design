@@ -23,6 +23,8 @@ Durum: KAPALI = kontrol PASS; AÇIK = kontrol FAIL veya doğrulanmadı; DIŞ = d
 | S12 | channel-content-os MCP HTTP 401 | Üretim Cloudflare Access OAuth, istemci statik Bearer gönderiyor | Teşhis | S14 (manuel) | DIŞ: kullanıcı yetkilendirmesi |
 | S13 | Kaduse minute cron Workers Free sınırında başarısız | Aynı S10 | Aynı S10 | S12 | Bkz. S10 |
 | S14 | Zayıf kaynaklar: `research-altmetric-api`, `research-crossmark` (doküman sayfaları), `research-gdelt-doc-api` (sağlıkla ilgisiz genel haber) | Feed konfigürasyonu | Henüz yapılmadı | S05 (kısmen) | AÇIK: kapat / GDELT'e sağlık filtresi ekle |
+| S15 | Eski/tarihsiz içerik "taze" görünüyor: 2024 atama kurası, 2021 Meme Tarama Rehberi, Sağlık Bakanlığı 115-129. dönem kura arşivi (hangisi güncel belli değil) | Liste sayfasında tarih yok; sistem tarihsizi "İnceleme gerek" olarak alıyor ve çekilme zamanını yayın tarihi gibi gösteriyor ("1 gün") | Kural: tarihi doğrulanamayan kayıt haber değildir, alınmaz (Python + Worker); 32 kayıt silindi. Sonraki zamanlanmış çalıştırma yeni kuralla çalışır | S15, S15b | KAPALI (mevcut veri); yeni kural ilk zamanlanmış çalıştırmada doğrulanacak |
 
 ## Çalıştırma geçmişi
 - 2026-09-21 ~21:00 UTC (Worker 215ba08): PASS 11, FAIL 6, MANUAL 4. FAIL: S05 (1 kayıt), S05b (8 kayıt), S08 (HSGM), S09 (GMC, ECFMG, MiG).
+- 2026-09-21 ~22:00 UTC (Worker 7ee37f6, S15 sonrası): S15/S15b PASS; kalan FAIL: S05 (1), S05b (8), S08 (HSGM), S09 (GMC, ECFMG, MiG). Not: bazı kayıtlarda yayın tarihi ISO değil ("2026 Sep 7"); yalnız görünümü etkiler.
