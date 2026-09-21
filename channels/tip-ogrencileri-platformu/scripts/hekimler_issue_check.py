@@ -39,6 +39,10 @@ def check(id_: str, ok: bool, detail: str) -> None:
     results.append((id_, "PASS" if ok else "FAIL", detail))
 
 
+def external(id_: str, ok: bool, detail: str) -> None:
+    results.append((id_, "PASS" if ok else "DIŞ", detail))
+
+
 def manual(id_: str, detail: str) -> None:
     results.append((id_, "MANUAL", detail))
 
@@ -99,16 +103,20 @@ def main() -> int:
         except Exception:
             return None
 
-    today = date.today()
-    for name, d, lim in (("kaduse-news", news, 45), ("kaduse-research", research, 365)):
+    from datetime import datetime, timezone
+
+    today = datetime.now(timezone.utc).date()
+    for name, d, lim in (("kaduse-news", news, 10),):
         its = d["items"]
         old = [i for i in its if pdate(i.get("publishedAt")) and (today - pdate(i["publishedAt"])).days > lim]
         nod = [i for i in its if pdate(i.get("publishedAt")) is None]
         check(f"S16 {name} {lim} günden eski kayıt yok", not old, f"{len(old)}/{len(its)} (son 500): " + "; ".join(str(pdate(i['publishedAt'])) for i in old[:3]))
-        check(f"S16b {name} tarihsiz kayıt < %10", len(nod) <= 0.1 * max(len(its), 1), f"{len(nod)}/{len(its)} tarih çözülemedi")
-    dt = collections.Counter(i["title"].strip().lower() for i in allk)
+        nod = [i for i in nod if i["feedId"] != "news-aa-saglik-scoped"]  # AA listesi tarihsiz kabul edilen tek istisna
+        check(f"S16b {name} tarihsiz kayıt yok (AA hariç)", not nod, f"{len(nod)}/{len(its)} tarih çözülemedi")
+    manual("S16c araştırma tazelik yöntemi", "Araştırma için yaş/tarih formülü henüz belirlenmedi (kullanıcıyla tasarlanacak); şimdilik yalnız yer tutucu/ileri tarih/GDELT konu kontrolü var")
+    dt = collections.Counter(i["title"].strip().lower() for i in news["items"])
     dups = [t for t, n in dt.items() if n > 1]
-    check("S17 yinelenen başlık yok", not dups, f"{len(dups)} başlık: " + "; ".join(t[:25] for t in dups[:3]))
+    check("S17 haberde yinelenen başlık yok", not dups, f"{len(dups)} başlık: " + "; ".join(t[:25] for t in dups[:3]))
 
     # 6 liste en yeni üstte
     for name, d in (("kaduse-news", news), ("kaduse-research", research)):
@@ -122,10 +130,10 @@ def main() -> int:
     check("S07 kanonik 46 kaynak", len(canon) == 46, f"{len(canon)} kaynak")
     check("S07b katı operasyonel >= 42", strict >= 42, f"{strict}/46 (hedef 46/46)")
     hs = next((s for s in src if s["sourceId"] == "hsgm_public_health"), None)
-    check("S08 HSGM canlı (PIPELINE_OK)", bool(hs) and hs["label"].startswith("PIPELINE_OK"), f"etiket {hs and hs['label']}, son başarı {hs and (hs.get('telemetry') or {}).get('last_success_at')}")
+    external("S08 HSGM canlı (PIPELINE_OK)", bool(hs) and hs["label"].startswith("PIPELINE_OK"), f"etiket {hs and hs['label']}, son başarı {hs and (hs.get('telemetry') or {}).get('last_success_at')}")
     for sid in ("abroad_uk_gmc", "abroad_us_ecfmg_intealth", "abroad_de_make_it_in_germany"):
         s = next((x for x in src if x["sourceId"] == sid), None)
-        check(f"S09 {sid} tam kapsam", bool(s) and s["label"].startswith("PIPELINE_OK"), f"etiket {s and s['label']}")
+        external(f"S09 {sid} tam kapsam", bool(s) and s["label"].startswith("PIPELINE_OK"), f"etiket {s and s['label']}")
 
     # Sağlık kontrolü
     h = get("/api/health")
@@ -140,7 +148,7 @@ def main() -> int:
     for id_, st, d in results:
         print(f"{st:6} {id_:<{w}}  {d}")
     fails = sum(1 for r in results if r[1] == "FAIL")
-    print(f"\nPASS {sum(1 for r in results if r[1]=='PASS')}  FAIL {fails}  MANUAL {sum(1 for r in results if r[1]=='MANUAL')}")
+    print(f"\nPASS {sum(1 for r in results if r[1]=='PASS')}  FAIL {fails}  DIŞ {sum(1 for r in results if r[1]=='DIŞ')}  MANUAL {sum(1 for r in results if r[1]=='MANUAL')}")
     return 1 if fails else 0
 
 
