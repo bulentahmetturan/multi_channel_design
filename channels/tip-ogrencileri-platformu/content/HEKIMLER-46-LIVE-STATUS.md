@@ -21,3 +21,10 @@ Runs: 35537808504 and 35538245330 (sources=all, 45 sources, 45/45 ok, 0 new rows
 Totals (canonical 46): PIPELINE_OK 27, EMPTY 13, LIMITED 2 (es_universidades, pubmed), PARTIALLY_COVERED 3 (gmc, ecfmg, make-it-in-germany), BLOCKED_EXTERNAL_RUNNER_REQUIRED 1 (hsgm), FAILED 0, NOT_RUN 0.
 Extras: tvhb_veterinary and tdb_dental operational (separate from the 46). Coverage matrices: HEKIMLER-COVERAGE-MATRIX.md. Per-source rows: legacy-cleanup/final_run_rows.json; D1 telemetry: legacy-cleanup/telemetry_snapshot_2026-09-21.json.
 Worker: de55d676 then d149b0ad (Hub labels). D1 active duplicate canonical URLs: 0.
+
+## Final acceptance (2026-09-21)
+Runs: 35606771585 (sources=all, 45/45 ok, 1 new = real new TVHB item), 35607740649 (sources=all, 45/45 ok, 0 new, no errors); mixed batch 35608569046 (temp branch, 3 ok + 1 controlled failure, workflow red as designed, branch deleted). Scheduled run 35585968893 (09:55 UTC, GitHub delayed) failed only on PubMed HTTP 429 -> fixed with paced/backoff calls.
+Deploy: Worker version 1b7f9f90, commit 2e24236 (clean worktree; /api/health reports commit). Per-source rows: legacy-cleanup/final_run_rows_2.json.
+Hub acceptance on item_acc_* rows: single hold OK, undo OK, single delete OK, bulk hold OK (2), bulk delete OK (2), counters updated, promote of undated row -> HTTP 422 (after guard fix: promote needs published_at for hekimler channel). Test rows removed (0 remain). Active duplicate canonical URLs 0. D1 active = API = Hub counter = 190.
+Distribution (canonical 46): PIPELINE_OK 28, PIPELINE_OK_EMPTY 12, PIPELINE_OK_LIMITED 2, PARTIALLY_COVERED 3, RUNNER_REQUIRED 1, BLOCKED_EXTERNAL 0, FAILED_INTERNAL 0. Strict operational 42. Correction: the earlier 27/13 split double-counted es_universidades.
+Extras (outside 46): tvhb_veterinary, tdb_dental operational. Proposal only: denominator 47/48.
