@@ -135,6 +135,13 @@ def main() -> int:
         s = next((x for x in src if x["sourceId"] == sid), None)
         external(f"S09 {sid} tam kapsam", bool(s) and s["label"].startswith("PIPELINE_OK"), f"etiket {s and s['label']}")
 
+    # 19/20 Tıp Öğrencileri kanalı kaldırıldı; kaynak paneli için gerçek sayılar
+    tipf = get("/api/feeds?route=tip-ogrencileri")["feeds"]
+    check("S19 Tıp Öğrencileri eski kaynakları kapalı", len(tipf) <= 2, f"açık kaynak {len(tipf)} (yalnız Hekimler'in 2 teknik kaydı kalmalı)")
+    for rt in ("kaduse-news", "kaduse-research"):
+        fd = get(f"/api/feeds?route={rt}")["feeds"]
+        check(f"S20 {rt} kaynak paneli verisi", bool(fd) and all("inbox_count" in f and "last_error" in f for f in fd), f"{len(fd)} kaynak, gelen kutusu toplamı {sum(f.get('inbox_count', 0) for f in fd)}")
+
     # Sağlık kontrolü
     h = get("/api/health")
     check("S10 Worker sağlık", h.get("ok") is True, f"commit {h.get('commit')}")
