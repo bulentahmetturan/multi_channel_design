@@ -26,3 +26,8 @@ Görev Zamanlayıcı'da günlük 07:17 (Türkiye saati) çalıştırın. Kaldır
 ## Durum
 Bu repoyu çalıştıran ortamdan Türkiye çıkışlı bir makineye erişim yoktur; runner'ın çalıştığı iddia edilmez.
 Yerel dry-run kanıtı: 58 ayrıştırılan, 3 tarih dışı, 53 politika dışı, 2 uygun, en yeni kayıt 2026-07-25.
+
+## Windows görevi betiği (2026-09-21)
+`scripts/hekimler_hsgm_local_task.ps1`: `-Run [-DryRun]` (görevin çalıştırdığı), `-Install` (günlük 07:17, `StartWhenAvailable` = kaçırılan çalıştırma bir sonraki açılışta), `-Uninstall`.
+Log: `$HOME\hekimler-report\hsgm-run.log`; hata: `HSGM-LAST-RUN-FAILED.txt` + `msg` bildirimi + çıkış kodu 1. Token `$HOME\.hekimler_token` dosyasında (repo dışı, oluşturmanız gerekir; betik yazdırmaz/loglamaz). GitHub tarafındaki `hekimler-tr-freshness.yml` 48 saatten eski başarıyı e-postayla bildirir.
+Durum: token dosyası yok ve `.dev.vars` içindeki geliştirme değeri üretimde HTTP 401 alıyor; görev kurulmadı, gerçek ingest çalıştırılmadı.

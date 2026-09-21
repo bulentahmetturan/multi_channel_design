@@ -66,3 +66,6 @@ Deploy: Worker version 4ed2b498 from clean checkout, commit 7439f76 (`/api/healt
 
 ## Four-source follow-up (2026-09-21)
 No source changed status; strict operational stays 42/46 (27 OK, 13 EMPTY, 2 LIMITED); 3 PARTIALLY_COVERED (GMC, ECFMG/Intealth, Make it in Germany), 1 RUNNER_REQUIRED (HSGM). Details, missing topics and external conditions: HEKIMLER-COVERAGE-MATRIX.md (follow-up section). HSGM freshness alarm is live and red by design until a real scheduled run succeeds.
+
+## HSGM local Windows task (2026-09-21 18:13 UTC)
+This PC reaches hsgm.saglik.gov.tr (HTTP 200, 2.5 s); dry-run 48 parsed / 2 eligible. Real ingest NOT run: `~/.hekimler_token` does not exist, no env var, and the `.dev.vars` TIP_RADAR_INGEST_TOKEN is rejected by production (HTTP 401). GitHub secret is write-only and no new secret was created. Task `Hekimler-HSGM-Daily` not installed. HSGM stays RUNNER_REQUIRED. Script: scripts/hekimler_hsgm_local_task.ps1 (tested: dry-run OK, missing-token failure path logs + flags + exits 1).
