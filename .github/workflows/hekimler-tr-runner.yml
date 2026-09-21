@@ -15,6 +15,9 @@ on:
       retries:
         default: "2"
 
+  schedule:
+    - cron: "47 4 * * *"   # daily; stays queued (visible, no ingest) until a self-hosted runner labelled `tr` exists
+
 permissions:
   contents: read
 

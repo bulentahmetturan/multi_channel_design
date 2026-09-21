@@ -44,3 +44,17 @@ USMLE/NRMP/AAMC do not substitute for ECFMG certification and pathways; classifi
 | Relocation guidance | make-it-in-germany.com | No | Radware |
 | Federal Medical Association | bundesaerztekammer.de/en | Not usable | reachable (200) but no news list URL; home page only |
 Static guidance pages cannot be monitored as dated feeds; adding them would create undated review noise. Recognition (the physician-critical part) is covered by Anerkennung.
+
+## Follow-up route review (2026-09-21, probe run 35634376186 from GitHub-hosted runner; MiG also checked locally)
+Only new official routes were tested, plain GET, TLS on, no bypass. No status changes: strict operational stays 42/46.
+
+| Source | Missing topics (acceptance = all of these dated and ingested) | New route tested | Result | Status |
+|---|---|---|---|---|
+| hsgm_public_health | HSGM announcements (official page hsgm.saglik.gov.tr) | Local Türkiye egress dry run; registered self-hosted runners: 0 | Local: 48 parsed, 2 eligible, ok. GitHub egress blocked (TCP). No live ingest possible: no TR machine under our control, ingest token exists only as a GitHub secret | RUNNER_REQUIRED |
+| abroad_uk_gmc | GMC registration, licensing/rules, PLAB, IMG requirements, GMC regulatory news | gmc-uk.org/robots.txt, data.gmc-uk.org | 403 Cloudflare "Attention Required" / connection failure | PARTIALLY_COVERED (stop probing) |
+| abroad_us_ecfmg_intealth | ECFMG certification, Intealth pathways, IMG application/eligibility changes | ecfmg.org & intealth.org robots.txt, intealth.org /, /feed/, faimer.org | 403 (Apache) / Cloudflare "Just a moment" on all | PARTIALLY_COVERED (stop probing) |
+| abroad_de_make_it_in_germany | Visa & residence, physician employment/shortage, relocation guidance (recognition already covered by abroad_de_anerkennung) | robots.txt (allows all), sitemap.xml, en/de HTML | Sitemaps open but list only page sitemaps; pages return the Radware bot page (118,383 B) from GitHub and locally; no titles/dates readable | PARTIALLY_COVERED (stop probing) |
+
+External conditions: GMC and Intealth/ECFMG must allow automated access (or provide an official API/feed); MiG must allowlist automated clients or publish a feed; HSGM needs one Türkiye-located always-on machine registered as a GitHub self-hosted runner with labels `self-hosted, tr` (or Windows scheduled task per `scripts/hekimler_tr_runner_setup.md`).
+
+HSGM alarm added: `hekimler-tr-runner.yml` now has a daily schedule (queued, no ingest, until a runner exists) and `hekimler-tr-freshness.yml` (GitHub-hosted, daily, no secret) fails visibly when hsgm has no success, `last_success_at` is older than 48 h, health is not HEALTHY, or a D1 quota error is in telemetry. Network and D1 quota errors inside a real run are already surfaced by `hekimler_scheduled_run.py` (red run, banner, `::error`).
