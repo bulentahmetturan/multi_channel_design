@@ -3,6 +3,7 @@ Kullanım: python scripts/hekimler_issue_check.py   (çıkış kodu 1 = en az bi
 """
 from __future__ import annotations
 
+import collections
 import json
 import re
 import sys
@@ -83,6 +84,31 @@ def main() -> int:
     check("S05 menü/navigasyon kaydı yok", not nav, f"tarayıcı tipi {len(scraper)}, navigasyon {len(nav)}: " + "; ".join(i["title"][:25] for i in nav[:4]))
     ent = [i for i in allk if re.search(r"&#x?[0-9a-f]+;", i["title"], re.I)]
     check("S05b başlıkta HTML kodu yok", not ent, f"{len(ent)} adet")
+
+    # 16 Kaduse'de eski / tarihsiz içerik (son 500 kayıt üzerinden)
+    from datetime import date
+    from email.utils import parsedate_to_datetime
+
+    def pdate(v):
+        v = str(v or "")
+        m = re.match(r"(\d{4})-(\d\d)-(\d\d)", v)
+        try:
+            if m:
+                return date(int(m[1]), int(m[2]), int(m[3]))
+            return parsedate_to_datetime(v).date()
+        except Exception:
+            return None
+
+    today = date.today()
+    for name, d, lim in (("kaduse-news", news, 45), ("kaduse-research", research, 365)):
+        its = d["items"]
+        old = [i for i in its if pdate(i.get("publishedAt")) and (today - pdate(i["publishedAt"])).days > lim]
+        nod = [i for i in its if pdate(i.get("publishedAt")) is None]
+        check(f"S16 {name} {lim} günden eski kayıt yok", not old, f"{len(old)}/{len(its)} (son 500): " + "; ".join(str(pdate(i['publishedAt'])) for i in old[:3]))
+        check(f"S16b {name} tarihsiz kayıt < %10", len(nod) <= 0.1 * max(len(its), 1), f"{len(nod)}/{len(its)} tarih çözülemedi")
+    dt = collections.Counter(i["title"].strip().lower() for i in allk)
+    dups = [t for t, n in dt.items() if n > 1]
+    check("S17 yinelenen başlık yok", not dups, f"{len(dups)} başlık: " + "; ".join(t[:25] for t in dups[:3]))
 
     # 6 liste en yeni üstte
     for name, d in (("kaduse-news", news), ("kaduse-research", research)):
