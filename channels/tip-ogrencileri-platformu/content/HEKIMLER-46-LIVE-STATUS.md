@@ -35,7 +35,7 @@ Source of numbers: Cloudflare GraphQL `d1AnalyticsAdaptiveGroups` (rowsWritten, 
 | Run | GitHub ID | Result | Window (UTC) | New Hekimler items | D1 rows written (all writers) | Write queries |
 |---|---|---|---|---:|---:|---:|
 | C | 35627556556 | success | 16:44:46-16:52:39 | 0 | ~702 | ~351 |
-| D | 35628437735 | success | 16:52:53-16:59:54 | 0 | ~702 | ~351 |
+| D | 35628437735 | success | 16:53:03-16:59:54 | 0 | ~702 | ~351 |
 | E (after `7439f76`) | 35630680700 | success | 17:13:58-17:23:02 | 0 | 219 (includes Kaduse cron: 3 real inserts at 17:15) | 91 |
 
 - Item writes: 0 in all three windows (`source_items` rows updated since 16:44 in the Hekimler channel: 0; REJECTED_LEGACY 112 rows last touched 2026-09-20; active duplicate canonical URLs: 0; active = 190 unchanged). The 7 duplicate-URL pairs visible by URL alone are all REJECTED_LEGACY rows.
