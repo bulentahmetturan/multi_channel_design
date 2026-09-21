@@ -1301,6 +1301,21 @@ def ingest_one_source(
         if group:
             key = _norm_title_key(it_.title) if profile.get("dedupe_by") == "title" else (it_.canonical_item_url or "")
             it_.content_hash = _hash_text(group, key)
+    # One candidate per canonical URL: list pages often carry the same link twice (card title + teaser). Keeping both
+    # made the Hub row flip between two titles on every run (a D1 write each time). Keep the shortest clean title and
+    # any publication date found on either copy.
+    by_url: dict[str, RawItem] = {}
+    for it_ in items:
+        key_url = it_.canonical_item_url or ""
+        keep = by_url.get(key_url)
+        if keep is None:
+            by_url[key_url] = it_
+            continue
+        if not keep.published_at and it_.published_at:
+            keep.published_at = it_.published_at
+        if len(it_.title) >= 12 and len(it_.title) < len(keep.title):
+            keep.title, keep.raw_excerpt, keep.content_hash = it_.title, it_.raw_excerpt, it_.content_hash
+    items = list(by_url.values())
     newest_dates: list = []
     month_estimates: list[str] = []
     from .hekimler_dates import extract_dates as _extract_dates

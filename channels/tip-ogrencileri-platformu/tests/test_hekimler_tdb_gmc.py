@@ -107,3 +107,34 @@ class PubmedRateLimitTests(unittest.TestCase):
         with mock.patch("urllib.request.urlopen", fake_open), mock.patch("time.sleep"):
             pp.fetch_approved_query_pack(prof)
         self.assertGreaterEqual(calls["n"], 3)
+
+
+class SameUrlTwiceTests(unittest.TestCase):
+    def test_duplicate_anchor_for_one_url_yields_one_candidate(self):
+        import os
+        from unittest import mock
+
+        from radar.config import settings
+        from radar.database import Database
+        from radar.hekimler_hub_bridge import InMemoryHubStore
+        from radar.phase1_ingestion_canary import TransportResult, ingest_one_source
+
+        u = "https://www.nrmp.org/about/news/2026/09/new-webinar-2027-main-residency-match-overview-for-medical-schools/"
+        body = (
+            f'<ul><li><a href="{u}">New Webinar: 2027 Match Overview for Medical Schools</a> <span>09/10/2026</span></li>'
+            f'<li><a href="{u}">New Webinar: 2027 Match Overview for Medical Schools Chief of Match Operations Jeanette Calli and '
+            f'Director of Policy recently hosted a webinar for medical school officials</a></li></ul>'
+        )
+        prof = _src("abroad_us_nrmp")
+        db = Database(settings.db_path)
+        db.init()
+        hub = InMemoryHubStore()
+        with mock.patch.dict(os.environ, {"HEKIMLER_CONTINUOUS_INGESTION_ENABLED": "true"}):
+            ingest_one_source(prof, db=db, dry_run=False, force_due=True, hub_client=hub,
+                              transport=lambda url, *a, **k: TransportResult(http_status=200, body=body, tls_ok=True, requested_url=url))
+        urls = [i.canonical_url for i in hub.items.values()]
+        self.assertLessEqual(urls.count(u), 1)
+
+
+if __name__ == "__main__":
+    unittest.main()
