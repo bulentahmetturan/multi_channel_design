@@ -77,8 +77,19 @@ def fetch_approved_query_pack(profile: dict[str, Any]) -> list[dict[str, Any]]:
         if not _allowed(url):
             raise ValueError("pubmed_host_not_allowed")
         req = urllib.request.Request(url, headers={"User-Agent": ua})
-        with urllib.request.urlopen(req, timeout=timeout) as resp:  # noqa: S310 — host allowlisted
-            return json.loads(resp.read().decode("utf-8"))
+        # NCBI E-utilities rate-limit shared CI addresses (HTTP 429): pace calls and retry with bounded backoff.
+        for attempt in range(4):
+            time.sleep(0.4)
+            try:
+                with urllib.request.urlopen(req, timeout=timeout) as resp:  # noqa: S310 — host allowlisted
+                    return json.loads(resp.read().decode("utf-8"))
+            except urllib.error.HTTPError as err:
+                if err.code != 429 or attempt == 3:
+                    raise
+                retry_after = err.headers.get("Retry-After") if err.headers else None
+                delay = min(20.0, float(retry_after)) if retry_after and retry_after.isdigit() else 2.0 * (2 ** attempt)
+                time.sleep(delay)
+        raise ValueError("pubmed_rate_limited")
 
     for q in profile.get("approved_query_pack") or []:
         term = str(q.get("term") or "").strip()

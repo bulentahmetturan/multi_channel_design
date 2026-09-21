@@ -77,3 +77,33 @@ class GmcSubstituteTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class PubmedRateLimitTests(unittest.TestCase):
+    def test_429_is_retried_then_succeeds(self):
+        import io
+        import json
+        import urllib.error
+        from unittest import mock
+
+        from radar import hekimler_pubmed_pack as pp
+
+        calls = {"n": 0}
+
+        class Resp(io.BytesIO):
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *a):
+                return False
+
+        def fake_open(req, timeout=None):
+            calls["n"] += 1
+            if calls["n"] < 3:
+                raise urllib.error.HTTPError(req.full_url, 429, "Too Many", {"Retry-After": "0"}, None)
+            return Resp(json.dumps({"esearchresult": {"idlist": []}}).encode())
+
+        prof = _src("pubmed_biomedical_evidence")
+        with mock.patch("urllib.request.urlopen", fake_open), mock.patch("time.sleep"):
+            pp.fetch_approved_query_pack(prof)
+        self.assertGreaterEqual(calls["n"], 3)
