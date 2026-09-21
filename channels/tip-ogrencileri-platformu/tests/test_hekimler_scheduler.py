@@ -71,3 +71,29 @@ class ExitStatusTests(unittest.TestCase):
 
     def test_all_failed_is_nonzero(self):
         self.assertEqual(self._run({"a": False, "b": False}), 1)
+
+
+class QuotaTests(unittest.TestCase):
+    def test_quota_text_is_recognised(self):
+        q = "HTTP 500: D1_ERROR: Your account has exceeded D1's free tier daily row write limit."
+        self.assertTrue(sched.is_quota_error(q))
+        self.assertTrue(sched.is_quota_error("D1_QUOTA_EXCEEDED"))
+        self.assertFalse(sched.is_quota_error("HTTP 502 bad gateway"))
+
+    def test_quota_source_is_not_retried_and_marks_row(self):
+        from unittest import mock
+
+        calls = []
+
+        def fake_once(sid, timeout, dry_run):
+            calls.append(sid)
+            return {"results": [{"operator_status": "hub_failed", "fetch_result": "ok", "hub_delivery_failures": 3,
+                                 "error_reason": "HTTP 500: D1_ERROR: exceeded D1's free tier daily row write limit"}]}, ""
+
+        with mock.patch.object(sched, "run_once", side_effect=fake_once), mock.patch("time.sleep"):
+            row = sched.run_source("x", 10, 3, False)
+        self.assertEqual(len(calls), 1)
+        self.assertTrue(row["d1_quota"])
+        self.assertFalse(row["ok"])
+        self.assertTrue(row["error"].startswith("D1_QUOTA_EXCEEDED"))
+        self.assertIn("D1 DAILY WRITE QUOTA EXCEEDED", sched.quota_banner([row]))

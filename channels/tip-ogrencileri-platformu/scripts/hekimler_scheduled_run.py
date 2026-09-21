@@ -23,6 +23,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
+QUOTA_MARKERS = ("d1_quota_exceeded", "row write limit", "free tier daily")
+
+
+def is_quota_error(text: object) -> bool:
+    t = str(text or "").lower()
+    return any(m in t for m in QUOTA_MARKERS)
+
+
 TRANSIENT_MARKERS = ("timed out", "timeout", "temporarily", "connection", "reset", "502", "503", "504", "429", "degraded")
 
 
@@ -99,6 +107,11 @@ def run_source(source_id: str, timeout: int, retries: int, dry_run: bool) -> dic
             if not transient and not row["hub_failures"]:
                 break
             last_err = str(row.get("error") or row.get("operator_status"))
+            if is_quota_error(last_err):
+                # Retrying only burns more of the exhausted quota; surface it and stop retrying this source.
+                row["d1_quota"] = True
+                row["error"] = "D1_QUOTA_EXCEEDED: " + str(last_err)[:200]
+                break
         else:
             last_err = err
             row.update(operator_status="run_failed", error=err)
@@ -127,6 +140,17 @@ def markdown(rows: list[dict]) -> str:
             f"{'yes' if r.get('ok') else 'NO'} | {str(r.get('error') or '')[:90].replace('|', '/')} |\n"
         )
     return head + body
+
+
+def quota_banner(rows: list[dict]) -> str:
+    hit = [r["source_id"] for r in rows if r.get("d1_quota")]
+    if not hit:
+        return ""
+    return (
+        "> **D1 DAILY WRITE QUOTA EXCEEDED** - Cloudflare D1 (Free plan) rejected writes. "
+        f"Affected sources: {', '.join(hit)}. Nothing was ingested for them; ingestion resumes after 00:00 UTC "
+        "or on a paid plan. This run is intentionally red.\n\n"
+    )
 
 
 def main() -> int:
@@ -159,7 +183,7 @@ def main() -> int:
     out.mkdir(parents=True, exist_ok=True)
     stamp = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
     (out / "run-report.json").write_text(json.dumps({"generated_at": stamp, "dry_run": args.dry_run, "rows": rows}, ensure_ascii=False, indent=2), encoding="utf-8")
-    md = f"## Hekimler Python runner — {stamp}\n\n" + markdown(rows)
+    md = f"## Hekimler Python runner — {stamp}\n\n" + quota_banner(rows) + markdown(rows)
     (out / "run-report.md").write_text(md, encoding="utf-8")
     summary = os.environ.get("GITHUB_STEP_SUMMARY")
     if summary:
@@ -168,6 +192,9 @@ def main() -> int:
     print(md)
     failed = [r for r in rows if not r["ok"]]
     print(f"sources={len(rows)} ok={len(rows) - len(failed)} failed={len(failed)}")
+    if any(r.get("d1_quota") for r in rows):
+        print("::error title=D1 quota exceeded::Cloudflare D1 daily write quota is exhausted; ingest rejected for "
+              + ", ".join(r["source_id"] for r in rows if r.get("d1_quota")))
     if failed:
         print(f"::error::{len(failed)} of {len(rows)} sources failed: {', '.join(r['source_id'] for r in failed)}")
     return 1 if failed else 0
