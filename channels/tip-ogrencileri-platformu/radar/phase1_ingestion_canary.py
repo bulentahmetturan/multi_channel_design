@@ -511,6 +511,49 @@ def _hash_text(*parts: str) -> str:
     return hashlib.sha256(blob.encode("utf-8")).hexdigest()
 
 
+def _extract_body_excerpt(html_body: str, title: str) -> str:
+    """Best-effort real lead-paragraph excerpt from a detail page, for listing sources whose
+    card markup carries no description (raw_excerpt otherwise just repeats the title verbatim,
+    which gives reviewers nothing about what the announcement actually says).
+
+    Strips script/style/nav/header/footer/form, flattens to text, and returns the text that
+    literally follows the article title in that flattened text (common CMS layout: header/nav
+    render before the title, then the body) -- never generated, only text already on the page.
+    Returns "" on anything uncertain; callers must fall back to the title, never guess.
+    """
+    import html as _html
+
+    if not html_body or not title:
+        return ""
+    # <head> (<title>, <meta>) often repeats "PAGE TITLE | Org Name" -- searching there finds the
+    # org-name/header text, not the article body. Only the real <body> can hold the actual lead text.
+    body_start = re.search(r"<body[^>]*>", html_body, flags=re.I)
+    html_body = html_body[body_start.end() :] if body_start else html_body
+    stripped = re.sub(r"<(script|style|nav|header|footer|form|noscript)[\s\S]*?</\1>", " ", html_body, flags=re.I)
+    text = re.sub(r"<[^>]+>", " ", stripped)
+    text = _html.unescape(text)
+    text = re.sub(r"\s+", " ", text).strip()
+    full_title = re.sub(r"\s+", " ", title).strip()
+    needle = full_title[:60]
+    if len(needle) < 12:
+        return ""
+    idx = text.lower().find(needle.lower())
+    if idx == -1:
+        return ""
+    # Skip past the WHOLE title when it's present verbatim at that position, not just the
+    # 60-char search needle -- otherwise the tail of a long title leaks into the excerpt.
+    skip = len(full_title) if text[idx : idx + len(full_title)].lower() == full_title.lower() else len(needle)
+    tail = text[idx + skip : idx + skip + 2000].lstrip(" -–—|:.·")
+    if len(tail) < 40:
+        return ""
+    m = re.match(r"(.{40,450}?[.!?])(\s|$)", tail)
+    excerpt = (m.group(1) if m else tail[:400]).strip()
+    # Guard against grabbing more boilerplate (short repeated menu-like fragments have few spaces per char).
+    if excerpt.count(" ") < 6:
+        return ""
+    return excerpt
+
+
 def _parse_rss_items(
     *, source_id: str, source_url: str, body: str, fetched_at: str, fetch_method: str
 ) -> list[RawItem]:
@@ -1285,6 +1328,7 @@ def ingest_one_source(
     item_url_patterns = [re.compile(x) for x in (profile.get("item_url_patterns") or [])]
     item_title_patterns = [re.compile(x) for x in (profile.get("item_title_patterns") or [])]
     detail_budget = 40  # bounded detail-page date lookups per source per run
+    excerpt_budget = 20  # bounded detail-page excerpt lookups per source per run (real text only, never generated)
     stale_discarded = 0
     rej_shape = rej_audience = rej_keyword = 0
     method = str(plan.get("primary_method") or "")
@@ -1379,6 +1423,7 @@ def ingest_one_source(
             url=item.canonical_item_url or "",
         )
         date_method = "listing"
+        detail = None
         if verdict == "UNDATED" and not date_exempt and detail_budget > 0:
             host = (urlparse(item.canonical_item_url or "").hostname or "").lower()
             if host in {h.lower() for h in plan.get("allowed_hostnames") or []}:
@@ -1409,6 +1454,24 @@ def ingest_one_source(
             stale_discarded += 1
             continue
         date_unverified = False
+
+        # Real-excerpt backfill: the listing card gave us nothing beyond the title (the common
+        # case for plain <a href> listing pages), so the reviewer sees the title twice and learns
+        # nothing about what the announcement says. Fetch the detail page (reusing it if already
+        # fetched above for a date lookup) and pull the real lead paragraph — never generated,
+        # only text literally present on the page; "" on any uncertainty leaves the title as-is.
+        if (not item.raw_excerpt or item.raw_excerpt.strip() == item.title.strip()) and excerpt_budget > 0:
+            host = (urlparse(item.canonical_item_url or "").hostname or "").lower()
+            if host in {h.lower() for h in plan.get("allowed_hostnames") or []}:
+                excerpt_body = detail.body if detail is not None and detail.body else None
+                if excerpt_body is None:
+                    excerpt_budget -= 1
+                    detail = transport(item.canonical_item_url)
+                    excerpt_body = detail.body if detail else None
+                if excerpt_body:
+                    found = _extract_body_excerpt(excerpt_body, item.title)
+                    if found:
+                        item.raw_excerpt = found
 
         from .hekimler_backfill import classify_backfill
 
