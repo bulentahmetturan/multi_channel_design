@@ -18,6 +18,7 @@ from .hekimler_registry import (
 ROOT = Path(__file__).resolve().parents[1]
 RADAR = ROOT / "radar"
 BATCH2_PATH = ROOT / "content" / "source-registry-batch2.json"
+BATCH3_PATH = ROOT / "content" / "source-registry-batch3.json"
 
 # Domestic v1.1 OFFICIAL_PRIMARY set (unchanged by Abroad Career additive layer)
 DOMESTIC_OFFICIAL_PRIMARY_IDS = frozenset(
@@ -66,7 +67,8 @@ LOAD_MERGE_ORDER = (
     "3. For shared phase1/v1.1 source_ids: phase1 fetch_plan/observability/activation win; v1.1 source_tier/statement_treatment/routes win.",
     "4. Load source-registry-abroad-career-v1.json as additive Abroad Career layer (abroad_* IDs only; never overrides phase1/v1.1).",
     "5. Load source-registry-batch2.json as additive Batch 2 layer (new IDs only; PubMed approved-query pack).",
-    "6. Resolve to exactly one effective profile per source_id.",
+    "6. Load source-registry-batch3.json as additive Batch 3 layer (new IDs only; international English health/medical discovery pool).",
+    "7. Resolve to exactly one effective profile per source_id.",
 )
 
 
@@ -78,16 +80,26 @@ def load_batch2_registry() -> dict[str, Any]:
     return json.loads(BATCH2_PATH.read_text(encoding="utf-8"))
 
 
+def load_batch3_registry() -> dict[str, Any]:
+    if not BATCH3_PATH.exists():
+        return {"sources": []}
+    import json
+
+    return json.loads(BATCH3_PATH.read_text(encoding="utf-8"))
+
+
 def resolve_effective_registry(
     phase1: dict[str, Any] | None = None,
     v11: dict[str, Any] | None = None,
     abroad: dict[str, Any] | None = None,
     batch2: dict[str, Any] | None = None,
+    batch3: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     p1 = phase1 or load_phase1_registry()
     v = v11 or load_v11_registry()
     ab = abroad if abroad is not None else load_abroad_career_registry()
     b2 = batch2 if batch2 is not None else load_batch2_registry()
+    b3 = batch3 if batch3 is not None else load_batch3_registry()
     p1_by_id = {s["source_id"]: s for s in p1["sources"]}
     effective: list[dict[str, Any]] = []
     seen: set[str] = set()
@@ -140,6 +152,13 @@ def resolve_effective_registry(
         effective.append(dict(src))
         seen.add(sid)
 
+    for src in b3.get("sources") or []:
+        sid = src["source_id"]
+        if sid in seen:
+            raise ValueError(f"batch3 source_id collides with existing profile: {sid}")
+        effective.append(dict(src))
+        seen.add(sid)
+
     secondaries = list(p1.get("secondary_sources") or [])
     v_sec = {s["source_id"]: s for s in v.get("secondary_sources") or []}
     merged_sec = []
@@ -159,6 +178,7 @@ def resolve_effective_registry(
         "overlayRegistry": "source-registry-v1.1.json",
         "abroadCareerRegistry": "source-registry-abroad-career-v1.json",
         "batch2Registry": "source-registry-batch2.json",
+        "batch3Registry": "source-registry-batch3.json",
         "sources": effective,
         "secondary_sources": merged_sec,
         "pipeline_wiring_enabled": bool((p1.get("global_rules") or {}).get("pipeline_wiring_enabled")),

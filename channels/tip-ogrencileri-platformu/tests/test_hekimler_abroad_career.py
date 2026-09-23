@@ -198,7 +198,7 @@ class AbroadCareerRegistryTests(unittest.TestCase):
         self.assertEqual(counts["OFFICIAL_PRIMARY"], 12 + 19)
         self.assertEqual(counts["PROFESSIONAL_BODY"], 5)  # + tdb_dental (tracked separately from the 46)
         self.assertEqual(counts["PROFESSIONAL_GUIDANCE"], 12)
-        self.assertEqual(counts["SECONDARY_NEWSWIRE"], 17)
+        self.assertEqual(counts["SECONDARY_NEWSWIRE"], 32)  # +15 batch3 international English health/medical discovery pool
 
 
 if __name__ == "__main__":
