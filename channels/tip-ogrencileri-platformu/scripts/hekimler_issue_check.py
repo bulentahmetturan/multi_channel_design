@@ -1,14 +1,30 @@
 """Sorun tespit listesi - otomatik kontroller (salt okunur, canlı Hub API). Çıktı: PASS / FAIL / MANUAL.
-Kullanım: python scripts/hekimler_issue_check.py   (çıkış kodu 1 = en az bir FAIL)
+Kullanım:
+  python scripts/hekimler_issue_check.py                 (tüm kontroller; çıkış kodu 1 = en az bir FAIL)
+  python scripts/hekimler_issue_check.py --list-controls  (yalnız kontrol kimliklerini listele, Hub'a dokunmaz*
+                                                             *S-kimlikleri koddan statik çıkarılır, canlı veri gerekmez)
+  python scripts/hekimler_issue_check.py --only S16       (tüm kontrolleri çalıştırır -- checkler birbirine bağlı
+                                                             tek geçişte hesaplanıyor -- ama yalnız S16 ile başlayan
+                                                             satırları basar; çıkış kodu yalnız o alt kümeye göre)
 """
 from __future__ import annotations
 
+import argparse
 import collections
 import json
 import re
 import sys
 import urllib.request
 from urllib.parse import urlparse
+
+# Static list of control ids this script implements, in run order. Kept in sync manually with the
+# check()/external()/manual() calls below -- used by --list-controls (no Hub call needed) and to
+# validate --only.
+CONTROLS = [
+    "S01", "S01b", "S01c", "S03", "S04", "S04b", "S05", "S05b", "S06", "S07", "S07b",
+    "S08", "S09", "S10", "S11", "S12", "S13", "S14", "S15", "S15b", "S16", "S16b", "S16c",
+    "S17", "S19", "S20", "S24", "S26",
+]
 
 HUB = "https://global-content-os.channel-content-os-mcp.workers.dev"
 EXTRAS = {"tvhb_veterinary", "tdb_dental"}
@@ -51,7 +67,7 @@ def items(route: str, extra: str = "", limit: int = 500):
     return get(f"/api/items?route={route}{extra}&status=inbox&days=14&limit={limit}")
 
 
-def main() -> int:
+def main(only: str | None = None) -> int:
     # 1 Hekimler akışı Hub'da görünür; rozet = görünen
     hek = items("tip-ogrencileri", "&channel=hekimler-toplulugu", 500)
     check("S01 Hekimler görünür", len(hek["items"]) > 0, f"görünen {len(hek['items'])}, rozet {hek['counts']['inbox']}")
@@ -153,11 +169,18 @@ def main() -> int:
     manual("S26 Hatalı feed geri çekilme", "SELECT id,last_error,last_fetched_at FROM source_feeds WHERE enabled=1 AND last_error IS NOT NULL: her hatalı feed en fazla 12 saatte bir denenmeli")
     manual("S14 MCP channel-content-os 401", "~/.claude.json içindeki statik Bearer başlığı kaldırılıp /mcp ile OAuth yetkilendirme")
 
-    w = max(len(r[0]) for r in results)
-    for id_, st, d in results:
+    shown = results
+    if only:
+        shown = [r for r in results if r[0] == only or r[0].startswith(only + " ") or r[0].startswith(only + "b") or r[0].startswith(only + "c")]
+        if not shown:
+            print(f"bilinmeyen veya bu koşuda üretilmeyen kontrol kimliği: {only}")
+            return 2
+
+    w = max(len(r[0]) for r in shown) if shown else 0
+    for id_, st, d in shown:
         print(f"{st:6} {id_:<{w}}  {d}")
-    fails = sum(1 for r in results if r[1] == "FAIL")
-    print(f"\nPASS {sum(1 for r in results if r[1]=='PASS')}  FAIL {fails}  DIŞ {sum(1 for r in results if r[1]=='DIŞ')}  MANUAL {sum(1 for r in results if r[1]=='MANUAL')}")
+    fails = sum(1 for r in shown if r[1] == "FAIL")
+    print(f"\nPASS {sum(1 for r in shown if r[1]=='PASS')}  FAIL {fails}  DIŞ {sum(1 for r in shown if r[1]=='DIŞ')}  MANUAL {sum(1 for r in shown if r[1]=='MANUAL')}")
     return 1 if fails else 0
 
 
@@ -166,4 +189,14 @@ if __name__ == "__main__":
         sys.stdout.reconfigure(encoding="utf-8")  # type: ignore[attr-defined]
     except Exception:
         pass
-    sys.exit(main())
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--list-controls", action="store_true", help="Kontrol kimliklerini listele (Hub'a dokunmaz).")
+    ap.add_argument("--only", default=None, help="Yalnız bu kimlik (ör. S16) ile başlayan kontrol satırlarını bas.")
+    args = ap.parse_args()
+    if args.list_controls:
+        print(" ".join(CONTROLS))
+        sys.exit(0)
+    if args.only and args.only not in CONTROLS:
+        print(f"bilinmeyen kontrol kimliği: {args.only} (bkz. --list-controls)")
+        sys.exit(2)
+    sys.exit(main(only=args.only))

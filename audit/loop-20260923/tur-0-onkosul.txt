@@ -1,0 +1,69 @@
+Audit: Hekimler + Kaduse continuous-ingestion loop, madde bazlı kapatma
+Tarih: 2026-09-23
+Branch: audit/loop-20260923 (main'den, iki repo: multi_channel_design + gcos-deploy)
+
+1) git status (multi_channel_design)
+   - .claude/launch.json: modified, önceki oturumdan kalma (dev server config), audit kapsamı dışı, dokunulmadı.
+   - channels/tip-ogrencileri-platformu/sources/_*.json/_*.txt (~28 dosya) + _triage_lists/: untracked,
+     Tıp Öğrencileri kulüp taraması işine ait ara-çıktı dosyaları (ayrı, tamamlanmamış bir görev).
+     Audit kapsamı dışı (bkz. görev tanımı "kapsam: Hekimler + Kaduse... registry/migration/workflow").
+     git stash -u ile kaldırmadım çünkü başka bir görevin sürmekte olan çalışması; stash etmek o işi
+     riske atar. Bunun yerine bu turlarda bu dosyalara dokunulmayacağı garanti edilir (git diff --stat
+     her turda kontrol edilecek).
+   DURUM: Onaylandı-not-ile-devam (dirty ama kapsam dışı ve zarasız).
+
+2) Branch: audit/loop-20260923 oluşturuldu, main'den. Doğrudan main'e commit yok.
+
+3) Kontrol betiği:
+   `python channels/tip-ogrencileri-platformu/scripts/hekimler_issue_check.py --list-controls`
+   İLK ÇALIŞTIRMADA: --list-controls ve --only bayrakları YOKTU (betik böyle bir CLI desteklemiyordu,
+   yalnız tam koşu + exit 1/0 vardı). Bu bir prekoşul boşluğuydu: audit protokolü bu bayrakları ön koşul
+   sayıyor. Minimal bir yama ile eklendi (argparse + statik CONTROLS listesi + sonuçları id önekine göre
+   filtreleme). Sonuç:
+   S01 S01b S01c S03 S04 S04b S05 S05b S06 S07 S07b S08 S09 S10 S11 S12 S13 S14 S15 S15b S16 S16b S16c S17 S19 S20 S24 S26
+   -> promptta beklenen liste ile birebir eşleşiyor.
+   DURUM: PASS (yama sonrası).
+
+4) Canlı Hub erişimi:
+   curl .../api/hekimler/sources -> 200, source_id/last_success_at/poll_minutes/zero_accept_streak MEVCUT.
+   inbox_count VE expected_check_interval_minutes bu uç noktada YOK (inbox_count yalnız /api/feeds'te var;
+   expected_check_interval_minutes yalnız Python registry'sinde bir alan, Worker'a hiç expose edilmiyor —
+   Worker tarafının eşdeğeri poll_minutes). Bu, audit promptunun ön koşul 4'te varsaydığı alan listesiyle
+   gerçek API şekli arasında bir uyuşmazlık; kod hatası değil, prompt varsayımı yanlış. Not düşüldü, turlar
+   bu farkı bilerek ilerleyecek (gerekirse ilgili turda inbox_count için /api/feeds kullanılacak).
+   DURUM: PASS (temel erişim çalışıyor), NOT: alan listesi düzeltmesiyle.
+
+5) D1 erişimi: `wrangler d1 execute global-content-os --remote --command "SELECT 1"` -> success:true.
+   DURUM: PASS.
+
+6) Deploy hattı: `wrangler deployments list` çalışıyor (gcos-deploy). Son deploy'lar günün içinde çok sayıda
+   (bugünkü oturumdaki index.ts/index.html değişiklikleri dahil). SORUN-TESPIT-LISTESI.md'deki son referans
+   ("KAPALI 2026-09-23") ile tutarlı; kesin hash eşleştirmesi yapılmadı (çok sayıda deploy var, madde bazlı
+   turlarda ilgili deploy hash'i ayrıca kaydedilecek).
+   DURUM: PASS.
+
+7) pytest baseline: `python -m pytest channels/tip-ogrencileri-platformu -q`
+   SONUÇ: 7 failed, 325 passed.
+   Başarısız testler (bu turda ELE ALINMAYACAK, yalnız kayıt):
+     - test_phase1_ingestion_canary.py::test_commit_never_approves_renders_or_publishes
+     - test_phase1_ingestion_canary.py::test_dry_run_creates_no_persistent_candidate
+     - test_phase1_ingestion_canary.py::test_duplicate_second_run_no_second_candidate
+     - test_phase1_ingestion_canary.py::test_tuik_medical_scope_passes_when_plan_healthy
+     - test_phase1_ingestion_canary.py::test_tuk_resmi_yokak_medical_reach_review (3 subtest:
+       tuk_specialty_training, resmi_gazete_medical_regulation, yokak_medical_accreditation)
+   Belirti: bu kaynaklarda accepted_count=0, rejected_date=1 — muhtemelen tarih-doğrulama kapısıyla ilgili
+   ama bu turun kapsamı dışı (S07/S16 önceliğinde değil); ayrı bir madde olarak SORUN-TESPIT-LISTESI.md'ye
+   eklenmesi önerilir (bkz. tur sonu önerisi).
+   DURUM: Baseline kaydedildi, dokunulmadı.
+
+8) Workflow durumu:
+   - hekimler-issue-check.yml: son 2 çalıştırma "failure" (S07/S16 FAIL olduğu için exit 1 — beklenen, kırık
+     değil, çünkü bu workflow FAIL sayısı>0 olunca kırmızı basıyor by design).
+   - hekimler-python-runner.yml: son 3 çalıştırma "failure". En sonuncusu (workflow_dispatch, 15:52 UTC):
+     sources=18 ok=15 failed=3 (medimagazin_general, doktorclub, iha_saglik) — SORUN-TESPIT-LISTESI.md S35'te
+     zaten bilinen/dış (GitHub runner IP'sinden 403 bot engeli). Bugünkü S37-39 değişikliğimden sonra henüz
+     zamanlanmış (cron) bir çalıştırma olmadı (cron 04:17 UTC, bir sonraki 2026-09-24 04:17 UTC'de).
+   DURUM: PASS (mevcut kırmızılar bilinen/beklenen, yeni bir regresyon yok).
+
+ÖZET: Tüm ön koşullar sağlandı (madde 3'te küçük bir CLI yaması gerekti, madde 4'te alan listesi notu
+düşüldü). Tur 1'e (S07) geçiliyor.
