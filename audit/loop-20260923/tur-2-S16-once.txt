@@ -1,0 +1,5 @@
+FAIL   S16 kaduse-news 10 günden eski kayıt yok        9/310 (son 500): 2026-09-11; 2026-09-11; 2026-09-11
+PASS   S16b kaduse-news tarihsiz kayıt yok (AA hariç)  0/310 tarih çözülemedi
+MANUAL S16c araştırma tazelik yöntemi                  Araştırma için yaş/tarih formülü henüz belirlenmedi (kullanıcıyla tasarlanacak); şimdilik yalnız yer tutucu/ileri tarih/GDELT konu kontrolü var
+
+PASS 1  FAIL 1  DIŞ 0  MANUAL 1

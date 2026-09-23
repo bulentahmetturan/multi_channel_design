@@ -1,0 +1,5 @@
+PASS   S16 kaduse-news 10 günden eski kayıt yok        0/301 (son 500): 
+PASS   S16b kaduse-news tarihsiz kayıt yok (AA hariç)  0/301 tarih çözülemedi
+MANUAL S16c araştırma tazelik yöntemi                  Araştırma için yaş/tarih formülü henüz belirlenmedi (kullanıcıyla tasarlanacak); şimdilik yalnız yer tutucu/ileri tarih/GDELT konu kontrolü var
+
+PASS 2  FAIL 0  DIŞ 0  MANUAL 1
