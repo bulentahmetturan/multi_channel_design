@@ -24,6 +24,11 @@ on:
         required: false
         type: boolean
         default: false
+      force_due:
+        description: "Ignore per-source interval and run every AUTOMATION_READY source (backfill/manual use)"
+        required: false
+        type: boolean
+        default: false
   schedule:
     - cron: "17 4 * * *"   # daily, 04:17 UTC
 
@@ -64,9 +69,11 @@ jobs:
           SOURCE_TIMEOUT: ${{ github.event.inputs.timeout || '240' }}
           SOURCE_RETRIES: ${{ github.event.inputs.retries || '2' }}
           DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+          FORCE_DUE: ${{ github.event.inputs.force_due || 'false' }}
         run: |
           EXTRA=""
-          if [ "$DRY_RUN" = "true" ]; then EXTRA="--dry-run"; fi
+          if [ "$DRY_RUN" = "true" ]; then EXTRA="$EXTRA --dry-run"; fi
+          if [ "$FORCE_DUE" = "true" ]; then EXTRA="$EXTRA --force-due"; fi
           python scripts/hekimler_scheduled_run.py \
             --sources "$SOURCES" --timeout "$SOURCE_TIMEOUT" --retries "$SOURCE_RETRIES" \
             --report-dir report $EXTRA
