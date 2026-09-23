@@ -12,10 +12,33 @@ from __future__ import annotations
 import argparse
 import collections
 import json
+import os
 import re
 import sys
 import urllib.request
+from pathlib import Path
 from urllib.parse import urlparse
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+
+
+def canonical_source_count() -> int | None:
+    """AUTOMATION_READY Hekimler source count, derived from the same registry the Worker's
+    deployed readyBundle is generated from -- not a hardcoded number. A mismatch between this
+    and the live Hub's source count means the deployed readyBundle is stale relative to the
+    registry (this was the exact root cause behind S35). Returns None if the registry can't be
+    read locally (e.g. running outside the repo checkout); caller falls back to MANUAL.
+    """
+    try:
+        os.environ.setdefault("HEKIMLER_CONTINUOUS_INGESTION_ENABLED", "true")
+        from radar.hekimler_activation import ACTIVATION_AUTOMATION_READY, all_sources, compute_activation_state
+        from radar.hekimler_integrity import resolve_effective_registry
+
+        reg = resolve_effective_registry()
+        return sum(1 for s in all_sources(reg) if compute_activation_state(s) == ACTIVATION_AUTOMATION_READY)
+    except Exception:
+        return None
 
 # Static list of control ids this script implements, in run order. Kept in sync manually with the
 # check()/external()/manual() calls below -- used by --list-controls (no Hub call needed) and to
@@ -143,8 +166,12 @@ def main(only: str | None = None) -> int:
     src = get("/api/hekimler/sources")["sources"]
     canon = [s for s in src if s["sourceId"] not in EXTRAS]
     strict = sum(1 for s in canon if s["label"] in ("PIPELINE_OK", "PIPELINE_OK_EMPTY", "PIPELINE_OK_LIMITED"))
-    check("S07 kanonik 46 kaynak", len(canon) == 46, f"{len(canon)} kaynak")
-    check("S07b katı operasyonel >= 42", strict >= 42, f"{strict}/46 (hedef 46/46)")
+    expected_canon = canonical_source_count()
+    if expected_canon is None:
+        manual("S07 kanonik kaynak sayısı", f"registry lokal olarak okunamadı (yalnız Hub API ile karşılaştırma yapılamıyor); Hub'da {len(canon)} kaynak var")
+    else:
+        check("S07 kanonik kaynak sayısı == registry AUTOMATION_READY", len(canon) == expected_canon, f"Hub {len(canon)} / registry {expected_canon} kaynak")
+    check("S07b katı operasyonel >= 42", strict >= 42, f"{strict}/{len(canon)} (hedef: tümü)")
     hs = next((s for s in src if s["sourceId"] == "hsgm_public_health"), None)
     external("S08 HSGM canlı (PIPELINE_OK)", bool(hs) and hs["label"].startswith("PIPELINE_OK"), f"etiket {hs and hs['label']}, son başarı {hs and (hs.get('telemetry') or {}).get('last_success_at')}")
     for sid in ("abroad_uk_gmc", "abroad_us_ecfmg_intealth", "abroad_de_make_it_in_germany"):
