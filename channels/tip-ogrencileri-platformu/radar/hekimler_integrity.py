@@ -32,6 +32,8 @@ DOMESTIC_OFFICIAL_PRIMARY_IDS = frozenset(
         "hsgm_public_health",
         "osym_dus_dental_exams",
         "osym_ydus_subspecialty_exams",
+        "titck_announcements_general",
+        "saglik_bakanligi_genel",
     }
 )
 # Back-compat alias for existing imports

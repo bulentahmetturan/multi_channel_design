@@ -51,7 +51,7 @@ class IntegrityAuditTests(unittest.TestCase):
         }
         self.assertEqual(domestic, set(DOMESTIC_OFFICIAL_PRIMARY_IDS))
         self.assertEqual(domestic, set(OFFICIAL_PRIMARY_IDS))
-        self.assertEqual(len(domestic), 10)
+        self.assertEqual(len(domestic), 12)
         counts = tier_counts(self.effective)
         self.assertGreaterEqual(counts.get("OFFICIAL_PRIMARY", 0), 8)
 
@@ -114,10 +114,10 @@ class IntegrityAuditTests(unittest.TestCase):
             for s in self.effective["sources"]
             if s["source_tier"] == "OFFICIAL_PRIMARY" and not s["source_id"].startswith("abroad_")
         )
-        self.assertEqual(domestic_op, 10)
+        self.assertEqual(domestic_op, 12)
         self.assertEqual(counts["PROFESSIONAL_BODY"], 5)  # + tdb_dental (tracked separately from the 46)
         self.assertEqual(counts["PROFESSIONAL_GUIDANCE"], 12)
-        self.assertEqual(counts["SECONDARY_NEWSWIRE"], 1)
+        self.assertEqual(counts["SECONDARY_NEWSWIRE"], 17)
         self.assertEqual(set(PROFESSIONAL_BODY_IDS), {
             s["source_id"] for s in self.effective["sources"] if s["source_tier"] == "PROFESSIONAL_BODY"
         })

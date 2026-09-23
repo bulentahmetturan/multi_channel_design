@@ -189,16 +189,16 @@ class AbroadCareerRegistryTests(unittest.TestCase):
             if s["source_tier"] == "OFFICIAL_PRIMARY" and not s["source_id"].startswith("abroad_")
         }
         self.assertEqual(domestic_op, set(DOMESTIC_OFFICIAL_PRIMARY_IDS))
-        self.assertEqual(len(domestic_op), 10)
+        self.assertEqual(len(domestic_op), 12)
         abroad_op = [
             s for s in self.effective["sources"]
             if s["source_id"].startswith("abroad_") and s["source_tier"] == "OFFICIAL_PRIMARY"
         ]
         self.assertEqual(len(abroad_op), 19)
-        self.assertEqual(counts["OFFICIAL_PRIMARY"], 10 + 19)
+        self.assertEqual(counts["OFFICIAL_PRIMARY"], 12 + 19)
         self.assertEqual(counts["PROFESSIONAL_BODY"], 5)  # + tdb_dental (tracked separately from the 46)
         self.assertEqual(counts["PROFESSIONAL_GUIDANCE"], 12)
-        self.assertEqual(counts["SECONDARY_NEWSWIRE"], 1)
+        self.assertEqual(counts["SECONDARY_NEWSWIRE"], 17)
 
 
 if __name__ == "__main__":
