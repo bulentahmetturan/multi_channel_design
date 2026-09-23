@@ -1,0 +1,4 @@
+FAIL   S07 kanonik 46 kaynak        64 kaynak
+PASS   S07b katı operasyonel >= 42  56/46 (hedef 46/46)
+
+PASS 1  FAIL 1  DIŞ 0  MANUAL 0

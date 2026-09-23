@@ -1,0 +1,4 @@
+PASS   S07 kanonik kaynak sayısı == registry AUTOMATION_READY  Hub 64 / registry 64 kaynak
+PASS   S07b katı operasyonel >= 42                             56/64 (hedef: tümü)
+
+PASS 2  FAIL 0  DIŞ 0  MANUAL 0
