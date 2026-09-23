@@ -287,7 +287,7 @@
         "forbidden_hosts": [],
         "forbidden_path_patterns": [],
         "notes": "Registered ERAS URL is 404; aamc.org/news (server-rendered) is the official news list. Dates from JSON-LD on detail pages.",
-        "expected_check_interval_minutes": 1440,
+        "expected_check_interval_minutes": 43200,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {
@@ -502,7 +502,7 @@
         "forbidden_hosts": [],
         "forbidden_path_patterns": [],
         "notes": "PARTIAL substitute for gmc-uk.org (Cloudflare challenge from datacenter IPs; not bypassed): official gov.uk Atom activity feeds of UKVI and DHSC filtered for overseas-doctor/visa/regulation topics. GMC registration/PLAB/rules pages and GMC news are NOT covered. NHS Employers/NHS England feeds rejected: malformed links / domestic employment noise.",
-        "expected_check_interval_minutes": 1440,
+        "expected_check_interval_minutes": 43200,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {
@@ -607,7 +607,7 @@
         "forbidden_hosts": [],
         "forbidden_path_patterns": [],
         "notes": "Official public replacement for the login-only Oriel portal: NHS England Medical Training Recruitment Hub news (server-rendered, dated). Oriel itself is not scraped.",
-        "expected_check_interval_minutes": 1440,
+        "expected_check_interval_minutes": 10080,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {
@@ -719,7 +719,7 @@
           "/"
         ],
         "notes": "English news list only.",
-        "expected_check_interval_minutes": 1440,
+        "expected_check_interval_minutes": 43200,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {
@@ -1070,7 +1070,7 @@
           "/"
         ],
         "notes": "Official WordPress RSS; newest item matches the website news list (2026-09-13).",
-        "expected_check_interval_minutes": 1440,
+        "expected_check_interval_minutes": 43200,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {
@@ -1181,7 +1181,7 @@
           "/"
         ],
         "notes": "News list; posts pinned by dated URLs.",
-        "expected_check_interval_minutes": 1440,
+        "expected_check_interval_minutes": 10080,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {
@@ -1297,7 +1297,7 @@
           "/"
         ],
         "notes": "News list; posts pinned by dated URLs; doctor-related only.",
-        "expected_check_interval_minutes": 1440,
+        "expected_check_interval_minutes": 10080,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {
@@ -1412,7 +1412,7 @@
         "forbidden_hosts": [],
         "forbidden_path_patterns": [],
         "notes": "Official press-release list (server-rendered); dates from detail pages. TLS verified through the OS trust store.",
-        "expected_check_interval_minutes": 1440,
+        "expected_check_interval_minutes": 10080,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {
@@ -1512,7 +1512,7 @@
         "forbidden_hosts": [],
         "forbidden_path_patterns": [],
         "notes": "Homepage news teasers only; posts pinned by item_url_patterns (dated /latest/news/YYYY/ URLs).",
-        "expected_check_interval_minutes": 1440,
+        "expected_check_interval_minutes": 43200,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {
@@ -1615,7 +1615,7 @@
         "forbidden_hosts": [],
         "forbidden_path_patterns": [],
         "notes": "Official Ministry of Universities news list (server-rendered). TLS verified via OS trust store; dates from detail pages.",
-        "expected_check_interval_minutes": 1440,
+        "expected_check_interval_minutes": 43200,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {
@@ -1723,7 +1723,7 @@
         "forbidden_hosts": [],
         "forbidden_path_patterns": [],
         "notes": "Official Ministry of Health press-note list (server-rendered, 2.8 MB: Python runner only). fse.sanidad.gob.es is a JS-only shell (5 KB). Dates from detail pages.",
-        "expected_check_interval_minutes": 1440,
+        "expected_check_interval_minutes": 43200,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {
@@ -1844,7 +1844,7 @@
         "forbidden_hosts": [],
         "forbidden_path_patterns": [],
         "notes": "salute.gov.it is behind a Gcore challenge (not bypassed). Official alternative: Trova Norme weekly newsletters (archive -> last 13 weeks), parsed from official act metadata (date, category, description, dettaglioAtto link).",
-        "expected_check_interval_minutes": 1440,
+        "expected_check_interval_minutes": 10080,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {
@@ -1958,7 +1958,7 @@
         "forbidden_hosts": [],
         "forbidden_path_patterns": [],
         "notes": "Official English news list (server-rendered; watch-only per policy: candidates go to review). Dates from <time> on detail pages.",
-        "expected_check_interval_minutes": 1440,
+        "expected_check_interval_minutes": 10080,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {

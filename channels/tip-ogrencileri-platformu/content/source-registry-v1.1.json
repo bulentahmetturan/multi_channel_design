@@ -135,7 +135,10 @@
       ],
       "dedupe_group": "osym_exam_announcements",
       "dedupe_by": "url",
-      "execution": "python_runner"
+      "execution": "python_runner",
+      "fetch_plan": {
+        "expected_check_interval_minutes": 1440
+      }
     },
     {
       "source_id": "yok_medical_education",
@@ -190,7 +193,10 @@
       "candidate_emission_enabled": false,
       "publication_eligible": false,
       "pipeline_wiring_enabled": false,
-      "execution": "python_runner"
+      "execution": "python_runner",
+      "fetch_plan": {
+        "expected_check_interval_minutes": 43200
+      }
     },
     {
       "source_id": "yokak_medical_accreditation",
@@ -240,7 +246,10 @@
       "candidate_emission_enabled": false,
       "publication_eligible": false,
       "pipeline_wiring_enabled": false,
-      "execution": "python_runner"
+      "execution": "python_runner",
+      "fetch_plan": {
+        "expected_check_interval_minutes": 43200
+      }
     },
     {
       "source_id": "tuk_specialty_training",
@@ -294,7 +303,10 @@
       "candidate_emission_enabled": false,
       "publication_eligible": false,
       "pipeline_wiring_enabled": false,
-      "execution": "python_runner"
+      "execution": "python_runner",
+      "fetch_plan": {
+        "expected_check_interval_minutes": 10080
+      }
     },
     {
       "source_id": "resmi_gazete_medical_regulation",
@@ -352,7 +364,10 @@
       "candidate_emission_enabled": false,
       "publication_eligible": false,
       "pipeline_wiring_enabled": false,
-      "execution": "python_runner"
+      "execution": "python_runner",
+      "fetch_plan": {
+        "expected_check_interval_minutes": 43200
+      }
     },
     {
       "source_id": "tuik_medical_public_health",
@@ -442,7 +457,7 @@
         "forbidden_hosts": [],
         "forbidden_path_patterns": [],
         "notes": "Official server-rendered home page bulletin slider (latest bulletins: title, period, veriportali press URL). veriportali/data.tuik.gov.tr are JS-only shells; press API not reachable without the portal proxy.",
-        "expected_check_interval_minutes": 1440,
+        "expected_check_interval_minutes": 43200,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {
@@ -572,7 +587,7 @@
           "/TR/"
         ],
         "notes": "Never scan www.saglik.gov.tr homepage. Only YHGM physician kura/atama list indexes.",
-        "expected_check_interval_minutes": 720,
+        "expected_check_interval_minutes": 1440,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {
@@ -694,7 +709,7 @@
           "/tr/mevzuat"
         ],
         "notes": "Use basin-odasi haber list only. /tr/duyurular and /tr/haberler are 404. Homepage /tr/ forbidden. mevzuat.html is not the announcement index.",
-        "expected_check_interval_minutes": 720,
+        "expected_check_interval_minutes": 43200,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {
@@ -796,7 +811,7 @@
           "/"
         ],
         "notes": "National duyuru/haber archives only; no tabip odası crawl; homepage forbidden.",
-        "expected_check_interval_minutes": 720,
+        "expected_check_interval_minutes": 10080,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {
@@ -902,7 +917,7 @@
           "/TR/"
         ],
         "notes": "Exact Haberler index only; never homepage.",
-        "expected_check_interval_minutes": 720,
+        "expected_check_interval_minutes": 10080,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {
@@ -1003,7 +1018,7 @@
           "/TR/"
         ],
         "notes": "Official RSS feed only.",
-        "expected_check_interval_minutes": 1440,
+        "expected_check_interval_minutes": 43200,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {
@@ -1106,7 +1121,7 @@
           "/TR/"
         ],
         "notes": "Official RSS feed only.",
-        "expected_check_interval_minutes": 1440,
+        "expected_check_interval_minutes": 43200,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {
@@ -1209,7 +1224,7 @@
           "/"
         ],
         "notes": "Use /listele/duyurular-hasuder-cat only. Legacy /listele/duyurular returns 500.",
-        "expected_check_interval_minutes": 720,
+        "expected_check_interval_minutes": 1440,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {
@@ -1316,7 +1331,7 @@
           "/TR/"
         ],
         "notes": "Homepage announcements only; posts pinned by item_url_patterns (timestamped /detail/ slugs).",
-        "expected_check_interval_minutes": 1440,
+        "expected_check_interval_minutes": 43200,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {
@@ -1422,7 +1437,7 @@
           "/TR/"
         ],
         "notes": "Exact list index only; never homepage.",
-        "expected_check_interval_minutes": 1440,
+        "expected_check_interval_minutes": 43200,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {
@@ -1542,7 +1557,7 @@
           "/TR/"
         ],
         "notes": "Exact list index only; posts pinned by item_url_patterns.",
-        "expected_check_interval_minutes": 1440,
+        "expected_check_interval_minutes": 43200,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {
@@ -1644,7 +1659,7 @@
           "/TR/"
         ],
         "notes": "WP category indexes only; homepage forbidden.",
-        "expected_check_interval_minutes": 1440,
+        "expected_check_interval_minutes": 43200,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {
@@ -1760,7 +1775,7 @@
           "/TR/"
         ],
         "notes": "haber-duyuru index; posts pinned by item_url_patterns.",
-        "expected_check_interval_minutes": 1440,
+        "expected_check_interval_minutes": 10080,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {
@@ -1865,7 +1880,7 @@
           "/TR/"
         ],
         "notes": "Dernek haber/duyuru indexes; homepage forbidden.",
-        "expected_check_interval_minutes": 1440,
+        "expected_check_interval_minutes": 10080,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {
@@ -1980,7 +1995,7 @@
           "/TR/"
         ],
         "notes": "Exact list index only; never homepage.",
-        "expected_check_interval_minutes": 1440,
+        "expected_check_interval_minutes": 10080,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {
@@ -2089,7 +2104,7 @@
         "forbidden_hosts": [],
         "forbidden_path_patterns": [],
         "notes": "Server-rendered dated rows (title + dd/mm/yyyy). 3.6 MB page: Python runner only (Workers Free CPU limit).",
-        "expected_check_interval_minutes": 1440,
+        "expected_check_interval_minutes": 43200,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {
@@ -2188,7 +2203,7 @@
           "/"
         ],
         "notes": "Exact /haberler index; homepage forbidden.",
-        "expected_check_interval_minutes": 1440,
+        "expected_check_interval_minutes": 10080,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {
@@ -2299,7 +2314,7 @@
           "/TR/"
         ],
         "notes": "Official RSS feed only.",
-        "expected_check_interval_minutes": 1440,
+        "expected_check_interval_minutes": 43200,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {
@@ -2361,7 +2376,10 @@
       "item_url_patterns": [
         "aa\\.com\\.tr/tr/(saglik|gundem|bilim-teknoloji)/.+/\\d+$"
       ],
-      "execution": "python_runner"
+      "execution": "python_runner",
+      "fetch_plan": {
+        "expected_check_interval_minutes": 1440
+      }
     }
   ],
   "approved_source_ids": [
