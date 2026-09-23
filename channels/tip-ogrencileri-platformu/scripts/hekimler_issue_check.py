@@ -192,7 +192,7 @@ def main(only: str | None = None) -> int:
     manual("S11 Kaduse feed hataları (D1)", "wrangler d1: SELECT route,count(*),sum(last_error IS NOT NULL) FROM source_feeds WHERE enabled=1 GROUP BY route  (hedef: 0 stale, kalanlar harici engel)")
     manual("S12 Workers CPU sınırı", "Cloudflare workersInvocationsAdaptive: exceededResources = 0 (son 24 saat); uyarı penceresi 2026-09-22 ~17:14Z sonrası temiz olmalı")
     manual("S13 D1 yazma kotası 24 saat", "d1AnalyticsAdaptiveGroups rowsWritten: 2026-09-21 17:13Z -> 2026-09-22 17:13Z ve UTC gün toplamı; kota 100.000/gün")
-    manual("S24 D1 okuma kotası", "d1AnalyticsAdaptiveGroups rowsRead: UTC gün toplamı < 5.000.000 (2026-09-21 21:23Z'de 5.408.095 idi); boşta saatlik okuma hedefi < 100.000")
+    manual("S24 D1 okuma kotası", "wrangler d1 insights <db> --timePeriod 1d --json, tüm sorgular toplanır: rowsRead < 5.000.000/gün, rowsWritten < 100.000/gün (son ölçüm 2026-09-23: 2.503.549 okuma / 22.110 yazma -- ikisi de sınırın altında)")
     manual("S26 Hatalı feed geri çekilme", "SELECT id,last_error,last_fetched_at FROM source_feeds WHERE enabled=1 AND last_error IS NOT NULL: her hatalı feed en fazla 12 saatte bir denenmeli")
     manual("S14 MCP channel-content-os 401", "~/.claude.json içindeki statik Bearer başlığı kaldırılıp /mcp ile OAuth yetkilendirme")
 
