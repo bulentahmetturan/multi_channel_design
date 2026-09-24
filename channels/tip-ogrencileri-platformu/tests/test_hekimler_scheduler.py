@@ -11,15 +11,23 @@ import hekimler_scheduled_run as sched  # noqa: E402
 class SchedulerTests(unittest.TestCase):
     def test_all_python_selects_only_python_runner_sources(self):
         ids = sched.select_sources("all-python")
-        self.assertIn("abroad_ie_medical_council", ids)
+        self.assertIn("abroad_it_salute_foreign_qual", ids)
         self.assertIn("moh_physician_workforce", ids)  # every ready source now runs through the Python path
         self.assertNotIn("abroad_uk_gmc", ids)  # 2026-09-24: disabled, 0 accepted / 40 discarded (S49)
+        # 2026-09-24 (S51): disabled, regularly produced content but none of it was scholarship/
+        # education (exam-admin logistics / local registration admin only).
+        self.assertNotIn("abroad_ie_medical_council", ids)
+        self.assertNotIn("abroad_us_usmle", ids)
+        self.assertNotIn("abroad_us_nrmp", ids)
+        self.assertNotIn("abroad_uk_oriel", ids)
+        self.assertNotIn("abroad_au_amc", ids)
         self.assertNotIn("hsgm_public_health", ids)  # runner_region=TR: needs a Türkiye-based runner
         self.assertIn("tdb_dental", ids)
 
     def test_explicit_selection_ignores_unknown_and_manual_sources(self):
-        ids = sched.select_sources("abroad_us_ecfmg_intealth,abroad_uk_oriel,nope")
-        self.assertEqual(ids, ["abroad_uk_oriel"])
+        # abroad_uk_oriel disabled 2026-09-24 (S51); abroad_ca_mcc_img_pathways is still ready.
+        ids = sched.select_sources("abroad_us_ecfmg_intealth,abroad_ca_mcc_img_pathways,nope")
+        self.assertEqual(ids, ["abroad_ca_mcc_img_pathways"])
 
     def test_tr_runner_selection(self):
         self.assertEqual(sched.select_sources("tr-runner"), ["hsgm_public_health"])

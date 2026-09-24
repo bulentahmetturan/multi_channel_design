@@ -15,7 +15,7 @@ class Batch12Tests(unittest.TestCase):
         all_ids = {p["source_id"] for p in export_automation_ready_profiles()}
         worker_ids = {p["source_id"] for p in export_automation_ready_profiles(worker_only=True)}
         heavy = all_ids - worker_ids
-        for sid in ("tihud_internal_medicine", "abroad_ie_medical_council", "abroad_es_mir_fse", "moh_physician_workforce"):
+        for sid in ("tihud_internal_medicine", "abroad_it_salute_foreign_qual", "abroad_es_mir_fse", "moh_physician_workforce"):
             self.assertIn(sid, heavy)
         # Architecture: the Worker is a lightweight authenticated ingest endpoint only; its cron parses nothing.
         self.assertEqual(worker_ids, set())
@@ -50,11 +50,11 @@ class Batch12Tests(unittest.TestCase):
         from radar.hekimler_integrity import resolve_effective_registry
         from radar.phase1_ingestion_canary import TransportResult, ingest_one_source
 
-        # abroad_us_aamc_eras was disabled 2026-09-24 (S49, zero opportunity-shaped output); this
-        # test only exercises the detail-page date-probe mechanics, so any active abroad_* source
-        # with a matching item_url_patterns works -- swapped to abroad_us_usmle.
-        profile = dict([s for s in all_sources(resolve_effective_registry()) if s["source_id"] == "abroad_us_usmle"][0])
-        listing = '<a href="https://www.usmle.org/some-long-news-slug-about-something-here">A long enough news headline text</a>'
+        # abroad_us_aamc_eras/abroad_us_usmle both disabled 2026-09-24 (S49/S51, zero or non-
+        # scholarship output); this test only exercises the detail-page date-probe mechanics, so
+        # any active abroad_* source with a matching item_url_patterns works -- abroad_ca_mcc_img_pathways.
+        profile = dict([s for s in all_sources(resolve_effective_registry()) if s["source_id"] == "abroad_ca_mcc_img_pathways"][0])
+        listing = '<a href="https://mcc.ca/news/some-long-news-slug-here">A long enough news headline text</a>'
         detail = '<script type="application/ld+json">{"datePublished":"2026-09-02T10:00:00Z"}</script>'
 
         def transport(url):

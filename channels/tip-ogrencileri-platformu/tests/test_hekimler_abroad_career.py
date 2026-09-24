@@ -64,14 +64,18 @@ class AbroadCareerRegistryTests(unittest.TestCase):
                 self.assertFalse(src["pipeline_wiring_enabled"])
         self.assertTrue(
             {
-                "abroad_us_usmle",
-                "abroad_us_nrmp",
                 "abroad_ca_mcc_img_pathways",
+                "abroad_it_salute_foreign_qual",
             }.issubset(ready)
         )
         # 2026-09-24 (S49): disabled for producing zero opportunity-shaped content (see
         # SORUN-TESPIT-LISTESI.md) -- must NOT be AUTOMATION_READY until a real surface is found.
         self.assertNotIn("abroad_ca_carms", ready)
+        # 2026-09-24 (S50/S51): regularly produced content but none of it was ever scholarship/
+        # education -- exam-administration logistics, webinars/newsletters, or local registration
+        # admin only. Disabled; must NOT be AUTOMATION_READY.
+        for sid in ("abroad_us_usmle", "abroad_us_nrmp", "abroad_ie_medical_council", "abroad_au_amc", "abroad_uk_oriel"):
+            self.assertNotIn(sid, ready)
 
     def test_canada_requires_province(self):
         missing = classify_abroad_item(

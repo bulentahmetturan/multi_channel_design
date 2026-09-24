@@ -14,11 +14,11 @@ class ManualPass2ActivationTests(unittest.TestCase):
         self.eff = resolve_effective_registry()
 
     def test_six_new_sources_ready(self):
+        # abroad_us_usmle / abroad_us_nrmp disabled 2026-09-24 (S51): regularly produced content
+        # but none of it was ever scholarship/education, only exam-administration logistics.
         for sid, sample in (
             ("hasuder_public_health", "https://www.hasuder.org.tr/listele/duyurular-hasuder-cat"),
             ("turk_pediatri_kurumu", "https://turkpediatri.org.tr/haberler"),
-            ("abroad_us_usmle", "https://www.usmle.org/announcements"),
-            ("abroad_us_nrmp", "https://www.nrmp.org/about/news/"),
             ("abroad_ca_mcc_img_pathways", "https://mcc.ca/news/"),
         ):
             profile = get_source_profile(self.eff, sid)
@@ -31,8 +31,6 @@ class ManualPass2ActivationTests(unittest.TestCase):
         for sid in (
             "hasuder_public_health",
             "turk_pediatri_kurumu",
-            "abroad_us_usmle",
-            "abroad_us_nrmp",
             "abroad_ca_mcc_img_pathways",
         ):
             self.assertIn(sid, ready)

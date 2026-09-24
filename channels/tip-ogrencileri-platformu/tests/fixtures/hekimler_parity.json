@@ -74,18 +74,6 @@
       "expect": "DISCARD"
     },
     {
-      "id": "nrmp_match_recent",
-      "source_id": "abroad_us_nrmp",
-      "title": "Residency Match applicant deadline update September 5, 2026",
-      "expect": "ACCEPT"
-    },
-    {
-      "id": "nrmp_old",
-      "source_id": "abroad_us_nrmp",
-      "title": "Residency Match applicant deadline update January 5, 2026",
-      "expect": "DISCARD"
-    },
-    {
       "id": "aa_satellite_ydus_substring",
       "source_id": "anadolu_ajansi_medical_radar",
       "title": "TÜRKSAT 7A uydusu çalışmaları son aşamaya gelindi",
@@ -277,13 +265,6 @@
       "source_id": "abroad_it_salute_foreign_qual",
       "title": "Nuove norme sui medicinali veterinari e farmaci",
       "expect": "DISCARD",
-      "published_at": "2026-09-10"
-    },
-    {
-      "id": "intl_doctor",
-      "source_id": "abroad_us_nrmp",
-      "title": "International medical graduates residency Match applicant deadline update",
-      "expect": "ACCEPT",
       "published_at": "2026-09-10"
     },
     {
