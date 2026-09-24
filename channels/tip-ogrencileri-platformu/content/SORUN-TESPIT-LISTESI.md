@@ -6,6 +6,17 @@ Yeni bir sorun bildirildiğinde buraya yeni bir satır (ve mümkünse betiğe ko
 
 Durum: KAPALI = kontrol PASS; AÇIK = kontrol FAIL veya doğrulanmadı; DIŞ = dış koşul bekliyor.
 
+## Editoryal misyon (kullanıcı, 2026-09-24 — kalıcı kural, her içerik/kaynak kararından önce buraya uğra)
+
+1. **Hedef kitle:** Türkiye'deki sağlık profesyonelleri ve öğrencileri.
+2. **Amaç:** Arşiv değil — ilgi çekici paylaşımlarla takip/engagement oluşturmak.
+3. **Yurt dışı kaynaklar — yerel regülasyon kapsam dışı:** Farklı ülkelerin sağlık otoritelerinin kendi yerel düzenlemesi/disiplin işi/iç haberi bizimle ilgisiz (örnek: AHPRA'nın bir disiplin cezası haberi — S45'te sızma tespit edilip düzeltildi).
+4. **Yurt dışı kaynaklar — ne zaman değerli:** Yalnızca Türk öğrenci/hekime burs, eğitim veya somut bir imkan sunuyorsa.
+5. **Araştırma/bilimsel içerik — "wow faktörü" şartı:** Ancak ilgi çekip engagement sağlayabiliyorsa değerli; kimsenin anlamadığı salt akademik çalışmalar kapsam dışı (bkz. S41 — "en yeni" değil "en çok okunan/trend" stratejisinin gerekçesi budur).
+6. **Popüler kaynaklar bilinçli seçim:** Healthline, MedPage Today, Newswise gibi popüler/ilgi çekici kaynaklar tam bu yüzden eklendi.
+
+Tam detay ve "nasıl uygulanır" için: Claude'un kalıcı hafızasındaki `hekimler_editorial_mission.md` ve `hekimler_audience_scope_gate.md`. Kullanıcı zaman zaman sistemi bu 6 maddeye göre denetleyecek.
+
 | # | Bildirilen sorun | Kök neden | Yapılan | Kontrol | Durum |
 |---|---|---|---|---|---|
 | S01 | Hekimler haber akışı kullanıcıya görünmüyor | Tarayıcı son sekmeyi (Beklemede) hatırlıyor, boş liste ipucu yok; rozet 190, liste 189 | Deep link `?route=hekimler&view=inbox`, yükleniyor/boş ipucu, rozet = görünen filtre | S01, S01b, S01c | KAPALI (2026-09-21) |
