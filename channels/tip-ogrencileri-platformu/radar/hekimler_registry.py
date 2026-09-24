@@ -33,6 +33,36 @@ V11_ROUTES = PHASE1_ROUTES | frozenset({"CLINICAL_UPDATE"})
 
 ORGANISATION_POSITION_IDS = frozenset({"ttb_national", "hasuder_public_health"})
 
+# Abroad-career sources (source_id prefix "abroad_") track pathway info a Turkish physician could
+# act on: scholarships, education programs, registration/exam/licensing steps. They must NOT pass
+# routine local disciplinary/enforcement/court news just because it shares licensing-adjacent
+# vocabulary ("registration", "medical practitioner") -- a story about a local regulator penalising
+# an unregistered person has zero relevance to a Turkish applicant. User correction 2026-09-24
+# (repeated after an AHPRA "unregistered doctor penalised" item leaked through): scope is Turkish-
+# audience actionable opportunity/pathway info, not what locals/nationals do among themselves.
+# Applied centrally here (not per-source exclude_keywords) so it covers every abroad_* source,
+# present and future, without relying on each one's own keyword list to remember it.
+ABROAD_LOCAL_NOISE_EXCLUDE_KEYWORDS = (
+    "penalis",
+    "penalt",
+    "fined",
+    "fine of",
+    "convicted",
+    "conviction",
+    "guilty",
+    "offence",
+    "offense",
+    "misconduct",
+    "impersonat",
+    "false claim",
+    "falsely calling",
+    "calling himself",
+    "calling herself",
+    "unregistered",
+    "unlicensed",
+    "unqualified",
+)
+
 
 
 def _fold(text: str) -> str:
@@ -221,7 +251,10 @@ def classify_item(
 ) -> RegistryDecision:
     """Keyword gate for a single announcement/title against one Phase 1 profile."""
     blob = f"{title}\n{body}"
-    matched_ex = [k for k in profile.get("exclude_keywords") or [] if _keyword_hit(blob, k)]
+    exclude_pool = list(profile.get("exclude_keywords") or [])
+    if str(profile.get("source_id", "")).startswith("abroad_"):
+        exclude_pool += list(ABROAD_LOCAL_NOISE_EXCLUDE_KEYWORDS)
+    matched_ex = [k for k in exclude_pool if _keyword_hit(blob, k)]
     matched_in = [k for k in profile.get("include_keywords") or [] if _keyword_hit(blob, k)]
 
     primary_url = profile.get("primary_url") or profile.get("source_url") or ""
