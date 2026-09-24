@@ -134,11 +134,25 @@ def export_automation_ready_profiles(
     return out
 
 
+def _worker_repo_sibling(root: Path) -> Path:
+    """Locate the sibling Worker repo checkout. Its local directory was renamed gcos-deploy at
+    some point (same git remote, bulentahmetturan/global-content-os.git) -- an old, stale
+    global-content-os/ checkout can still exist alongside it (2026-09-24: caused a real
+    Python<->Worker parity test failure by silently reading/writing the abandoned copy). Prefer
+    the current name; fall back to the old one only if that's genuinely all that exists.
+    """
+    for name in ("gcos-deploy", "global-content-os"):
+        candidate = root.parent / name
+        if (candidate / "apps" / "worker" / "src" / "ingress").is_dir():
+            return candidate / "apps" / "worker" / "src" / "ingress"
+    return root.parent / "gcos-deploy" / "apps" / "worker" / "src" / "ingress"
+
+
 def write_worker_profile_bundle(dest: Path | None = None) -> Path:
-    """Sync AUTOMATION_READY profiles into global-content-os for the Worker runner."""
+    """Sync AUTOMATION_READY profiles into the Worker repo's ingress dir for the Worker runner."""
     profiles = export_automation_ready_profiles(worker_only=True)
     root = Path(__file__).resolve().parents[3]  # multi_channel_design
-    sibling = root.parent / "global-content-os" / "apps" / "worker" / "src" / "ingress"
+    sibling = _worker_repo_sibling(root)
     path = dest or (sibling / "hekimler-automation-ready.ts")
     path.parent.mkdir(parents=True, exist_ok=True)
     payload = {

@@ -12,7 +12,15 @@ from radar.hekimler_fetch import classify_with_congress_gate
 from radar.hekimler_integrity import resolve_effective_registry
 
 FIX = Path(__file__).resolve().parent / "fixtures" / "hekimler_parity.json"
-HUB = Path(__file__).resolve().parents[3].parent / "global-content-os"
+_PROJECTS_ROOT = Path(__file__).resolve().parents[3].parent
+# Worker repo's local directory was renamed gcos-deploy at some point (same git remote,
+# bulentahmetturan/global-content-os.git); an old, stale global-content-os/ checkout can still
+# exist alongside it. Prefer the current name; fall back to the old one only if that's genuinely
+# all that exists, so this test can't silently run against an abandoned copy (2026-09-24 incident).
+HUB = next(
+    (_PROJECTS_ROOT / name for name in ("gcos-deploy", "global-content-os") if (_PROJECTS_ROOT / name / "apps" / "worker").is_dir()),
+    _PROJECTS_ROOT / "gcos-deploy",
+)
 
 
 def python_decision(profile, case, today):

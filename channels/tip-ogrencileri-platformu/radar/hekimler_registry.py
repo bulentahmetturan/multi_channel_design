@@ -61,6 +61,74 @@ ABROAD_LOCAL_NOISE_EXCLUDE_KEYWORDS = (
     "unregistered",
     "unlicensed",
     "unqualified",
+    "newsletter",
+    "bulletin",
+    "digest",
+    "illuminator",
+)
+
+# 2026-09-24: an ever-growing exclude list is reactive (a new bad shape gets added every time the
+# user flags one more example -- disciplinary language, then newsletters, then "letter to the
+# community", ...). Flipped to a positive requirement instead: for abroad_* sources, content must
+# show a concrete, Turkish-applicant-actionable opportunity signal (a scholarship, a free resource,
+# an application/registration window, a deadline, a webinar to attend) -- not just pathway-adjacent
+# vocabulary. A regulatory/administrative change in how the exam/registration body runs itself
+# (e.g. "USMLE to Transition to Limited Testing Dates Each Year Starting in 2028") is real, can be
+# significant, and can still sit around for months unreviewed -- but it is not itself something a
+# Turkish applicant can act on today, so it doesn't pass this gate even though it's well-written and
+# not local disciplinary noise. User's own framing: this is still "local" (about how that country's
+# system runs), same category as a local regulation, even when it's forward-looking and important.
+ABROAD_OPPORTUNITY_SIGNAL_KEYWORDS = (
+    "scholarship",
+    "burs",
+    "fellowship",
+    "grant",
+    "free ",
+    "ücretsiz",
+    "ucretsiz",
+    "no cost",
+    "webinar",
+    "register",
+    "registration is open",
+    "registration opens",
+    "now open",
+    "now available",
+    "opens on",
+    "opening of applications",
+    "application",
+    "apply now",
+    "apply for",
+    "apply by",
+    "deadline",
+    "scheduling is now open",
+    "now accepting",
+    "more accessible",
+    "affordable",
+    "discount",
+    "reduced fee",
+    "reduced cost",
+    # abroad_* sources span several languages (Italy, Spain, Germany, Netherlands registries) --
+    # opportunity vocabulary must be checked in each, not just English/Turkish.
+    "borsa di studio",
+    "borse di studio",
+    "candidatura",
+    "iscrizione",
+    "iscriviti",
+    "scadenza",
+    "beca",
+    "solicitud",
+    "inscripción",
+    "inscripcion",
+    "inscribirse",
+    "plazo",
+    "convocatoria",
+    "stipendium",
+    "bewerbung",
+    "anmeldung",
+    "frist",
+    "beurs",
+    "aanvraag",
+    "inschrijving",
 )
 
 
@@ -285,6 +353,23 @@ def classify_item(
             matched_include=[],
             matched_exclude=[],
             reason="no include_keyword hit — not medically scoped for Hekimler Topluluğu",
+            primary_url=primary_url,
+            source_url=source_url,
+            virality_must_not_penalize=viral_safe,
+        )
+
+    if str(profile.get("source_id", "")).startswith("abroad_") and not any(
+        _keyword_hit(blob, k) for k in ABROAD_OPPORTUNITY_SIGNAL_KEYWORDS
+    ):
+        return RegistryDecision(
+            source_id=profile["source_id"],
+            decision="DISCARD",
+            route="DISCARD",
+            evidence_status="insufficient",
+            matched_include=matched_in,
+            matched_exclude=[],
+            reason="no_concrete_opportunity_signal: regulatory/administrative update about that "
+            "country's own system, not something a Turkish applicant can act on",
             primary_url=primary_url,
             source_url=source_url,
             virality_must_not_penalize=viral_safe,
