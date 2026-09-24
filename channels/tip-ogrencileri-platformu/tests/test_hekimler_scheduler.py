@@ -13,7 +13,7 @@ class SchedulerTests(unittest.TestCase):
         ids = sched.select_sources("all-python")
         self.assertIn("abroad_ie_medical_council", ids)
         self.assertIn("moh_physician_workforce", ids)  # every ready source now runs through the Python path
-        self.assertIn("abroad_uk_gmc", ids)  # official gov.uk feed substitute (partial)
+        self.assertNotIn("abroad_uk_gmc", ids)  # 2026-09-24: disabled, 0 accepted / 40 discarded (S49)
         self.assertNotIn("hsgm_public_health", ids)  # runner_region=TR: needs a Türkiye-based runner
         self.assertIn("tdb_dental", ids)
 

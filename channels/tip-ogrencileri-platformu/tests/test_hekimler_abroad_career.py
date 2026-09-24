@@ -66,10 +66,12 @@ class AbroadCareerRegistryTests(unittest.TestCase):
             {
                 "abroad_us_usmle",
                 "abroad_us_nrmp",
-                "abroad_ca_carms",
                 "abroad_ca_mcc_img_pathways",
             }.issubset(ready)
         )
+        # 2026-09-24 (S49): disabled for producing zero opportunity-shaped content (see
+        # SORUN-TESPIT-LISTESI.md) -- must NOT be AUTOMATION_READY until a real surface is found.
+        self.assertNotIn("abroad_ca_carms", ready)
 
     def test_canada_requires_province(self):
         missing = classify_abroad_item(

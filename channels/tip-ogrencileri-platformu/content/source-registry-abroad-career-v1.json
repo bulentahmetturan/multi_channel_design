@@ -243,11 +243,11 @@
         "/news"
       ],
       "statement_treatment": "official_guidance",
-      "fetch_enabled": true,
-      "scheduled_fetch_enabled": true,
-      "candidate_emission_enabled": true,
+      "fetch_enabled": false,
+      "scheduled_fetch_enabled": false,
+      "candidate_emission_enabled": false,
       "publication_eligible": false,
-      "pipeline_wiring_enabled": true,
+      "pipeline_wiring_enabled": false,
       "include_keywords": [
         "ERAS",
         "residency application",
@@ -272,8 +272,8 @@
         "DISCARD"
       ],
       "default_route_on_accept": "NEEDS_REVIEW",
-      "source_health": "HEALTHY",
-      "runtime_activation": "AUTOMATION_READY",
+      "source_health": "MANUAL_REVIEW_REQUIRED",
+      "runtime_activation": "MANUAL_INTAKE",
       "fetch_plan": {
         "primary_method": "list-page",
         "tls_verification_required": true,
@@ -317,7 +317,8 @@
       "item_url_patterns": [
         "aamc\\.org/news/[a-z0-9-]{15,}$"
       ],
-      "execution": "python_runner"
+      "execution": "python_runner",
+      "manual_intake_reason": "2026-09-24: 0 accepted / 101 discarded in last run -- producing no opportunity-shaped content. Disabled pending review."
     },
     {
       "source_id": "abroad_us_nrmp",
@@ -444,13 +445,13 @@
         "/government/"
       ],
       "statement_treatment": "official_guidance",
-      "fetch_enabled": true,
-      "scheduled_fetch_enabled": true,
-      "candidate_emission_enabled": true,
+      "fetch_enabled": false,
+      "scheduled_fetch_enabled": false,
+      "candidate_emission_enabled": false,
       "publication_eligible": false,
-      "pipeline_wiring_enabled": true,
-      "runtime_activation": "AUTOMATION_READY",
-      "source_health": "HEALTHY",
+      "pipeline_wiring_enabled": false,
+      "runtime_activation": "MANUAL_INTAKE",
+      "source_health": "MANUAL_REVIEW_REQUIRED",
       "include_keywords": [
         "international medical graduate",
         "overseas doctor",
@@ -534,7 +535,8 @@
           "https://www.gov.uk/government/organisations/department-of-health-and-social-care.atom"
         ]
       },
-      "execution": "python_runner"
+      "execution": "python_runner",
+      "manual_intake_reason": "2026-09-24: 0 accepted / 40 discarded in last run (also PARTIALLY_COVERED) -- producing no opportunity-shaped content. Disabled pending review."
     },
     {
       "source_id": "abroad_uk_oriel",
@@ -669,11 +671,11 @@
         "/html/en/"
       ],
       "statement_treatment": "official_guidance",
-      "fetch_enabled": true,
-      "scheduled_fetch_enabled": true,
-      "candidate_emission_enabled": true,
+      "fetch_enabled": false,
+      "scheduled_fetch_enabled": false,
+      "candidate_emission_enabled": false,
       "publication_eligible": false,
-      "pipeline_wiring_enabled": true,
+      "pipeline_wiring_enabled": false,
       "include_keywords": [
         "doctor",
         "physician",
@@ -701,8 +703,8 @@
         "DISCARD"
       ],
       "default_route_on_accept": "NEEDS_REVIEW",
-      "source_health": "HEALTHY",
-      "runtime_activation": "AUTOMATION_READY",
+      "source_health": "MANUAL_REVIEW_REQUIRED",
+      "runtime_activation": "MANUAL_INTAKE",
       "fetch_plan": {
         "primary_method": "list-page",
         "tls_verification_required": true,
@@ -746,7 +748,8 @@
         "scheduled_fetch_enabled": true,
         "candidate_emission_enabled": true
       },
-      "execution": "python_runner"
+      "execution": "python_runner",
+      "manual_intake_reason": "2026-09-24: 0 accepted / 74 discarded in last run -- producing no opportunity-shaped content under the new gate. Disabled pending review."
     },
     {
       "source_id": "abroad_de_make_it_in_germany",
@@ -919,11 +922,11 @@
         "/"
       ],
       "statement_treatment": "official_guidance",
-      "fetch_enabled": true,
-      "scheduled_fetch_enabled": true,
-      "candidate_emission_enabled": true,
+      "fetch_enabled": false,
+      "scheduled_fetch_enabled": false,
+      "candidate_emission_enabled": false,
       "publication_eligible": false,
-      "pipeline_wiring_enabled": true,
+      "pipeline_wiring_enabled": false,
       "include_keywords": [
         "CaRMS",
         "R-1",
@@ -945,8 +948,8 @@
         "DISCARD"
       ],
       "default_route_on_accept": "NEEDS_REVIEW",
-      "source_health": "HEALTHY",
-      "runtime_activation": "AUTOMATION_READY",
+      "source_health": "MANUAL_REVIEW_REQUIRED",
+      "runtime_activation": "MANUAL_INTAKE",
       "fetch_plan": {
         "primary_method": "list-page",
         "tls_verification_required": true,
@@ -992,7 +995,8 @@
       "item_url_patterns": [
         "carms\\.ca/news/[a-z0-9-]{10,}"
       ],
-      "execution": "python_runner"
+      "execution": "python_runner",
+      "manual_intake_reason": "2026-09-24: 0 accepted across last run despite active fetch -- content is entirely match-result/data-announcement shape with no scholarship/application signal (see SORUN-TESPIT-LISTESI.md S49). Disabled pending a real opportunity-shaped surface (e.g. explicit application-window pages) being found."
     },
     {
       "source_id": "abroad_au_amc",
@@ -1181,7 +1185,7 @@
           "/"
         ],
         "notes": "News list; posts pinned by dated URLs.",
-        "expected_check_interval_minutes": 10080,
+        "expected_check_interval_minutes": 43200,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {
@@ -1297,7 +1301,7 @@
           "/"
         ],
         "notes": "News list; posts pinned by dated URLs; doctor-related only.",
-        "expected_check_interval_minutes": 10080,
+        "expected_check_interval_minutes": 43200,
         "source_health": "HEALTHY",
         "coverage_status": "configured",
         "coverage_policy": {
@@ -1470,11 +1474,11 @@
         "/"
       ],
       "statement_treatment": "official_guidance",
-      "fetch_enabled": true,
-      "scheduled_fetch_enabled": true,
-      "candidate_emission_enabled": true,
+      "fetch_enabled": false,
+      "scheduled_fetch_enabled": false,
+      "candidate_emission_enabled": false,
       "publication_eligible": false,
-      "pipeline_wiring_enabled": true,
+      "pipeline_wiring_enabled": false,
       "include_keywords": [
         "physician",
         "doctor",
@@ -1497,8 +1501,8 @@
         "DISCARD"
       ],
       "default_route_on_accept": "NEEDS_REVIEW",
-      "source_health": "HEALTHY",
-      "runtime_activation": "AUTOMATION_READY",
+      "source_health": "MANUAL_REVIEW_REQUIRED",
+      "runtime_activation": "MANUAL_INTAKE",
       "fetch_plan": {
         "primary_method": "list-page",
         "tls_verification_required": true,
@@ -1542,7 +1546,8 @@
       "item_url_patterns": [
         "bigregister\\.nl/latest/news/20\\d\\d/"
       ],
-      "execution": "python_runner"
+      "execution": "python_runner",
+      "manual_intake_reason": "2026-09-24: 0 accepted / 13 discarded in last run -- producing no opportunity-shaped content. Disabled pending review."
     },
     {
       "source_id": "abroad_es_universidades_homologacion",
@@ -1560,7 +1565,7 @@
       "source_tier": "OFFICIAL_PRIMARY",
       "source_role": "government_recognition_portal",
       "status": "active",
-      "source_health": "HEALTHY",
+      "source_health": "MANUAL_REVIEW_REQUIRED",
       "manual_review_required": true,
       "fetch_mode": "list-page",
       "allowed_scope": [
@@ -1573,11 +1578,11 @@
         "/Noticias"
       ],
       "statement_treatment": "official_guidance",
-      "fetch_enabled": true,
-      "scheduled_fetch_enabled": true,
-      "candidate_emission_enabled": true,
+      "fetch_enabled": false,
+      "scheduled_fetch_enabled": false,
+      "candidate_emission_enabled": false,
       "publication_eligible": false,
-      "pipeline_wiring_enabled": true,
+      "pipeline_wiring_enabled": false,
       "include_keywords": [
         "homologación",
         "equivalencia",
@@ -1601,7 +1606,7 @@
         "DISCARD"
       ],
       "default_route_on_accept": "NEEDS_REVIEW",
-      "runtime_activation": "AUTOMATION_READY",
+      "runtime_activation": "MANUAL_INTAKE",
       "fetch_plan": {
         "primary_method": "list-page",
         "tls_verification_required": true,
@@ -1645,7 +1650,8 @@
       "item_url_patterns": [
         "universidades\\.gob\\.es/Noticias/20\\d\\d/"
       ],
-      "execution": "python_runner"
+      "execution": "python_runner",
+      "manual_intake_reason": "2026-09-24: 0 accepted / 51 discarded in last run -- producing no opportunity-shaped content. Disabled pending review."
     },
     {
       "source_id": "abroad_es_mir_fse",

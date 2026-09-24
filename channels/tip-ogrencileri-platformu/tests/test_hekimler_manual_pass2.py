@@ -19,7 +19,6 @@ class ManualPass2ActivationTests(unittest.TestCase):
             ("turk_pediatri_kurumu", "https://turkpediatri.org.tr/haberler"),
             ("abroad_us_usmle", "https://www.usmle.org/announcements"),
             ("abroad_us_nrmp", "https://www.nrmp.org/about/news/"),
-            ("abroad_ca_carms", "https://www.carms.ca/news/"),
             ("abroad_ca_mcc_img_pathways", "https://mcc.ca/news/"),
         ):
             profile = get_source_profile(self.eff, sid)
@@ -34,7 +33,6 @@ class ManualPass2ActivationTests(unittest.TestCase):
             "turk_pediatri_kurumu",
             "abroad_us_usmle",
             "abroad_us_nrmp",
-            "abroad_ca_carms",
             "abroad_ca_mcc_img_pathways",
         ):
             self.assertIn(sid, ready)

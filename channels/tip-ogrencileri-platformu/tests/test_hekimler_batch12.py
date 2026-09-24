@@ -50,8 +50,11 @@ class Batch12Tests(unittest.TestCase):
         from radar.hekimler_integrity import resolve_effective_registry
         from radar.phase1_ingestion_canary import TransportResult, ingest_one_source
 
-        profile = dict([s for s in all_sources(resolve_effective_registry()) if s["source_id"] == "abroad_us_aamc_eras"][0])
-        listing = '<a href="https://www.aamc.org/news/some-long-news-slug-about-something">A long enough news headline text</a>'
+        # abroad_us_aamc_eras was disabled 2026-09-24 (S49, zero opportunity-shaped output); this
+        # test only exercises the detail-page date-probe mechanics, so any active abroad_* source
+        # with a matching item_url_patterns works -- swapped to abroad_us_usmle.
+        profile = dict([s for s in all_sources(resolve_effective_registry()) if s["source_id"] == "abroad_us_usmle"][0])
+        listing = '<a href="https://www.usmle.org/some-long-news-slug-about-something-here">A long enough news headline text</a>'
         detail = '<script type="application/ld+json">{"datePublished":"2026-09-02T10:00:00Z"}</script>'
 
         def transport(url):
